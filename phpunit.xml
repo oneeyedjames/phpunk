@@ -1,0 +1,9 @@
+<phpunit bootstrap="test/autoload.php">
+	<testsuites>
+		<testsuite name="Zombie">
+			<file>test/cacheTest.php</file>
+			<!-- <file>test/databaseTest.php</file> -->
+			<!-- <file>test/resourceTest.php</file> -->
+		</testsuite>
+	</testsuites>
+</phpunit>

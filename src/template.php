@@ -1,0 +1,41 @@
+<?php
+
+class template_base {
+    private $_dirs = array();
+
+    public function __construct($base_dir) {
+        $this->_dirs = array($base_dir);
+    }
+
+    public function add_folder($dir) {
+        $this->_dirs[] = $dir;
+    }
+
+    public function locate($view, $resource = false) {
+        $files = array($view, 'index');
+
+        foreach ($files as $filename) {
+            foreach ($this->_dirs as $dirname) {
+    			$filepath = $resource
+                    ? "$dirname/$resource/$filename.php"
+                    : "$dirname/$filename.php";
+
+    			if (is_file($filepath))
+    				return $filepath;
+    		}
+        }
+
+        $filename = $resource ? "$resource/$view.php" : "$view.php";
+
+        trigger_error("Missing template file $filename", E_USER_WARNING);
+
+    	return false;
+    }
+
+    public function load($view, $resource = false, $vars = array()) {
+        if ($file = $this->locate($view, $resource)) {
+            extract($vars, EXTR_SKIP);
+            include $file;
+        }
+    }
+}
