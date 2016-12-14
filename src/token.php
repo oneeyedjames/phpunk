@@ -21,6 +21,9 @@ function create_token($data, $key, $algo = 'md5') {
 function verify_token($token, $data, $key, $algo = 'md5') {
 	$length = strlen(hash($algo, 'hash'));
 
+	if (strlen($token) != $length * 2)
+		return false;
+
 	$hash = hash($algo, $data);
 
 	list($hmac, $salt) = str_split($token, $length);
