@@ -1,12 +1,14 @@
 <?php
 
 class controller_base {
+	private $_resource;
 	private $_database;
-    private $_resource;
+	private $_cache;
 
-    public function __construct($database, $resource = false) {
+    public function __construct($resource, $database, $cache) {
+		$this->_resource = $resource;
 		$this->_database = $database;
-        $this->_resource = $resource;
+		$this->_cache    = $cache;
     }
 
 	public function __get($key) {
@@ -42,6 +44,18 @@ class controller_base {
 
 	protected function put_record($record) {
 		return $this->_database->put_record($this->_resource, $record);
+	}
+
+	protected function get_cached_object($id, $type = false) {
+		return $this->_cache->get($type ?: $this->_resource, $id);
+	}
+
+	protected function put_cached_object($id, $object, $type = false) {
+		return $this->_cache->put($type ?: $this->_resource, $id, $object);
+	}
+
+	protected function remove_cached_object($id, $type = false) {
+		$this->_cache->remove($type ?: $this->_resource, $id, $object);
 	}
 
 	protected function map_result($result, $key = 'id') {
