@@ -29,10 +29,10 @@ class url_schema {
 				'actions' => array('save', 'delete'),
 				'views'   => array('list', 'grid', 'item', 'form')
 			);
-
-			if ($alias)
-				$this->add_alias($resource, $alias);
 		}
+
+		if ($alias)
+			$this->add_alias($alias, $resource);
 	}
 
 	public function is_resource($resource) {

@@ -256,8 +256,11 @@ class database_schema {
 				$params[] = $offset;
 			}
 
-			if ($records = $this->query($query, $params))
-				return $records;
+			if ($records = $this->query($query, $params)) {
+				return array_combine(array_map(function($record) use ($table) {
+					return $record[$table->pkey];
+				}, $records), $records);
+			}
 		}
 
 		return null;

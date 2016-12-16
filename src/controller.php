@@ -38,6 +38,10 @@ class controller_base {
 		return $this->_database->execute($sql, $params);
 	}
 
+	protected function get_all($args = array(), $limit = 0, $offset = 0, $resource = false) {
+		return $this->_database->get_all($resource ?: $this->_resource, $args, $limit, $offset);
+	}
+
 	protected function get_record($id, $resource = false) {
 		return $this->_database->get_record($resource ?: $this->_resource, $id);
 	}
