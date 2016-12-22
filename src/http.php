@@ -134,8 +134,8 @@ if ( ! function_exists( 'http_response_code' ) ) {
     function http_response_code( $code = null ) {
 		static $http_response_code = 200;
 
-        if ( ! is_null( $code ) ) {
-            switch ( $code ) {
+        if (!is_null($code)) {
+            switch ($code) {
                 case 100: $text = 'Continue'; break;
                 case 101: $text = 'Switching Protocols'; break;
                 case 200: $text = 'OK'; break;
@@ -178,7 +178,7 @@ if ( ! function_exists( 'http_response_code' ) ) {
                 break;
             }
 
-            $protocol = isset( $_SERVER['SERVER_PROTOCOL'] ) ? $_SERVER['SERVER_PROTOCOL'] : 'HTTP/1.0';
+            $protocol = isset($_SERVER['SERVER_PROTOCOL']) ? $_SERVER['SERVER_PROTOCOL'] : 'HTTP/1.0';
 
             header("$protocol $code $text");
 
