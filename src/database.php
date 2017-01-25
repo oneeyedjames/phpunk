@@ -206,11 +206,11 @@ class database_schema {
 		return false;
 	}
 
-	public function get_all($table_key, $args = array(), $limit = 0, $offset = 0) {
+	public function get_all($table_key, $args = array(), $limit = 0, $offset = 0, &$count = null) {
 		if (isset($this->_tables[$table_key])) {
 			$table =& $this->_tables[$table_key];
 
-			$query = "SELECT `$table->name`.* FROM `$table->name`";
+			$query = "SELECT SQL_CALC_FOUND_ROWS `$table->name`.* FROM `$table->name`";
 
 			$joins = array();
 			$where = array();
@@ -256,7 +256,7 @@ class database_schema {
 				$params[] = $offset;
 			}
 
-			if ($records = $this->query($query, $params)) {
+			if ($records = $this->query($query, $params, $count)) {
 				return array_combine(array_map(function($record) use ($table) {
 					return $record[$table->pkey];
 				}, $records), $records);
