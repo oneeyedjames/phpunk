@@ -90,6 +90,9 @@ class url_schema {
 
 		$params = array();
 
+		if ($params['api'] = ('api' == $path[0]))
+			array_shift($path);
+
 		if (isset($path[0])) {
 			if ($resource = $this->is_resource($path[0])) {
 				$params['resource'] = $resource;

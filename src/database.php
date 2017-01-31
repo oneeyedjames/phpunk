@@ -113,8 +113,11 @@ class database_schema {
 	}
 
 	public function add_table($name, $pkey = 'id') {
-		if (!isset($this->_tables[$name]))
-			$this->_tables[$name] = new database_table($name, $pkey);
+		if (!isset($this->_tables[$name])) {
+			$this->_tables[$name] = is_null($pkey)
+				? new database_bridge_table($name, $pkey)
+				: new database_table($name, $pkey);
+		}
 
 		return $this->_tables[$name];
 	}
@@ -207,9 +210,7 @@ class database_schema {
 	}
 
 	public function get_all($table_key, $args = array(), $limit = 0, $offset = 0, &$count = null) {
-		if (isset($this->_tables[$table_key])) {
-			$table =& $this->_tables[$table_key];
-
+		if ($table = $this->get_table($table_key)) {
 			$query = "SELECT SQL_CALC_FOUND_ROWS `$table->name`.* FROM `$table->name`";
 
 			$joins = array();
@@ -218,13 +219,17 @@ class database_schema {
 			$params = array();
 
 			foreach ($args as $field => $value) {
-				if (isset($table->rels[$field])) {
-					$rel = $table->rels[$field];
+				if ($rel = $table->get_relation($field)) {
+					if ($table->name == $rel->ptable) {
+						$joins[] = "`$rel->ftable` ON `$rel->ftable`.`$rel->fkey` = `$rel->ptable`.`$rel->pkey`";
 
-					$joins[] = "`$rel->name` ON `$rel->name`.`$rel->fkey`"
-						. " IN (`$table->name`.`$table->pkey`, 0)";
+						$ftable = $this->_tables[$rel->ftable];
+						$field = "$rel->ftable`.`$ftable->pkey";
+					} else {
+						$joins[] = "`$rel->ptable` ON `$rel->ftable`.`$rel->fkey` = `$rel->ptable`.`$rel->pkey` OR `$rel->ftable`.`$rel->fkey` = 0";
 
-					$field = "$rel->name`.`$rel->pkey";
+						$field = "$rel->ptable`.`$rel->pkey";
+					}
 				}
 
 				if (is_scalar($value)) {
@@ -283,11 +288,17 @@ class database_table {
 				return $this->_name;
 			case 'pkey':
 				return $this->_pkey;
+			case 'relations':
+				return $this->_rels;
 		}
 	}
 
 	public function relation_exists($name) {
 		return isset($this->_rels[$name]);
+	}
+
+	public function get_relation($name) {
+		return @$this->_rels[$name];
 	}
 
 	public function add_relation($name, $rel) {
@@ -304,15 +315,15 @@ class database_table {
 
 	public function select_sql($name = false) {
 		if ($name) {
-			if ($rel = @$this->_rels[$name]) {
+			if ($rel = $this->get_relation($name)) {
 				$table = $this->name != $rel->ptable ? $rel->ptable : $rel->ftable;
-				return "SELECT `$table`.* FROM $rel->join WHERE `$this->name`.`$this->pkey` = ?";
+				return "SELECT SQL_CALC_FOUND_ROWS `$table`.* FROM $rel->join WHERE `$this->name`.`$this->pkey` = ?";
 			}
 
 			return false;
 		}
 
-		return "SELECT * FROM `$this->name` WHERE `$this->pkey` = ?";
+		return "SELECT SQL_CALC_FOUND_ROWS * FROM `$this->name` WHERE `$this->pkey` = ?";
 	}
 
 	public function insert_sql($record, &$params) {
@@ -350,7 +361,7 @@ class database_table {
 
 	public function delete_sql($name = false) {
 		if ($name) {
-			if ($rel = @$this->_rels[$name]) {
+			if ($rel = $this->get_relation($name)) {
 				$table = $this->name != $rel->ptable ? $rel->ptable : $rel->ftable;
 				return "DELETE `$table`.* FROM $rel->join WHERE `$this->name`.`$this->pkey` = ?";
 			}
@@ -359,6 +370,50 @@ class database_table {
 		}
 
 		return "DELETE FROM `$this->name` WHERE `$this->pkey` = ?";
+	}
+}
+
+class database_bridge_table extends database_table {
+	public function __get($key) {
+		switch ($key) {
+			case 'join':
+			case 'inner':
+				return $this->_join('INNER');
+			default:
+				return parent::__get($key);
+		}
+	}
+
+	public function select_sql($name = false, $args = array()) {
+		if ($rel = $this->get_relation($name)) {
+			$table = $this->name != $rel->ptable ? $rel->ptable : $rel->ftable;
+			$query = "SELECT SQL_CALC_FOUND_ROWS `$table`.* FROM $rel->join";
+
+			if (!empty($args)) {
+				$where = array();
+
+				foreach ($args as $fkey)
+					$where[] = "`$this->name`.`$fkey` = ?";
+
+				$query .= ' WHERE ' . implode(' AND ', $where);
+			}
+
+			return $query;
+		}
+
+		return false;
+	}
+
+	private function _join($type) {
+		$type = strtoupper($type);
+		$join = $this->name;
+
+		foreach ($this->relations as $rel) {
+			$table = $this->name != $rel->ptable ? $rel->ptable : $rel->ftable;
+			$join .= " $type JOIN `$table` ON `$rel->ftable`.`$rel->fkey` = `$rel->ptable`.`$rel->pkey`";
+		}
+
+		return $join;
 	}
 }
 
