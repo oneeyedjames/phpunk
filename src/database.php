@@ -232,8 +232,6 @@ class database_query {
 	private $_query;
 	private $_result;
 
-	private $_found_rows = false;
-
 	public function __construct($database, $args) {
 		$this->_database = $database;
 
@@ -255,7 +253,6 @@ class database_query {
 			case 'offset':
 			case 'query':
 			case 'result':
-			case 'found_rows':
 				return $this->{"_$key"};
 		}
 	}
