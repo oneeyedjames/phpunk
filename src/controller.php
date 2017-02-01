@@ -38,8 +38,16 @@ class controller_base {
 		return $this->_database->execute($sql, $params);
 	}
 
+	protected function make_query($args, $resource = false) {
+		$args['table'] = $resource ?: $this->_resource;
+		return new database_query($this->_database, $args);
+	}
+
+	/**
+	 * @deprecated in favor of make_query($args, $resource = false)
+	 */
 	protected function get_all($args = array(), $limit = 0, $offset = 0, $resource = false) {
-		return $this->_database->get_all($resource ?: $this->_resource, $args, $limit, $offset);
+		return $this->make_query(compact('args', 'limit', 'offset'), $resource)->get_result();
 	}
 
 	protected function get_record($id, $resource = false) {

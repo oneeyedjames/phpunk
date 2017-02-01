@@ -7,8 +7,6 @@ class database_schema {
 
 	private $_rels = array();
 
-	private $_found_rows = false;
-
 	public function __construct($mysql) {
 		$this->_mysql = $mysql;
 	}
@@ -17,14 +15,12 @@ class database_schema {
 		switch ($key) {
 			case 'insert_id':
 				return $this->_mysql->insert_id;
-			case 'found_rows':
-				return $this->_found_rows;
 			default:
 				return $this->get_table($key);
 		}
 	}
 
-	public function query($sql, $params = array()) {
+	public function query($sql, $params = array(), &$count = null) {
 		$records = false;
 
 		if ($stmt = $this->_mysql->prepare($sql)) {
@@ -56,7 +52,7 @@ class database_schema {
 
 				if ($result = $this->_mysql->query('SELECT FOUND_ROWS()')) {
 					if ($record = $result->fetch_row())
-						$this->_found_rows = intval($record[0]);
+						$count = intval($record[0]);
 
 					$result->free();
 				}
@@ -214,22 +210,74 @@ class database_schema {
 
 		return false;
 	}
+}
 
-	public function get_all($table_key, $args = array(), $limit = 0, $offset = 0) {
-		if ($table = $this->get_table($table_key)) {
+class database_query {
+	private static $_defaults = array(
+		'table'  => '',
+		'args'   => array(),
+		'sort'   => array(),
+		'limit'  => 0,
+		'offset' => 0
+	);
+
+	private $_database;
+
+	private $_table;
+	private $_args = array();
+	private $_sort = array();
+	private $_limit = 0;
+	private $_offset = 0;
+
+	private $_query;
+	private $_result;
+
+	private $_found_rows = false;
+
+	public function __construct($database, $args) {
+		$this->_database = $database;
+
+		$args = new object(array_merge(self::$_defaults, $args));
+
+		$this->_table  = $args->table;
+		$this->_args   = $args->args;
+		$this->_sort   = $args->sort;
+		$this->_limit  = $args->limit;
+		$this->_offset = $args->offset;
+	}
+
+	public function __get($key) {
+		switch ($key) {
+			case 'table':
+			case 'args':
+			case 'sort':
+			case 'limit':
+			case 'offset':
+			case 'result':
+			case 'found_rows':
+				return $this->{"_$key"};
+		}
+	}
+
+	public function get_result() {
+		if (!is_null($this->_result))
+			return $this->_result;
+
+		if ($table = $this->_database->get_table($this->table)) {
 			$query = "SELECT SQL_CALC_FOUND_ROWS `$table->name`.* FROM `$table->name`";
 
 			$joins = array();
 			$where = array();
+			$order = array();
 
 			$params = array();
 
-			foreach ($args as $field => $value) {
+			foreach ($this->args as $field => $value) {
 				if ($rel = $table->get_relation($field)) {
 					if ($table->name == $rel->ptable) {
 						$joins[] = "`$rel->ftable` ON `$rel->ftable`.`$rel->fkey` = `$rel->ptable`.`$rel->pkey`";
 
-						$ftable = $this->_tables[$rel->ftable];
+						$ftable = $this->_database->get_table($rel->ftable);
 						$field = "$rel->ftable`.`$ftable->pkey";
 					} else {
 						$joins[] = "`$rel->ptable` ON `$rel->ftable`.`$rel->fkey` = `$rel->ptable`.`$rel->pkey` OR `$rel->ftable`.`$rel->fkey` = 0";
@@ -257,20 +305,33 @@ class database_schema {
 			if (count($where))
 				$query .= " WHERE " . implode(" AND ", $where);
 
-			if ($limit = intval($limit)) {
+			if (count($this->sort)) {
+				foreach ($this->sort as $field => $value) {
+					$value = strtoupper($value) == 'DESC' ? 'DESC' : 'ASC';
+					$order[] = "`$field` $value";
+				}
+
+				$query .=  " ORDER BY " . implode(", ", $order);
+			}
+
+			if ($limit = intval($this->limit)) {
 				$query .= " LIMIT ?";
 				$params[] = $limit;
 			}
 
-			if ($offset = intval($offset)) {
+			if ($offset = intval($this->offset)) {
 				$query .= " OFFSET ?";
 				$params[] = $offset;
 			}
 
-			if ($records = $this->query($query, $params)) {
-				return array_combine(array_map(function($record) use ($table) {
+			$this->_query = $query;
+
+			if ($result = $this->_database->query($query, $params, $this->_found_rows)) {
+				$this->_result = array_combine(array_map(function($record) use ($table) {
 					return $record[$table->pkey];
-				}, $records), $records);
+				}, $result), $result);
+
+				return $this->_result;
 			}
 		}
 
