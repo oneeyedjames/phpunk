@@ -253,6 +253,7 @@ class database_query {
 			case 'sort':
 			case 'limit':
 			case 'offset':
+			case 'query':
 			case 'result':
 			case 'found_rows':
 				return $this->{"_$key"};
@@ -280,7 +281,7 @@ class database_query {
 						$ftable = $this->_database->get_table($rel->ftable);
 						$field = "$rel->ftable`.`$ftable->pkey";
 					} else {
-						$joins[] = "`$rel->ptable` ON `$rel->ftable`.`$rel->fkey` = `$rel->ptable`.`$rel->pkey` OR `$rel->ftable`.`$rel->fkey` = 0";
+						$joins[] = "`$rel->ptable` ON `$rel->ftable`.`$rel->fkey` = `$rel->ptable`.`$rel->pkey`";
 
 						$field = "$rel->ptable`.`$rel->pkey";
 					}
@@ -326,16 +327,74 @@ class database_query {
 
 			$this->_query = $query;
 
-			if ($result = $this->_database->query($query, $params, $this->_found_rows)) {
-				$this->_result = array_combine(array_map(function($record) use ($table) {
-					return $record[$table->pkey];
-				}, $result), $result);
+			if (is_array($records = $this->_database->query($query, $params, $found)))
+				$this->_result = new database_result($records, $table->pkey, $found);
 
-				return $this->_result;
-			}
+			return $this->_result;
 		}
 
 		return null;
+	}
+}
+
+class database_result implements Iterator, Countable, ArrayAccess {
+	private $_records;
+	private $_found;
+
+	public function __construct($records, $pkey, $found) {
+		//$this->_records = array_combine(array_map(function($record) use ($pkey) {
+		//	return $record[$pkey];
+		//}, $records), $records);
+
+		$this->_records = $records;
+		$this->_found = intval($found);
+	}
+
+	public function __get($key) {
+		switch ($key) {
+			case 'found':
+				return $this->_found;
+		}
+	}
+
+	public function current() {
+		return current($this->_records);
+	}
+
+	public function key() {
+		return key($this->_records);
+	}
+
+	public function next() {
+		next($this->_records);
+	}
+
+	public function rewind() {
+		reset($this->_records);
+	}
+
+	public function valid() {
+		return key($this->_records) !== null;
+	}
+
+	public function count() {
+		return count($this->_records);
+	}
+
+	public function offsetGet ($key) {
+		return $this->_records[$key];
+	}
+
+	public function offsetSet ($key, $value) {}
+
+	public function offsetExists ($key) {
+		return isset($this->_records[$key]);
+	}
+
+	public function offsetUnset ($key) {}
+
+	public function walk($func, $data = null) {
+		return array_walk($this->_records, $func, $data);
 	}
 }
 
