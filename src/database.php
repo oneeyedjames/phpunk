@@ -7,6 +7,8 @@ class database_schema {
 
 	private $_rels = array();
 
+	private $_found_rows = false;
+
 	public function __construct($mysql) {
 		$this->_mysql = $mysql;
 	}
@@ -15,12 +17,14 @@ class database_schema {
 		switch ($key) {
 			case 'insert_id':
 				return $this->_mysql->insert_id;
+			case 'found_rows':
+				return $this->_found_rows;
 			default:
 				return $this->get_table($key);
 		}
 	}
 
-	public function query($sql, $params = array(), &$found = null ) {
+	public function query($sql, $params = array()) {
 		$records = false;
 
 		if ($stmt = $this->_mysql->prepare($sql)) {
@@ -52,7 +56,7 @@ class database_schema {
 
 				if ($result = $this->_mysql->query('SELECT FOUND_ROWS()')) {
 					if ($record = $result->fetch_row())
-						$found = intval($record[0]);
+						$this->_found_rows = intval($record[0]);
 
 					$result->free();
 				}
@@ -90,6 +94,8 @@ class database_schema {
 				if (!call_user_func_array(array($stmt, 'bind_param'), $_params))
 					trigger_error($stmt->error, E_USER_WARNING);
 			}
+
+			$this->_found_rows = false;
 
 			if (!($result = $stmt->execute()))
 				trigger_error($stmt->error, E_USER_WARNING);
@@ -209,7 +215,7 @@ class database_schema {
 		return false;
 	}
 
-	public function get_all($table_key, $args = array(), $limit = 0, $offset = 0, &$count = null) {
+	public function get_all($table_key, $args = array(), $limit = 0, $offset = 0) {
 		if ($table = $this->get_table($table_key)) {
 			$query = "SELECT SQL_CALC_FOUND_ROWS `$table->name`.* FROM `$table->name`";
 
@@ -261,7 +267,7 @@ class database_schema {
 				$params[] = $offset;
 			}
 
-			if ($records = $this->query($query, $params, $count)) {
+			if ($records = $this->query($query, $params)) {
 				return array_combine(array_map(function($record) use ($table) {
 					return $record[$table->pkey];
 				}, $records), $records);
