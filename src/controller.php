@@ -43,13 +43,6 @@ class controller_base {
 		return new database_query($this->_database, $args);
 	}
 
-	/**
-	 * @deprecated in favor of make_query($args, $resource = false)
-	 */
-	protected function get_all($args = array(), $limit = 0, $offset = 0, $resource = false) {
-		return $this->make_query(compact('args', 'limit', 'offset'), $resource)->get_result();
-	}
-
 	protected function get_record($id, $resource = false) {
 		return $this->_database->get_record($resource ?: $this->_resource, $id);
 	}
