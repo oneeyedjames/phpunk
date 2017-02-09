@@ -215,6 +215,7 @@ class database_schema {
 class database_query {
 	private static $_defaults = array(
 		'table'  => '',
+		'bridge' => '',
 		'args'   => array(),
 		'sort'   => array(),
 		'limit'  => 0,
@@ -224,6 +225,7 @@ class database_query {
 	private $_database;
 
 	private $_table;
+	private $_bridge;
 	private $_args = array();
 	private $_sort = array();
 	private $_limit = 0;
@@ -238,6 +240,7 @@ class database_query {
 		$args = new object(array_merge(self::$_defaults, $args));
 
 		$this->_table  = $args->table;
+		$this->_bridge = $args->bridge;
 		$this->_args   = $args->args;
 		$this->_sort   = $args->sort;
 		$this->_limit  = $args->limit;
@@ -247,6 +250,7 @@ class database_query {
 	public function __get($key) {
 		switch ($key) {
 			case 'table':
+			case 'bridge':
 			case 'args':
 			case 'sort':
 			case 'limit':
@@ -270,6 +274,15 @@ class database_query {
 
 			$params = array();
 
+			if ($rel = $table->get_relation($this->bridge)) {
+				$bridge = $table->name == $rel->ptable ? $rel->ftable : $rel->ptable;
+				$bridge = $this->_database->get_table($bridge);
+
+				$joins[] = "`$bridge->name` ON `$rel->ftable`.`$rel->fkey` = `$rel->ptable`.`$rel->pkey`";
+			} else {
+				$bridge = new database_bridge_table('');
+			}
+
 			foreach ($this->args as $field => $value) {
 				if ($rel = $table->get_relation($field)) {
 					if ($table->name == $rel->ptable) {
@@ -277,6 +290,16 @@ class database_query {
 
 						$ftable = $this->_database->get_table($rel->ftable);
 						$field = "$rel->ftable`.`$ftable->pkey";
+					} else {
+						$joins[] = "`$rel->ptable` ON `$rel->ftable`.`$rel->fkey` = `$rel->ptable`.`$rel->pkey`";
+
+						$field = "$rel->ptable`.`$rel->pkey";
+					}
+				} elseif ($rel = $bridge->get_relation($field)) {
+					if ($bridge->name == $rel->ptable) {
+						$joins[] = "`$rel->ftable` ON `$rel->ftable`.`$rel->fkey` = `$rel->ptable`.`$rel->pkey`";
+
+						$field = "$bridge->name`.`$bridge->pkey";
 					} else {
 						$joins[] = "`$rel->ptable` ON `$rel->ftable`.`$rel->fkey` = `$rel->ptable`.`$rel->pkey`";
 
@@ -351,6 +374,8 @@ class database_result implements Iterator, Countable, ArrayAccess {
 		switch ($key) {
 			case 'found':
 				return $this->_found;
+			case 'first':
+				return count($this) ? $this->_records[0] : null;
 		}
 	}
 
