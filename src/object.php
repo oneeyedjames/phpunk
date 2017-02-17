@@ -1,6 +1,6 @@
 <?php
 
-interface Mutable extends Iterator, Countable, ArrayAccess {
+interface Mutable extends Iterator, Countable, ArrayAccess, JsonSerializable {
 	public function has($key);
 
 	public function get($key);
@@ -116,5 +116,9 @@ class object implements Mutable {
 
 	public function offsetUnset ($key) {
 		$this->remove($key);
+	}
+
+	public function jsonSerialize() {
+		return $this->_vars;
 	}
 }

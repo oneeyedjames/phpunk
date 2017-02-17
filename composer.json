@@ -1,0 +1,17 @@
+{
+    "name": "oneeyedjames/phpunk",
+    "description": "Yet another lightweight PHP framework",
+    "type": "library",
+    "license": "GNU",
+    "authors": [
+        {
+            "name": "oneeyedjames",
+            "email": "jascott@programmer.net"
+        }
+    ],
+    "require-dev": {
+        "task/task": "~0.5",
+        "task/cli": "~0.2",
+        "task/watch": "~0.1"
+    }
+}

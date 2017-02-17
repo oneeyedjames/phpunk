@@ -20,9 +20,7 @@ class database_schema {
 		}
 	}
 
-	public function query($sql, $params = array(), &$count = null) {
-		$records = false;
-
+	public function query($sql, $params = array()) {
 		if ($stmt = $this->_mysql->prepare($sql)) {
 			if (count($params)) {
 				$_params = array('');
@@ -44,18 +42,21 @@ class database_schema {
 
 			if ($stmt->execute() && $result = $stmt->get_result()) {
 				$records = array();
+				$found = 0;
 
-				while ($record = $result->fetch_object())
-					$records[] = new object($record);
+				while ($record = $result->fetch_assoc())
+					$records[] = new database_record($record);
 
 				$result->free();
 
 				if ($result = $this->_mysql->query('SELECT FOUND_ROWS()')) {
 					if ($record = $result->fetch_row())
-						$count = intval($record[0]);
+						$found = intval($record[0]);
 
 					$result->free();
 				}
+
+				return new database_result($records, $found);
 			} else {
 				error_log($sql);
 				trigger_error($stmt->error, E_USER_WARNING);
@@ -66,7 +67,7 @@ class database_schema {
 			trigger_error($this->_mysql->error, E_USER_WARNING);
 		}
 
-		return $records;
+		return false;
 	}
 
 	public function execute($sql, $params = array()) {
@@ -181,8 +182,8 @@ class database_schema {
 
 			$params = array(intval($record_id));
 
-			if ($recordset = $this->query($sql, $params))
-				return $recordset[0];
+			if ($result = $this->query($sql, $params))
+				return $result->first;
 		}
 
 		return null;
@@ -209,214 +210,6 @@ class database_schema {
 		}
 
 		return false;
-	}
-}
-
-class database_query {
-	private static $_defaults = array(
-		'table'  => '',
-		'bridge' => '',
-		'args'   => array(),
-		'sort'   => array(),
-		'limit'  => 0,
-		'offset' => 0
-	);
-
-	private $_database;
-
-	private $_table;
-	private $_bridge;
-	private $_args = array();
-	private $_sort = array();
-	private $_limit = 0;
-	private $_offset = 0;
-
-	private $_query;
-	private $_result;
-
-	public function __construct($database, $args) {
-		$this->_database = $database;
-
-		$args = new object(array_merge(self::$_defaults, $args));
-
-		$this->_table  = $args->table;
-		$this->_bridge = $args->bridge;
-		$this->_args   = $args->args;
-		$this->_sort   = $args->sort;
-		$this->_limit  = $args->limit;
-		$this->_offset = $args->offset;
-	}
-
-	public function __get($key) {
-		switch ($key) {
-			case 'table':
-			case 'bridge':
-			case 'args':
-			case 'sort':
-			case 'limit':
-			case 'offset':
-			case 'query':
-			case 'result':
-				return $this->{"_$key"};
-		}
-	}
-
-	public function get_result() {
-		if (!is_null($this->_result))
-			return $this->_result;
-
-		if ($table = $this->_database->get_table($this->table)) {
-			$query = "SELECT SQL_CALC_FOUND_ROWS `$table->name`.* FROM `$table->name`";
-
-			$joins = array();
-			$where = array();
-			$order = array();
-
-			$params = array();
-
-			if ($rel = $table->get_relation($this->bridge)) {
-				$bridge = $table->name == $rel->ptable ? $rel->ftable : $rel->ptable;
-				$bridge = $this->_database->get_table($bridge);
-
-				$joins[] = "`$bridge->name` ON `$rel->ftable`.`$rel->fkey` = `$rel->ptable`.`$rel->pkey`";
-			} else {
-				$bridge = new database_bridge_table('');
-			}
-
-			foreach ($this->args as $field => $value) {
-				if ($rel = $table->get_relation($field)) {
-					if ($table->name == $rel->ptable) {
-						$joins[] = "`$rel->ftable` ON `$rel->ftable`.`$rel->fkey` = `$rel->ptable`.`$rel->pkey`";
-
-						$ftable = $this->_database->get_table($rel->ftable);
-						$field = "$rel->ftable`.`$ftable->pkey";
-					} else {
-						$joins[] = "`$rel->ptable` ON `$rel->ftable`.`$rel->fkey` = `$rel->ptable`.`$rel->pkey`";
-
-						$field = "$rel->ptable`.`$rel->pkey";
-					}
-				} elseif ($rel = $bridge->get_relation($field)) {
-					if ($bridge->name == $rel->ptable) {
-						$joins[] = "`$rel->ftable` ON `$rel->ftable`.`$rel->fkey` = `$rel->ptable`.`$rel->pkey`";
-
-						$field = "$bridge->name`.`$bridge->pkey";
-					} else {
-						$joins[] = "`$rel->ptable` ON `$rel->ftable`.`$rel->fkey` = `$rel->ptable`.`$rel->pkey`";
-
-						$field = "$rel->ptable`.`$rel->pkey";
-					}
-				}
-
-				if (is_scalar($value)) {
-					$where[] = "`$field` = ?";
-					$params[] = $value;
-				} elseif (is_array($value)) {
-					$places = array_fill(0, count($value), '?');
-
-					$where[] = "`$field` IN (" . implode(", ", $places) . ")";
-
-					foreach ($value as $subvalue)
-						$params[] = $subvalue;
-				}
-			}
-
-			if (count($joins))
-				$query .= " INNER JOIN " . implode(" INNER JOIN ", $joins);
-
-			if (count($where))
-				$query .= " WHERE " . implode(" AND ", $where);
-
-			if (count($this->sort)) {
-				foreach ($this->sort as $field => $value) {
-					$value = strtoupper($value) == 'DESC' ? 'DESC' : 'ASC';
-					$order[] = "`$field` $value";
-				}
-
-				$query .=  " ORDER BY " . implode(", ", $order);
-			}
-
-			if ($limit = intval($this->limit)) {
-				$query .= " LIMIT ?";
-				$params[] = $limit;
-			}
-
-			if ($offset = intval($this->offset)) {
-				$query .= " OFFSET ?";
-				$params[] = $offset;
-			}
-
-			$this->_query = $query;
-
-			if (is_array($records = $this->_database->query($query, $params, $found)))
-				$this->_result = new database_result($records, $table->pkey, $found);
-
-			return $this->_result;
-		}
-
-		return null;
-	}
-}
-
-class database_result implements Iterator, Countable, ArrayAccess {
-	private $_records;
-	private $_found;
-
-	public function __construct($records, $pkey, $found) {
-		//$this->_records = array_combine(array_map(function($record) use ($pkey) {
-		//	return $record[$pkey];
-		//}, $records), $records);
-
-		$this->_records = $records;
-		$this->_found = intval($found);
-	}
-
-	public function __get($key) {
-		switch ($key) {
-			case 'found':
-				return $this->_found;
-			case 'first':
-				return count($this) ? $this->_records[0] : null;
-		}
-	}
-
-	public function current() {
-		return current($this->_records);
-	}
-
-	public function key() {
-		return key($this->_records);
-	}
-
-	public function next() {
-		next($this->_records);
-	}
-
-	public function rewind() {
-		reset($this->_records);
-	}
-
-	public function valid() {
-		return key($this->_records) !== null;
-	}
-
-	public function count() {
-		return count($this->_records);
-	}
-
-	public function offsetGet ($key) {
-		return $this->_records[$key];
-	}
-
-	public function offsetSet ($key, $value) {}
-
-	public function offsetExists ($key) {
-		return isset($this->_records[$key]);
-	}
-
-	public function offsetUnset ($key) {}
-
-	public function walk($func, $data = null) {
-		return array_walk($this->_records, $func, $data);
 	}
 }
 
@@ -616,5 +409,261 @@ class database_relation {
 		$type = strtoupper($type);
 
 		return "`$ptable` $type JOIN `$ftable` ON `$ptable`.`$pkey` = `$ftable`.`$fkey`";
+	}
+}
+
+class database_query {
+	private static $_defaults = array(
+		'table'  => '',
+		'bridge' => '',
+		'args'   => array(),
+		'sort'   => array(),
+		'limit'  => 0,
+		'offset' => 0
+	);
+
+	private $_database;
+
+	private $_table;
+	private $_bridge;
+	private $_args = array();
+	private $_sort = array();
+	private $_limit = 0;
+	private $_offset = 0;
+
+	private $_query;
+	private $_result;
+
+	public function __construct($database, $args) {
+		$this->_database = $database;
+
+		$args = new object(array_merge(self::$_defaults, $args));
+
+		$this->_table  = $args->table;
+		$this->_bridge = $args->bridge;
+		$this->_args   = $args->args;
+		$this->_sort   = $args->sort;
+		$this->_limit  = $args->limit;
+		$this->_offset = $args->offset;
+	}
+
+	public function __get($key) {
+		switch ($key) {
+			case 'table':
+			case 'bridge':
+			case 'args':
+			case 'sort':
+			case 'limit':
+			case 'offset':
+			case 'query':
+			case 'result':
+				return $this->{"_$key"};
+		}
+	}
+
+	public function get_result() {
+		if (!is_null($this->_result))
+			return $this->_result;
+
+		if ($table = $this->_database->get_table($this->table)) {
+			$query = "SELECT SQL_CALC_FOUND_ROWS `$table->name`.* FROM `$table->name`";
+
+			$joins = array();
+			$where = array();
+			$order = array();
+
+			$params = array();
+
+			if ($rel = $table->get_relation($this->bridge)) {
+				$bridge = $table->name == $rel->ptable ? $rel->ftable : $rel->ptable;
+				$bridge = $this->_database->get_table($bridge);
+
+				$joins[] = "`$bridge->name` ON `$rel->ftable`.`$rel->fkey` = `$rel->ptable`.`$rel->pkey`";
+			} else {
+				$bridge = new database_bridge_table('');
+			}
+
+			foreach ($this->args as $field => $value) {
+				if ($rel = $table->get_relation($field)) {
+					if ($table->name == $rel->ptable) {
+						$joins[] = "`$rel->ftable` ON `$rel->ftable`.`$rel->fkey` = `$rel->ptable`.`$rel->pkey`";
+
+						$ftable = $this->_database->get_table($rel->ftable);
+						$field = "$rel->ftable`.`$ftable->pkey";
+					} else {
+						$joins[] = "`$rel->ptable` ON `$rel->ftable`.`$rel->fkey` = `$rel->ptable`.`$rel->pkey`";
+
+						$field = "$rel->ptable`.`$rel->pkey";
+					}
+				} elseif ($rel = $bridge->get_relation($field)) {
+					if ($bridge->name == $rel->ptable) {
+						$joins[] = "`$rel->ftable` ON `$rel->ftable`.`$rel->fkey` = `$rel->ptable`.`$rel->pkey`";
+
+						$field = "$bridge->name`.`$bridge->pkey";
+					} else {
+						$joins[] = "`$rel->ptable` ON `$rel->ftable`.`$rel->fkey` = `$rel->ptable`.`$rel->pkey`";
+
+						$field = "$rel->ptable`.`$rel->pkey";
+					}
+				}
+
+				if (is_scalar($value)) {
+					$where[] = "`$field` = ?";
+					$params[] = $value;
+				} elseif (is_array($value)) {
+					$places = array_fill(0, count($value), '?');
+
+					$where[] = "`$field` IN (" . implode(", ", $places) . ")";
+
+					foreach ($value as $subvalue)
+						$params[] = $subvalue;
+				}
+			}
+
+			if (count($joins))
+				$query .= " INNER JOIN " . implode(" INNER JOIN ", $joins);
+
+			if (count($where))
+				$query .= " WHERE " . implode(" AND ", $where);
+
+			if (count($this->sort)) {
+				foreach ($this->sort as $field => $value) {
+					$value = strtoupper($value) == 'DESC' ? 'DESC' : 'ASC';
+					$order[] = "`$field` $value";
+				}
+
+				$query .=  " ORDER BY " . implode(", ", $order);
+			}
+
+			if ($limit = intval($this->limit)) {
+				$query .= " LIMIT ?";
+				$params[] = $limit;
+			}
+
+			if ($offset = intval($this->offset)) {
+				$query .= " OFFSET ?";
+				$params[] = $offset;
+			}
+
+			$this->_query = $query;
+
+			return $this->_result = $this->_database->query($query, $params);
+		}
+
+		return null;
+	}
+}
+
+class database_record implements ArrayAccess, JsonSerializable {
+	private $_fields;
+
+	public function __construct($fields) {
+		if (is_array($fields))
+			$this->_fields = $fields;
+		elseif (is_object($fields))
+			$this->_fields = get_object_vars($fields);
+	}
+
+	public function __get($key) {
+		return $this->offsetGet($key);
+	}
+
+	public function __set($key, $value) {
+		$this->offsetSet($key, $value);
+	}
+
+	public function __isset($key) {
+		return $this->offsetExists($key);
+	}
+
+	public function __unset($key) {
+		$this->offsetUnset($key);
+	}
+
+	public function offsetGet ($key) {
+		return @$this->_fields[$key];
+	}
+
+	public function offsetSet ($key, $value) {
+		$this->_fields[$key] = $value;
+	}
+
+	public function offsetExists ($key) {
+		return isset($this->_fields[$key]);
+	}
+
+	public function offsetUnset ($key) {
+		unset($this->_fields[$key]);
+	}
+
+	public function jsonSerialize() {
+		return $this->_fields;
+	}
+}
+
+class database_result implements Iterator, Countable, ArrayAccess, JsonSerializable {
+	private $_records;
+	private $_found;
+
+	public function __construct($records, $found) {
+		$this->_records = $records;
+		$this->_found = intval($found);
+	}
+
+	public function __get($key) {
+		switch ($key) {
+			case 'found':
+				return $this->_found;
+			case 'first':
+				return count($this) ? $this->_records[0] : null;
+		}
+	}
+
+	public function current() {
+		return current($this->_records);
+	}
+
+	public function key() {
+		return key($this->_records);
+	}
+
+	public function next() {
+		next($this->_records);
+	}
+
+	public function rewind() {
+		reset($this->_records);
+	}
+
+	public function valid() {
+		return key($this->_records) !== null;
+	}
+
+	public function count() {
+		return count($this->_records);
+	}
+
+	public function offsetGet ($key) {
+		return $this->_records[$key];
+	}
+
+	public function offsetSet ($key, $value) {}
+
+	public function offsetExists ($key) {
+		return isset($this->_records[$key]);
+	}
+
+	public function offsetUnset ($key) {}
+
+	public function jsonSerialize() {
+		return array_values($this->_records);
+	}
+
+	public function walk($func, $data = null) {
+		return array_walk($this->_records, $func, $data);
+	}
+
+	public function map($func) {
+		return new self(array_map($func, $this->_records), $this->_found);
 	}
 }
