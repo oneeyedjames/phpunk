@@ -1,0 +1,34 @@
+<?php
+
+require 'vendor/autoload.php';
+
+$project = new Task\Project('PHPunk');
+
+$project->inject(function ($container) {
+    $container['watch'] = new Task\Plugin\WatchPlugin;
+});
+
+$project->addTask('watch', ['watch', function ($watch) {
+    $watch->init('src/')->addListener('modify', function ($event) {
+        $this->runTask('build');
+    })->start();
+}]);
+
+$project->addTask('build', function() {
+	$srcRoot = 'src';
+	$buildRoot = 'build';
+	$buildFile = basename(__DIR__);
+
+	$flags = FilesystemIterator::CURRENT_AS_FILEINFO | FilesystemIterator::KEY_AS_FILENAME;
+
+	$phar = new Phar("$buildRoot/$buildFile.phar", $flags, $buildFile);
+
+	foreach (glob('src/*.php') as $srcFile) {
+		$this->getOutput()->writeln("Including $srcFile");
+		$phar->addFile($srcFile, basename($srcFile));
+	}
+
+	$this->getOutput()->writeln("Finished $buildRoot/$buildFile.phar");
+});
+
+return $project;
