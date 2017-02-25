@@ -13,7 +13,11 @@ interface Mutable extends Iterator, Countable, ArrayAccess, JsonSerializable {
 	public function remove_all();
 }
 
-class object implements Mutable {
+interface ArrayWrapper {
+	public function toArray();
+}
+
+class object implements Mutable, ArrayWrapper {
 	private $_vars = array();
 
 	public function __construct($vars = null) {
@@ -116,6 +120,10 @@ class object implements Mutable {
 
 	public function offsetUnset ($key) {
 		$this->remove($key);
+	}
+
+	public function toArray() {
+		return $this->_vars;
 	}
 
 	public function jsonSerialize() {

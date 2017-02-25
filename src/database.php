@@ -191,8 +191,8 @@ class database_schema {
 
 	public function put_record($table_key, $record) {
 		if ($table = @$this->_tables[$table_key]) {
-			if (is_a($record, 'object'))
-				$record = $record->get_all();
+			if (is_a($record, 'ArrayWrapper'))
+				$record = $record->toArray();
 			elseif (is_object($record))
 				$record = get_object_vars($record);
 
@@ -554,7 +554,7 @@ class database_query {
 	}
 }
 
-class database_record implements ArrayAccess, JsonSerializable {
+class database_record implements ArrayAccess, ArrayWrapper, JsonSerializable {
 	private $_fields;
 
 	public function __construct($fields) {
@@ -594,6 +594,10 @@ class database_record implements ArrayAccess, JsonSerializable {
 
 	public function offsetUnset ($key) {
 		unset($this->_fields[$key]);
+	}
+
+	public function toArray() {
+		return $this->_fields;
 	}
 
 	public function jsonSerialize() {
