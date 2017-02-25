@@ -191,10 +191,10 @@ class database_schema {
 
 	public function put_record($table_key, $record) {
 		if ($table = @$this->_tables[$table_key]) {
-			if (is_a($record, 'ArrayWrapper'))
-				$record = $record->toArray();
-			elseif (is_object($record))
-				$record = get_object_vars($record);
+			if (is_object($record))
+				$record = method_exists($record, 'toArray')
+					? $record->toArray()
+					: get_object_vars($record);
 
 			$params = array();
 			$insert = @$record[$table->pkey] == 0;
@@ -554,7 +554,7 @@ class database_query {
 	}
 }
 
-class database_record implements ArrayAccess, ArrayWrapper, JsonSerializable {
+class database_record implements ArrayAccess, JsonSerializable {
 	private $_fields;
 
 	public function __construct($fields) {

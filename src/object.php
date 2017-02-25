@@ -1,6 +1,19 @@
 <?php
 
-class object implements Mutable, ArrayWrapper {
+interface Mutable extends Iterator, Countable, ArrayAccess, JsonSerializable {
+	public function has($key);
+
+	public function get($key);
+	public function get_all();
+
+	public function put($key, $value);
+	public function put_all($values);
+
+	public function remove($key);
+	public function remove_all();
+}
+
+class object implements Mutable {
 	private $_vars = array();
 
 	public function __construct($vars = null) {
