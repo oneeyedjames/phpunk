@@ -1,19 +1,6 @@
 <?php
 
-interface Mutable extends Iterator, Countable, ArrayAccess, JsonSerializable {
-	public function has($key);
-
-	public function get($key);
-	public function get_all();
-
-	public function put($key, $value);
-	public function put_all($values);
-
-	public function remove($key);
-	public function remove_all();
-}
-
-class object implements Mutable {
+class object implements Iterator, Countable, ArrayAccess, JsonSerializable {
 	private $_vars = array();
 
 	public function __construct($vars = null) {
@@ -86,9 +73,8 @@ class object implements Mutable {
 
 	public function put_all($vars) {
 		if (is_array($vars) || is_a($vars, 'Iterator')) {
-			foreach ($vars as $key => $value) {
+			foreach ($vars as $key => $value)
 				$this->put($key, $value);
-			}
 		} elseif (is_object($vars)) {
 			$this->put_all(get_object_vars($vars));
 		}
@@ -118,11 +104,11 @@ class object implements Mutable {
 		$this->remove($key);
 	}
 
-	public function toArray() {
+	public function jsonSerialize() {
 		return $this->_vars;
 	}
 
-	public function jsonSerialize() {
+	public function toArray() {
 		return $this->_vars;
 	}
 }

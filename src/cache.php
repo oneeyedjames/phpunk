@@ -1,16 +1,9 @@
 <?php
 
-interface TypeCache {
-	public function has($type, $id = false);
-	public function get($type, $id = false);
-	public function put($type, $id, $object);
-	public function remove($type, $id = false);
-}
-
 /**
  * Basic reference implementation. Multi-type, in-memory cache.
  */
-class cache implements TypeCache {
+class cache {
 	protected $_memcache;
 	protected $_data = array();
 

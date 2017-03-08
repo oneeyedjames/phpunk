@@ -23,10 +23,31 @@ $project->addTask('build', function() {
 
 	$phar = new Phar("$buildRoot/$buildFile.phar", $flags, $buildFile);
 
-	foreach (glob('src/*.php') as $srcFile) {
-		$this->getOutput()->writeln("Including $srcFile");
+    $files = array(
+        "/src/crypto.php",
+        "/src/token.php",
+        "/src/types.php",
+        "/src/http.php",
+        "/src/object.php",
+        "/src/cache.php",
+        "/src/database/schema.php",
+        "/src/database/table.php",
+        "/src/database/bridge.php",
+        "/src/database/relation.php",
+        "/src/database/query.php",
+        "/src/database/record.php",
+        "/src/database/result.php",
+        "/src/controller.php",
+        "/src/template.php",
+        "/src/user.php",
+        "/src/url.php"
+    );
+
+    foreach ($files as $srcFile) {
+        $srcFile = __DIR__ . $srcFile;
+        $this->getOutput()->writeln("Including $srcFile");
 		$phar->addFile($srcFile, basename($srcFile));
-	}
+    }
 
 	$this->getOutput()->writeln("Finished $buildRoot/$buildFile.phar");
 });
