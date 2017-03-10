@@ -15,6 +15,8 @@ class database_result implements Iterator, Countable, ArrayAccess, JsonSerializa
 				return $this->_found;
 			case 'first':
 				return count($this) ? $this->_records[0] : null;
+			case 'keys':
+				return array_keys($this->_records);
 		}
 	}
 
@@ -58,11 +60,40 @@ class database_result implements Iterator, Countable, ArrayAccess, JsonSerializa
 		return array_values($this->_records);
 	}
 
+	public function sort($reverse = false, $mode = '') {
+		if (is_callable($reverse)) {
+			switch ($mode) {
+				case 'a':
+					return uasort($this->_records, $reverse);
+				case 'k':
+					return uksort($this->_records, $reverse);
+				default:
+					return usort($this->_records, $reverse);
+			}
+		}
+
+		switch ($mode) {
+			case 'a':
+				return $reverse ? arsort($this->_records) : asort($this->_records);
+			case 'k':
+				return $reverse ? krsort($this->_records) : ksort($this->_records);
+			default:
+				return $reverse ? rsort($this->_records) : sort($this->_records);
+		}
+	}
+
 	public function walk($func, $data = null) {
 		return array_walk($this->_records, $func, $data);
 	}
 
 	public function map($func) {
 		return new self(array_map($func, $this->_records), $this->_found);
+	}
+
+	public function key_map($func) {
+		$keys   = array_map($func, $this->_records);
+		$values = array_values($this->_records);
+
+		return new self(array_combine($keys, $values), $this->_found);
 	}
 }
