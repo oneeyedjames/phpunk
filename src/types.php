@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * Backwards-compatibility functions
+ */
+
 if (!function_exists('boolval')) {
 	function boolval($var) {
 		return (bool)$var;

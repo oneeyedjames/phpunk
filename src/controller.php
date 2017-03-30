@@ -51,8 +51,8 @@ class controller_base {
 		return $this->_database->get_record($resource ?: $this->_resource, $id);
 	}
 
-	protected function put_record($record) {
-		return $this->_database->put_record($this->_resource, $record);
+	protected function put_record($record, $resource = false) {
+		return $this->_database->put_record($resource ?: $this->_resource, $record);
 	}
 
 	protected function get_cached_object($id, $type = false) {
@@ -65,11 +65,5 @@ class controller_base {
 
 	protected function remove_cached_object($id, $type = false) {
 		$this->_cache->remove($type ?: $this->_resource, $id, $object);
-	}
-
-	protected function map_result($result, $key = 'id') {
-		return new object(array_combine(array_map(function($record) use ($key) {
-			return $record[$key];
-		}, $result), $result));
 	}
 }

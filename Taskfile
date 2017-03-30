@@ -5,30 +5,55 @@ require 'vendor/autoload.php';
 $project = new Task\Project('PHPunk');
 
 $project->inject(function ($container) {
-    $container['watch'] = new Task\Plugin\WatchPlugin;
+	$container['watch'] = new Task\Plugin\WatchPlugin;
 });
 
 $project->addTask('watch', ['watch', function ($watch) {
-    $watch->init('src/')->addListener('modify', function ($event) {
-        $this->runTask('build');
-    })->start();
+	$watch->init('src/')->addListener('modify', function ($event) {
+		$this->runTask('build');
+	})->start();
 }]);
 
 $project->addTask('build', function() {
-	$srcRoot = 'src';
-	$buildRoot = 'build';
 	$buildFile = basename(__DIR__);
+	$buildPath = "build/$buildFile.phar";
 
 	$flags = FilesystemIterator::CURRENT_AS_FILEINFO | FilesystemIterator::KEY_AS_FILENAME;
 
-	$phar = new Phar("$buildRoot/$buildFile.phar", $flags, $buildFile);
+	$files = array(
+		"index.php",
+		"crypto.php",
+		"token.php",
+		"types.php",
+		"http.php",
+		"object.php",
+		"cache.php",
+		"database/schema.php",
+		"database/table.php",
+		"database/bridge.php",
+		"database/relation.php",
+		"database/query.php",
+		"database/record.php",
+		"database/result.php",
+		"controller.php",
+		"template.php",
+		"user.php",
+		"url.php"
+	);
 
-	foreach (glob('src/*.php') as $srcFile) {
+	$srcMap = array();
+
+	foreach ($files as $srcFile) {
+		$srcPath = __DIR__ . '/src/' . $srcFile;
+		$srcMap[$srcFile] = $srcPath;
+
 		$this->getOutput()->writeln("Including $srcFile");
-		$phar->addFile($srcFile, basename($srcFile));
 	}
 
-	$this->getOutput()->writeln("Finished $buildRoot/$buildFile.phar");
+	$phar = new Phar($buildPath, $flags, $buildFile);
+	$phar->buildFromIterator(new ArrayIterator($srcMap));
+
+	$this->getOutput()->writeln("Finished $buildPath");
 });
 
 return $project;

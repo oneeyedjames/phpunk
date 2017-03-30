@@ -13,5 +13,26 @@
         "task/task": "~0.5",
         "task/cli": "~0.2",
         "task/watch": "~0.1"
+    },
+    "autoload": {
+        "files": [
+            "src/crypto.php",
+            "src/token.php",
+            "src/types.php",
+            "src/http.php",
+            "src/object.php",
+            "src/cache.php",
+            "src/database/schema.php",
+            "src/database/table.php",
+            "src/database/bridge.php",
+            "src/database/relation.php",
+            "src/database/query.php",
+            "src/database/record.php",
+            "src/database/result.php",
+            "src/controller.php",
+            "src/template.php",
+            "src/user.php",
+            "src/url.php"
+        ]
     }
 }
