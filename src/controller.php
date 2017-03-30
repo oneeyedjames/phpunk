@@ -5,11 +5,11 @@ class controller_base {
 	private $_database;
 	private $_cache;
 
-    public function __construct($resource, $database, $cache) {
+	public function __construct($resource, $database, $cache) {
 		$this->_resource = $resource;
 		$this->_database = $database;
-		$this->_cache    = $cache;
-    }
+		$this->_cache	= $cache;
+	}
 
 	public function __get($key) {
 		switch ($key) {
@@ -20,13 +20,13 @@ class controller_base {
 		}
 	}
 
-    public function do_action($action) {
+	public function do_action($action) {
 		$method = str_replace('-', '_', $action) . '_action';
-        if (method_exists($this, $method))
-            return call_user_func(array($this, $method), $_GET, $_POST);
-        else
-            trigger_error("Undefined action $this->resource:$action", E_USER_WARNING);
-    }
+		if (method_exists($this, $method))
+			return call_user_func(array($this, $method), $_GET, $_POST);
+		else
+			trigger_error("Undefined action $this->resource:$action", E_USER_WARNING);
+	}
 
 	public function pre_view($view, &$vars) {
 		$method = str_replace('-', '_', $view) . '_view';
@@ -35,10 +35,12 @@ class controller_base {
 	}
 
 	protected function query($sql, $params = array()) {
+		$params = is_array($params) ? $params : array_slice(func_get_args(), 1);
 		return $this->_database->query($sql, $params);
 	}
 
 	protected function execute($sql, $params = array()) {
+		$params = is_array($params) ? $params : array_slice(func_get_args(), 1);
 		return $this->_database->execute($sql, $params);
 	}
 
