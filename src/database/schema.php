@@ -22,6 +22,9 @@ class database_schema {
 
 	public function query($sql, $params = array()) {
 		if ($stmt = $this->_mysql->prepare($sql)) {
+			if (is_scalar($params))
+				$params = array_slice(func_get_args(), 1);
+
 			if (count($params)) {
 				$_params = array('');
 
@@ -74,6 +77,9 @@ class database_schema {
 		$result = false;
 
 		if ($stmt = $this->_mysql->prepare($sql)) {
+			if (is_scalar($params))
+				$params = array_slice(func_get_args(), 1);
+
 			if (count($params)) {
 				$_params = array('');
 
