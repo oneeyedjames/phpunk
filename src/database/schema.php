@@ -195,8 +195,8 @@ class database_schema {
 		return null;
 	}
 
-	public function put_record($table_key, $record) {
-		if ($table = @$this->_tables[$table_key]) {
+	public function put_record($table_name, $record) {
+		if ($table = @$this->_tables[$table_name]) {
 			if (is_object($record))
 				$record = method_exists($record, 'toArray')
 					? $record->toArray()
@@ -213,6 +213,18 @@ class database_schema {
 			$this->execute($sql, $params);
 
 			return @$record[$table->pkey] ?: $this->insert_id;
+		}
+
+		return false;
+	}
+
+	public function remove_record($table_name, $record_id) {
+		if ($table = @$this->_tables[$table_name]) {
+			$sql = $table->delete_sql();
+
+			$params = array(intval($record_id));
+
+			return $this->execute($sql, $params);
 		}
 
 		return false;

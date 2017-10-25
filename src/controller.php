@@ -57,6 +57,10 @@ class controller_base {
 		return $this->_database->put_record($resource ?: $this->_resource, $record);
 	}
 
+	protected function remove_record($id, $resource = false) {
+		return $this->_database->remove_record($resource ?: $this->_resource, $id);
+	}
+
 	protected function get_cached_object($id, $type = false) {
 		return $this->_cache->get($type ?: $this->_resource, $id);
 	}
