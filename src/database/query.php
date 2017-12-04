@@ -53,6 +53,13 @@ class database_query {
 		if (!is_null($this->_result))
 			return $this->_result;
 
+		if ($this->execute())
+			return $this->_result;
+
+		return null;
+	}
+
+	public function execute() {
 		if ($table = $this->_database->get_table($this->table)) {
 			$query = "SELECT SQL_CALC_FOUND_ROWS `$table->name`.* FROM `$table->name`";
 
@@ -144,9 +151,15 @@ class database_query {
 
 			$this->_query = $query;
 
-			return $this->_result = $this->_database->query($query, $params);
+			$this->_result = $this->_database->query($query, $params);
+
+			return !is_null($this->_result);
 		}
 
-		return null;
+		return false;
+	}
+
+	public function reset() {
+		$this->_result = null;
 	}
 }
