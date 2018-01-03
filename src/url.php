@@ -105,12 +105,10 @@ class url_schema {
 					$params['action'] = array_shift($path);
 				elseif ($this->is_view($path[0]))
 					$params['view'] = array_shift($path);
-
-				return $params;
 			}
 		}
 
-		if (isset($path[0])) {
+		if (isset($path[0], $params['resource'])) {
 			if ($this->is_action($path[0], $params['resource'])) {
 				$params['action'] = array_shift($path);
 			} elseif ($this->is_view($path[0], $params['resource'])) {
