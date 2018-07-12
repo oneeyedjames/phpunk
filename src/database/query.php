@@ -20,6 +20,7 @@ class database_query {
 	private $_offset = 0;
 
 	private $_query;
+	private $_params;
 	private $_result;
 
 	public function __construct($database, $args) {
@@ -44,6 +45,7 @@ class database_query {
 			case 'limit':
 			case 'offset':
 			case 'query':
+			case 'params':
 			case 'result':
 				return $this->{"_$key"};
 		}
@@ -150,7 +152,7 @@ class database_query {
 			}
 
 			$this->_query = $query;
-
+			$this->_params = $params;
 			$this->_result = $this->_database->query($query, $params);
 
 			return !is_null($this->_result);

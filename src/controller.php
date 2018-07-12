@@ -70,6 +70,6 @@ class controller_base {
 	}
 
 	protected function remove_cached_object($id, $type = false) {
-		$this->_cache->remove($type ?: $this->_resource, $id, $object);
+		$this->_cache->remove($type ?: $this->_resource, $id);
 	}
 }
