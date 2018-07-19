@@ -1,6 +1,6 @@
 <?php
 
-class object implements Iterator, Countable, ArrayAccess, JsonSerializable {
+class object implements Iterator, Countable, Mutable, ArrayAccess, JsonSerializable {
 	private $_vars = array();
 
 	public function __construct($vars = null) {

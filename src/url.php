@@ -149,6 +149,9 @@ class url_schema {
 	public function build_path($params = array()) {
 		$path = array();
 
+		if (@$params['api'])
+			$path[] = 'api';
+
 		if ($this->is_resource(@$params['resource'])) {
 			$path[] = $params['resource'];
 
