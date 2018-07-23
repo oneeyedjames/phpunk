@@ -20,6 +20,7 @@
             "src/token.php",
             "src/types.php",
             "src/http.php",
+			"src/collection.php",
 			"src/mutable.php",
             "src/object.php",
             "src/cache.php",
