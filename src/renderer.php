@@ -10,7 +10,7 @@ class renderer_base {
 	public function __get($key) {
 		switch ($key) {
 			case 'resource':
-				return $this->_renderer;
+				return $this->_resource;
 		}
 	}
 
