@@ -6,6 +6,40 @@
 trait collection {
 	private $_data = [];
 
+	public function sort($reverse = false, $mode = '') {
+		if (is_callable($reverse)) {
+			switch ($mode) {
+				case 'a':
+					return uasort($this->_data, $reverse);
+				case 'k':
+					return uksort($this->_data, $reverse);
+				default:
+					return usort($this->_data, $reverse);
+			}
+		}
+
+		switch ($mode) {
+			case 'a':
+				return $reverse ? arsort($this->_data) : asort($this->_data);
+			case 'k':
+				return $reverse ? krsort($this->_data) : ksort($this->_data);
+			default:
+				return $reverse ? rsort($this->_data) : sort($this->_data);
+		}
+	}
+
+	public function walk($func, $data = null) {
+		return array_walk($this->_data, $func, $data);
+	}
+
+	public function keys() {
+		return array_keys($this->_data);
+	}
+
+	public function values() {
+		return array_values($this->_data);
+	}
+
 	public function toArray() {
 		return $this->_data;
 	}
