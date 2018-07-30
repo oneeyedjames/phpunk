@@ -30,7 +30,7 @@ class mutableTest extends PHPUnit_Framework_TestCase {
 		$this->assertFalse($obj->has('baz'));
 		$this->assertEquals('bat', $obj->get('baz', 'bat'));
 		$this->assertEquals('bat', $obj->baz('bat'));
-		$this->assertEquals(null, $obj->baz);
+		$this->assertNull($obj->baz);
 	}
 
 	public function testPut() {

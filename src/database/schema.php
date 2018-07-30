@@ -20,7 +20,7 @@ class database_schema {
 		}
 	}
 
-	public function query($sql, $params = array()) {
+	public function query($sql, $params = array(), $table_name = false) {
 		if ($stmt = $this->_mysql->prepare($sql)) {
 			if (is_scalar($params))
 				$params = array_slice(func_get_args(), 1);
@@ -48,7 +48,7 @@ class database_schema {
 				$found = 0;
 
 				while ($record = $result->fetch_assoc())
-					$records[] = new database_record($record);
+					$records[] = new database_record($record, $table_name);
 
 				$result->free();
 
@@ -188,7 +188,7 @@ class database_schema {
 
 			$params = array(intval($record_id));
 
-			if ($result = $this->query($sql, $params))
+			if ($result = $this->query($sql, $params, $table_name))
 				return $result->first;
 		}
 

@@ -7,7 +7,14 @@ class databaseRecordTest extends PHPUnit_Framework_TestCase {
 		$this->record = new database_record([
 			'foo' => 'bar',
 			'baz' => 'bat'
-		]);
+		], 'test_table');
+	}
+
+	public function testTable() {
+		$new_record = new database_record;
+
+		$this->assertEquals('test_table', $this->record->table);
+		$this->assertFalse($new_record->table);
 	}
 
 	public function testCount() {
@@ -39,10 +46,10 @@ class databaseRecordTest extends PHPUnit_Framework_TestCase {
 	public function testGetDefault() {
 		$this->assertFalse($this->record->has('non'));
 
-		$this->assertEquals(null, $this->record->get('non'));
+		$this->assertNull($this->record->get('non'));
 		$this->assertEquals('def', $this->record->get('non', 'def'));
 
-		$this->assertEquals(null, $this->record->non);
+		$this->assertNull($this->record->non);
 		$this->assertEquals('def', $this->record->non('def'));
 	}
 

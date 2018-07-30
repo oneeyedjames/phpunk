@@ -153,7 +153,7 @@ class database_query {
 
 			$this->_query = $query;
 			$this->_params = $params;
-			$this->_result = $this->_database->query($query, $params);
+			$this->_result = $this->_database->query($query, $params, $this->table);
 
 			return !is_null($this->_result);
 		}
