@@ -1,10 +1,10 @@
 <?php
 
-class databaseTest extends PHPUnit_Framework_TestCase {
+class databaseSchemaTest extends PHPUnit_Framework_TestCase {
 	public $database;
 
 	public function setUp() {
-		$this->database = new database(null);
+		$this->database = new database_schema(null);
 	}
 
 	public function tearDown() {
@@ -65,8 +65,8 @@ class databaseTest extends PHPUnit_Framework_TestCase {
 		$sql1 = $tbl1->select_sql();
 		$sql2 = $tbl2->select_sql();
 
-		$this->assertSame('SELECT * FROM `users` WHERE `id` = ?', $sql1);
-		$this->assertSame('SELECT * FROM `groups` WHERE `id` = ?', $sql2);
+		$this->assertSame('SELECT SQL_CALC_FOUND_ROWS * FROM `users` WHERE `id` = ?', $sql1);
+		$this->assertSame('SELECT SQL_CALC_FOUND_ROWS * FROM `groups` WHERE `id` = ?', $sql2);
 
 		$this->assertFalse($tbl1->select_sql('user_group'));
 		$this->assertFalse($tbl2->select_sql('user_group'));
@@ -76,8 +76,8 @@ class databaseTest extends PHPUnit_Framework_TestCase {
 		$sql1 = $tbl1->select_sql('user_group');
 		$sql2 = $tbl2->select_sql('user_group');
 
-		$this->assertSame('SELECT `groups`.* FROM `groups` INNER JOIN `users` ON `groups`.`id` = `users`.`group_id` WHERE `users`.`id` = ?', $sql1);
-		$this->assertSame('SELECT `users`.* FROM `groups` INNER JOIN `users` ON `groups`.`id` = `users`.`group_id` WHERE `groups`.`id` = ?', $sql2);
+		$this->assertSame('SELECT SQL_CALC_FOUND_ROWS `groups`.* FROM `groups` INNER JOIN `users` ON `groups`.`id` = `users`.`group_id` WHERE `users`.`id` = ?', $sql1);
+		$this->assertSame('SELECT SQL_CALC_FOUND_ROWS `users`.* FROM `groups` INNER JOIN `users` ON `groups`.`id` = `users`.`group_id` WHERE `groups`.`id` = ?', $sql2);
 	}
 
 	public function testTableInsert() {
