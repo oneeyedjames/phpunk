@@ -56,10 +56,10 @@ class renderer_base {
 	protected function create_response($record) {
 		$response = new object();
 
-		$record->each(function($value, $key) use ($response) {
+		foreach ($record as $key => $value) {
 			if ($field = $this->map_field_name($key))
 				$response[$field] = $value;
-		});
+		}
 
 		$links = [];
 
