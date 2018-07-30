@@ -14,21 +14,9 @@ class renderer_base {
 		}
 	}
 
-	public function render($view, $controller = false) {
-		$method = 'api_' . str_replace('-', '_', $view) . '_view';
+	public function render($view) {}
 
-		if (method_exists($controller, $method)) {
-			$result = call_user_func([$controller, $method]);
-		} else {
-			$result = new api_error('api_undefined_view',
-				'The requested API view is not defined', [
-					'status'   => 400,
-					'resource' => $this->resource,
-					'view'     => $view
-				]
-			);
-		}
-
+	protected function render_result($result) {
 		if ($result instanceof database_record) {
 			$response = $this->create_response($result);
 		} elseif ($result instanceof database_result) {
@@ -43,8 +31,8 @@ class renderer_base {
 
 			$response = $result;
 		} else {
-			$response = new api_error('api_invalid_backend_response',
-				'The back-end response was invalid.');
+			$response = new api_error('api_invalid_response',
+				'The response was invalid.');
 
 			http_response_code(500);
 		}
