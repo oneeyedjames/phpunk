@@ -45,19 +45,17 @@ class renderer_base {
 		$response = new object();
 
 		foreach ($record as $key => $value) {
-			if ($field = $this->map_field_name($key))
-				$response[$field] = $value;
+			$map_key = $key;
+			$map_value = $this->map_field_value($value, $map_key);
+			if ($map_key) $response[$map_key] = $map_value;
 		}
 
 		$links = [];
 
 		foreach ($this->get_links($record) as $rel => $params) {
 			$params['api'] = true;
-
-			$links[] = [
-				'rel'  => $rel,
-				'href' => build_url($params)
-			];
+			$href = build_url($params);
+			$links[] = compact('rel', 'href');
 		}
 
 		$response->links = $links;
@@ -79,5 +77,10 @@ class renderer_base {
 
 	protected function map_field_name($field) {
 		return $field;
+	}
+
+	protected function map_field_value($value, &$field) {
+		$field = $this->map_field_name($field);
+		return $field ? $value : null;
 	}
 }
