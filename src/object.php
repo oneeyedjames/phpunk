@@ -1,6 +1,6 @@
 <?php
 
-class object implements collectible, JsonSerializable {
+class object implements collection, JsonSerializable {
 	use mutable;
 
 	public function __construct($data = []) {

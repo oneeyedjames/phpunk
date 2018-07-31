@@ -3,7 +3,7 @@
 /**
  * 'Implements' ArrayAccess, Countable, Iterator
  */
-trait collection {
+trait collectible {
 	private $_data = [];
 
 	public function sort($reverse = false, $mode = '') {
@@ -47,7 +47,7 @@ trait collection {
 	protected function loadArray($data) {
 		if (is_array($data)) {
 			$this->_data = $data;
-		} elseif ($data instanceof collection) {
+		} elseif ($data instanceof collectible) {
 			$this->_data = $data->_data;
 		} elseif ($data instanceof Iterator) {
 			$this->_data = [];
@@ -107,4 +107,4 @@ trait collection {
 	}
 }
 
-interface collectible extends ArrayAccess, Countable, Iterator {}
+interface collection extends ArrayAccess, Countable, Iterator {}

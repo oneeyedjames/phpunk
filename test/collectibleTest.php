@@ -1,16 +1,16 @@
 <?php
 
-class collectionObject implements collectible {
-	use collection;
+class collectibleObject implements collection {
+	use collectible;
 
 	public function __construct($data = []) {
 		$this->loadArray($data);
 	}
 }
 
-class collectionTest extends PHPUnit_Framework_TestCase {
+class collectibleTest extends PHPUnit_Framework_TestCase {
 	public function testArrayAccess() {
-		$arr = new collectionObject;
+		$arr = new collectibleObject;
 
 		$this->assertFalse(isset($arr['foo']));
 		$this->assertEmpty($arr['foo']);
@@ -27,7 +27,7 @@ class collectionTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function testCountable() {
-		$arr = new collectionObject;
+		$arr = new collectibleObject;
 
 		$this->assertEquals(0, count($arr));
 
@@ -39,7 +39,7 @@ class collectionTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function testIterator() {
-		$arr = new collectionObject;
+		$arr = new collectibleObject;
 
 		for ($i = 0; $i < 10; $i++)
 			$arr[$i] = $i + 1;
@@ -50,7 +50,7 @@ class collectionTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function testSort() {
-		$arr = new collectionObject([7, 3, 5]);
+		$arr = new collectibleObject([7, 3, 5]);
 
 		$this->assertEquals(7, $arr[0]);
 		$this->assertEquals(3, $arr[1]);
@@ -70,7 +70,7 @@ class collectionTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function testSortAssoc() {
-		$arr = new collectionObject([7, 3, 5]);
+		$arr = new collectibleObject([7, 3, 5]);
 		$keys = $arr->keys();
 
 		$this->assertEquals(7, $arr[0]);
@@ -102,7 +102,7 @@ class collectionTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function testSortKeyed() {
-		$arr = new collectionObject([1 => 7, 4 => 3, 2 => 5]);
+		$arr = new collectibleObject([1 => 7, 4 => 3, 2 => 5]);
 		$keys = $arr->keys();
 
 		$this->assertEquals(7, $arr[1]);
@@ -134,7 +134,7 @@ class collectionTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function testWalk() {
-		$arr = new collectionObject([1, 2, 3]);
+		$arr = new collectibleObject([1, 2, 3]);
 
 		$this->assertEquals(1, $arr[0]);
 		$this->assertEquals(2, $arr[1]);
@@ -150,7 +150,7 @@ class collectionTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function testKeysAndValues() {
-		$arr = new collectionObject(['foo' => 'bar', 'baz' => 'bat']);
+		$arr = new collectibleObject(['foo' => 'bar', 'baz' => 'bat']);
 
 		$keys   = $arr->keys();
 		$values = $arr->values();

@@ -1,7 +1,7 @@
 <phpunit bootstrap="test/autoload.php">
 	<testsuites>
 		<testsuite name="Zombie">
-			<file>test/collectionTest.php</file>
+			<file>test/collectibleTest.php</file>
 			<file>test/mutableTest.php</file>
 			<file>test/objectTest.php</file>
 			<file>test/cacheTest.php</file>

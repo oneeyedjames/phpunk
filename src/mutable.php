@@ -1,7 +1,7 @@
 <?php
 
 trait mutable {
-	use collection;
+	use collectible;
 
 	public function __call($func, $args) {
 		if (count($args) == 1)

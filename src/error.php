@@ -1,7 +1,7 @@
 <?php
 
-class api_error implements collectible, JsonSerializable {
-	use collection;
+class api_error implements collection, JsonSerializable {
+	use collectible;
 
 	private $_code;
 	private $_message;
