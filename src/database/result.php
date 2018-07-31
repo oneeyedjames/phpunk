@@ -1,21 +1,25 @@
 <?php
 
 class database_result extends object {
+	private $_table;
 	private $_found;
 
-	public function __construct($records, $found) {
+	public function __construct($records, $found, $table = false) {
 		parent::__construct($records);
 		$this->_found = intval($found);
+		$this->_table = $table;
 	}
 
 	public function __get($key) {
 		switch ($key) {
+			case 'table':
+				return $this->_table;
 			case 'found':
 				return $this->_found;
 			case 'first':
 				return isset($this[0]) ? $this[0] : null;
 			default:
-				return $this->get($key);
+				return parent::__get($key);
 		}
 	}
 

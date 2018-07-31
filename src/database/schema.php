@@ -59,7 +59,7 @@ class database_schema {
 					$result->free();
 				}
 
-				return new database_result($records, $found);
+				return new database_result($records, $found, $table_name);
 			} else {
 				error_log($sql);
 				trigger_error($stmt->error, E_USER_WARNING);
