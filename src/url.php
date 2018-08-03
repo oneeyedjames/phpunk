@@ -179,8 +179,8 @@ class url_schema {
 			foreach ($params['sort'] as $key => $order) {
 				$order = strtolower($order);
 				if (in_array($order, array('asc', 'desc'))) {
-					$path[] = $this->join_slug('sort', $key);
-					$path[] = $order;
+					$path[] = $this->join_slug('sort', $order);
+					$path[] = $key;
 				}
 			}
 		}
