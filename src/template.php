@@ -12,16 +12,13 @@ class template_base {
     }
 
     public function locate($view, $resource = false) {
-        $files = array($view, 'index');
+		$files = $resource === false ? array($view, 'index') :
+			array("$resource/$view", $view, "$resource/index", 'index');
 
         foreach ($files as $filename) {
             foreach ($this->_dirs as $dirname) {
-    			$filepath = $resource
-                    ? "$dirname/$resource/$filename.php"
-                    : "$dirname/$filename.php";
-
-    			if (is_file($filepath))
-    				return $filepath;
+				if (is_file("$dirname/$filename.php"))
+    				return "$dirname/$filename.php";
     		}
         }
 
