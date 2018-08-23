@@ -32,6 +32,7 @@
             "src/database/query.php",
             "src/database/record.php",
             "src/database/result.php",
+			"src/resource.php",
             "src/controller.php",
             "src/renderer.php",
             "src/template.php",
