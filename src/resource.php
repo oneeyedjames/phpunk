@@ -20,6 +20,30 @@ class resource_base {
 		}
 	}
 
+	public function get_record($id) {
+		if ($record = $this->get_cached_object($id))
+			return $record;
+
+		if ($record = $this->_database->get_record($this->_name, $id))
+			$this->put_cached_object($id, $record);
+
+		return $record;
+	}
+
+	public function put_record($record) {
+		if ($record = $this->_database->put_record($this->_name, $record))
+			$this->put_cached_object($record->id, $record);
+
+		return $record;
+	}
+
+	public function remove_record($id) {
+		if ($result = $this->_database->remove_record($this->_name, $id))
+			$this->remove_cached_object($id);
+
+		return $result;
+	}
+
 	protected function query($sql, $params = array()) {
 		$params = is_array($params) ? $params : array_slice(func_get_args(), 1);
 		return $this->_database->query($sql, $params);
@@ -33,30 +57,6 @@ class resource_base {
 	protected function make_query($args) {
 		$args['table'] = $this->_name;
 		return new database_query($this->_database, $args);
-	}
-
-	protected function get_record($id) {
-		if ($record = $this->get_cached_object($id))
-			return $record;
-
-		if ($record = $this->_database->get_record($this->_name, $id))
-			$this->put_cached_object($id, $record);
-
-		return $record;
-	}
-
-	protected function put_record($record) {
-		if ($record = $this->_database->put_record($this->_name, $record))
-			$this->put_cached_object($record->id, $record);
-
-		return $record;
-	}
-
-	protected function remove_record($id) {
-		if ($result = $this->_database->remove_record($this->_name, $id))
-			$this->remove_cached_object($id);
-
-		return $result;
 	}
 
 	protected function get_cached_object($id) {

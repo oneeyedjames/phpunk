@@ -63,7 +63,7 @@ class database_query {
 
 	public function execute() {
 		if ($table = $this->_database->get_table($this->table)) {
-			$query = "SELECT SQL_CALC_FOUND_ROWS `$table->name`.* FROM `$table->name`";
+			$query = "SELECT SQL_CALC_FOUND_ROWS `$table->name`.*";
 
 			$joins = array();
 			$where = array();
@@ -75,10 +75,14 @@ class database_query {
 				$bridge = $table->name == $rel->ptable ? $rel->ftable : $rel->ptable;
 				$bridge = $this->_database->get_table($bridge);
 
+				$query .= ", `$bridge->name`.*";
+
 				$joins[] = "`$bridge->name` ON `$rel->ftable`.`$rel->fkey` = `$rel->ptable`.`$rel->pkey`";
 			} else {
 				$bridge = new database_bridge_table('');
 			}
+
+			$query .= " FROM `$table->name`";
 
 			foreach ($this->args as $field => $value) {
 				if ($rel = $table->get_relation($field)) {
