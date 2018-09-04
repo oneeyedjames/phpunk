@@ -1,22 +1,16 @@
 <?php
 
 class controller_base {
-	private $_resource;
-	private $_database;
-	private $_cache;
+	protected $_model;
 
-	public function __construct($resource, $database, $cache) {
-		$this->_resource = $resource;
-		$this->_database = $database;
-		$this->_cache	= $cache;
+	public function __construct($model) {
+		$this->_model = $model;
 	}
 
 	public function __get($key) {
 		switch ($key) {
 			case 'resource':
-				return $this->_resource;
-			case 'insert_id':
-				return $this->_database->insert_id;
+				return @$this->_model->resource;
 		}
 	}
 
@@ -32,44 +26,5 @@ class controller_base {
 		$method = str_replace('-', '_', $view) . '_view';
 		if (method_exists($this, $method))
 			$vars = call_user_func(array($this, $method), $vars);
-	}
-
-	protected function query($sql, $params = array()) {
-		$params = is_array($params) ? $params : array_slice(func_get_args(), 1);
-		return $this->_database->query($sql, $params);
-	}
-
-	protected function execute($sql, $params = array()) {
-		$params = is_array($params) ? $params : array_slice(func_get_args(), 1);
-		return $this->_database->execute($sql, $params);
-	}
-
-	protected function make_query($args, $resource = false) {
-		$args['table'] = $resource ?: $this->_resource;
-		return new database_query($this->_database, $args);
-	}
-
-	protected function get_record($id, $resource = false) {
-		return $this->_database->get_record($resource ?: $this->_resource, $id);
-	}
-
-	protected function put_record($record, $resource = false) {
-		return $this->_database->put_record($resource ?: $this->_resource, $record);
-	}
-
-	protected function remove_record($id, $resource = false) {
-		return $this->_database->remove_record($resource ?: $this->_resource, $id);
-	}
-
-	protected function get_cached_object($id, $type = false) {
-		return $this->_cache->get($type ?: $this->_resource, $id);
-	}
-
-	protected function put_cached_object($id, $object, $type = false) {
-		return $this->_cache->put($type ?: $this->_resource, $id, $object);
-	}
-
-	protected function remove_cached_object($id, $type = false) {
-		$this->_cache->remove($type ?: $this->_resource, $id);
 	}
 }
