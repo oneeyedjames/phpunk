@@ -1,20 +1,20 @@
 <?php
 
-class resource_base {
-	private $_name;
+class model_base {
+	private $_resource;
 	private $_database;
 	private $_cache;
 
-	public function __construct($name, $database, $cache = null) {
-		$this->_name     = $name;
+	public function __construct($resource, $database, $cache = null) {
+		$this->_resource = $resource;
 		$this->_database = $database;
 		$this->_cache    = $cache;
 	}
 
 	public function __get($key) {
 		switch ($key) {
-			case 'name':
-				return $this->_name;
+			case 'resource':
+				return $this->_resource;
 			case 'insert_id':
 				return $this->_database->insert_id;
 		}
@@ -24,21 +24,21 @@ class resource_base {
 		if ($record = $this->get_cached_object($id))
 			return $record;
 
-		if ($record = $this->_database->get_record($this->_name, $id))
+		if ($record = $this->_database->get_record($this->_resource, $id))
 			$this->put_cached_object($id, $record);
 
 		return $record;
 	}
 
 	public function put_record($record) {
-		if ($record = $this->_database->put_record($this->_name, $record))
+		if ($record = $this->_database->put_record($this->_resource, $record))
 			$this->put_cached_object($record->id, $record);
 
 		return $record;
 	}
 
 	public function remove_record($id) {
-		if ($result = $this->_database->remove_record($this->_name, $id))
+		if ($result = $this->_database->remove_record($this->_resource, $id))
 			$this->remove_cached_object($id);
 
 		return $result;
@@ -55,19 +55,19 @@ class resource_base {
 	}
 
 	protected function make_query($args) {
-		$args['table'] = $this->_name;
+		$args['table'] = $this->_resource;
 		return new database_query($this->_database, $args);
 	}
 
 	protected function get_cached_object($id) {
-		return $this->_cache->get($this->_name, $id);
+		return $this->_cache->get($this->_resource, $id);
 	}
 
 	protected function put_cached_object($id, $object) {
-		return $this->_cache->put($this->_name, $id, $object);
+		return $this->_cache->put($this->_resource, $id, $object);
 	}
 
 	protected function remove_cached_object($id) {
-		return $this->_cache->remove($this->_name, $id);
+		return $this->_cache->remove($this->_resource, $id);
 	}
 }

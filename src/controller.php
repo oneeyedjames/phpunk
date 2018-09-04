@@ -1,16 +1,16 @@
 <?php
 
 class controller_base {
-	protected $_resource;
+	protected $_model;
 
-	public function __construct($resource) {
-		$this->_resource = $resource;
+	public function __construct($model) {
+		$this->_model = $model;
 	}
 
 	public function __get($key) {
 		switch ($key) {
 			case 'resource':
-				return @$this->_resource->name;
+				return @$this->_model->resource;
 		}
 	}
 
