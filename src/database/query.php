@@ -120,7 +120,7 @@ class database_query {
 				if (is_scalar($value)) {
 					$where[] = "`$field` = ?";
 					$params[] = $value;
-				} elseif (is_array($value)) {
+				} elseif (is_array($value) && count($value)) {
 					$places = array_fill(0, count($value), '?');
 
 					$where[] = "`$field` IN (" . implode(", ", $places) . ")";
