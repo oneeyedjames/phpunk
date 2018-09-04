@@ -60,14 +60,14 @@ class model_base {
 	}
 
 	protected function get_cached_object($id) {
-		return $this->_cache->get($this->_resource, $id);
+		return @$this->_cache->get($this->_resource, $id);
 	}
 
 	protected function put_cached_object($id, $object) {
-		return $this->_cache->put($this->_resource, $id, $object);
+		return @$this->_cache->put($this->_resource, $id, $object);
 	}
 
 	protected function remove_cached_object($id) {
-		return $this->_cache->remove($this->_resource, $id);
+		return @$this->_cache->remove($this->_resource, $id);
 	}
 }
