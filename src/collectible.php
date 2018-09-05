@@ -47,12 +47,10 @@ trait collectible {
 	protected function loadArray($data) {
 		if (is_array($data)) {
 			$this->_data = $data;
-		} elseif ($data instanceof collectible) {
+		} elseif (is_collectible($data)) {
 			$this->_data = $data->_data;
-		} elseif ($data instanceof Iterator) {
-			$this->_data = [];
-			foreach ($data as $key => $value)
-				$this->_data[$key] = $value;
+		} elseif (is_iterable($data)) {
+			$this->_data = iterator_to_array($data);
 		} elseif (is_object($data)) {
 			$this->_data = get_object_vars($data);
 		} else {
@@ -108,3 +106,7 @@ trait collectible {
 }
 
 interface collection extends ArrayAccess, Countable, Iterator {}
+
+function is_collectible($obj) {
+	return $obj instanceof collectible;
+}
