@@ -14,119 +14,23 @@
 <path fill="none" stroke="#c0c0c0" d="M221.4878,-44C221.4878,-44 731.5598,-44 731.5598,-44 737.5598,-44 743.5598,-50 743.5598,-56 743.5598,-56 743.5598,-859 743.5598,-859 743.5598,-865 737.5598,-871 731.5598,-871 731.5598,-871 221.4878,-871 221.4878,-871 215.4878,-871 209.4878,-865 209.4878,-859 209.4878,-859 209.4878,-56 209.4878,-56 209.4878,-50 215.4878,-44 221.4878,-44"/>
 <text text-anchor="middle" x="476.5238" y="-858.2" font-family="Times,serif" font-size="11.00" fill="#c0c0c0">Global</text>
 </g>
-<!-- \\database_relation -->
-<g id="node1" class="node">
-<title>\\database_relation</title>
-<polygon fill="none" stroke="#000000" points="722.467,-844 594.0301,-844 594.0301,-808 722.467,-808 722.467,-844"/>
-<text text-anchor="middle" x="658.2485" y="-822.7" font-family="Courier,monospace" font-size="11.00" fill="#000000">database_relation</text>
-</g>
-<!-- \\database_record -->
-<g id="node2" class="node">
-<title>\\database_record</title>
-<polygon fill="none" stroke="#000000" points="715.7646,-736 600.7324,-736 600.7324,-700 715.7646,-700 715.7646,-736"/>
-<text text-anchor="middle" x="658.2485" y="-714.7" font-family="Courier,monospace" font-size="11.00" fill="#000000">database_record</text>
-</g>
 <!-- \\object -->
-<g id="node14" class="node">
+<g id="node1" class="node">
 <title>\\object</title>
-<polygon fill="none" stroke="#000000" points="482.3376,-736 427.1219,-736 427.1219,-700 482.3376,-700 482.3376,-736"/>
-<text text-anchor="middle" x="454.7297" y="-714.7" font-family="Courier,monospace" font-size="11.00" fill="#000000">object</text>
-</g>
-<!-- \\database_record&#45;&gt;\\object -->
-<g id="edge1" class="edge">
-<title>\\database_record&#45;&gt;\\object</title>
-<path fill="none" stroke="#000000" d="M600.4726,-718C565.887,-718 522.9077,-718 492.6113,-718"/>
-<polygon fill="none" stroke="#000000" points="492.4587,-714.5001 482.4586,-718 492.4586,-721.5001 492.4587,-714.5001"/>
-</g>
-<!-- \\database_bridge_table -->
-<g id="node3" class="node">
-<title>\\database_bridge_table</title>
-<polygon fill="none" stroke="#000000" points="735.3715,-682 581.1255,-682 581.1255,-646 735.3715,-646 735.3715,-682"/>
-<text text-anchor="middle" x="658.2485" y="-660.7" font-family="Courier,monospace" font-size="11.00" fill="#000000">database_bridge_table</text>
-</g>
-<!-- \\database_table -->
-<g id="node7" class="node">
-<title>\\database_table</title>
-<polygon fill="none" stroke="#000000" points="509.1456,-682 400.3139,-682 400.3139,-646 509.1456,-646 509.1456,-682"/>
-<text text-anchor="middle" x="454.7297" y="-660.7" font-family="Courier,monospace" font-size="11.00" fill="#000000">database_table</text>
-</g>
-<!-- \\database_bridge_table&#45;&gt;\\database_table -->
-<g id="edge2" class="edge">
-<title>\\database_bridge_table&#45;&gt;\\database_table</title>
-<path fill="none" stroke="#000000" d="M581.0166,-664C560.6203,-664 538.826,-664 519.184,-664"/>
-<polygon fill="none" stroke="#000000" points="519.1275,-660.5001 509.1275,-664 519.1274,-667.5001 519.1275,-660.5001"/>
-</g>
-<!-- \\database_result -->
-<g id="node4" class="node">
-<title>\\database_result</title>
-<polygon fill="none" stroke="#000000" points="715.7646,-790 600.7324,-790 600.7324,-754 715.7646,-754 715.7646,-790"/>
-<text text-anchor="middle" x="658.2485" y="-768.7" font-family="Courier,monospace" font-size="11.00" fill="#000000">database_result</text>
-</g>
-<!-- \\database_result&#45;&gt;\\object -->
-<g id="edge3" class="edge">
-<title>\\database_result&#45;&gt;\\object</title>
-<path fill="none" stroke="#000000" d="M600.4726,-756.6702C565.736,-747.4535 522.5322,-735.9901 492.2152,-727.9461"/>
-<polygon fill="none" stroke="#000000" points="493.0218,-724.5391 482.4586,-725.3574 491.2266,-731.305 493.0218,-724.5391"/>
-</g>
-<!-- \\database_schema -->
-<g id="node5" class="node">
-<title>\\database_schema</title>
-<polygon fill="none" stroke="#000000" points="715.7646,-628 600.7324,-628 600.7324,-592 715.7646,-592 715.7646,-628"/>
-<text text-anchor="middle" x="658.2485" y="-606.7" font-family="Courier,monospace" font-size="11.00" fill="#000000">database_schema</text>
-</g>
-<!-- \\database_query -->
-<g id="node6" class="node">
-<title>\\database_query</title>
-<polygon fill="none" stroke="#000000" points="712.6644,-574 603.8327,-574 603.8327,-538 712.6644,-538 712.6644,-574"/>
-<text text-anchor="middle" x="658.2485" y="-552.7" font-family="Courier,monospace" font-size="11.00" fill="#000000">database_query</text>
-</g>
-<!-- \\controller_base -->
-<g id="node8" class="node">
-<title>\\controller_base</title>
-<polygon fill="none" stroke="#000000" points="715.7646,-520 600.7324,-520 600.7324,-484 715.7646,-484 715.7646,-520"/>
-<text text-anchor="middle" x="658.2485" y="-498.7" font-family="Courier,monospace" font-size="11.00" fill="#000000">controller_base</text>
-</g>
-<!-- \\renderer_base -->
-<g id="node9" class="node">
-<title>\\renderer_base</title>
-<polygon fill="none" stroke="#000000" points="709.0627,-466 607.4344,-466 607.4344,-430 709.0627,-430 709.0627,-466"/>
-<text text-anchor="middle" x="658.2485" y="-444.7" font-family="Courier,monospace" font-size="11.00" fill="#000000">renderer_base</text>
-</g>
-<!-- \\cache -->
-<g id="node10" class="node">
-<title>\\cache</title>
-<polygon fill="none" stroke="#000000" points="685.2485,-412 631.2485,-412 631.2485,-376 685.2485,-376 685.2485,-412"/>
-<text text-anchor="middle" x="658.2485" y="-390.7" font-family="Courier,monospace" font-size="11.00" fill="#000000">cache</text>
-</g>
-<!-- \\user_base -->
-<g id="node11" class="node">
-<title>\\user_base</title>
-<polygon fill="none" stroke="#000000" points="696.1593,-358 620.3377,-358 620.3377,-322 696.1593,-322 696.1593,-358"/>
-<text text-anchor="middle" x="658.2485" y="-336.7" font-family="Courier,monospace" font-size="11.00" fill="#000000">user_base</text>
-</g>
-<!-- \\model_base -->
-<g id="node12" class="node">
-<title>\\model_base</title>
-<polygon fill="none" stroke="#000000" points="699.2593,-304 617.2378,-304 617.2378,-268 699.2593,-268 699.2593,-304"/>
-<text text-anchor="middle" x="658.2485" y="-282.7" font-family="Courier,monospace" font-size="11.00" fill="#000000">model_base</text>
-</g>
-<!-- \\url_schema -->
-<g id="node13" class="node">
-<title>\\url_schema</title>
-<polygon fill="none" stroke="#000000" points="699.2593,-250 617.2378,-250 617.2378,-214 699.2593,-214 699.2593,-250"/>
-<text text-anchor="middle" x="658.2485" y="-228.7" font-family="Courier,monospace" font-size="11.00" fill="#000000">url_schema</text>
+<polygon fill="none" stroke="#000000" points="482.3376,-440 427.1219,-440 427.1219,-404 482.3376,-404 482.3376,-440"/>
+<text text-anchor="middle" x="454.7297" y="-418.7" font-family="Courier,monospace" font-size="11.00" fill="#000000">object</text>
 </g>
 <!-- \\collection -->
 <g id="node17" class="node">
 <title>\\collection</title>
-<polygon fill="none" stroke="#000000" points="299.5039,-412 217.4824,-412 217.4824,-376 299.5039,-376 299.5039,-412"/>
-<text text-anchor="middle" x="258.4931" y="-390.7" font-family="Courier,monospace" font-size="11.00" fill="#000000">collection</text>
+<polygon fill="none" stroke="#000000" points="299.5039,-264 217.4824,-264 217.4824,-228 299.5039,-228 299.5039,-264"/>
+<text text-anchor="middle" x="258.4931" y="-242.7" font-family="Courier,monospace" font-size="11.00" fill="#000000">collection</text>
 </g>
 <!-- \\object&#45;&gt;\\collection -->
-<g id="edge4" class="edge">
+<g id="edge1" class="edge">
 <title>\\object&#45;&gt;\\collection</title>
-<path fill="none" stroke="#000000" stroke-dasharray="1,5" d="M427.0897,-708.4892C417.7813,-704.2529 407.8967,-698.4938 400.5222,-691 321.834,-611.0387 280.3156,-479.0956 265.2275,-421.8903"/>
-<polygon fill="none" stroke="#000000" points="268.5927,-420.9227 262.7148,-412.1079 261.8127,-422.6643 268.5927,-420.9227"/>
+<path fill="none" stroke="#000000" stroke-dasharray="1,5" d="M434.4681,-403.8278C399.1229,-372.1276 326.1583,-306.6873 286.1796,-270.8313"/>
+<polygon fill="none" stroke="#000000" points="288.426,-268.1446 278.6446,-264.0733 283.7522,-273.3557 288.426,-268.1446"/>
 </g>
 <!-- \\JsonSerializable -->
 <g id="node20" class="node">
@@ -135,82 +39,178 @@
 <text text-anchor="middle" x="258.4931" y="-13.8" font-family="Times,serif" font-size="14.00" fill="#c0c0c0">\JsonSerializable</text>
 </g>
 <!-- \\object&#45;&gt;\\JsonSerializable -->
-<g id="edge5" class="edge">
+<g id="edge2" class="edge">
 <title>\\object&#45;&gt;\\JsonSerializable</title>
-<path fill="none" stroke="#000000" stroke-dasharray="1,5" d="M426.9946,-710.3487C417.0958,-706.2209 406.8411,-700.0522 400.5222,-691 233.9012,-452.3052 513.4297,-264.8266 328.5222,-40 326.8577,-37.9761 325.0088,-36.1355 323.0158,-34.4616"/>
-<polygon fill="none" stroke="#000000" points="324.9354,-31.5344 314.7001,-28.7978 320.9949,-37.3199 324.9354,-31.5344"/>
+<path fill="none" stroke="#000000" stroke-dasharray="1,5" d="M449.2216,-403.7961C426.7177,-329.6353 342.2967,-53.5734 328.5222,-40 326.4373,-37.9455 324.1628,-36.0826 321.7495,-34.3934"/>
+<polygon fill="none" stroke="#000000" points="323.4769,-31.3489 313.0833,-29.2937 319.9267,-37.3819 323.4769,-31.3489"/>
+</g>
+<!-- \\database_bridge_table -->
+<g id="node2" class="node">
+<title>\\database_bridge_table</title>
+<polygon fill="none" stroke="#000000" points="735.3715,-844 581.1255,-844 581.1255,-808 735.3715,-808 735.3715,-844"/>
+<text text-anchor="middle" x="658.2485" y="-822.7" font-family="Courier,monospace" font-size="11.00" fill="#000000">database_bridge_table</text>
+</g>
+<!-- \\database_table -->
+<g id="node14" class="node">
+<title>\\database_table</title>
+<polygon fill="none" stroke="#000000" points="509.1456,-844 400.3139,-844 400.3139,-808 509.1456,-808 509.1456,-844"/>
+<text text-anchor="middle" x="454.7297" y="-822.7" font-family="Courier,monospace" font-size="11.00" fill="#000000">database_table</text>
+</g>
+<!-- \\database_bridge_table&#45;&gt;\\database_table -->
+<g id="edge3" class="edge">
+<title>\\database_bridge_table&#45;&gt;\\database_table</title>
+<path fill="none" stroke="#000000" d="M581.0166,-826C560.6203,-826 538.826,-826 519.184,-826"/>
+<polygon fill="none" stroke="#000000" points="519.1275,-822.5001 509.1275,-826 519.1274,-829.5001 519.1275,-822.5001"/>
+</g>
+<!-- \\database_result -->
+<g id="node3" class="node">
+<title>\\database_result</title>
+<polygon fill="none" stroke="#000000" points="715.7646,-790 600.7324,-790 600.7324,-754 715.7646,-754 715.7646,-790"/>
+<text text-anchor="middle" x="658.2485" y="-768.7" font-family="Courier,monospace" font-size="11.00" fill="#000000">database_result</text>
+</g>
+<!-- \\database_result&#45;&gt;\\object -->
+<g id="edge4" class="edge">
+<title>\\database_result&#45;&gt;\\object</title>
+<path fill="none" stroke="#000000" d="M600.52,-758.2406C593.3453,-754.7689 586.5664,-750.4273 580.9372,-745 494.6671,-661.8225 466.253,-512.7189 457.8802,-450.4946"/>
+<polygon fill="none" stroke="#000000" points="461.3124,-449.7387 456.5807,-440.2592 454.3682,-450.6204 461.3124,-449.7387"/>
+</g>
+<!-- \\database_record -->
+<g id="node4" class="node">
+<title>\\database_record</title>
+<polygon fill="none" stroke="#000000" points="715.7646,-736 600.7324,-736 600.7324,-700 715.7646,-700 715.7646,-736"/>
+<text text-anchor="middle" x="658.2485" y="-714.7" font-family="Courier,monospace" font-size="11.00" fill="#000000">database_record</text>
+</g>
+<!-- \\database_record&#45;&gt;\\object -->
+<g id="edge5" class="edge">
+<title>\\database_record&#45;&gt;\\object</title>
+<path fill="none" stroke="#000000" d="M600.4528,-703.7034C593.3726,-700.3174 586.6373,-696.1429 580.9372,-691 506.7894,-624.1004 472.6113,-504.5482 460.3542,-450.2363"/>
+<polygon fill="none" stroke="#000000" points="463.734,-449.307 458.1897,-440.2787 456.8938,-450.794 463.734,-449.307"/>
+</g>
+<!-- \\template_base -->
+<g id="node5" class="node">
+<title>\\template_base</title>
+<polygon fill="none" stroke="#000000" points="709.0627,-682 607.4344,-682 607.4344,-646 709.0627,-646 709.0627,-682"/>
+<text text-anchor="middle" x="658.2485" y="-660.7" font-family="Courier,monospace" font-size="11.00" fill="#000000">template_base</text>
 </g>
 <!-- \\api_error -->
-<g id="node15" class="node">
+<g id="node6" class="node">
 <title>\\api_error</title>
-<polygon fill="none" stroke="#000000" points="492.6405,-358 416.8189,-358 416.8189,-322 492.6405,-322 492.6405,-358"/>
-<text text-anchor="middle" x="454.7297" y="-336.7" font-family="Courier,monospace" font-size="11.00" fill="#000000">api_error</text>
+<polygon fill="none" stroke="#000000" points="492.6405,-237 416.8189,-237 416.8189,-201 492.6405,-201 492.6405,-237"/>
+<text text-anchor="middle" x="454.7297" y="-215.7" font-family="Courier,monospace" font-size="11.00" fill="#000000">api_error</text>
 </g>
 <!-- \\api_error&#45;&gt;\\collection -->
 <g id="edge6" class="edge">
 <title>\\api_error&#45;&gt;\\collection</title>
-<path fill="none" stroke="#000000" stroke-dasharray="1,5" d="M416.8933,-350.4117C386.28,-358.8359 342.884,-370.7775 309.2531,-380.032"/>
-<polygon fill="none" stroke="#000000" points="308.3139,-376.6603 299.6009,-382.6881 310.1711,-383.4094 308.3139,-376.6603"/>
+<path fill="none" stroke="#000000" stroke-dasharray="1,5" d="M416.8933,-224.2059C386.4114,-228.3999 343.2562,-234.3375 309.6866,-238.9563"/>
+<polygon fill="none" stroke="#000000" points="309.0304,-235.5136 299.6009,-240.344 309.9846,-242.4482 309.0304,-235.5136"/>
 </g>
 <!-- \\api_error&#45;&gt;\\JsonSerializable -->
 <g id="edge7" class="edge">
 <title>\\api_error&#45;&gt;\\JsonSerializable</title>
-<path fill="none" stroke="#000000" stroke-dasharray="1,5" d="M452.415,-321.7893C444.846,-269.8627 416.0607,-119.6878 328.5222,-40 326.3577,-38.0296 324.0178,-36.2357 321.5515,-34.6024"/>
-<polygon fill="none" stroke="#000000" points="323.1808,-31.5031 312.7501,-29.6454 319.7457,-37.6023 323.1808,-31.5031"/>
+<path fill="none" stroke="#000000" stroke-dasharray="1,5" d="M446.8485,-200.7999C430.2909,-164.6917 388.4117,-83.7153 328.5222,-40 325.846,-38.0465 322.991,-36.2629 320.0212,-34.6348"/>
+<polygon fill="none" stroke="#000000" points="321.3589,-31.3942 310.8313,-30.2028 318.3181,-37.6993 321.3589,-31.3942"/>
 </g>
-<!-- \\template_base -->
+<!-- \\database_schema -->
+<g id="node7" class="node">
+<title>\\database_schema</title>
+<polygon fill="none" stroke="#000000" points="715.7646,-628 600.7324,-628 600.7324,-592 715.7646,-592 715.7646,-628"/>
+<text text-anchor="middle" x="658.2485" y="-606.7" font-family="Courier,monospace" font-size="11.00" fill="#000000">database_schema</text>
+</g>
+<!-- \\database_query -->
+<g id="node8" class="node">
+<title>\\database_query</title>
+<polygon fill="none" stroke="#000000" points="712.6644,-574 603.8327,-574 603.8327,-538 712.6644,-538 712.6644,-574"/>
+<text text-anchor="middle" x="658.2485" y="-552.7" font-family="Courier,monospace" font-size="11.00" fill="#000000">database_query</text>
+</g>
+<!-- \\database_relation -->
+<g id="node9" class="node">
+<title>\\database_relation</title>
+<polygon fill="none" stroke="#000000" points="722.467,-520 594.0301,-520 594.0301,-484 722.467,-484 722.467,-520"/>
+<text text-anchor="middle" x="658.2485" y="-498.7" font-family="Courier,monospace" font-size="11.00" fill="#000000">database_relation</text>
+</g>
+<!-- \\user_base -->
+<g id="node10" class="node">
+<title>\\user_base</title>
+<polygon fill="none" stroke="#000000" points="696.1593,-466 620.3377,-466 620.3377,-430 696.1593,-430 696.1593,-466"/>
+<text text-anchor="middle" x="658.2485" y="-444.7" font-family="Courier,monospace" font-size="11.00" fill="#000000">user_base</text>
+</g>
+<!-- \\controller_base -->
+<g id="node11" class="node">
+<title>\\controller_base</title>
+<polygon fill="none" stroke="#000000" points="715.7646,-412 600.7324,-412 600.7324,-376 715.7646,-376 715.7646,-412"/>
+<text text-anchor="middle" x="658.2485" y="-390.7" font-family="Courier,monospace" font-size="11.00" fill="#000000">controller_base</text>
+</g>
+<!-- \\model_base -->
+<g id="node12" class="node">
+<title>\\model_base</title>
+<polygon fill="none" stroke="#000000" points="699.2593,-358 617.2378,-358 617.2378,-322 699.2593,-322 699.2593,-358"/>
+<text text-anchor="middle" x="658.2485" y="-336.7" font-family="Courier,monospace" font-size="11.00" fill="#000000">model_base</text>
+</g>
+<!-- \\renderer_base -->
+<g id="node13" class="node">
+<title>\\renderer_base</title>
+<polygon fill="none" stroke="#000000" points="709.0627,-304 607.4344,-304 607.4344,-268 709.0627,-268 709.0627,-304"/>
+<text text-anchor="middle" x="658.2485" y="-282.7" font-family="Courier,monospace" font-size="11.00" fill="#000000">renderer_base</text>
+</g>
+<!-- \\cache -->
+<g id="node15" class="node">
+<title>\\cache</title>
+<polygon fill="none" stroke="#000000" points="685.2485,-250 631.2485,-250 631.2485,-214 685.2485,-214 685.2485,-250"/>
+<text text-anchor="middle" x="658.2485" y="-228.7" font-family="Courier,monospace" font-size="11.00" fill="#000000">cache</text>
+</g>
+<!-- \\url_schema -->
 <g id="node16" class="node">
-<title>\\template_base</title>
-<polygon fill="none" stroke="#000000" points="709.0627,-196 607.4344,-196 607.4344,-160 709.0627,-160 709.0627,-196"/>
-<text text-anchor="middle" x="658.2485" y="-174.7" font-family="Courier,monospace" font-size="11.00" fill="#000000">template_base</text>
+<title>\\url_schema</title>
+<polygon fill="none" stroke="#000000" points="699.2593,-196 617.2378,-196 617.2378,-160 699.2593,-160 699.2593,-196"/>
+<text text-anchor="middle" x="658.2485" y="-174.7" font-family="Courier,monospace" font-size="11.00" fill="#000000">url_schema</text>
 </g>
 <!-- \\ArrayAccess -->
 <g id="node21" class="node">
 <title>\\ArrayAccess</title>
-<ellipse fill="none" stroke="#000000" cx="58.232" cy="-448" rx="58.465" ry="18"/>
-<text text-anchor="middle" x="58.232" y="-443.8" font-family="Times,serif" font-size="14.00" fill="#c0c0c0">\ArrayAccess</text>
+<ellipse fill="none" stroke="#000000" cx="58.232" cy="-300" rx="58.465" ry="18"/>
+<text text-anchor="middle" x="58.232" y="-295.8" font-family="Times,serif" font-size="14.00" fill="#c0c0c0">\ArrayAccess</text>
 </g>
 <!-- \\collection&#45;&gt;\\ArrayAccess -->
 <g id="edge8" class="edge">
 <title>\\collection&#45;&gt;\\ArrayAccess</title>
-<path fill="none" stroke="#000000" d="M217.4841,-405.058C187.0989,-413.2513 145.3974,-424.496 112.2897,-433.4235"/>
-<polygon fill="none" stroke="#000000" points="111.0567,-430.1308 102.3128,-436.1137 112.8792,-436.8895 111.0567,-430.1308"/>
+<path fill="none" stroke="#000000" d="M217.4841,-257.058C187.0989,-265.2513 145.3974,-276.496 112.2897,-285.4235"/>
+<polygon fill="none" stroke="#000000" points="111.0567,-282.1308 102.3128,-288.1137 112.8792,-288.8895 111.0567,-282.1308"/>
 </g>
 <!-- \\Countable -->
 <g id="node22" class="node">
 <title>\\Countable</title>
-<ellipse fill="none" stroke="#000000" cx="58.232" cy="-394" rx="48.8273" ry="18"/>
-<text text-anchor="middle" x="58.232" y="-389.8" font-family="Times,serif" font-size="14.00" fill="#c0c0c0">\Countable</text>
+<ellipse fill="none" stroke="#000000" cx="58.232" cy="-246" rx="48.8273" ry="18"/>
+<text text-anchor="middle" x="58.232" y="-241.8" font-family="Times,serif" font-size="14.00" fill="#c0c0c0">\Countable</text>
 </g>
 <!-- \\collection&#45;&gt;\\Countable -->
 <g id="edge9" class="edge">
 <title>\\collection&#45;&gt;\\Countable</title>
-<path fill="none" stroke="#000000" d="M217.4841,-394C188.6754,-394 149.6944,-394 117.5098,-394"/>
-<polygon fill="none" stroke="#000000" points="117.3206,-390.5001 107.3205,-394 117.3205,-397.5001 117.3206,-390.5001"/>
+<path fill="none" stroke="#000000" d="M217.4841,-246C188.6754,-246 149.6944,-246 117.5098,-246"/>
+<polygon fill="none" stroke="#000000" points="117.3206,-242.5001 107.3205,-246 117.3205,-249.5001 117.3206,-242.5001"/>
 </g>
 <!-- \\Iterator -->
 <g id="node23" class="node">
 <title>\\Iterator</title>
-<ellipse fill="none" stroke="#000000" cx="58.232" cy="-340" rx="38.6695" ry="18"/>
-<text text-anchor="middle" x="58.232" y="-335.8" font-family="Times,serif" font-size="14.00" fill="#c0c0c0">\Iterator</text>
+<ellipse fill="none" stroke="#000000" cx="58.232" cy="-192" rx="38.6695" ry="18"/>
+<text text-anchor="middle" x="58.232" y="-187.8" font-family="Times,serif" font-size="14.00" fill="#c0c0c0">\Iterator</text>
 </g>
 <!-- \\collection&#45;&gt;\\Iterator -->
 <g id="edge10" class="edge">
 <title>\\collection&#45;&gt;\\Iterator</title>
-<path fill="none" stroke="#000000" d="M217.4841,-382.942C183.7392,-373.8428 136.0373,-360.98 101.6498,-351.7075"/>
-<polygon fill="none" stroke="#000000" points="102.4482,-348.2978 91.8818,-349.0736 100.6257,-355.0565 102.4482,-348.2978"/>
-</g>
-<!-- \\collectible -->
-<g id="node18" class="node">
-<title>\\collectible</title>
-<polygon fill="none" stroke="#000000" points="702.3612,-142 614.1359,-142 614.1359,-106 702.3612,-106 702.3612,-142"/>
-<text text-anchor="middle" x="658.2485" y="-120.7" font-family="Courier,monospace" font-size="11.00" fill="#000000">collectible</text>
+<path fill="none" stroke="#000000" d="M217.4841,-234.942C183.7392,-225.8428 136.0373,-212.98 101.6498,-203.7075"/>
+<polygon fill="none" stroke="#000000" points="102.4482,-200.2978 91.8818,-201.0736 100.6257,-207.0565 102.4482,-200.2978"/>
 </g>
 <!-- \\mutable -->
-<g id="node19" class="node">
+<g id="node18" class="node">
 <title>\\mutable</title>
-<polygon fill="none" stroke="#000000" points="689.4564,-88 627.0407,-88 627.0407,-52 689.4564,-52 689.4564,-88"/>
-<text text-anchor="middle" x="658.2485" y="-66.7" font-family="Courier,monospace" font-size="11.00" fill="#000000">mutable</text>
+<polygon fill="none" stroke="#000000" points="689.4564,-142 627.0407,-142 627.0407,-106 689.4564,-106 689.4564,-142"/>
+<text text-anchor="middle" x="658.2485" y="-120.7" font-family="Courier,monospace" font-size="11.00" fill="#000000">mutable</text>
+</g>
+<!-- \\collectible -->
+<g id="node19" class="node">
+<title>\\collectible</title>
+<polygon fill="none" stroke="#000000" points="702.3612,-88 614.1359,-88 614.1359,-52 702.3612,-52 702.3612,-88"/>
+<text text-anchor="middle" x="658.2485" y="-66.7" font-family="Courier,monospace" font-size="11.00" fill="#000000">collectible</text>
 </g>
 </g>
 </svg>

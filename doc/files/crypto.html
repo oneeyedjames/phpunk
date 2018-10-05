@@ -106,7 +106,7 @@
                         <ul class="dropdown-menu">
                             <li>
                                 <a href="../reports/errors.html">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                <i class="icon-list-alt"></i>&#160;Errors <span class="label label-info pull-right">430</span>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                <i class="icon-list-alt"></i>&#160;Errors <span class="label label-info pull-right">371</span>
                                 </a>
                             </li>
                             <li>
@@ -136,10 +136,10 @@
                                 <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-1391171619"></a>
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-1839773067"></a>
                                 <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
             </div>
-            <div id="namespace-1391171619" class="accordion-body collapse in">
+            <div id="namespace-1839773067" class="accordion-body collapse in">
                 <div class="accordion-inner">
 
                     
@@ -283,21 +283,24 @@
             <article class="method">
                 <h3 class=" ">random_bytes()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">random_bytes(  <span class="argument">$length</span>) </pre>
-                <p><em></em></p>
-                
+                <pre class="signature" style="margin-right: 54px;">random_bytes(integer  <span class="argument">$length</span>) : string</pre>
+                <p><em>Generates an arbitrary length string of cryptographic random bytes that are suitable for cryptographic use, such as when generating salts, keys or initialization vectors.</em></p>
+                <p>Triggers error if no crytpographically secure random number generator can be found.</p>
 
                                     <h4>Parameters</h4>
                     <table class="table table-condensed table-hover">
                                                     <tr>
-                                <td></td>
+                                <td>integer</td>
                                 <td>$length </td>
-                                <td></td>
+                                <td><p>The length of the random string that should be returned in bytes.</p></td>
                             </tr>
                                             </table>
                 
                 
-                				
+                                    <h4>Returns</h4>
+                    string
+                                            &mdash; <p>Returns a string containing the requested number of cryptographically secure random bytes.</p>
+                                    				
                             </article>
         </div>
         <aside class="span4 detailsbar">
@@ -326,31 +329,43 @@
             <article class="method">
                 <h3 class=" ">password_hash()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">password_hash(  <span class="argument">$password</span>,   <span class="argument">$algo</span>,   <span class="argument">$options = array()</span>) </pre>
-                <p><em></em></p>
-                
+                <pre class="signature" style="margin-right: 54px;">password_hash(string  <span class="argument">$password</span>, integer  <span class="argument">$algo</span>, array  <span class="argument">$options = array()</span>) : string</pre>
+                <p><em>Creates a new password hash using a strong one-way hashing algorithm.</em></p>
+                <p>The following algorithms are supported:</p>
+<ul>
+<li><strong>PASSWORD_DEFAULT</strong> - Use the bcrypt algorithm</li>
+<li><strong>PASSWORD_BCRYPT</strong> - Use the CRYPT_BLOWFISH algorithm to create the hash. This will produce a standard crypt() compatible hash using the &quot;$2y$&quot; identifier. The result will always be a 60 character string, or FALSE on failure.</li>
+</ul>
+<p>Supported options for <strong>PASSWORD_BCRYPT</strong>:</p>
+<ul>
+<li><strong>salt</strong> - to manually provide a salt to use when hashing the password. If omitted, a random salt will be generated.</li>
+<li><strong>cost</strong> - which denotes the algorithmic cost that should be used. If omitted, a default value of 10 will be used.</li>
+</ul>
 
                                     <h4>Parameters</h4>
                     <table class="table table-condensed table-hover">
                                                     <tr>
-                                <td></td>
+                                <td>string</td>
                                 <td>$password </td>
-                                <td></td>
+                                <td><p>The user's password</p></td>
                             </tr>
                                                     <tr>
-                                <td></td>
+                                <td>integer</td>
                                 <td>$algo </td>
-                                <td></td>
+                                <td><p>A password algorithm constant denoting the algorithm to use when hashing the password</p></td>
                             </tr>
                                                     <tr>
-                                <td></td>
+                                <td>array</td>
                                 <td>$options </td>
                                 <td></td>
                             </tr>
                                             </table>
                 
                 
-                				
+                                    <h4>Returns</h4>
+                    string
+                                            &mdash; <p>Returns the hashed password, or FALSE on failure.</p>
+                                    				
                             </article>
         </div>
         <aside class="span4 detailsbar">
@@ -379,26 +394,29 @@
             <article class="method">
                 <h3 class=" ">password_verify()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">password_verify(  <span class="argument">$password</span>,   <span class="argument">$hash</span>) </pre>
-                <p><em></em></p>
+                <pre class="signature" style="margin-right: 54px;">password_verify(string  <span class="argument">$password</span>, string  <span class="argument">$hash</span>) : boolean</pre>
+                <p><em>Verifies that the given hash matches the given password.</em></p>
                 
 
                                     <h4>Parameters</h4>
                     <table class="table table-condensed table-hover">
                                                     <tr>
-                                <td></td>
+                                <td>string</td>
                                 <td>$password </td>
-                                <td></td>
+                                <td><p>The user's password</p></td>
                             </tr>
                                                     <tr>
-                                <td></td>
+                                <td>string</td>
                                 <td>$hash </td>
-                                <td></td>
+                                <td><p>A hash created by password_hash()</p></td>
                             </tr>
                                             </table>
                 
                 
-                				
+                                    <h4>Returns</h4>
+                    boolean
+                                            &mdash; <p>Returns TRUE if the password and hash match, or FALSE otherwise.</p>
+                                    				
                             </article>
         </div>
         <aside class="span4 detailsbar">
@@ -471,7 +489,7 @@
                 <section class="span10 offset1">
                     <hr />
                     Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and authored
-                    on October 5th, 2018 at 18:00.
+                    on October 5th, 2018 at 20:24.
                 </section>
             </section>
         </section>

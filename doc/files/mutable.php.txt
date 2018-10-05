@@ -44,6 +44,12 @@ trait mutable {
 	}
 }
 
+/**
+ * Returns whether or not the object is an instance of mutable.
+ *
+ * @param object $obj Any object
+ * @return boolean Returns **TRUE** if **obj** mutable, **FALSE** otherwise.
+ */
 function is_mutable($obj) {
 	return $obj instanceof mutable;
 }

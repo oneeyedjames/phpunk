@@ -106,7 +106,7 @@
                         <ul class="dropdown-menu">
                             <li>
                                 <a href="../reports/errors.html">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                <i class="icon-list-alt"></i>&#160;Errors <span class="label label-info pull-right">430</span>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                <i class="icon-list-alt"></i>&#160;Errors <span class="label label-info pull-right">371</span>
                                 </a>
                             </li>
                             <li>
@@ -136,10 +136,10 @@
                                 <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-503793583"></a>
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-1392671792"></a>
                                 <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
             </div>
-            <div id="namespace-503793583" class="accordion-body collapse in">
+            <div id="namespace-1392671792" class="accordion-body collapse in">
                 <div class="accordion-inner">
 
                     
@@ -180,7 +180,7 @@
 
                     <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal"><i class="icon-code"></i></a>
                     <h1><small></small>http.php</h1>
-                    <p><em>Backwards-compatibility functions and constants</em></p>
+                    <p><em></em></p>
                     
 
                     
@@ -433,31 +433,33 @@
             <article class="method">
                 <h3 class=" ">http_parse_cookie()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">http_parse_cookie(  <span class="argument">$cookie</span>,   <span class="argument">$flags = HTTP_COOKIE_PARSE_RAW</span>,   <span class="argument">$extras = array()</span>) </pre>
-                <p><em></em></p>
+                <pre class="signature" style="margin-right: 54px;">http_parse_cookie(string  <span class="argument">$cookie</span>, integer  <span class="argument">$flags = HTTP_COOKIE_PARSE_RAW</span>, array  <span class="argument">$extras = array()</span>) : object</pre>
+                <p><em>Parses an HTTP cookie</em></p>
                 
 
                                     <h4>Parameters</h4>
                     <table class="table table-condensed table-hover">
                                                     <tr>
-                                <td></td>
+                                <td>string</td>
                                 <td>$cookie </td>
                                 <td></td>
                             </tr>
                                                     <tr>
-                                <td></td>
+                                <td>integer</td>
                                 <td>$flags </td>
                                 <td></td>
                             </tr>
                                                     <tr>
-                                <td></td>
+                                <td>array</td>
                                 <td>$extras </td>
                                 <td></td>
                             </tr>
                                             </table>
                 
                 
-                				
+                                    <h4>Returns</h4>
+                    object
+                                    				
                             </article>
         </div>
         <aside class="span4 detailsbar">
@@ -486,8 +488,8 @@
             <article class="method">
                 <h3 class=" ">http_parse_params()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">http_parse_params(  <span class="argument">$param</span>,   <span class="argument">$flags = HTTP_PARAMS_DEFAULT</span>) </pre>
-                <p><em></em></p>
+                <pre class="signature" style="margin-right: 54px;">http_parse_params(  <span class="argument">$param</span>, integer  <span class="argument">$flags = HTTP_PARAMS_DEFAULT</span>) : object</pre>
+                <p><em>Parses a parameterized HTTP header</em></p>
                 
 
                                     <h4>Parameters</h4>
@@ -498,14 +500,16 @@
                                 <td></td>
                             </tr>
                                                     <tr>
-                                <td></td>
+                                <td>integer</td>
                                 <td>$flags </td>
                                 <td></td>
                             </tr>
                                             </table>
                 
                 
-                				
+                                    <h4>Returns</h4>
+                    object
+                                    				
                             </article>
         </div>
         <aside class="span4 detailsbar">
@@ -534,21 +538,24 @@
             <article class="method">
                 <h3 class=" ">http_parse_headers()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">http_parse_headers(  <span class="argument">$header</span>) </pre>
+                <pre class="signature" style="margin-right: 54px;">http_parse_headers(string  <span class="argument">$header</span>) : array</pre>
                 <p><em></em></p>
                 
 
                                     <h4>Parameters</h4>
                     <table class="table table-condensed table-hover">
                                                     <tr>
-                                <td></td>
+                                <td>string</td>
                                 <td>$header </td>
-                                <td></td>
+                                <td><p>Raw HTTP header</p></td>
                             </tr>
                                             </table>
                 
                 
-                				
+                                    <h4>Returns</h4>
+                    array
+                                            &mdash; <p>Sssociative array of HTTP headers</p>
+                                    				
                             </article>
         </div>
         <aside class="span4 detailsbar">
@@ -577,21 +584,24 @@
             <article class="method">
                 <h3 class=" ">http_response_code()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">http_response_code(  <span class="argument">$code = null</span>) </pre>
-                <p><em></em></p>
+                <pre class="signature" style="margin-right: 54px;">http_response_code(integer  <span class="argument">$code = null</span>) : integer</pre>
+                <p><em>Gets or sets the HTTP response status code.</em></p>
                 
 
                                     <h4>Parameters</h4>
                     <table class="table table-condensed table-hover">
                                                     <tr>
-                                <td></td>
+                                <td>integer</td>
                                 <td>$code </td>
-                                <td></td>
+                                <td><p>OPTIONAL The optional <strong>code</strong> will set the response code.</p></td>
                             </tr>
                                             </table>
                 
                 
-                				
+                                    <h4>Returns</h4>
+                    integer
+                                            &mdash; <p>If response_code is provided, then the previous status code will be returned. If response_code is not provided, then the current status code will be returned.</p>
+                                    				
                             </article>
         </div>
         <aside class="span4 detailsbar">
@@ -664,7 +674,7 @@
                 <section class="span10 offset1">
                     <hr />
                     Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and authored
-                    on October 5th, 2018 at 18:00.
+                    on October 5th, 2018 at 20:24.
                 </section>
             </section>
         </section>
