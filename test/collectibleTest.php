@@ -1,5 +1,7 @@
 <?php
 
+use PHPUnit\Framework\TestCase;
+
 class collectibleObject implements collection {
 	use collectible;
 
@@ -8,7 +10,7 @@ class collectibleObject implements collection {
 	}
 }
 
-class collectibleTest extends PHPUnit_Framework_TestCase {
+class collectibleTest extends TestCase {
 	public function testArrayAccess() {
 		$arr = new collectibleObject;
 

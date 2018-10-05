@@ -1,6 +1,8 @@
 <?php
 
-class errorTest extends PHPUnit_Framework_TestCase {
+use PHPUnit\Framework\TestCase;
+
+class errorTest extends TestCase {
 	public function testError() {
 		$error = new api_error(101, 'Hello, World!');
 

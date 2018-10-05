@@ -1,6 +1,8 @@
 <?php
 
-class databaseResultTest extends PHPUnit_Framework_TestCase {
+use PHPUnit\Framework\TestCase;
+
+class databaseResultTest extends TestCase {
 	private $result;
 
 	public function setUp() {

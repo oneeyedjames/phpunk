@@ -10,9 +10,7 @@
         }
     ],
     "require-dev": {
-        "task/task": "~0.5",
-        "task/cli": "~0.3",
-        "task/watch": "~0.1"
+        "phpunit/phpunit": "^7.4",
     },
     "autoload": {
         "files": [
