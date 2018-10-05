@@ -43,3 +43,7 @@ trait mutable {
 		$this->offsetUnset($key);
 	}
 }
+
+function is_mutable($obj) {
+	return $obj instanceof mutable;
+}
