@@ -1,6 +1,8 @@
 <?php
 
-class databaseSchemaTest extends PHPUnit_Framework_TestCase {
+use PHPUnit\Framework\TestCase;
+
+class databaseSchemaTest extends TestCase {
 	public $database;
 
 	public function setUp() {

@@ -1,6 +1,8 @@
 <?php
 
-class objectTest extends PHPUnit_Framework_TestCase {
+use PHPUnit\Framework\TestCase;
+
+class objectTest extends TestCase {
 	public function testJSON() {
 		$obj = new object(['foo' => 'bar']);
 

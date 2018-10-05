@@ -1,5 +1,7 @@
 <?php
 
+use PHPUnit\Framework\TestCase;
+
 class mutableObject {
 	use mutable;
 
@@ -8,7 +10,7 @@ class mutableObject {
 	}
 }
 
-class mutableTest extends PHPUnit_Framework_TestCase {
+class mutableTest extends TestCase {
 	public function testHas() {
 		$obj = new mutableObject(['foo' => 'bar']);
 
