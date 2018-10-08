@@ -1,5 +1,7 @@
 <?php
 
+namespace PHPunk\Database;
+
 class database_relation {
 	private $_name;
 

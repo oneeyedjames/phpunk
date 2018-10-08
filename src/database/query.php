@@ -1,5 +1,7 @@
 <?php
 
+namespace PHPunk\Database;
+
 class database_query {
 	private static $_defaults = array(
 		'table'  => '',

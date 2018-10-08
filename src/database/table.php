@@ -1,5 +1,7 @@
 <?php
 
+namespace PHPunk\Database;
+
 class database_table {
 	private $_name = null;
 	private $_pkey = null;

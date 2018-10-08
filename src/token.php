@@ -1,5 +1,7 @@
 <?php
 
+namespace PHPunk;
+
 /**
  * Basic reference implementation(s). Private key signing.
  */

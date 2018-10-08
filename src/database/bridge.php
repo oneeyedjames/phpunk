@@ -1,5 +1,7 @@
 <?php
 
+namespace PHPunk\Database;
+
 class database_bridge_table extends database_table {
 	public function __get($key) {
 		switch ($key) {

@@ -1,5 +1,9 @@
 <?php
 
+namespace PHPunk\Database;
+
+use PHPunk\Util\object;
+
 class database_record extends object {
 	private $_table;
 

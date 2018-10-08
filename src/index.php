@@ -8,6 +8,11 @@ require_once 'util/collectible.php';
 require_once 'util/mutable.php';
 require_once 'util/object.php';
 
+require_once 'cache.php';
+require_once 'error.php';
+require_once 'token.php';
+require_once 'url.php';
+
 require_once 'database/schema.php';
 require_once 'database/table.php';
 require_once 'database/bridge.php';
@@ -15,11 +20,6 @@ require_once 'database/relation.php';
 require_once 'database/query.php';
 require_once 'database/record.php';
 require_once 'database/result.php';
-
-require_once 'cache.php';
-require_once 'error.php';
-require_once 'token.php';
-require_once 'url.php';
 
 require_once 'component/model.php';
 require_once 'component/controller.php';

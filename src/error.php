@@ -1,5 +1,12 @@
 <?php
 
+namespace PHPunk;
+
+use JsonSerializable;
+
+use PHPunk\Util\collectible;
+use PHPunk\Util\collection;
+
 class api_error implements collection, JsonSerializable {
 	use collectible;
 

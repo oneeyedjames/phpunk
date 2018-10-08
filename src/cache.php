@@ -1,5 +1,7 @@
 <?php
 
+namespace PHPunk;
+
 /**
  * Basic reference implementation. Multi-type, in-memory cache.
  */

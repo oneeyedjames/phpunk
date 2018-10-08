@@ -1,5 +1,9 @@
 <?php
 
+namespace PHPunk\Database;
+
+use PHPunk\Util\object;
+
 class database_result extends object {
 	private $_table;
 	private $_found;

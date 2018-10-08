@@ -1,5 +1,7 @@
 <?php
 
+namespace PHPunk\Database;
+
 class database_schema {
 	private $_mysql = null;
 

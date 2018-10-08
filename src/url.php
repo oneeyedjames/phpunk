@@ -1,5 +1,7 @@
 <?php
 
+namespace PHPunk;
+
 class url_schema {
 	private $_http_host;
 	private $_base_path;
