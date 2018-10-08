@@ -1,5 +1,7 @@
 <?php
 
+namespace PHPunk\Component;
+
 class renderer_base {
 	private $_resource = false;
 

@@ -1,5 +1,9 @@
 <?php
 
+namespace PHPunk\Util;
+
+use ArrayAccess, Countable, Iterator;
+
 /**
  * 'Implements' ArrayAccess, Countable, Iterator
  */

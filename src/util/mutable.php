@@ -1,5 +1,7 @@
 <?php
 
+namespace PHPunk\Util;
+
 trait mutable {
 	use collectible;
 

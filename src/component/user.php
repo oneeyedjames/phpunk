@@ -1,5 +1,7 @@
 <?php
 
+namespace PHPunk\Component;
+
 /**
  * Base implementation.
  */

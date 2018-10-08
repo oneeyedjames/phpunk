@@ -1,5 +1,7 @@
 <?php
 
+namespace PHPunk\Component;
+
 class template_base {
     private $_dirs = array();
 

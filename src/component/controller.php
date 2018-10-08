@@ -1,5 +1,7 @@
 <?php
 
+namespace PHPunk\Component;
+
 class controller_base {
 	protected $_model;
 

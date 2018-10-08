@@ -1,5 +1,7 @@
 <?php
 
+namespace PHPunk\Component;
+
 class model_base {
 	private $_resource;
 	private $_database;
