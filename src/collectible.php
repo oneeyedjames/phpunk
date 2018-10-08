@@ -1,11 +1,12 @@
 <?php
 
 /**
+ * Array-style key-value storage
  * 'Implements' ArrayAccess, Countable, Iterator
  */
 trait collectible {
 	/**
-	 * @ignore internal variabel storage
+	 * @ignore internal variable storage
 	 */
 	private $_data = [];
 
