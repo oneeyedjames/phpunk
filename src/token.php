@@ -2,7 +2,7 @@
 
 define('HASH_ALGO_MD5', 'md5');
 define('HASH_ALGO_SHA1', 'sha1');
-define('HASH_ALGO_DEFAULT', HASH_MD5);
+define('HASH_ALGO_DEFAULT', HASH_ALGO_MD5);
 
 /**
  * Generates a random string of $length bytes.
