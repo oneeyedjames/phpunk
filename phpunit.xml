@@ -2,6 +2,8 @@
 	<testsuites>
 		<testsuite name="Zombie">
 			<file>test/typesTest.php</file>
+			<file>test/tokenTest.php</file>
+			<file>test/cryptoTest.php</file>
 
 			<file>test/collectibleTest.php</file>
 			<file>test/mutableTest.php</file>
