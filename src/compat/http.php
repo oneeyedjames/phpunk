@@ -1,7 +1,5 @@
 <?php
 
-namespace PHPunk\Compat;
-
 /**
  * Backwards-compatibility functions and constants
  */
