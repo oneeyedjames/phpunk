@@ -6,6 +6,7 @@
  * @see http://us2.php.net/manual/en/class.jsonserializable.php JsonSerializable
  * @see collectible Collectible Trait
  * @see mutable Mutable Trait
+ * @see http://github.com/oneeyedjames/phpunk/wiki/Mutable-Objects PHPunk Wiki
  */
 class object implements collection, JsonSerializable {
 	use mutable;

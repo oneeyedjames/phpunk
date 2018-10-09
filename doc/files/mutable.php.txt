@@ -2,6 +2,8 @@
 
 /**
  * Object-oriented style syntax support
+ *
+ * @see http://github.com/oneeyedjames/phpunk/wiki/Mutable-Objects PHPunk Wiki
  */
 trait mutable {
 	use collectible;
