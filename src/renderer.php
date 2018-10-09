@@ -1,4 +1,7 @@
 <?php
+/**
+ * @package phpunk\component
+ */
 
 class renderer_base {
 	private $_resource = false;

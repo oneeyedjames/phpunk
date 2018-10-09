@@ -1,7 +1,8 @@
 <?php
-
 /**
  * Backwards-compatibility functions and constants
+ *
+ * @package phpunk\compat\crypto
  */
 
 if (!function_exists('random_bytes')) {

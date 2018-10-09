@@ -1,4 +1,7 @@
 <?php
+/**
+ * @package phpunk\util
+ */
 
 /**
  * Object-oriented style syntax support

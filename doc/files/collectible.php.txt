@@ -1,4 +1,7 @@
 <?php
+/**
+ * @package phpunk\util
+ */
 
 /**
  * Array-style key-value storage

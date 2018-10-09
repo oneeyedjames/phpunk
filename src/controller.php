@@ -1,4 +1,7 @@
 <?php
+/**
+ * @package phpunk\component
+ */
 
 class controller_base {
 	protected $_model;

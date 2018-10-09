@@ -1,4 +1,7 @@
 <?php
+/**
+ * @package phpunk\database
+ */
 
 class database_schema {
 	private $_mysql = null;

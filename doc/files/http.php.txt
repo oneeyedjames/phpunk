@@ -1,4 +1,9 @@
 <?php
+/**
+ * Backwards-compatibility functions
+ *
+ * @package phpunk\compat\http
+ */
 
 defined( 'HTTP_COOKIE_PARSE_RAW' ) or define( 'HTTP_COOKIE_PARSE_RAW', 1 );
 defined( 'HTTP_COOKIE_SECURE' )    or define( 'HTTP_COOKIE_SECURE',   16 );

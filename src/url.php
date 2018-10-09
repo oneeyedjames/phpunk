@@ -1,4 +1,7 @@
 <?php
+/**
+ * @package phpunk
+ */
 
 class url_schema {
 	private $_http_host;

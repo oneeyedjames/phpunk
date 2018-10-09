@@ -1,4 +1,7 @@
 <?php
+/**
+ * @package phpunk\component
+ */
 
 class template_base {
     private $_dirs = array();

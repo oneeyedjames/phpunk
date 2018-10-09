@@ -1,4 +1,7 @@
 <?php
+/**
+ * @package phpunk\database
+ */
 
 /**
  * Contains a set of data return from a database query

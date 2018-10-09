@@ -1,4 +1,7 @@
 <?php
+/**
+ * @package phpunk
+ */
 
 class api_error implements collection, JsonSerializable {
 	use collectible;
