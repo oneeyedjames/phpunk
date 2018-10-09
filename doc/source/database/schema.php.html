@@ -1,0 +1,280 @@
+<html>
+    <head>
+        <script
+            type="text/javascript"
+            src="../../js/jquery-1.4.2.min.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../../syntax_highlighter/scripts/shCore.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../../syntax_highlighter/scripts/shBrushJScript.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../../syntax_highlighter/scripts/shBrushPhp.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../../syntax_highlighter/scripts/shBrushXml.js">
+        </script>
+        <link
+            href="../../syntax_highlighter/styles/shCore.css" rel="stylesheet"
+            type="text/css"
+        />
+        <link
+            href="../../syntax_highlighter/styles/shCoreEclipse.css"
+            rel="stylesheet" type="text/css"
+        />
+        <link
+            href="../../syntax_highlighter/styles/shThemeWordpress.css"
+            rel="stylesheet" type="text/css"
+        />
+    </head>
+    <body>
+        <pre class="brush: php">&lt;?php
+/**
+ * @package phpunk\database
+ */
+
+class database_schema {
+	private $_mysql = null;
+
+	private $_tables = array();
+
+	private $_rels = array();
+
+	public function __construct($mysql) {
+		$this-&gt;_mysql = $mysql;
+	}
+
+	public function __get($key) {
+		switch ($key) {
+			case 'insert_id':
+				return $this-&gt;_mysql-&gt;insert_id;
+			default:
+				return $this-&gt;get_table($key);
+		}
+	}
+
+	public function query($sql, $params = array(), $table_name = false) {
+		if ($stmt = $this-&gt;_mysql-&gt;prepare($sql)) {
+			if (is_scalar($params))
+				$params = array_slice(func_get_args(), 1);
+
+			if (count($params)) {
+				$_params = array('');
+
+				for ($i = 0, $n = count($params); $i &lt; $n; $i++) {
+					$_params[$i + 1] =&amp; $params[$i];
+
+					if (is_int($params[$i]))
+						$_params[0] .= 'i';
+					elseif (is_float($params[$i]))
+						$_params[0] .= 'd';
+					else
+						$_params[0] .= 's';
+				}
+
+				if (!call_user_func_array(array($stmt, 'bind_param'), $_params))
+					trigger_error($stmt-&gt;error, E_USER_WARNING);
+			}
+
+			if ($stmt-&gt;execute() &amp;&amp; $result = $stmt-&gt;get_result()) {
+				$records = array();
+				$found = 0;
+
+				while ($record = $result-&gt;fetch_assoc())
+					$records[] = new database_record($record, $table_name);
+
+				$result-&gt;free();
+
+				if ($result = $this-&gt;_mysql-&gt;query('SELECT FOUND_ROWS()')) {
+					if ($record = $result-&gt;fetch_row())
+						$found = intval($record[0]);
+
+					$result-&gt;free();
+				}
+
+				return new database_result($records, $found, $table_name);
+			} else {
+				error_log($sql);
+				trigger_error($stmt-&gt;error, E_USER_WARNING);
+			}
+
+			$stmt-&gt;close();
+		} else {
+			trigger_error($this-&gt;_mysql-&gt;error, E_USER_WARNING);
+		}
+
+		return false;
+	}
+
+	public function execute($sql, $params = array()) {
+		$result = false;
+
+		if ($stmt = $this-&gt;_mysql-&gt;prepare($sql)) {
+			if (is_scalar($params))
+				$params = array_slice(func_get_args(), 1);
+
+			if (count($params)) {
+				$_params = array('');
+
+				for ($i = 0, $n = count($params); $i &lt; $n; $i++) {
+					$_params[$i + 1] =&amp; $params[$i];
+
+					if (is_int($params[$i]))
+						$_params[0] .= 'i';
+					elseif (is_float($params[$i]))
+						$_params[0] .= 'd';
+					else
+						$_params[0] .= 's';
+				}
+
+				if (!call_user_func_array(array($stmt, 'bind_param'), $_params))
+					trigger_error($stmt-&gt;error, E_USER_WARNING);
+			}
+
+			$this-&gt;_found_rows = false;
+
+			if (!($result = $stmt-&gt;execute()))
+				trigger_error($stmt-&gt;error, E_USER_WARNING);
+
+			$stmt-&gt;close();
+
+			return $result;
+		} else {
+			trigger_error($this-&gt;_mysql-&gt;error, E_USER_WARNING);
+		}
+
+		return $result;
+	}
+
+	public function table_exists($name) {
+		return isset($this-&gt;_tables[$name]);
+	}
+
+	public function get_table($name) {
+		return @$this-&gt;_tables[$name];
+	}
+
+	public function add_table($name, $pkey = 'id') {
+		if (!isset($this-&gt;_tables[$name])) {
+			$this-&gt;_tables[$name] = is_null($pkey)
+				? new database_bridge_table($name, $pkey)
+				: new database_table($name, $pkey);
+		}
+
+		return $this-&gt;_tables[$name];
+	}
+
+	public function remove_table($name) {
+		unset($this-&gt;_tables[$name]);
+	}
+
+	public function clear_tables() {
+		$this-&gt;_tables = array();
+	}
+
+	public function relation_exists($name) {
+		return isset($this-&gt;_rels[$name]);
+	}
+
+	public function get_relation($name) {
+		return @$this-&gt;_rels[$name];
+	}
+
+	public function add_relation($rel_name, $ptable_name, $ftable_name, $fkey) {
+		if (!$this-&gt;relation_exists($rel_name)) {
+			if (($ptable =&amp; $this-&gt;_tables[$ptable_name]) &amp;&amp;
+				($ftable =&amp; $this-&gt;_tables[$ftable_name])) {
+				$rel = new database_relation($rel_name, $ptable, $ftable, $fkey);
+
+				$ptable-&gt;add_relation($rel_name, $rel);
+				$ftable-&gt;add_relation($rel_name, $rel);
+
+				$this-&gt;_rels[$rel_name] =&amp; $rel;
+			}
+		}
+
+		return $this-&gt;get_relation($rel_name);
+	}
+
+	public function remove_relation($name) {
+		if ($rel =&amp; $this-&gt;_rels[$name]) {
+			unset($this-&gt;_rels[$name]);
+
+			if ($ptable =&amp; $this-&gt;_tables[$rel-&gt;ptable])
+				$ptable-&gt;remove_relation($name);
+
+			if ($ftable =&amp; $this-&gt;_tables[$rel-&gt;ftable])
+				$ftable-&gt;remove_relation($name);
+		}
+	}
+
+	public function clear_relations() {
+		$this-&gt;_rels = array();
+
+		foreach ($this-&gt;_tables as &amp;$table)
+			$table-&gt;clear_relations();
+	}
+
+	public function get_record($table_name, $record_id, $rel_name = false) {
+		if ($table = @$this-&gt;_tables[$table_name]) {
+			$sql = $table-&gt;select_sql($rel_name);
+
+			$params = array(intval($record_id));
+
+			if ($result = $this-&gt;query($sql, $params, $table_name))
+				return $result-&gt;first;
+		}
+
+		return null;
+	}
+
+	public function put_record($table_name, $record) {
+		if ($table = @$this-&gt;_tables[$table_name]) {
+			if (is_object($record))
+				$record = method_exists($record, 'toArray')
+					? $record-&gt;toArray()
+					: get_object_vars($record);
+
+			$params = array();
+			$insert = @$record[$table-&gt;pkey] == 0;
+
+			if ($insert)
+				$sql = $table-&gt;insert_sql($record, $params);
+			else
+				$sql = $table-&gt;update_sql($record, $params);
+
+			$this-&gt;execute($sql, $params);
+
+			return @$record[$table-&gt;pkey] ?: $this-&gt;insert_id;
+		}
+
+		return false;
+	}
+
+	public function remove_record($table_name, $record_id) {
+		if ($table = @$this-&gt;_tables[$table_name]) {
+			$sql = $table-&gt;delete_sql();
+
+			$params = array(intval($record_id));
+
+			return $this-&gt;execute($sql, $params);
+		}
+
+		return false;
+	}
+}
+</pre>
+        <script type="text/javascript">
+             SyntaxHighlighter.all();
+             jQuery('.gutter div').each(function(key, data){
+                jQuery(data).prepend('<a name="L'+jQuery(data).text()+'"/>');
+             });
+        </script>
+    </body>
+</html>

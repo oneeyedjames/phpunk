@@ -1,0 +1,103 @@
+<html>
+    <head>
+        <script
+            type="text/javascript"
+            src="../../js/jquery-1.4.2.min.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../../syntax_highlighter/scripts/shCore.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../../syntax_highlighter/scripts/shBrushJScript.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../../syntax_highlighter/scripts/shBrushPhp.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../../syntax_highlighter/scripts/shBrushXml.js">
+        </script>
+        <link
+            href="../../syntax_highlighter/styles/shCore.css" rel="stylesheet"
+            type="text/css"
+        />
+        <link
+            href="../../syntax_highlighter/styles/shCoreEclipse.css"
+            rel="stylesheet" type="text/css"
+        />
+        <link
+            href="../../syntax_highlighter/styles/shThemeWordpress.css"
+            rel="stylesheet" type="text/css"
+        />
+    </head>
+    <body>
+        <pre class="brush: php">&lt;?php
+/**
+ * @package phpunk\database
+ */
+
+class database_relation {
+	private $_name;
+
+	private $_ptable;
+	private $_ftable;
+
+	private $_fkey;
+
+	public function __construct($name, &amp;$ptable, &amp;$ftable, $fkey) {
+		$this-&gt;_name = $name;
+
+		$this-&gt;_ptable = $ptable;
+		$this-&gt;_ftable = $ftable;
+
+		$this-&gt;_fkey = $fkey;
+	}
+
+	public function __destruct() {
+		$this-&gt;_ptable-&gt;remove_relation($this-&gt;_name);
+		$this-&gt;_ftable-&gt;remove_relation($this-&gt;_name);
+	}
+
+	public function __get($key) {
+		switch ($key) {
+			case 'name':
+			case 'fkey':
+				return $this-&gt;{&quot;_$key&quot;};
+			case 'ptable':
+			case 'ftable':
+				return $this-&gt;{&quot;_$key&quot;}-&gt;name;
+			case 'pkey':
+				return $this-&gt;_ptable-&gt;pkey;
+			case 'join':
+			case 'inner':
+				return $this-&gt;_join('INNER');
+			case 'left':
+			case 'right':
+				return $this-&gt;_join($key);
+		}
+	}
+
+	private function _join($type = 'INNER') {
+		$ptable = $this-&gt;_ptable-&gt;name;
+		$pkey   = $this-&gt;_ptable-&gt;pkey;
+
+		$ftable = $this-&gt;_ftable-&gt;name;
+		$fkey   = $this-&gt;_fkey;
+
+		$type = strtoupper($type);
+
+		return &quot;`$ptable` $type JOIN `$ftable` ON `$ptable`.`$pkey` = `$ftable`.`$fkey`&quot;;
+	}
+}
+</pre>
+        <script type="text/javascript">
+             SyntaxHighlighter.all();
+             jQuery('.gutter div').each(function(key, data){
+                jQuery(data).prepend('<a name="L'+jQuery(data).text()+'"/>');
+             });
+        </script>
+    </body>
+</html>

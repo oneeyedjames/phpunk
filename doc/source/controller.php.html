@@ -1,0 +1,78 @@
+<html>
+    <head>
+        <script
+            type="text/javascript"
+            src="../js/jquery-1.4.2.min.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../syntax_highlighter/scripts/shCore.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../syntax_highlighter/scripts/shBrushJScript.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../syntax_highlighter/scripts/shBrushPhp.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../syntax_highlighter/scripts/shBrushXml.js">
+        </script>
+        <link
+            href="../syntax_highlighter/styles/shCore.css" rel="stylesheet"
+            type="text/css"
+        />
+        <link
+            href="../syntax_highlighter/styles/shCoreEclipse.css"
+            rel="stylesheet" type="text/css"
+        />
+        <link
+            href="../syntax_highlighter/styles/shThemeWordpress.css"
+            rel="stylesheet" type="text/css"
+        />
+    </head>
+    <body>
+        <pre class="brush: php">&lt;?php
+/**
+ * @package phpunk\component
+ */
+
+class controller_base {
+	protected $_model;
+
+	public function __construct($model) {
+		$this-&gt;_model = $model;
+	}
+
+	public function __get($key) {
+		switch ($key) {
+			case 'resource':
+				return @$this-&gt;_model-&gt;resource;
+		}
+	}
+
+	public function do_action($action) {
+		$method = str_replace('-', '_', $action) . '_action';
+		if (method_exists($this, $method))
+			return call_user_func(array($this, $method), $_GET, $_POST);
+		else
+			trigger_error(&quot;Undefined action $this-&gt;resource:$action&quot;, E_USER_WARNING);
+	}
+
+	public function pre_view($view, &amp;$vars) {
+		$method = str_replace('-', '_', $view) . '_view';
+		if (method_exists($this, $method))
+			$vars = call_user_func(array($this, $method), $vars);
+	}
+}
+</pre>
+        <script type="text/javascript">
+             SyntaxHighlighter.all();
+             jQuery('.gutter div').each(function(key, data){
+                jQuery(data).prepend('<a name="L'+jQuery(data).text()+'"/>');
+             });
+        </script>
+    </body>
+</html>

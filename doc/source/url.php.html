@@ -1,0 +1,286 @@
+<html>
+    <head>
+        <script
+            type="text/javascript"
+            src="../js/jquery-1.4.2.min.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../syntax_highlighter/scripts/shCore.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../syntax_highlighter/scripts/shBrushJScript.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../syntax_highlighter/scripts/shBrushPhp.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../syntax_highlighter/scripts/shBrushXml.js">
+        </script>
+        <link
+            href="../syntax_highlighter/styles/shCore.css" rel="stylesheet"
+            type="text/css"
+        />
+        <link
+            href="../syntax_highlighter/styles/shCoreEclipse.css"
+            rel="stylesheet" type="text/css"
+        />
+        <link
+            href="../syntax_highlighter/styles/shThemeWordpress.css"
+            rel="stylesheet" type="text/css"
+        />
+    </head>
+    <body>
+        <pre class="brush: php">&lt;?php
+/**
+ * @package phpunk
+ */
+
+class url_schema {
+	private $_http_host;
+	private $_base_path;
+
+	private $_resources = array();
+	private $_aliases = array();
+	private $_actions = array();
+	private $_views = array();
+
+	public function __construct($host = false, $path = '/') {
+		$this-&gt;_http_host = !empty($host) ? $host : $_SERVER['HTTP_HOST'];
+		$this-&gt;_base_path = $path;
+	}
+
+	public function __get($key) {
+		switch ($key) {
+			case 'resources':
+			case 'actions':
+			case 'views':
+				return $this-&gt;{&quot;_$key&quot;};
+		}
+	}
+
+	public function add_resource($resource, $alias = false) {
+		if (!$this-&gt;is_resource($resource)) {
+			$this-&gt;_resources[$resource] = array(
+				'actions' =&gt; array('save', 'delete'),
+				'views'   =&gt; array('list', 'grid', 'item', 'form')
+			);
+		}
+
+		if ($alias)
+			$this-&gt;add_alias($alias, $resource);
+	}
+
+	public function is_resource($resource) {
+		return isset($this-&gt;_resources[$resource]) ? $resource : $this-&gt;is_alias($resource);
+	}
+
+	public function add_alias($alias, $resource) {
+		$resource = $this-&gt;is_resource($resource);
+
+		if ($resource &amp;&amp; !$this-&gt;is_alias($alias))
+			$this-&gt;_aliases[$alias] = $resource;
+	}
+
+	public function is_alias($alias) {
+		return isset($this-&gt;_aliases[$alias]) ? $this-&gt;_aliases[$alias] : false;
+	}
+
+	public function add_action($action, $resource = false) {
+		$resource = $this-&gt;is_resource($resource);
+
+		if ($resource &amp;&amp; !$this-&gt;is_action($action, $resource))
+			$this-&gt;_resources[$resource]['actions'][] = $action;
+		elseif ($resource === false &amp;&amp; !$this-&gt;is_action($action))
+			$this-&gt;_actions[] = $action;
+	}
+
+	public function is_action($action, $resource = false) {
+		$resource = $this-&gt;is_resource($resource);
+
+		$actions = $resource ? $this-&gt;_resources[$resource]['actions'] : $this-&gt;_actions;
+
+		return in_array($action, $actions) ? $action : false;
+	}
+
+	public function add_view($view, $resource = false) {
+		$resource = $this-&gt;is_resource($resource);
+
+		if ($resource &amp;&amp; !$this-&gt;is_view($view, $resource))
+			$this-&gt;_resources[$resource]['views'][] = $view;
+		elseif ($resource === false &amp;&amp; !$this-&gt;is_view($view))
+			$this-&gt;_views[] = $view;
+	}
+
+	public function is_view($view, $resource = false) {
+		$resource = $this-&gt;is_resource($resource);
+
+		$views = $resource ? $this-&gt;_resources[$resource]['views'] : $this-&gt;_views;
+
+		return in_array($view, $views) ? $view : false;
+	}
+
+	public function parse_path($path = '') {
+		if (is_string($path))
+			$path = explode('/', trim($path, '/'));
+
+		$params = array();
+
+		if ($params['api'] = ('api' == $path[0]))
+			array_shift($path);
+
+		if (isset($path[0])) {
+			if ($resource = $this-&gt;is_resource($path[0])) {
+				$params['resource'] = $resource;
+				array_shift($path);
+
+				if (isset($path[0]) &amp;&amp; is_numeric($path[0]))
+					$params['id'] = intval(array_shift($path));
+			} else {
+				if ($this-&gt;is_action($path[0]))
+					$params['action'] = array_shift($path);
+				elseif ($this-&gt;is_view($path[0]))
+					$params['view'] = array_shift($path);
+			}
+		}
+
+		if (isset($path[0], $params['resource'])) {
+			if ($this-&gt;is_action($path[0], $params['resource'])) {
+				$params['action'] = array_shift($path);
+			} elseif ($this-&gt;is_view($path[0], $params['resource'])) {
+				$params['view'] = array_shift($path);
+			} elseif (isset($params['id']) &amp;&amp; $resource = $this-&gt;is_resource($path[0])) {
+				$params['filter'] = array($params['resource'] =&gt; $params['id']);
+				$params['resource'] = $resource;
+
+				unset($params['id']);
+				array_shift($path);
+
+				if (isset($path[0])) {
+					if ($this-&gt;is_action($path[0], $params['resource']))
+						$params['action'] = array_shift($path);
+					elseif ($this-&gt;is_view($path[0], $params['resource']))
+						$params['view'] = array_shift($path);
+				}
+			}
+		}
+
+		while (count($path) &gt;= 2) {
+			list($key, $suffix) = $this-&gt;split_slug(array_shift($path));
+			$value = $this-&gt;explode_slug(array_shift($path));
+
+			if ($key == 'sort')
+				$params[$key][$value] = strtolower($suffix) == 'desc' ? 'desc' : 'asc';
+			elseif (in_array($key, array('page', 'per_page')))
+				$params[$key] = intval($value);
+			elseif (!empty($suffix))
+				@$params['filter'][$key][$suffix] = $value;
+			else
+				@$params['filter'][$key] = $value;
+		}
+
+		return $params;
+	}
+
+	public function build_path($params = array()) {
+		$path = array();
+
+		if (@$params['api'])
+			$path[] = 'api';
+
+		if ($this-&gt;is_resource(@$params['resource'])) {
+			$path[] = $params['resource'];
+
+			if (is_numeric(@$params['id']))
+				$path[] = $params['id'];
+
+			if ($this-&gt;is_action(@$params['action'], $params['resource']))
+				$path[] = $params['action'];
+			elseif ($this-&gt;is_view(@$params['view'], $params['resource']))
+				$path[] = $params['view'];
+		} elseif ($this-&gt;is_action(@$params['action'])) {
+			$path[] = $params['action'];
+		} elseif ($this-&gt;is_view(@$params['view'])) {
+			$path[] = $params['view'];
+		}
+
+		foreach (array('page', 'per_page') as $filter) {
+			if (isset($params[$filter]) &amp;&amp; is_numeric($params[$filter])) {
+				$path[] = $filter;
+				$path[] = intval($params[$filter]);
+			}
+		}
+
+		if (isset($params['sort']) &amp;&amp; is_array($params['sort'])) {
+			foreach ($params['sort'] as $key =&gt; $order) {
+				$order = strtolower($order);
+				if (in_array($order, array('asc', 'desc'))) {
+					$path[] = $this-&gt;join_slug('sort', $order);
+					$path[] = $key;
+				}
+			}
+		}
+
+		if (isset($params['filter']) &amp;&amp; is_array($params['filter'])) {
+			foreach ($params['filter'] as $key =&gt; $value) {
+				if (is_scalar($value)) {
+					$path[] = urlencode($key);
+					$path[] = urlencode($value);
+				}
+			}
+		}
+
+		return implode('/', $path);
+	}
+
+	public function build($params, $secure = false) {
+		$scheme = $secure ? 'https' : 'http';
+
+		$host = trim($this-&gt;_http_host, '/');
+		$base = trim($this-&gt;_base_path, '/');
+		$path = $this-&gt;build_path($params);
+
+		if (!empty($base))
+			$path = &quot;$base/$path&quot;;
+
+		return &quot;$scheme://$host/$path&quot;;
+	}
+
+	protected function split_slug($slug) {
+		if (preg_match('/^([A-Z0-9-_]+)~([A-Z0-9-_]+)$/si', $slug, $matches))
+			return array($matches[1], $matches[2]);
+
+		static $empty = '';
+		return array($slug, $empty);
+	}
+
+	protected function join_slug($slug, $suffix) {
+		if (!empty($suffix))
+			return &quot;$slug~$suffix&quot;;
+
+		return $slug;
+	}
+
+	protected function explode_slug($slug) {
+		if (strpos($slug, '.') !== false)
+			return explode('.', $slug);
+
+		return $slug;
+	}
+
+	protected function implode_slug($slug) {
+		return implode('.', $slug);
+	}
+}
+</pre>
+        <script type="text/javascript">
+             SyntaxHighlighter.all();
+             jQuery('.gutter div').each(function(key, data){
+                jQuery(data).prepend('<a name="L'+jQuery(data).text()+'"/>');
+             });
+        </script>
+    </body>
+</html>

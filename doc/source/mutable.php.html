@@ -1,0 +1,146 @@
+<html>
+    <head>
+        <script
+            type="text/javascript"
+            src="../js/jquery-1.4.2.min.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../syntax_highlighter/scripts/shCore.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../syntax_highlighter/scripts/shBrushJScript.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../syntax_highlighter/scripts/shBrushPhp.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../syntax_highlighter/scripts/shBrushXml.js">
+        </script>
+        <link
+            href="../syntax_highlighter/styles/shCore.css" rel="stylesheet"
+            type="text/css"
+        />
+        <link
+            href="../syntax_highlighter/styles/shCoreEclipse.css"
+            rel="stylesheet" type="text/css"
+        />
+        <link
+            href="../syntax_highlighter/styles/shThemeWordpress.css"
+            rel="stylesheet" type="text/css"
+        />
+    </head>
+    <body>
+        <pre class="brush: php">&lt;?php
+/**
+ * @package phpunk\util
+ */
+
+/**
+ * Object-oriented style syntax support
+ *
+ * @see http://github.com/oneeyedjames/phpunk/wiki/Mutable-Objects PHPunk Wiki
+ */
+trait mutable {
+	use collectible;
+
+	/**
+	 * @ignore magic method
+	 */
+	public function __call($func, $args) {
+		if (count($args) == 1)
+			return $this-&gt;get($func, $args[0]);
+
+		$class = get_class($this);
+		trigger_error(&quot;Call to undefined method $class::$func()&quot;, E_USER_WARNING);
+	}
+
+	/**
+	 * @ignore magic method
+	 */
+	public function __get($key) {
+		return $this-&gt;get($key);
+	}
+
+	/**
+	 * @ignore magic method
+	 */
+	public function __set($key, $value) {
+		$this-&gt;put($key, $value);
+	}
+
+	/**
+	 * @ignore magic method
+	 */
+	public function __isset($key) {
+		return $this-&gt;has($key);
+	}
+
+	/**
+	 * @ignore magic method
+	 */
+	public function __unset($key) {
+		$this-&gt;remove($key);
+	}
+
+	/**
+	 * Determine whether or not a given key exists.
+	 *
+	 * @param mixed $key The key
+	 * @return boolean TRUE if the key exists, FALSE otherwise
+	 */
+	public function has($key) {
+		return $this-&gt;offsetExists($key);
+	}
+
+	/**
+	 * Get the stored value for a given key.
+	 *
+	 * @param mixed $key The key
+	 * @param mixed $default OPTIONAL The value to return if the given key does not exist
+	 */
+	public function get($key, $default = null) {
+		return $this-&gt;offsetExists($key) ? $this-&gt;offsetGet($key) : $default;
+	}
+
+	/**
+	 * Store a value for a given key.
+	 *
+	 * @param mixed $key The key
+	 * @param mixed $value The value to be stored
+	 */
+	public function put($key, $value) {
+		$this-&gt;offsetSet($key, $value);
+	}
+
+	/**
+	 * Remove a key-value pair from the store.
+	 *
+	 * @param mixed $key The key
+	 */
+	public function remove($key) {
+		$this-&gt;offsetUnset($key);
+	}
+}
+
+/**
+ * Returns whether or not the object is an instance of mutable.
+ *
+ * @param object $obj Any object
+ * @return boolean Returns **TRUE** if **obj** mutable, **FALSE** otherwise.
+ */
+function is_mutable($obj) {
+	return $obj instanceof mutable;
+}
+</pre>
+        <script type="text/javascript">
+             SyntaxHighlighter.all();
+             jQuery('.gutter div').each(function(key, data){
+                jQuery(data).prepend('<a name="L'+jQuery(data).text()+'"/>');
+             });
+        </script>
+    </body>
+</html>
