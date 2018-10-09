@@ -6,7 +6,8 @@
  */
 trait collectible {
 	/**
-	 * @ignore internal variable storage
+	 * Internal key-value storage
+	 * @var array
 	 */
 	private $_data = [];
 

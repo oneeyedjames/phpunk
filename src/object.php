@@ -3,6 +3,7 @@
 /**
  * Basic reference implementation
  *
+ * @see http://us2.php.net/manual/en/class.jsonserializable.php JsonSerializable
  * @see collectible Collectible Trait
  * @see mutable Mutable Trait
  */
@@ -12,7 +13,7 @@ class object implements collection, JsonSerializable {
 	/**
 	 * Creates a shallow clone of the passed data.
 	 *
-	 * @param mixed $data Any array or traversable object
+	 * @param mixed $data OPTIONAL Any array or traversable object
 	 */
 	public function __construct($data = []) {
 		$this->loadArray($data);

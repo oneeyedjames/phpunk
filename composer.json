@@ -38,5 +38,9 @@
             "src/user.php",
             "src/url.php"
         ]
-    }
+    },
+	"scripts": {
+		"test": "phpunit",
+		"doc": "phpdoc"
+	}
 }
