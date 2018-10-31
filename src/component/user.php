@@ -5,10 +5,7 @@
 
 namespace PHPunk\Component;
 
-/**
- * Base implementation.
- */
-class user_base {
+class user {
 	protected $_public_name;
 	protected $_private_key;
 

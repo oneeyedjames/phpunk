@@ -5,7 +5,7 @@
 
 namespace PHPunk\Component;
 
-class renderer_base {
+class renderer {
 	private $_resource = false;
 
 	public function __construct($resource) {

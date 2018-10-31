@@ -5,7 +5,7 @@
 
 namespace PHPunk\Component;
 
-class model_base {
+class model {
 	private $_resource;
 	private $_database;
 	private $_cache;

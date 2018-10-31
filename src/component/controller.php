@@ -5,7 +5,7 @@
 
 namespace PHPunk\Component;
 
-class controller_base {
+class controller {
 	protected $_model;
 
 	public function __construct($model) {

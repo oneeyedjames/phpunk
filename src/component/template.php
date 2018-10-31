@@ -5,7 +5,7 @@
 
 namespace PHPunk\Component;
 
-class template_base {
+class template {
     private $_dirs = array();
 
     public function __construct($base_dir) {
