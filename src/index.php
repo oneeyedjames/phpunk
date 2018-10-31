@@ -11,6 +11,7 @@ require_once 'util/object.php';
 require_once 'cache.php';
 require_once 'error.php';
 require_once 'token.php';
+require_once 'event.php';
 require_once 'url.php';
 
 require_once 'database/schema.php';

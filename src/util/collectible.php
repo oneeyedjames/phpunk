@@ -149,12 +149,12 @@ trait collectible {
  */
 interface collection extends ArrayAccess, Countable, Iterator {}
 
-	/**
-	 * Returns whether or not the object is an instance of collectible.
-	 *
-	 * @param object $obj Any object
-	 * @return boolean Returns **TRUE** if **obj** collectible, **FALSE** otherwise.
-	 */
+/**
+ * Returns whether or not the object is an instance of collectible.
+ *
+ * @param object $obj Any object
+ * @return boolean Returns **TRUE** if **obj** collectible, **FALSE** otherwise.
+ */
 function is_collectible($obj) {
 	return $obj instanceof collectible;
 }
