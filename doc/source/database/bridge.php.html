@@ -1,0 +1,93 @@
+<html>
+    <head>
+        <script
+            type="text/javascript"
+            src="../../js/jquery-1.4.2.min.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../../syntax_highlighter/scripts/shCore.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../../syntax_highlighter/scripts/shBrushJScript.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../../syntax_highlighter/scripts/shBrushPhp.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../../syntax_highlighter/scripts/shBrushXml.js">
+        </script>
+        <link
+            href="../../syntax_highlighter/styles/shCore.css" rel="stylesheet"
+            type="text/css"
+        />
+        <link
+            href="../../syntax_highlighter/styles/shCoreEclipse.css"
+            rel="stylesheet" type="text/css"
+        />
+        <link
+            href="../../syntax_highlighter/styles/shThemeWordpress.css"
+            rel="stylesheet" type="text/css"
+        />
+    </head>
+    <body>
+        <pre class="brush: php">&lt;?php
+/**
+ * @package phpunk\database
+ */
+
+class database_bridge_table extends database_table {
+	public function __get($key) {
+		switch ($key) {
+			case 'join':
+			case 'inner':
+				return $this-&gt;_join('INNER');
+			default:
+				return parent::__get($key);
+		}
+	}
+
+	public function select_sql($name = false, $args = array()) {
+		if ($rel = $this-&gt;get_relation($name)) {
+			$table = $this-&gt;name != $rel-&gt;ptable ? $rel-&gt;ptable : $rel-&gt;ftable;
+			$query = &quot;SELECT SQL_CALC_FOUND_ROWS `$table`.* FROM $rel-&gt;join&quot;;
+
+			if (!empty($args)) {
+				$where = array();
+
+				foreach ($args as $fkey)
+					$where[] = &quot;`$this-&gt;name`.`$fkey` = ?&quot;;
+
+				$query .= ' WHERE ' . implode(' AND ', $where);
+			}
+
+			return $query;
+		}
+
+		return false;
+	}
+
+	private function _join($type) {
+		$type = strtoupper($type);
+		$join = $this-&gt;name;
+
+		foreach ($this-&gt;relations as $rel) {
+			$table = $this-&gt;name != $rel-&gt;ptable ? $rel-&gt;ptable : $rel-&gt;ftable;
+			$join .= &quot; $type JOIN `$table` ON `$rel-&gt;ftable`.`$rel-&gt;fkey` = `$rel-&gt;ptable`.`$rel-&gt;pkey`&quot;;
+		}
+
+		return $join;
+	}
+}
+</pre>
+        <script type="text/javascript">
+             SyntaxHighlighter.all();
+             jQuery('.gutter div').each(function(key, data){
+                jQuery(data).prepend('<a name="L'+jQuery(data).text()+'"/>');
+             });
+        </script>
+    </body>
+</html>

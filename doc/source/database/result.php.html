@@ -1,0 +1,109 @@
+<html>
+    <head>
+        <script
+            type="text/javascript"
+            src="../../js/jquery-1.4.2.min.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../../syntax_highlighter/scripts/shCore.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../../syntax_highlighter/scripts/shBrushJScript.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../../syntax_highlighter/scripts/shBrushPhp.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../../syntax_highlighter/scripts/shBrushXml.js">
+        </script>
+        <link
+            href="../../syntax_highlighter/styles/shCore.css" rel="stylesheet"
+            type="text/css"
+        />
+        <link
+            href="../../syntax_highlighter/styles/shCoreEclipse.css"
+            rel="stylesheet" type="text/css"
+        />
+        <link
+            href="../../syntax_highlighter/styles/shThemeWordpress.css"
+            rel="stylesheet" type="text/css"
+        />
+    </head>
+    <body>
+        <pre class="brush: php">&lt;?php
+/**
+ * @package phpunk\database
+ */
+
+/**
+ * Contains a set of data return from a database query
+ *
+ * @property string $table The name of the related database table
+ * @property integer $found The total number of records matching the query
+ * @property object $first The first record of the returned data set
+ */
+class database_result extends object {
+	/**
+	 * The name of the related database table
+	 * @var string
+	 */
+	private $_table;
+
+	/**
+	 * The total number of records matching the query
+	 * @var integer
+	 */
+	private $_found;
+
+	/**
+	 */
+	public function __construct($records, $found, $table = false) {
+		parent::__construct($records);
+		$this-&gt;_found = intval($found);
+		$this-&gt;_table = $table;
+	}
+
+	/**
+	 * @ignore magic method
+	 */
+	public function __get($key) {
+		switch ($key) {
+			case 'table':
+				return $this-&gt;_table;
+			case 'found':
+				return $this-&gt;_found;
+			case 'first':
+				return isset($this[0]) ? $this[0] : null;
+			default:
+				return parent::__get($key);
+		}
+	}
+
+	/**
+	 */
+	public function map($func) {
+		return new self(array_map($func, $this-&gt;toArray()), $this-&gt;_found);
+	}
+
+	/**
+	 */
+	public function key_map($func) {
+		$keys   = array_map($func, $this-&gt;toArray());
+		$values = array_values($this-&gt;toArray());
+
+		return new self(array_combine($keys, $values), $this-&gt;_found);
+	}
+}
+</pre>
+        <script type="text/javascript">
+             SyntaxHighlighter.all();
+             jQuery('.gutter div').each(function(key, data){
+                jQuery(data).prepend('<a name="L'+jQuery(data).text()+'"/>');
+             });
+        </script>
+    </body>
+</html>

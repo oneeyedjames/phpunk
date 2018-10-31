@@ -1,7 +1,8 @@
 <?php
-
 /**
- * Backwards-compatibility functions and constants
+ * Backwards-compatibility functions
+ *
+ * @package phpunk\compat\http
  */
 
 defined( 'HTTP_COOKIE_PARSE_RAW' ) or define( 'HTTP_COOKIE_PARSE_RAW', 1 );
@@ -16,6 +17,14 @@ defined( 'HTTP_PARAMS_DEFAULT' ) or define( 'HTTP_PARAMS_DEFAULT',
 	HTTP_PARAMS_ALLOW_COMMA | HTTP_PARAMS_ALLOW_FAILURE | HTTP_PARAMS_RAISE_ERROR );
 
 if ( ! function_exists( 'http_parse_cookie' ) ) {
+	/**
+	 * Parses an HTTP cookie
+	 *
+	 * @param string $cookie
+	 * @param integer $flags
+	 * @param array $extras
+	 * @return object
+	 */
 	function http_parse_cookie( $cookie, $flags = HTTP_COOKIE_PARSE_RAW, $extras = array() ) {
 		$attr = array( 'expires', 'path', 'domain', 'secure', 'httponly' );
 
@@ -55,6 +64,13 @@ if ( ! function_exists( 'http_parse_cookie' ) ) {
 }
 
 if ( ! function_exists( 'http_parse_params' ) ) {
+	/**
+	 * Parses a parameterized HTTP header
+	 *
+	 * @param string param
+	 * @param integer $flags
+	 * @return object
+	 */
 	function http_parse_params( $param, $flags = HTTP_PARAMS_DEFAULT ) {
 		$parts = explode( ',', $param );
 		$result = (object) array( 'params' => array() );
@@ -92,6 +108,10 @@ if ( ! function_exists( 'http_parse_params' ) ) {
 }
 
 if ( ! function_exists( 'http_parse_headers' ) ) {
+	/**
+	 * @param string $header Raw HTTP header
+	 * @return array Sssociative array of HTTP headers
+	 */
     function http_parse_headers( $header ) {
         $headers = array();
         $prev_key = '';
@@ -131,6 +151,12 @@ if ( ! function_exists( 'http_parse_headers' ) ) {
 }
 
 if ( ! function_exists( 'http_response_code' ) ) {
+	/**
+	 * Gets or sets the HTTP response status code.
+	 *
+	 * @param integer $code OPTIONAL The optional **code** will set the response code.
+	 * @return integer If response_code is provided, then the previous status code will be returned. If response_code is not provided, then the current status code will be returned.
+	 */
     function http_response_code( $code = null ) {
 		static $http_response_code = 200;
 

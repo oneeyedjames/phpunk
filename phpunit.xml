@@ -1,11 +1,16 @@
 <phpunit bootstrap="test/autoload.php">
 	<testsuites>
 		<testsuite name="Zombie">
+			<file>test/typesTest.php</file>
+			<file>test/tokenTest.php</file>
+			<file>test/cryptoTest.php</file>
+
 			<file>test/collectibleTest.php</file>
 			<file>test/mutableTest.php</file>
 			<file>test/objectTest.php</file>
 			<file>test/cacheTest.php</file>
 			<file>test/errorTest.php</file>
+
 			<file>test/databaseRecordTest.php</file>
 			<file>test/databaseResultTest.php</file>
 			<file>test/databaseSchemaTest.php</file>

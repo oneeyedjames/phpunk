@@ -1,4 +1,7 @@
 <?php
+/**
+ * @package phpunk\database
+ */
 
 namespace PHPunk\Database;
 

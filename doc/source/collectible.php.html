@@ -1,0 +1,201 @@
+<html>
+    <head>
+        <script
+            type="text/javascript"
+            src="../js/jquery-1.4.2.min.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../syntax_highlighter/scripts/shCore.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../syntax_highlighter/scripts/shBrushJScript.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../syntax_highlighter/scripts/shBrushPhp.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../syntax_highlighter/scripts/shBrushXml.js">
+        </script>
+        <link
+            href="../syntax_highlighter/styles/shCore.css" rel="stylesheet"
+            type="text/css"
+        />
+        <link
+            href="../syntax_highlighter/styles/shCoreEclipse.css"
+            rel="stylesheet" type="text/css"
+        />
+        <link
+            href="../syntax_highlighter/styles/shThemeWordpress.css"
+            rel="stylesheet" type="text/css"
+        />
+    </head>
+    <body>
+        <pre class="brush: php">&lt;?php
+/**
+ * @package phpunk\util
+ */
+
+/**
+ * Array-style key-value storage
+ * 'Implements' ArrayAccess, Countable, Iterator
+ *
+ * @see http://github.com/oneeyedjames/phpunk/wiki/Mutable-Objects PHPunk Wiki
+ */
+trait collectible {
+	/**
+	 * Internal key-value storage
+	 * @var array
+	 */
+	private $_data = [];
+
+	public function sort($reverse = false, $mode = '') {
+		if (is_callable($reverse)) {
+			switch ($mode) {
+				case 'a':
+					return uasort($this-&gt;_data, $reverse);
+				case 'k':
+					return uksort($this-&gt;_data, $reverse);
+				default:
+					return usort($this-&gt;_data, $reverse);
+			}
+		}
+
+		switch ($mode) {
+			case 'a':
+				return $reverse ? arsort($this-&gt;_data) : asort($this-&gt;_data);
+			case 'k':
+				return $reverse ? krsort($this-&gt;_data) : ksort($this-&gt;_data);
+			default:
+				return $reverse ? rsort($this-&gt;_data) : sort($this-&gt;_data);
+		}
+	}
+
+	public function walk($func, $data = null) {
+		return array_walk($this-&gt;_data, $func, $data);
+	}
+
+	public function keys() {
+		return array_keys($this-&gt;_data);
+	}
+
+	public function values() {
+		return array_values($this-&gt;_data);
+	}
+
+	public function toArray() {
+		return $this-&gt;_data;
+	}
+
+	protected function loadArray($data) {
+		if (is_array($data)) {
+			$this-&gt;_data = $data;
+		} elseif (is_collectible($data)) {
+			$this-&gt;_data = $data-&gt;_data;
+		} elseif (is_iterable($data)) {
+			$this-&gt;_data = iterator_to_array($data);
+		} elseif (is_object($data)) {
+			$this-&gt;_data = get_object_vars($data);
+		} else {
+			$this-&gt;_data = [];
+		}
+	}
+
+	/**
+	 * @ignore implemented from ArrayAccess interface
+	 */
+	public function offsetExists($offset) {
+		return array_key_exists($offset, $this-&gt;_data);
+	}
+
+	/**
+	 * @ignore implemented from ArrayAccess interface
+	 */
+	public function offsetGet($offset) {
+		return @$this-&gt;_data[$offset];
+	}
+
+	/**
+	 * @ignore implemented from ArrayAccess interface
+	 */
+	public function offsetSet($offset, $value) {
+		$this-&gt;_data[$offset] = $value;
+	}
+
+	/**
+	 * @ignore implemented from ArrayAccess interface
+	 */
+	public function offsetUnset($offset) {
+		unset($this-&gt;_data[$offset]);
+	}
+
+	/**
+	 * @ignore implemented from Countable interface
+	 */
+	public function count() {
+		return count($this-&gt;_data);
+	}
+
+	/**
+	 * @ignore implemented from Iterator interface
+	 */
+	public function current() {
+		return current($this-&gt;_data);
+	}
+
+	/**
+	 * @ignore implemented from Iterator interface
+	 */
+	public function key() {
+		return key($this-&gt;_data);
+	}
+
+	/**
+	 * @ignore implemented from Iterator interface
+	 */
+	public function next() {
+		next($this-&gt;_data);
+	}
+
+	/**
+	 * @ignore implemented from Iterator interface
+	 */
+	public function rewind() {
+		reset($this-&gt;_data);
+	}
+
+	/**
+	 * @ignore implemented from Iterator interface
+	 */
+	public function valid() {
+		return key($this-&gt;_data) !== null;
+	}
+}
+
+/**
+ * This inteface consolidates the interfaces ArrayAccess, Countable, and Iterator.
+ * Classes using the collectible trait must implement this interface.
+ */
+interface collection extends ArrayAccess, Countable, Iterator {}
+
+	/**
+	 * Returns whether or not the object is an instance of collectible.
+	 *
+	 * @param object $obj Any object
+	 * @return boolean Returns **TRUE** if **obj** collectible, **FALSE** otherwise.
+	 */
+function is_collectible($obj) {
+	return $obj instanceof collectible;
+}
+</pre>
+        <script type="text/javascript">
+             SyntaxHighlighter.all();
+             jQuery('.gutter div').each(function(key, data){
+                jQuery(data).prepend('<a name="L'+jQuery(data).text()+'"/>');
+             });
+        </script>
+    </body>
+</html>

@@ -1,4 +1,7 @@
 <?php
+/**
+ * @package phpunk\component
+ */
 
 namespace PHPunk\Component;
 

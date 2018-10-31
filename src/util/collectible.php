@@ -1,13 +1,23 @@
 <?php
+/**
+ * @package phpunk\util
+ */
 
 namespace PHPunk\Util;
 
 use ArrayAccess, Countable, Iterator;
 
 /**
+ * Array-style key-value storage
  * 'Implements' ArrayAccess, Countable, Iterator
+ *
+ * @see http://github.com/oneeyedjames/phpunk/wiki/Mutable-Objects PHPunk Wiki
  */
 trait collectible {
+	/**
+	 * Internal key-value storage
+	 * @var array
+	 */
 	private $_data = [];
 
 	public function sort($reverse = false, $mode = '') {
@@ -62,55 +72,89 @@ trait collectible {
 		}
 	}
 
-	// from ArrayAccess interface
-
+	/**
+	 * @ignore implemented from ArrayAccess interface
+	 */
 	public function offsetExists($offset) {
 		return array_key_exists($offset, $this->_data);
 	}
 
+	/**
+	 * @ignore implemented from ArrayAccess interface
+	 */
 	public function offsetGet($offset) {
 		return @$this->_data[$offset];
 	}
 
+	/**
+	 * @ignore implemented from ArrayAccess interface
+	 */
 	public function offsetSet($offset, $value) {
 		$this->_data[$offset] = $value;
 	}
 
+	/**
+	 * @ignore implemented from ArrayAccess interface
+	 */
 	public function offsetUnset($offset) {
 		unset($this->_data[$offset]);
 	}
 
-	// from Countable interface
-
+	/**
+	 * @ignore implemented from Countable interface
+	 */
 	public function count() {
 		return count($this->_data);
 	}
 
-	// from Iterator interface
-
+	/**
+	 * @ignore implemented from Iterator interface
+	 */
 	public function current() {
 		return current($this->_data);
 	}
 
+	/**
+	 * @ignore implemented from Iterator interface
+	 */
 	public function key() {
 		return key($this->_data);
 	}
 
+	/**
+	 * @ignore implemented from Iterator interface
+	 */
 	public function next() {
 		next($this->_data);
 	}
 
+	/**
+	 * @ignore implemented from Iterator interface
+	 */
 	public function rewind() {
 		reset($this->_data);
 	}
 
+	/**
+	 * @ignore implemented from Iterator interface
+	 */
 	public function valid() {
 		return key($this->_data) !== null;
 	}
 }
 
+/**
+ * This inteface consolidates the interfaces ArrayAccess, Countable, and Iterator.
+ * Classes using the collectible trait must implement this interface.
+ */
 interface collection extends ArrayAccess, Countable, Iterator {}
 
+	/**
+	 * Returns whether or not the object is an instance of collectible.
+	 *
+	 * @param object $obj Any object
+	 * @return boolean Returns **TRUE** if **obj** collectible, **FALSE** otherwise.
+	 */
 function is_collectible($obj) {
 	return $obj instanceof collectible;
 }
