@@ -24,6 +24,7 @@
             "src/object.php",
             "src/cache.php",
 			"src/error.php",
+			"src/event.php",
             "src/database/schema.php",
             "src/database/table.php",
             "src/database/bridge.php",

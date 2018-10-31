@@ -1143,6 +1143,68 @@
     </parse_markers>
     <source>eJyNkU1PwzAMhs/tr/ChEjABu4+vIU5ICBDaDVDlpV4bliaVkw4mtP+O0+5TCIlTk7z2+z52L2+aqkmHg0EKAxg3qOZYEshba+dvBQacoifRhumm6IUaJk82eEBg9wnaymFTCvIx1Juxa4jDEnxgbUvIOgkmFYHFmsDNIMiZyWCg4rfDMFUGvd8KOZNyXAB9BbKFBzf9IBXgO00iWSKRky4gmnfX8QJ5HR7vwzRpWC8kDLK8C7lId713TKLEmXyFxshcyji7pWyEZA15Huv7gAYZa6j1l0hZ1ODpeXL/9Hj7ALd2CciMS3AMgXFB7Du8Hnu//3A/W4d/Lmo9WTs1WsGstSpoZyHPlbNi3Kpw3JNdwev76SbkCmZoPJ3E7SVCIb9zNPrVc3IhahYq7c+u801jtl5dstrb3liX1jFBjaVQ1BQqV/xJVpL4z2nZp/tPHVQFey+JitMddTlHo/iQMIWWLRywRLikoBm2JhxU7ebZJsXaVURepT+yyOnh</source>
   </file>
+  <file path="event.php" generated-path="event.html" hash="7979764cbb55aa9f4140556c67cfebd1" package="Default">
+    <docblock line="0">
+      <description></description>
+      <long-description></long-description>
+      <tag name="package" line="0" description="Default"/>
+    </docblock>
+    <class final="false" abstract="false" namespace="" line="6" package="phpunk\event">
+      <extends/>
+      <name>event_manager</name>
+      <full_name>\event_manager</full_name>
+      <docblock line="6">
+        <description></description>
+        <long-description></long-description>
+        <tag name="package" line="6" description="phpunk\event"/>
+      </docblock>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="" line="18" package="phpunk\event">
+        <name>listen</name>
+        <full_name>\event_manager::listen()</full_name>
+        <docblock line="18">
+          <description>Adds a callback handler for the specified event</description>
+          <long-description></long-description>
+          <tag name="param" line="18" description="&lt;p&gt;The name of the event&lt;/p&gt;" type="string" variable="$event">
+            <type>string</type>
+          </tag>
+          <tag name="param" line="18" description="&lt;p&gt;The callback function to handle the event&lt;/p&gt;" type="Callable" variable="$callback">
+            <type>Callable</type>
+          </tag>
+        </docblock>
+        <argument line="0" by_reference="false">
+          <name>$event</name>
+          <default></default>
+          <type>string</type>
+        </argument>
+        <argument line="0" by_reference="false">
+          <name>$callback</name>
+          <default></default>
+          <type>Callable</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="" line="32" package="phpunk\event">
+        <name>trigger</name>
+        <full_name>\event_manager::trigger()</full_name>
+        <docblock line="32">
+          <description>Fires all callback handlers for the specified event</description>
+          <long-description></long-description>
+          <tag name="param" line="32" description="&lt;p&gt;The name of the event&lt;/p&gt;" type="string" variable="$event">
+            <type>string</type>
+          </tag>
+        </docblock>
+        <argument line="0" by_reference="false">
+          <name>$event</name>
+          <default></default>
+          <type>string</type>
+        </argument>
+      </method>
+    </class>
+    <parse_markers>
+      <error line="0" code="PPC:ERR-50000">No summary was found for this file</error>
+      <error line="6" code="PPC:ERR-50005">No summary for class \event_manager</error>
+    </parse_markers>
+    <source>eJytUstqwzAQPFtfsQUf7JASeu6bQr+gtzSIjbK2RRTZSHKglPx7tZZr00d6Kvgiz8zuaEY3913TidViIWABDx2qPdYE8V9v9690JBsisBJCGfQehh/ygDaSHLyLjIUZK3VtW0egbSBn0cARncatIUZXIuucPmIgyGWDdmfIebiF9eZazCMedzsPCAqN2UYbMBKhah2EhsB3pHSlaZdcsCat7tDhAXxw2taQDyC8RIHFA0FbDeJJ8kl/imvYH+TTQtZMh6q3KujWQmhHJ1/n8J36rdFqZhrtA9kiOVjOg0sOKtMVFNpLNe4tZjjhA+FCe0+hyEOj/eXdlNU6zdyUJROzc/AU6XnKmknT6utIPYn4zS08a0exBmN+FOH/uYlfEozCOj6sMcKUS46u5seCzuGb9JFPBQtkTUEyVpRLuCqHa6eM/04whR2vQqgaOEsE9N8bzDI+y96Tk4ODwdJcZKyc/ZScKseaoj2JDzGAES4=</source>
+  </file>
   <file path="template.php" generated-path="template.html" hash="45f280c6e868f4b49f7e28db8711ddef" package="Default">
     <docblock line="0">
       <description></description>
@@ -4117,6 +4179,7 @@ Supported options for **PASSWORD_BCRYPT**:
     </package>
     <package name="component" full_name="phpunk\component"/>
     <package name="database" full_name="phpunk\database"/>
+    <package name="event" full_name="phpunk\event"/>
     <package name="util" full_name="phpunk\util"/>
   </package>
   <namespace name="global" full_name="global"/>
