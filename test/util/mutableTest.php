@@ -2,6 +2,8 @@
 
 use PHPUnit\Framework\TestCase;
 
+use PHPunk\Util\mutable;
+
 class mutableObject {
 	use mutable;
 

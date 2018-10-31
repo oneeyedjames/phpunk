@@ -2,6 +2,9 @@
 
 use PHPUnit\Framework\TestCase;
 
+use PHPunk\Util\collection;
+use PHPunk\Util\collectible;
+
 class collectibleObject implements collection {
 	use collectible;
 

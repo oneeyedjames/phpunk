@@ -2,6 +2,8 @@
 
 use PHPUnit\Framework\TestCase;
 
+use PHPunk\util\object;
+
 class typesTest extends TestCase {
 	public function testBoolVal() {
 		$this->assertSame(false, boolval(0));

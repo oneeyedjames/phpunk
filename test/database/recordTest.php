@@ -2,18 +2,20 @@
 
 use PHPUnit\Framework\TestCase;
 
+use PHPunk\Database\record;
+
 class databaseRecordTest extends TestCase {
 	private $record;
 
 	public function setUp() {
-		$this->record = new database_record([
+		$this->record = new record([
 			'foo' => 'bar',
 			'baz' => 'bat'
 		], 'test_table');
 	}
 
 	public function testTable() {
-		$new_record = new database_record;
+		$new_record = new record;
 
 		$this->assertEquals('test_table', $this->record->table);
 		$this->assertFalse($new_record->table);

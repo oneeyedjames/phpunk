@@ -2,11 +2,15 @@
 
 use PHPUnit\Framework\TestCase;
 
+use PHPunk\Database\schema;
+use PHPunk\Database\table;
+use PHPunk\Database\relation;
+
 class databaseSchemaTest extends TestCase {
 	public $database;
 
 	public function setUp() {
-		$this->database = new database_schema(null);
+		$this->database = new schema(null);
 	}
 
 	public function tearDown() {
@@ -28,8 +32,8 @@ class databaseSchemaTest extends TestCase {
 		$this->assertTrue($db->table_exists('users'));
 		$this->assertTrue($db->table_exists('groups'));
 
-		$this->assertInstanceOf('database_table', $db->get_table('users'));
-		$this->assertInstanceOf('database_table', $db->get_table('groups'));
+		$this->assertInstanceOf('\PHPunk\Database\table', $db->get_table('users'));
+		$this->assertInstanceOf('\PHPunk\Database\table', $db->get_table('groups'));
 
 		$db->remove_table('users');
 
@@ -37,7 +41,7 @@ class databaseSchemaTest extends TestCase {
 		$this->assertTrue($db->table_exists('groups'));
 
 		$this->assertNull($db->get_table('users'));
-		$this->assertInstanceOf('database_table', $db->get_table('groups'));
+		$this->assertInstanceOf('\PHPunk\Database\table', $db->get_table('groups'));
 
 		$db->clear_tables();
 
@@ -141,8 +145,8 @@ class databaseSchemaTest extends TestCase {
 		$this->assertTrue($db->relation_exists('user_group'));
 		$this->assertTrue($db->relation_exists('user_role'));
 
-		$this->assertInstanceOf('database_relation', $db->get_relation('user_group'));
-		$this->assertInstanceOf('database_relation', $db->get_relation('user_role'));
+		$this->assertInstanceOf('\PHPunk\Database\relation', $db->get_relation('user_group'));
+		$this->assertInstanceOf('\PHPunk\Database\relation', $db->get_relation('user_role'));
 
 		$db->remove_relation('user_group');
 
@@ -150,7 +154,7 @@ class databaseSchemaTest extends TestCase {
 		$this->assertTrue($db->relation_exists('user_role'));
 
 		$this->assertNull($db->get_relation('user_group'));
-		$this->assertInstanceOf('database_relation', $db->get_relation('user_role'));
+		$this->assertInstanceOf('\PHPunk\Database\relation', $db->get_relation('user_role'));
 
 		$db->clear_relations();
 

@@ -2,6 +2,10 @@
 
 use PHPUnit\Framework\TestCase;
 
+use function PHPunk\create_nonce;
+use function PHPunk\create_token;
+use function PHPunk\verify_token;
+
 class tokenTest extends TestCase {
 	public function testCreateNonce() {
 		$nonce1 = create_nonce(16);

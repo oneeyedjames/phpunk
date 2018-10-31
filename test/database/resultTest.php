@@ -2,14 +2,17 @@
 
 use PHPUnit\Framework\TestCase;
 
+use PHPunk\Database\result;
+use PHPunk\Database\record;
+
 class databaseResultTest extends TestCase {
 	private $result;
 
 	public function setUp() {
-		$this->result = new database_result([
-			new database_record(['foo' => 'bar']),
-			new database_record(['foo' => 'baz']),
-			new database_record(['foo' => 'bat'])
+		$this->result = new result([
+			new record(['foo' => 'bar']),
+			new record(['foo' => 'baz']),
+			new record(['foo' => 'bat'])
 		], 10);
 	}
 
