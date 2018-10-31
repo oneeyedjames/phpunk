@@ -11,7 +11,7 @@ use PHPunk\Util\object;
  * Represents a row in a database table
  * @property string $table The name of the related database table
  */
-class database_record extends object {
+class record extends object {
 	/**
 	 * Table name
 	 * @var string

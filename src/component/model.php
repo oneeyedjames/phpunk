@@ -5,6 +5,8 @@
 
 namespace PHPunk\Component;
 
+use PHPunk\Database\query;
+
 class model {
 	private $_resource;
 	private $_database;
@@ -61,7 +63,7 @@ class model {
 
 	protected function make_query($args) {
 		$args['table'] = $this->_resource;
-		return new database_query($this->_database, $args);
+		return new query($this->_database, $args);
 	}
 
 	protected function get_cached_object($id) {

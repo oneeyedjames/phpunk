@@ -5,7 +5,7 @@
 
 namespace PHPunk\Database;
 
-class database_bridge_table extends database_table {
+class bridge_table extends table {
 	public function __get($key) {
 		switch ($key) {
 			case 'join':

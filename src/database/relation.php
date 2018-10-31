@@ -5,7 +5,7 @@
 
 namespace PHPunk\Database;
 
-class database_relation {
+class relation {
 	private $_name;
 
 	private $_ptable;

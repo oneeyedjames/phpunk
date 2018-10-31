@@ -5,6 +5,9 @@
 
 namespace PHPunk\Component;
 
+use PHPunk\Database\result;
+use PHPunk\Database\record;
+
 class renderer {
 	private $_resource = false;
 
@@ -22,9 +25,9 @@ class renderer {
 	public function render($view) {}
 
 	protected function render_result($result) {
-		if ($result instanceof database_record) {
+		if ($result instanceof record) {
 			$response = $this->create_response($result);
-		} elseif ($result instanceof database_result) {
+		} elseif ($result instanceof result) {
 			$response = [];
 			foreach ($result as $record)
 				$response[] = $this->create_response($record);

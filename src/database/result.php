@@ -14,7 +14,7 @@ use PHPunk\Util\object;
  * @property integer $found The total number of records matching the query
  * @property object $first The first record of the returned data set
  */
-class database_result extends object {
+class result extends object {
 	/**
 	 * The name of the related database table
 	 * @var string
