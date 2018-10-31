@@ -1,10 +1,9 @@
 <?php
-
-namespace PHPunk;
-
 /**
  * @package phpunk
  */
+
+namespace PHPunk;
 
 define('HASH_ALGO_MD5', 'md5');
 define('HASH_ALGO_SHA1', 'sha1');

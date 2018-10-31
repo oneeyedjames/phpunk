@@ -1,7 +1,9 @@
 <?php
 /**
- * @package phpunk\event
+ * @package phpunk
  */
+
+namespace PHPunk;
 
 class event_manager {
 	/**
