@@ -5,6 +5,9 @@
 
 namespace PHPunk\Component;
 
+use function PHPunk\create_token;
+use function PHPunk\verify_token;
+
 class user {
 	protected $_public_name;
 	protected $_private_key;

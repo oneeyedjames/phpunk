@@ -5,6 +5,8 @@
 
 namespace PHPunk\Database;
 
+use PHPunk\Util\object;
+
 class query {
 	private static $_defaults = array(
 		'table'  => '',
