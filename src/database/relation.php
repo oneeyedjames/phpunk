@@ -1,4 +1,7 @@
 <?php
+/**
+ * @package phpunk\database
+ */
 
 class database_relation {
 	private $_name;

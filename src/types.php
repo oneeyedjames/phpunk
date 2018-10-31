@@ -1,6 +1,8 @@
 <?php
 /**
  * Backwards-compatibility functions
+ *
+ * @package phpunk\compat
  */
 
 if (!function_exists('boolval')) {

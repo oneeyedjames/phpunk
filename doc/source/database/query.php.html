@@ -1,0 +1,219 @@
+<html>
+    <head>
+        <script
+            type="text/javascript"
+            src="../../js/jquery-1.4.2.min.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../../syntax_highlighter/scripts/shCore.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../../syntax_highlighter/scripts/shBrushJScript.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../../syntax_highlighter/scripts/shBrushPhp.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../../syntax_highlighter/scripts/shBrushXml.js">
+        </script>
+        <link
+            href="../../syntax_highlighter/styles/shCore.css" rel="stylesheet"
+            type="text/css"
+        />
+        <link
+            href="../../syntax_highlighter/styles/shCoreEclipse.css"
+            rel="stylesheet" type="text/css"
+        />
+        <link
+            href="../../syntax_highlighter/styles/shThemeWordpress.css"
+            rel="stylesheet" type="text/css"
+        />
+    </head>
+    <body>
+        <pre class="brush: php">&lt;?php
+/**
+ * @package phpunk\database
+ */
+
+class database_query {
+	private static $_defaults = array(
+		'table'  =&gt; '',
+		'bridge' =&gt; '',
+		'args'   =&gt; array(),
+		'sort'   =&gt; array(),
+		'limit'  =&gt; 0,
+		'offset' =&gt; 0
+	);
+
+	private $_database;
+
+	private $_table;
+	private $_bridge;
+	private $_args = array();
+	private $_sort = array();
+	private $_limit = 0;
+	private $_offset = 0;
+
+	private $_query;
+	private $_params;
+	private $_result;
+
+	public function __construct($database, $args) {
+		$this-&gt;_database = $database;
+
+		$args = new object(array_merge(self::$_defaults, $args));
+
+		$this-&gt;_table  = $args-&gt;table;
+		$this-&gt;_bridge = $args-&gt;bridge;
+		$this-&gt;_args   = $args-&gt;args;
+		$this-&gt;_sort   = $args-&gt;sort;
+		$this-&gt;_limit  = $args-&gt;limit;
+		$this-&gt;_offset = $args-&gt;offset;
+	}
+
+	public function __get($key) {
+		switch ($key) {
+			case 'table':
+			case 'bridge':
+			case 'args':
+			case 'sort':
+			case 'limit':
+			case 'offset':
+			case 'query':
+			case 'params':
+			case 'result':
+				return $this-&gt;{&quot;_$key&quot;};
+		}
+	}
+
+	public function get_result() {
+		if (!is_null($this-&gt;_result))
+			return $this-&gt;_result;
+
+		if ($this-&gt;execute())
+			return $this-&gt;_result;
+
+		return null;
+	}
+
+	public function execute() {
+		if ($table = $this-&gt;_database-&gt;get_table($this-&gt;table)) {
+			$query = &quot;SELECT SQL_CALC_FOUND_ROWS `$table-&gt;name`.*&quot;;
+
+			$joins = array();
+			$where = array();
+			$order = array();
+
+			$params = array();
+
+			if ($rel = $table-&gt;get_relation($this-&gt;bridge)) {
+				$bridge = $table-&gt;name == $rel-&gt;ptable ? $rel-&gt;ftable : $rel-&gt;ptable;
+				$bridge = $this-&gt;_database-&gt;get_table($bridge);
+
+				$query .= &quot;, `$bridge-&gt;name`.*&quot;;
+
+				$joins[] = &quot;`$bridge-&gt;name` ON `$rel-&gt;ftable`.`$rel-&gt;fkey` = `$rel-&gt;ptable`.`$rel-&gt;pkey`&quot;;
+			} else {
+				$bridge = new database_bridge_table('');
+			}
+
+			$query .= &quot; FROM `$table-&gt;name`&quot;;
+
+			foreach ($this-&gt;args as $field =&gt; $value) {
+				if ($rel = $table-&gt;get_relation($field)) {
+					$match = &quot;`$rel-&gt;ftable`.`$rel-&gt;fkey` = `$rel-&gt;ptable`.`$rel-&gt;pkey`&quot;;
+
+					if ($table-&gt;name == $rel-&gt;ptable) {
+						$ftable = $this-&gt;_database-&gt;get_table($rel-&gt;ftable);
+
+						$joins[] = &quot;`$rel-&gt;ftable` ON $match&quot;;
+						$field = &quot;$rel-&gt;ftable`.`$ftable-&gt;pkey&quot;;
+					} else {
+						if (0 == $value) {
+							$field = &quot;$rel-&gt;ftable`.`$rel-&gt;fkey&quot;;
+						} else {
+							$joins[] = &quot;`$rel-&gt;ptable` ON $match&quot;;
+							$field = &quot;$rel-&gt;ptable`.`$rel-&gt;pkey&quot;;
+						}
+					}
+				} elseif ($rel = $bridge-&gt;get_relation($field)) {
+					$match = &quot;`$rel-&gt;ftable`.`$rel-&gt;fkey` = `$rel-&gt;ptable`.`$rel-&gt;pkey`&quot;;
+
+					if ($bridge-&gt;name == $rel-&gt;ptable) {
+						$joins[] = &quot;`$rel-&gt;ftable` ON $match&quot;;
+						$field = &quot;$bridge-&gt;name`.`$bridge-&gt;pkey&quot;;
+					} else {
+						if (0 == $value) {
+							$field = &quot;$rel-&gt;ftable`.`$rel-&gt;fkey&quot;;
+						} else {
+							$joins[] = &quot;`$rel-&gt;ptable` ON $match&quot;;
+							$field = &quot;$rel-&gt;ptable`.`$rel-&gt;pkey&quot;;
+						}
+					}
+				}
+
+				if (is_scalar($value)) {
+					$where[] = &quot;`$field` = ?&quot;;
+					$params[] = $value;
+				} elseif (is_array($value) &amp;&amp; count($value)) {
+					$places = array_fill(0, count($value), '?');
+
+					$where[] = &quot;`$field` IN (&quot; . implode(&quot;, &quot;, $places) . &quot;)&quot;;
+
+					foreach ($value as $subvalue)
+						$params[] = $subvalue;
+				}
+			}
+
+			if (count($joins))
+				$query .= &quot; INNER JOIN &quot; . implode(&quot; INNER JOIN &quot;, $joins);
+
+			if (count($where))
+				$query .= &quot; WHERE &quot; . implode(&quot; AND &quot;, $where);
+
+			if (count($this-&gt;sort)) {
+				foreach ($this-&gt;sort as $field =&gt; $value) {
+					$value = strtoupper($value) == 'DESC' ? 'DESC' : 'ASC';
+					$order[] = &quot;`$field` $value&quot;;
+				}
+
+				$query .=  &quot; ORDER BY &quot; . implode(&quot;, &quot;, $order);
+			}
+
+			if ($limit = intval($this-&gt;limit)) {
+				$query .= &quot; LIMIT ?&quot;;
+				$params[] = $limit;
+			}
+
+			if ($offset = intval($this-&gt;offset)) {
+				$query .= &quot; OFFSET ?&quot;;
+				$params[] = $offset;
+			}
+
+			$this-&gt;_query = $query;
+			$this-&gt;_params = $params;
+			$this-&gt;_result = $this-&gt;_database-&gt;query($query, $params, $this-&gt;table);
+
+			return !is_null($this-&gt;_result);
+		}
+
+		return false;
+	}
+
+	public function reset() {
+		$this-&gt;_result = null;
+	}
+}
+</pre>
+        <script type="text/javascript">
+             SyntaxHighlighter.all();
+             jQuery('.gutter div').each(function(key, data){
+                jQuery(data).prepend('<a name="L'+jQuery(data).text()+'"/>');
+             });
+        </script>
+    </body>
+</html>

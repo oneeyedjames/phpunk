@@ -1,11 +1,18 @@
 <?php
+/**
+ * @package phpunk\util
+ */
 
 /**
+ * Array-style key-value storage
  * 'Implements' ArrayAccess, Countable, Iterator
+ *
+ * @see http://github.com/oneeyedjames/phpunk/wiki/Mutable-Objects PHPunk Wiki
  */
 trait collectible {
 	/**
-	 * @ignore internal variabel storage
+	 * Internal key-value storage
+	 * @var array
 	 */
 	private $_data = [];
 

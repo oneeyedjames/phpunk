@@ -6,6 +6,9 @@
 	<transformer>
         <target>doc</target>
     </transformer>
+	<transformations>
+		<template name="new-black" />
+	</transformations>
 	<files>
 		<directory>src</directory>
 	</files>

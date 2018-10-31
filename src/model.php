@@ -1,4 +1,7 @@
 <?php
+/**
+ * @package phpunk\component
+ */
 
 class model_base {
 	private $_resource;

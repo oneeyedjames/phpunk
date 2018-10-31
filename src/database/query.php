@@ -1,4 +1,7 @@
 <?php
+/**
+ * @package phpunk\database
+ */
 
 class database_query {
 	private static $_defaults = array(
