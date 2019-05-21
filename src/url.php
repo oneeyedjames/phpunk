@@ -143,9 +143,9 @@ class url_schema {
 			elseif (in_array($key, array('page', 'per_page')))
 				$params[$key] = intval($value);
 			elseif (!empty($suffix))
-				@$params['filter'][$key][$suffix] = $value;
+				@$params['filter'][$key][$suffix] = urldecode($value);
 			else
-				@$params['filter'][$key] = $value;
+				@$params['filter'][$key] = urldecode($value);
 		}
 
 		return $params;
