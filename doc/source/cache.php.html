@@ -1,0 +1,96 @@
+<html>
+    <head>
+        <script
+            type="text/javascript"
+            src="../js/jquery-1.4.2.min.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../syntax_highlighter/scripts/shCore.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../syntax_highlighter/scripts/shBrushJScript.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../syntax_highlighter/scripts/shBrushPhp.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../syntax_highlighter/scripts/shBrushXml.js">
+        </script>
+        <link
+            href="../syntax_highlighter/styles/shCore.css" rel="stylesheet"
+            type="text/css"
+        />
+        <link
+            href="../syntax_highlighter/styles/shCoreEclipse.css"
+            rel="stylesheet" type="text/css"
+        />
+        <link
+            href="../syntax_highlighter/styles/shThemeWordpress.css"
+            rel="stylesheet" type="text/css"
+        />
+    </head>
+    <body>
+        <pre class="brush: php">&lt;?php
+/**
+ * @package phpunk
+ */
+
+/**
+ * Basic reference implementation. Multi-type, in-memory cache.
+ */
+class cache {
+	protected $_memcache;
+	protected $_data = array();
+
+	public function __construct($memcache = false) {
+		$this-&gt;_memcache = $memcache;
+	}
+
+	public function has($type, $id = false) {
+		if (!isset($this-&gt;_data[$type]))
+			return false;
+
+		return $id ? isset($this-&gt;_data[$type][$id]) : true;
+	}
+
+	public function get($type, $id = false) {
+		if ($this-&gt;_memcache)
+			return $this-&gt;_memcache-&gt;get(&quot;$type/$id&quot;);
+
+		return $id ? @$this-&gt;_data[$type][$id] : @$this-&gt;_data[$type];
+	}
+
+	public function put($type, $id, $object) {
+		if ($this-&gt;_memcache) {
+			$this-&gt;_memcache-&gt;set(&quot;$type/$id&quot;, $object); // TODO timeout?
+			return $object;
+		}
+
+		return @$this-&gt;_data[$type][$id] = $object;
+	}
+
+	public function remove($type, $id = false) {
+		if ($this-&gt;_memcache) {
+			$this-&gt;_memcache-&gt;delete(&quot;$type/$id&quot;);
+			return;
+		}
+
+		if ($id)
+			unset($this-&gt;_data[$type][$id]);
+		else
+			unset($this-&gt;_data[$type]);
+	}
+}
+</pre>
+        <script type="text/javascript">
+             SyntaxHighlighter.all();
+             jQuery('.gutter div').each(function(key, data){
+                jQuery(data).prepend('<a name="L'+jQuery(data).text()+'"/>');
+             });
+        </script>
+    </body>
+</html>

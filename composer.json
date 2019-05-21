@@ -1,42 +1,47 @@
 {
-    "name": "oneeyedjames/phpunk",
-    "description": "Yet another lightweight PHP framework",
-    "type": "library",
-    "license": "GNU",
-    "authors": [
-        {
-            "name": "oneeyedjames",
-            "email": "jascott@programmer.net"
-        }
-    ],
-    "require-dev": {
+	"name": "oneeyedjames/phpunk",
+	"description": "Yet another lightweight PHP framework",
+	"type": "library",
+	"license": "GNU",
+	"authors": [
+		{
+			"name": "oneeyedjames",
+			"email": "jascott@programmer.net"
+		}
+	],
+	"require-dev": {
 		"phpdocumentor/phpdocumentor": "^2.9",
-        "phpunit/phpunit": "^7.4"
-    },
-    "autoload": {
-        "files": [
-            "src/crypto.php",
-            "src/token.php",
-            "src/types.php",
-            "src/http.php",
-			"src/collectible.php",
-			"src/mutable.php",
-            "src/object.php",
-            "src/cache.php",
+		"phpunit/phpunit": "^7.4"
+	},
+	"autoload": {
+		"files": [
+			"src/compat/crypto.php",
+			"src/compat/types.php",
+			"src/compat/http.php",
+			"src/util/collectible.php",
+			"src/util/mutable.php",
+			"src/util/object.php",
+			"src/cache.php",
 			"src/error.php",
-            "src/database/schema.php",
-            "src/database/table.php",
-            "src/database/bridge.php",
-            "src/database/relation.php",
-            "src/database/query.php",
-            "src/database/record.php",
-            "src/database/result.php",
-			"src/model.php",
-            "src/controller.php",
-            "src/renderer.php",
-            "src/template.php",
-            "src/user.php",
-            "src/url.php"
-        ]
-    }
+			"src/token.php",
+			"src/event.php",
+			"src/url.php",
+			"src/database/schema.php",
+			"src/database/table.php",
+			"src/database/bridge.php",
+			"src/database/relation.php",
+			"src/database/query.php",
+			"src/database/record.php",
+			"src/database/result.php",
+			"src/component/model.php",
+			"src/component/controller.php",
+			"src/component/renderer.php",
+			"src/component/template.php",
+			"src/component/user.php"
+		]
+	},
+	"scripts": {
+		"test": "phpunit",
+		"doc": "phpdoc"
+	}
 }

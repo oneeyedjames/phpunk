@@ -2,6 +2,8 @@
 
 use PHPUnit\Framework\TestCase;
 
+use PHPunk\cache;
+
 class cacheTest extends TestCase {
 	private $cache;
 

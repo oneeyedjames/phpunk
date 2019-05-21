@@ -1,6 +1,11 @@
 <?php
+/**
+ * @package phpunk\database
+ */
 
-class database_schema {
+namespace PHPunk\Database;
+
+class schema {
 	private $_mysql = null;
 
 	private $_tables = array();
@@ -48,7 +53,7 @@ class database_schema {
 				$found = 0;
 
 				while ($record = $result->fetch_assoc())
-					$records[] = new database_record($record, $table_name);
+					$records[] = new record($record, $table_name);
 
 				$result->free();
 
@@ -59,7 +64,7 @@ class database_schema {
 					$result->free();
 				}
 
-				return new database_result($records, $found, $table_name);
+				return new result($records, $found, $table_name);
 			} else {
 				error_log($sql);
 				trigger_error($stmt->error, E_USER_WARNING);
@@ -124,8 +129,8 @@ class database_schema {
 	public function add_table($name, $pkey = 'id') {
 		if (!isset($this->_tables[$name])) {
 			$this->_tables[$name] = is_null($pkey)
-				? new database_bridge_table($name, $pkey)
-				: new database_table($name, $pkey);
+				? new bridge_table($name, $pkey)
+				: new table($name, $pkey);
 		}
 
 		return $this->_tables[$name];
@@ -151,7 +156,7 @@ class database_schema {
 		if (!$this->relation_exists($rel_name)) {
 			if (($ptable =& $this->_tables[$ptable_name]) &&
 				($ftable =& $this->_tables[$ftable_name])) {
-				$rel = new database_relation($rel_name, $ptable, $ftable, $fkey);
+				$rel = new relation($rel_name, $ptable, $ftable, $fkey);
 
 				$ptable->add_relation($rel_name, $rel);
 				$ftable->add_relation($rel_name, $rel);

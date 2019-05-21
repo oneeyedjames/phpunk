@@ -1,6 +1,11 @@
 <?php
+/**
+ * @package phpunk\database
+ */
 
-class database_bridge_table extends database_table {
+namespace PHPunk\Database;
+
+class bridge_table extends table {
 	public function __get($key) {
 		switch ($key) {
 			case 'join':

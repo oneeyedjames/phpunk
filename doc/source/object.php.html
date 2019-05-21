@@ -1,0 +1,77 @@
+<html>
+    <head>
+        <script
+            type="text/javascript"
+            src="../js/jquery-1.4.2.min.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../syntax_highlighter/scripts/shCore.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../syntax_highlighter/scripts/shBrushJScript.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../syntax_highlighter/scripts/shBrushPhp.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../syntax_highlighter/scripts/shBrushXml.js">
+        </script>
+        <link
+            href="../syntax_highlighter/styles/shCore.css" rel="stylesheet"
+            type="text/css"
+        />
+        <link
+            href="../syntax_highlighter/styles/shCoreEclipse.css"
+            rel="stylesheet" type="text/css"
+        />
+        <link
+            href="../syntax_highlighter/styles/shThemeWordpress.css"
+            rel="stylesheet" type="text/css"
+        />
+    </head>
+    <body>
+        <pre class="brush: php">&lt;?php
+/**
+ * @package phpunk\util
+ */
+
+/**
+ * Basic reference implementation
+ *
+ * @see http://us2.php.net/manual/en/class.jsonserializable.php JsonSerializable
+ * @see collectible Collectible Trait
+ * @see mutable Mutable Trait
+ * @see http://github.com/oneeyedjames/phpunk/wiki/Mutable-Objects PHPunk Wiki
+ */
+class object implements collection, JsonSerializable {
+	use mutable;
+
+	/**
+	 * Creates a shallow clone of the passed data.
+	 *
+	 * @param mixed $data OPTIONAL Any array or traversable object
+	 */
+	public function __construct($data = []) {
+		$this-&gt;loadArray($data);
+	}
+
+	/**
+	 * @ignore implementation for JsonSerializable
+	 */
+	public function jsonSerialize() {
+		return $this-&gt;toArray();
+	}
+}
+</pre>
+        <script type="text/javascript">
+             SyntaxHighlighter.all();
+             jQuery('.gutter div').each(function(key, data){
+                jQuery(data).prepend('<a name="L'+jQuery(data).text()+'"/>');
+             });
+        </script>
+    </body>
+</html>

@@ -1,14 +1,20 @@
 <phpunit bootstrap="test/autoload.php">
 	<testsuites>
 		<testsuite name="Zombie">
-			<file>test/collectibleTest.php</file>
-			<file>test/mutableTest.php</file>
-			<file>test/objectTest.php</file>
+			<file>test/tokenTest.php</file>
 			<file>test/cacheTest.php</file>
 			<file>test/errorTest.php</file>
-			<file>test/databaseRecordTest.php</file>
-			<file>test/databaseResultTest.php</file>
-			<file>test/databaseSchemaTest.php</file>
+
+			<file>test/compat/typesTest.php</file>
+			<file>test/compat/cryptoTest.php</file>
+
+			<file>test/util/collectibleTest.php</file>
+			<file>test/util/mutableTest.php</file>
+			<file>test/util/objectTest.php</file>
+
+			<file>test/database/recordTest.php</file>
+			<file>test/database/resultTest.php</file>
+			<file>test/database/schemaTest.php</file>
 		</testsuite>
 	</testsuites>
 </phpunit>

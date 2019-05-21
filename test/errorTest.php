@@ -2,6 +2,8 @@
 
 use PHPUnit\Framework\TestCase;
 
+use PHPunk\api_error;
+
 class errorTest extends TestCase {
 	public function testError() {
 		$error = new api_error(101, 'Hello, World!');

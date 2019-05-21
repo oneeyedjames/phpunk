@@ -1,4 +1,9 @@
 <?php
+/**
+ * @package phpunk
+ */
+
+namespace PHPunk;
 
 /**
  * Basic reference implementation. Multi-type, in-memory cache.

@@ -1,6 +1,11 @@
 <?php
+/**
+ * @package phpunk\database
+ */
 
-class database_relation {
+namespace PHPunk\Database;
+
+class relation {
 	private $_name;
 
 	private $_ptable;

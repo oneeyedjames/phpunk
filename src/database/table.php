@@ -1,6 +1,11 @@
 <?php
+/**
+ * @package phpunk\database
+ */
 
-class database_table {
+namespace PHPunk\Database;
+
+class table {
 	private $_name = null;
 	private $_pkey = null;
 	private $_rels = array();

@@ -1,4 +1,9 @@
 <?php
+/**
+ * @package phpunk
+ */
+
+namespace PHPunk;
 
 class url_schema {
 	private $_http_host;
