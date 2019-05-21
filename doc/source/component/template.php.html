@@ -36,46 +36,46 @@
     <body>
         <pre class="brush: php">&lt;?php
 /**
- * @package phpunk\database
+ * @package phpunk\component
  */
 
-namespace PHPunk\Database;
+namespace PHPunk\Component;
 
-use PHPunk\Util\object;
+class template {
+    private $_dirs = array();
 
-/**
- * Represents a row in a database table
- * @property string $table The name of the related database table
- */
-class record extends object {
-	/**
-	 * Table name
-	 * @var string
-	 */
-	private $_table;
+    public function __construct($base_dir) {
+        $this-&gt;_dirs = array($base_dir);
+    }
 
-	/**
-	 * Creates a shallow clone of the passed data.
-	 *
-	 * @param mixed $data OPTIONAL Any array or traversable object
-	 * @param string $table OPTIONAL The name of the related database table
-	 */
-	public function __construct($data = [], $table = false) {
-		parent::__construct($data);
-		$this-&gt;_table = $table;
-	}
+    public function add_folder($dir) {
+        $this-&gt;_dirs[] = $dir;
+    }
 
-	/**
-	 * @ignore magic method
-	 */
-	public function __get($key) {
-		switch ($key) {
-			case 'table':
-				return $this-&gt;_table;
-			default:
-				return parent::__get($key);
-		}
-	}
+    public function locate($view, $resource = false) {
+		$files = $resource === false ? array($view, 'index') :
+			array(&quot;$resource/$view&quot;, $view, &quot;$resource/index&quot;, 'index');
+
+        foreach ($files as $filename) {
+            foreach ($this-&gt;_dirs as $dirname) {
+				if (is_file(&quot;$dirname/$filename.php&quot;))
+    				return &quot;$dirname/$filename.php&quot;;
+    		}
+        }
+
+        $filename = $resource ? &quot;$resource/$view.php&quot; : &quot;$view.php&quot;;
+
+        trigger_error(&quot;Missing template file $filename&quot;, E_USER_WARNING);
+
+    	return false;
+    }
+
+    public function load($view, $resource = false, $vars = array()) {
+        if ($file = $this-&gt;locate($view, $resource)) {
+            extract($vars, EXTR_SKIP);
+            include $file;
+        }
+    }
 }
 </pre>
         <script type="text/javascript">

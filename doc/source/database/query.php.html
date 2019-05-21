@@ -39,7 +39,11 @@
  * @package phpunk\database
  */
 
-class database_query {
+namespace PHPunk\Database;
+
+use PHPunk\Util\object;
+
+class query {
 	private static $_defaults = array(
 		'table'  =&gt; '',
 		'bridge' =&gt; '',
@@ -118,7 +122,7 @@ class database_query {
 
 				$joins[] = &quot;`$bridge-&gt;name` ON `$rel-&gt;ftable`.`$rel-&gt;fkey` = `$rel-&gt;ptable`.`$rel-&gt;pkey`&quot;;
 			} else {
-				$bridge = new database_bridge_table('');
+				$bridge = new bridge_table('');
 			}
 
 			$query .= &quot; FROM `$table-&gt;name`&quot;;

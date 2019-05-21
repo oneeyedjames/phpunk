@@ -1,0 +1,139 @@
+<html>
+    <head>
+        <script
+            type="text/javascript"
+            src="../../js/jquery-1.4.2.min.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../../syntax_highlighter/scripts/shCore.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../../syntax_highlighter/scripts/shBrushJScript.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../../syntax_highlighter/scripts/shBrushPhp.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../../syntax_highlighter/scripts/shBrushXml.js">
+        </script>
+        <link
+            href="../../syntax_highlighter/styles/shCore.css" rel="stylesheet"
+            type="text/css"
+        />
+        <link
+            href="../../syntax_highlighter/styles/shCoreEclipse.css"
+            rel="stylesheet" type="text/css"
+        />
+        <link
+            href="../../syntax_highlighter/styles/shThemeWordpress.css"
+            rel="stylesheet" type="text/css"
+        />
+    </head>
+    <body>
+        <pre class="brush: php">&lt;?php
+/**
+ * @package phpunk\component
+ */
+
+namespace PHPunk\Component;
+
+use PHPunk\Database\result;
+use PHPunk\Database\record;
+
+class renderer {
+	private $_resource = false;
+
+	public function __construct($resource) {
+		$this-&gt;_resource = $resource;
+	}
+
+	public function __get($key) {
+		switch ($key) {
+			case 'resource':
+				return $this-&gt;_resource;
+		}
+	}
+
+	public function render($view) {}
+
+	protected function render_result($result) {
+		if ($result instanceof record) {
+			$response = $this-&gt;create_response($result);
+		} elseif ($result instanceof result) {
+			$response = [];
+			foreach ($result as $record)
+				$response[] = $this-&gt;create_response($record);
+		} elseif ($result instanceof api_error) {
+			if (isset($result['status'])) {
+				http_response_code($result['status']);
+				unset($result['status']);
+			}
+
+			$response = $result;
+		} else {
+			$response = new api_error('api_invalid_response',
+				'The response was invalid.');
+
+			http_response_code(500);
+		}
+
+		header('Content-type: text/json');
+		echo json_encode($response);
+	}
+
+	protected function create_response($record) {
+		$response = new object();
+
+		foreach ($record as $key =&gt; $value) {
+			$map_key = $key;
+			$map_value = $this-&gt;map_field_value($value, $map_key);
+			if ($map_key) $response[$map_key] = $map_value;
+		}
+
+		$links = [];
+
+		foreach ($this-&gt;get_links($record) as $rel =&gt; $params) {
+			$params['api'] = true;
+			$href = build_url($params);
+			$links[] = compact('rel', 'href');
+		}
+
+		$response-&gt;links = $links;
+
+		return $response;
+	}
+
+	protected function get_links($record) {
+		return [
+			'self' =&gt; [
+				'resource' =&gt; $this-&gt;resource,
+				'id'       =&gt; $record-&gt;id
+			],
+			'collection' =&gt; [
+				'resource' =&gt; $this-&gt;resource
+			]
+		];
+	}
+
+	protected function map_field_name($field) {
+		return $field;
+	}
+
+	protected function map_field_value($value, &amp;$field) {
+		$field = $this-&gt;map_field_name($field);
+		return $field ? $value : null;
+	}
+}
+</pre>
+        <script type="text/javascript">
+             SyntaxHighlighter.all();
+             jQuery('.gutter div').each(function(key, data){
+                jQuery(data).prepend('<a name="L'+jQuery(data).text()+'"/>');
+             });
+        </script>
+    </body>
+</html>

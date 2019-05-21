@@ -36,45 +36,38 @@
     <body>
         <pre class="brush: php">&lt;?php
 /**
- * @package phpunk\database
+ * @package phpunk\util
  */
 
-namespace PHPunk\Database;
+namespace PHPunk\Util;
 
-use PHPunk\Util\object;
+use JsonSerializable;
 
 /**
- * Represents a row in a database table
- * @property string $table The name of the related database table
+ * Basic reference implementation
+ *
+ * @see http://us2.php.net/manual/en/class.jsonserializable.php JsonSerializable
+ * @see collectible Collectible Trait
+ * @see mutable Mutable Trait
+ * @see http://github.com/oneeyedjames/phpunk/wiki/Mutable-Objects PHPunk Wiki
  */
-class record extends object {
-	/**
-	 * Table name
-	 * @var string
-	 */
-	private $_table;
+class object implements collection, JsonSerializable {
+	use mutable;
 
 	/**
 	 * Creates a shallow clone of the passed data.
 	 *
 	 * @param mixed $data OPTIONAL Any array or traversable object
-	 * @param string $table OPTIONAL The name of the related database table
 	 */
-	public function __construct($data = [], $table = false) {
-		parent::__construct($data);
-		$this-&gt;_table = $table;
+	public function __construct($data = []) {
+		$this-&gt;loadArray($data);
 	}
 
 	/**
-	 * @ignore magic method
+	 * @ignore implementation for JsonSerializable
 	 */
-	public function __get($key) {
-		switch ($key) {
-			case 'table':
-				return $this-&gt;_table;
-			default:
-				return parent::__get($key);
-		}
+	public function jsonSerialize() {
+		return $this-&gt;toArray();
 	}
 }
 </pre>

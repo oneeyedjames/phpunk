@@ -36,45 +36,44 @@
     <body>
         <pre class="brush: php">&lt;?php
 /**
- * @package phpunk\database
+ * @package phpunk\component
  */
 
-namespace PHPunk\Database;
+namespace PHPunk\Component;
 
-use PHPunk\Util\object;
+use function PHPunk\create_token;
+use function PHPunk\verify_token;
 
-/**
- * Represents a row in a database table
- * @property string $table The name of the related database table
- */
-class record extends object {
-	/**
-	 * Table name
-	 * @var string
-	 */
-	private $_table;
+class user {
+	protected $_public_name;
+	protected $_private_key;
 
-	/**
-	 * Creates a shallow clone of the passed data.
-	 *
-	 * @param mixed $data OPTIONAL Any array or traversable object
-	 * @param string $table OPTIONAL The name of the related database table
-	 */
-	public function __construct($data = [], $table = false) {
-		parent::__construct($data);
-		$this-&gt;_table = $table;
+	public function __construct($public_name, $private_key) {
+		$this-&gt;_public_name = $public_name;
+		$this-&gt;_private_key = $private_key;
 	}
 
-	/**
-	 * @ignore magic method
-	 */
 	public function __get($key) {
-		switch ($key) {
-			case 'table':
-				return $this-&gt;_table;
-			default:
-				return parent::__get($key);
-		}
+		if (isset($this-&gt;{&quot;_$key&quot;}))
+			return $this-&gt;{&quot;_$key&quot;};
+	}
+
+	public function create_token($algo = 'md5') {
+		return create_token($this-&gt;public_name, $this-&gt;private_key, $algo);
+	}
+
+	public function verify_token($token, $algo = 'md5') {
+		return verify_token($token, $this-&gt;public_name, $this-&gt;private_key, $algo);
+	}
+
+	public function create_action_token($action, $resource = false, $algo = 'md5') {
+		if ($resource) $action = &quot;$resource:$action&quot;;
+		return create_token($action, $this-&gt;private_key, $algo);
+	}
+
+	public function verify_action_token($token, $action, $resource = false, $algo = 'md5') {
+		if ($resource) $action = &quot;$resource:$action&quot;;
+		return verify_token($token, $action, $this-&gt;private_key, $algo);
 	}
 }
 </pre>
