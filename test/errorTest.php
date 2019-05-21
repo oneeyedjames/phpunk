@@ -5,15 +5,17 @@ use PHPUnit\Framework\TestCase;
 use PHPunk\api_error;
 
 class errorTest extends TestCase {
+	const MESSAGE = 'Hello, World!';
+
 	public function testError() {
-		$error = new api_error(101, 'Hello, World!');
+		$error = new api_error(101, self::MESSAGE);
 
 		$this->assertEquals(101, $error->code);
-		$this->assertEquals('Hello, World!', $error->message);
+		$this->assertEquals(self::MESSAGE, $error->message);
 	}
 
 	public function testData() {
-		$error = new api_error(101, 'Hello, World!', ['foo' => 'bar']);
+		$error = new api_error(101, self::MESSAGE, ['foo' => 'bar']);
 
 		$this->assertEquals('bar', $error['foo']);
 		$this->assertFalse(isset($error['baz']));

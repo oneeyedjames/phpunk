@@ -3,6 +3,8 @@
 use PHPUnit\Framework\TestCase;
 
 class cryptTest extends TestCase {
+	const CLEAR_TEXT = 'Hello, World!';
+
 	public function testRandomBytes() {
 		$bytes1 = random_bytes(16);
 		$bytes2 = random_bytes(16);
@@ -14,8 +16,8 @@ class cryptTest extends TestCase {
 	}
 
 	public function testPasswordHash() {
-		$hash1 = password_hash('Hello, World!', PASSWORD_BCRYPT);
-		$hash2 = password_hash('Hello, World!', PASSWORD_BCRYPT);
+		$hash1 = password_hash(self::CLEAR_TEXT, PASSWORD_BCRYPT);
+		$hash2 = password_hash(self::CLEAR_TEXT, PASSWORD_BCRYPT);
 
 		$this->assertEquals(1, preg_match('/^\$2y\$10\$[A-Z0-9\/.]{53}$/i', $hash1));
 		$this->assertEquals(1, preg_match('/^\$2y\$10\$[A-Z0-9\/.]{53}$/i', $hash2));
@@ -24,10 +26,10 @@ class cryptTest extends TestCase {
 	}
 
 	public function testPasswordVerify() {
-		$hash1 = password_hash('Hello, World!', PASSWORD_BCRYPT);
-		$hash2 = password_hash('Hello, World!', PASSWORD_BCRYPT);
+		$hash1 = password_hash(self::CLEAR_TEXT, PASSWORD_BCRYPT);
+		$hash2 = password_hash(self::CLEAR_TEXT, PASSWORD_BCRYPT);
 
-		$this->assertTrue(password_verify('Hello, World!', $hash1));
-		$this->assertTrue(password_verify('Hello, World!', $hash2));
+		$this->assertTrue(password_verify(self::CLEAR_TEXT, $hash1));
+		$this->assertTrue(password_verify(self::CLEAR_TEXT, $hash2));
 	}
 }
