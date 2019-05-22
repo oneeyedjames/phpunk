@@ -167,6 +167,11 @@ class url_schema {
 		return in_array($view, $views) ? $view : false;
 	}
 
+	/**
+	 * Parses a URL path into key-value parameters.
+	 * @param string $path OPTIONAL Path to parse
+	 * @return array Key-value parameters
+	 */
 	public function parse_path($path = '') {
 		if (is_string($path))
 			$path = explode('/', trim($path, '/'));
@@ -229,6 +234,11 @@ class url_schema {
 		return $params;
 	}
 
+	/**
+	 * Builds a URL path, based on given parameters.
+	 * @param array $params OPTIONAL Key-value parameters for URL
+	 * @return string The URL path
+	 */
 	public function build_path($params = array()) {
 		$path = array();
 
@@ -280,6 +290,12 @@ class url_schema {
 		return implode('/', $path);
 	}
 
+	/**
+	 * Builds a complete URL, based on given parameters. Includes any base path.
+	 * @param array $params Key-value parameters for URL
+	 * @param boolean $secure Whether the URL should use HTTPS
+	 * @return string The complete URL
+	 */
 	public function build($params, $secure = false) {
 		$scheme = $secure ? 'https' : 'http';
 
@@ -293,6 +309,13 @@ class url_schema {
 		return "$scheme://$host/$path";
 	}
 
+	/**
+	 * Splits a URL slug at the first tilde (~). If slug does not contain a
+	 * tilde, the first half will be the full slug and the second half will be
+	 * an empty string.
+	 * @param string $slug URL slug to be split
+	 * @param array Array of two strings
+	 */
 	protected function split_slug($slug) {
 		if (preg_match('/^([A-Z0-9-_]+)~([A-Z0-9-_]+)$/si', $slug, $matches))
 			return array($matches[1], $matches[2]);
@@ -301,6 +324,13 @@ class url_schema {
 		return array($slug, $empty);
 	}
 
+	/**
+	 * Joins two strings with a tilde (~) into a single URL slug. If second
+	 * argument is empty, result will contain the base string with no tilde.
+	 * @param string $slug A base string
+	 * @param string $suffix A suffix to append
+	 * @return string The completed URL slug
+	 */
 	protected function join_slug($slug, $suffix) {
 		if (!empty($suffix))
 			return "$slug~$suffix";
@@ -308,6 +338,12 @@ class url_schema {
 		return $slug;
 	}
 
+	/**
+	 * Splits a URL slug at each dot (.). If slug does not contain a dot, the
+	 * original URL slug will be returned.
+	 * @param string $slug URL slug to be split
+	 * @return mixed Array of strings, or original slug
+	 */
 	protected function explode_slug($slug) {
 		if (strpos($slug, '.') !== false)
 			return explode('.', $slug);
@@ -315,6 +351,11 @@ class url_schema {
 		return $slug;
 	}
 
+	/**
+	 * Joins an array of strings with dots (.) into a single URL slug.
+	 * @param array $slug Array of strings to be joined
+	 * @return string The completed URL slug
+	 */
 	protected function implode_slug($slug) {
 		return implode('.', $slug);
 	}
