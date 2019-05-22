@@ -3637,7 +3637,7 @@ have transformed field names/values and contain API hyperlinks.</description>
     </parse_markers>
     <source>eJyVVk1v2zgQPVu/Yg7GygmcuJe9xNt0u81hF0iLIGhOjmHQ0thiQ1ECSSUNiv73nSFFSf7qhw+GNRzOvHnzZuS/3tVFnczOzxM4h79rkT2JLQLZGv30mFVlXWnUjg5nSaJFiZZcEO7+vePzD/F8niSN7cwPTqrHav0FMzoY2G+EE2th8dGgbdTJs6wyOQXsMJmqRuNewToj9RbGdLtqDKH4RHig2oArEDrjpjJkkBZ2wWdKWEteOkeDBr4lI44/4gRyqyuDILVDo4WCZ2GkWCvk01kyqo18Fg5hvOpyvIWNUBYJZB/lNMz7+IP5O4avzdOslcxg0+jMyUrDapVVmoI1mZt0wc4Y+WjMAS6uh4A6j3ky+p4cVleKLQUv0RVVfjLhFinVE76GLPZFuqyAgWWUUYcgjanSK7aNDLrGaNgHRUAIyQ6Ye0+/BQF5224IUvCsvL/7jx+JFIuXLanCiBKClHyJ7Huze3cKQTJToBhoDH2HC13/KkdPmPeVBhlM2oChNrmBaCApWCd0hqStELstfxzhMeGh3MwgiWMVD7qYvnpAUsnJwH3uncCLJd8dESMoPP3tXWGZAY/G097dWSx/CMff+CkcUcuVJ69FxG7SWnTReZGSr2tsujxrXUaFc3WXitSa4xFnX8yo0cdD+VOWyB65cUNE1Ic0aXzpQU9S/in1s1Ay7yClU587/Rz2Q7j5Qjy2jpfp2dynPlLIn2/eBNLYoUDBekk/VLQjtLtwrzVegcOvbvbFVjr1npgVFfDjCnXHhY94tjeT/zRS5TQF2kueRyFKfGOqcnc6uHuXNDg8YiTh1u9FKuVDFeIZwRmhLemlZI1LVLnfNHZGRTbIeXJaNtoJGRIWhN4oqZ/siSnjnMMp4+fg2Y5667qH/vS8nVJlWGZ7TQ3BJqE1wynwsHgKaB/B22sY+/riBJWiXvkDfz7vbN6pHxA2eY7CwSQEmUK8HxTphyRaoJ+0aPMT10XvdDL2rLYzvIM+JKf9uvIuPQNhqpWvx/fBxoLC04KVnXI+ehNgKKswuCHDmmW0aoyaxJvh2GfwS4FfMYK4pI2t0imkfDHtZd3VdXEdgYfLHnxc69FpT8Tv85zfpwqfhXYDTYGrWgVHmbSyi3F+oDke1OHNNfKbtH1p70pQGCNe4SMtCZnLErUlndG7O5hpn1GTgvIf7m/BJ0N6vdvTGj3Sm289CwtmNrWoNim3ahEWS/ci9O0LPY62dvfIPIXwYZcQ+eJa5ny69D5pVimFHsSvxvaX6Wu515OPorb98uhXAfeEW9Bbhk2If1jC6c3h9R3iW+/DcMdp7eeN/SYhyQ61wbRXyee40g7qCfNMf9aGJXnjsKZSfiUUYbj3Szpw/j0CQuhjMafw6eH2Fmh5BCP9ydOVYwpqzH+Fot2V9MeQrBbckT025HW+Tyu8iyRcgW6U8jR/T/4Hnq3PPQ==</source>
   </file>
-  <file path="cache.php" generated-path="cache.html" hash="ec30d1aef4ff36dc3e43bec92706768c" package="phpunk">
+  <file path="cache.php" generated-path="cache.html" hash="9a138e5026de08d94e1da5938e54496d" package="phpunk">
     <docblock line="0">
       <description></description>
       <long-description></long-description>
@@ -3652,344 +3652,335 @@ have transformed field names/values and contain API hyperlinks.</description>
         <long-description></long-description>
         <tag name="package" line="11" description="phpunk"/>
       </docblock>
-      <property static="false" visibility="protected" namespace="PHPunk" line="12" package="phpunk">
-        <name>$_memcache</name>
-        <full_name>\PHPunk\cache::_memcache</full_name>
-        <default></default>
-        <docblock line="12">
-          <description></description>
-          <long-description></long-description>
-        </docblock>
-      </property>
-      <property static="false" visibility="protected" namespace="PHPunk" line="13" package="phpunk">
-        <name>$_data</name>
-        <full_name>\PHPunk\cache::_data</full_name>
-        <default>array()</default>
-        <docblock line="13">
-          <description></description>
-          <long-description></long-description>
-        </docblock>
-      </property>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="PHPunk" line="15" package="phpunk">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="PHPunk" line="26" package="phpunk">
         <name>__construct</name>
         <full_name>\PHPunk\cache::__construct()</full_name>
-        <docblock line="15">
-          <description></description>
+        <docblock line="26">
+          <description>Memcache is required to preserve cache across multiple requests.</description>
           <long-description></long-description>
+          <tag name="param" line="26" description="&lt;p&gt;OPTIONAL Memcache or Memcached instance&lt;/p&gt;" type="object" variable="$memcache">
+            <type>object</type>
+          </tag>
         </docblock>
         <argument line="0" by_reference="false">
           <name>$memcache</name>
           <default>false</default>
-          <type/>
+          <type>object</type>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="PHPunk" line="19" package="phpunk">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="PHPunk" line="37" package="phpunk">
         <name>has</name>
         <full_name>\PHPunk\cache::has()</full_name>
-        <docblock line="19">
-          <description></description>
-          <long-description></long-description>
+        <docblock line="37">
+          <description>Returns whether or not a cached object exists for the given type and Id.</description>
+          <long-description>If the Id is omitted, returns whether type exists.</long-description>
+          <tag name="param" line="37" description="&lt;p&gt;Name of object type&lt;/p&gt;" type="string" variable="$type">
+            <type>string</type>
+          </tag>
+          <tag name="param" line="37" description="&lt;p&gt;OPTIONAL Unique object Id&lt;/p&gt;" type="mixed" variable="$id">
+            <type>mixed</type>
+          </tag>
+          <tag name="return" line="37" description="TRUE if object or type exists in cache, FALSE otherwise" type="boolean">
+            <type>boolean</type>
+          </tag>
         </docblock>
         <argument line="0" by_reference="false">
           <name>$type</name>
           <default></default>
-          <type/>
+          <type>string</type>
         </argument>
         <argument line="0" by_reference="false">
           <name>$id</name>
           <default>false</default>
-          <type/>
+          <type>mixed</type>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="PHPunk" line="26" package="phpunk">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="PHPunk" line="50" package="phpunk">
         <name>get</name>
         <full_name>\PHPunk\cache::get()</full_name>
-        <docblock line="26">
-          <description></description>
+        <docblock line="50">
+          <description>Returns a cached object for the given type and Id.</description>
           <long-description></long-description>
+          <tag name="param" line="50" description="&lt;p&gt;Name of object type&lt;/p&gt;" type="string" variable="$type">
+            <type>string</type>
+          </tag>
+          <tag name="param" line="50" description="&lt;p&gt;OPTIONAL Unique object Id&lt;/p&gt;" type="mixed" variable="$id">
+            <type>mixed</type>
+          </tag>
+          <tag name="return" line="50" description="The cached object, NULL if not exists" type="mixed">
+            <type>mixed</type>
+          </tag>
         </docblock>
         <argument line="0" by_reference="false">
           <name>$type</name>
           <default></default>
-          <type/>
+          <type>string</type>
         </argument>
         <argument line="0" by_reference="false">
           <name>$id</name>
           <default>false</default>
-          <type/>
+          <type>mixed</type>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="PHPunk" line="33" package="phpunk">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="PHPunk" line="64" package="phpunk">
         <name>put</name>
         <full_name>\PHPunk\cache::put()</full_name>
-        <docblock line="33">
-          <description></description>
+        <docblock line="64">
+          <description>Caches an object with the given type and Id.</description>
           <long-description></long-description>
+          <tag name="param" line="64" description="&lt;p&gt;Name of object type&lt;/p&gt;" type="string" variable="$type">
+            <type>string</type>
+          </tag>
+          <tag name="param" line="64" description="&lt;p&gt;Unique object Id&lt;/p&gt;" type="mixed" variable="$id">
+            <type>mixed</type>
+          </tag>
+          <tag name="param" line="64" description="&lt;p&gt;The object to cache&lt;/p&gt;" type="mixed" variable="$object">
+            <type>mixed</type>
+          </tag>
+          <tag name="return" line="64" description="The cached object" type="mixed">
+            <type>mixed</type>
+          </tag>
         </docblock>
         <argument line="0" by_reference="false">
           <name>$type</name>
           <default></default>
-          <type/>
+          <type>string</type>
         </argument>
         <argument line="0" by_reference="false">
           <name>$id</name>
           <default></default>
-          <type/>
+          <type>mixed</type>
         </argument>
         <argument line="0" by_reference="false">
           <name>$object</name>
           <default></default>
-          <type/>
+          <type>mixed</type>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="PHPunk" line="42" package="phpunk">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="PHPunk" line="79" package="phpunk">
         <name>remove</name>
         <full_name>\PHPunk\cache::remove()</full_name>
-        <docblock line="42">
-          <description></description>
+        <docblock line="79">
+          <description>Removes an object with the given type and Id from the cache. If the Id is
+omitted, removes all objects of the given type.</description>
           <long-description></long-description>
+          <tag name="param" line="79" description="&lt;p&gt;Name of object type&lt;/p&gt;" type="string" variable="$type">
+            <type>string</type>
+          </tag>
+          <tag name="param" line="79" description="&lt;p&gt;OPTIONAL Unique object Id&lt;/p&gt;" type="mixed" variable="$id">
+            <type>mixed</type>
+          </tag>
         </docblock>
         <argument line="0" by_reference="false">
           <name>$type</name>
           <default></default>
-          <type/>
+          <type>string</type>
         </argument>
         <argument line="0" by_reference="false">
           <name>$id</name>
           <default>false</default>
-          <type/>
+          <type>mixed</type>
         </argument>
       </method>
     </class>
     <markers>
-      <todo line="35">timeout?</todo>
+      <todo line="66">timeout?</todo>
     </markers>
     <parse_markers>
       <error line="0" code="PPC:ERR-50000">No summary was found for this file</error>
-      <error line="15" code="PPC:ERR-50015">Argument $memcache is missing from the Docblock of __construct</error>
-      <error line="15" code="PPC:ERR-50008">No summary for method __construct()</error>
-      <error line="19" code="PPC:ERR-50015">Argument $type is missing from the Docblock of has</error>
-      <error line="19" code="PPC:ERR-50015">Argument $id is missing from the Docblock of has</error>
-      <error line="19" code="PPC:ERR-50008">No summary for method has()</error>
-      <error line="26" code="PPC:ERR-50015">Argument $type is missing from the Docblock of get</error>
-      <error line="26" code="PPC:ERR-50015">Argument $id is missing from the Docblock of get</error>
-      <error line="26" code="PPC:ERR-50008">No summary for method get()</error>
-      <error line="33" code="PPC:ERR-50015">Argument $type is missing from the Docblock of put</error>
-      <error line="33" code="PPC:ERR-50015">Argument $id is missing from the Docblock of put</error>
-      <error line="33" code="PPC:ERR-50015">Argument $object is missing from the Docblock of put</error>
-      <error line="33" code="PPC:ERR-50008">No summary for method put()</error>
-      <error line="42" code="PPC:ERR-50015">Argument $type is missing from the Docblock of remove</error>
-      <error line="42" code="PPC:ERR-50015">Argument $id is missing from the Docblock of remove</error>
-      <error line="42" code="PPC:ERR-50008">No summary for method remove()</error>
-      <error line="12" code="PPC:ERR-50007">No summary for property $_memcache</error>
-      <error line="13" code="PPC:ERR-50007">No summary for property $_data</error>
     </parse_markers>
-    <source>eJyVkrtuwkAQRWv8FRPkAqMY9yE8FKVIE0GRDiG0rMd4g7229hEJRfx7xuuYmIeR0mxxZ+bOuZp9npVp6UXDoQdDmJeM79kOgTQr9yRFnidZjpoKCMu3Jaljr2l/YVpwUJigQkl1kZcZ5igNM6KQI3i3mRGhOZT4CEKGOeaFOgBnPMWR8+YZ07oW4NvrlaowyA3G4G+o2enjczlmhsEEmFLsMAgIpVfabUYUiZW82gqbDS+kNspyM/AbFxpJWKYxqNb0fJMKHU43rarf2ne84ZoyPfDrJL6Iz+1EAoMHoTXSwl/nCnPl+tdBQC09hcYqWU9V1I1Qmc2gc3hF9XUAT0B5utB2brQb7TJtm+eyFk4rt76zi8itH1zDzrs4CfNWrQO7tG1seortJ135DrerXB0vnOpz5D+rMUQRfCxeF2BEjoU1s3b0uonoHF4jd6ebtEZuBVL0vb/wf6foihRjhgYvDnFiPzE7TxG7i1p59w9VM0gwd1sDF+3o/QBYakS3</source>
+    <source>eJy9ld9P2zAQx5+bv+KG+tCilr6P8Wsb0yoVilh5Qqhyk0vjkdiZ7RQQ4n/f2U7apBDGJrG3ynf3vbvvx04/HeVJHox2dwPYheOchbdsiUBnhbilo1EQCJahpgDCxfcLOt0PqvTPTPMQFMaoUFCcZ3mKGQrDDJdiD86K1PChechxAFwMM8ykeoCQhQnuOe0wZVr7A3gMOla2Y8fgSyEV6QmDSrAUVkxxtkjRRkdBJ1fSYGgwgu6cRF09TfVP9REzDA6AKcUeev26ylmpDFzTjr8KrqjASMgValQrLOdmoZK0RGZ3pfVdKmqj9/woOVMsA7n4SQ2hW00L04vZeHp+Mtl0kWr9O6LJtWFkaTVwsUjJ6bgQoXUW5vNQUoYqQtPbaB5AzFKNfWtlp2sSroeH81q0u/Gq81Rb9BJNoYSGuwRNgspOIqQBBuUw5fB4z2ktiClMabDkKxRg4QITEYwjv/A4dtFxZG2TGTdk84BMabZwZV6w4RPtxMUSui5+ThcPZFz1t2f13IzfW4I82ph5JTiZXxWMI5/um8NCyhSZgNnl1SnwtaxsTEPO+7UH8O1k8uMUpJ33jus2FAnTva6/4naUBgNq0vvAtUaiVOKw1+3a5d/0+5TSKYdzVfb2VQdW7Ahai68pftOHj0CXoI3nNsA/kPsPCHz+LMHmZAM4v5pMLBN77zyIFruXzo52u7evfd3j7djw0KrtOLkRqe30nwM4bvOerH8ptoXii+1DJERlyB03ybtBeNn7RlYZswgqOelhvAVUC5S8qEMZVF1eoeIiz75Rw0PdBLKR2ofRCGbTr1MwPENZmKM6WJ9E3jvzq+N2dge1kubLyeTqjbwgVjJzIf+H1vjyObXa16+UTdNSV1ueTdn3foQvcPNz/d17aiMXYYoGt17TGtEajdPkkXuWhXj142ZrMLUf3ldS+47gU/Ab0pTEMg==</source>
   </file>
-  <file path="url.php" generated-path="url.html" hash="1a18102f14616f0f5e92b51ba871f3df" package="phpunk">
+  <file path="url.php" generated-path="url.html" hash="96a59dc94a93c3fb18b969a356b908a4" package="phpunk">
     <docblock line="0">
       <description></description>
       <long-description></long-description>
       <tag name="package" line="0" description="phpunk"/>
     </docblock>
-    <class final="false" abstract="false" namespace="PHPunk" line="8" package="phpunk">
+    <class final="false" abstract="false" namespace="PHPunk" line="13" package="phpunk">
       <extends/>
       <name>url_schema</name>
       <full_name>\PHPunk\url_schema</full_name>
-      <docblock line="8">
+      <docblock line="13">
         <description></description>
         <long-description></long-description>
-        <tag name="package" line="8" description="phpunk"/>
+        <tag name="package" line="13" description="phpunk"/>
       </docblock>
-      <property static="false" visibility="private" namespace="PHPunk" line="9" package="phpunk">
-        <name>$_http_host</name>
-        <full_name>\PHPunk\url_schema::_http_host</full_name>
-        <default></default>
-        <docblock line="9">
-          <description></description>
-          <long-description></long-description>
-        </docblock>
-      </property>
-      <property static="false" visibility="private" namespace="PHPunk" line="10" package="phpunk">
-        <name>$_base_path</name>
-        <full_name>\PHPunk\url_schema::_base_path</full_name>
-        <default></default>
-        <docblock line="10">
-          <description></description>
-          <long-description></long-description>
-        </docblock>
-      </property>
-      <property static="false" visibility="private" namespace="PHPunk" line="12" package="phpunk">
-        <name>$_resources</name>
-        <full_name>\PHPunk\url_schema::_resources</full_name>
-        <default>array()</default>
-        <docblock line="12">
-          <description></description>
-          <long-description></long-description>
-        </docblock>
-      </property>
-      <property static="false" visibility="private" namespace="PHPunk" line="13" package="phpunk">
-        <name>$_aliases</name>
-        <full_name>\PHPunk\url_schema::_aliases</full_name>
-        <default>array()</default>
-        <docblock line="13">
-          <description></description>
-          <long-description></long-description>
-        </docblock>
-      </property>
-      <property static="false" visibility="private" namespace="PHPunk" line="14" package="phpunk">
-        <name>$_actions</name>
-        <full_name>\PHPunk\url_schema::_actions</full_name>
-        <default>array()</default>
-        <docblock line="14">
-          <description></description>
-          <long-description></long-description>
-        </docblock>
-      </property>
-      <property static="false" visibility="private" namespace="PHPunk" line="15" package="phpunk">
-        <name>$_views</name>
-        <full_name>\PHPunk\url_schema::_views</full_name>
-        <default>array()</default>
-        <docblock line="15">
-          <description></description>
-          <long-description></long-description>
-        </docblock>
-      </property>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="PHPunk" line="17" package="phpunk">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="PHPunk" line="48" package="phpunk">
         <name>__construct</name>
         <full_name>\PHPunk\url_schema::__construct()</full_name>
-        <docblock line="17">
+        <docblock line="48">
           <description></description>
           <long-description></long-description>
+          <tag name="param" line="48" description="&lt;p&gt;A fully-qualified domain name&lt;/p&gt;" type="string" variable="$host">
+            <type>string</type>
+          </tag>
+          <tag name="param" line="48" description="&lt;p&gt;OPTIONAL base path for URL's&lt;/p&gt;" type="string" variable="$path">
+            <type>string</type>
+          </tag>
         </docblock>
         <argument line="0" by_reference="false">
           <name>$host</name>
           <default>false</default>
-          <type/>
+          <type>string</type>
         </argument>
         <argument line="0" by_reference="false">
           <name>$path</name>
           <default>'/'</default>
-          <type/>
+          <type>string</type>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="PHPunk" line="22" package="phpunk">
-        <name>__get</name>
-        <full_name>\PHPunk\url_schema::__get()</full_name>
-        <docblock line="22">
-          <description></description>
-          <long-description></long-description>
-        </docblock>
-        <argument line="0" by_reference="false">
-          <name>$key</name>
-          <default></default>
-          <type/>
-        </argument>
-      </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="PHPunk" line="31" package="phpunk">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="PHPunk" line="70" package="phpunk">
         <name>add_resource</name>
         <full_name>\PHPunk\url_schema::add_resource()</full_name>
-        <docblock line="31">
-          <description></description>
+        <docblock line="70">
+          <description>Registers a resource name. Registers alias for resource, if included.</description>
           <long-description></long-description>
+          <tag name="param" line="70" description="&lt;p&gt;Resource name&lt;/p&gt;" type="string" variable="$resource">
+            <type>string</type>
+          </tag>
+          <tag name="param" line="70" description="&lt;p&gt;Alias for resource name&lt;/p&gt;" type="string" variable="$alias">
+            <type>string</type>
+          </tag>
         </docblock>
         <argument line="0" by_reference="false">
           <name>$resource</name>
           <default></default>
-          <type/>
+          <type>string</type>
         </argument>
         <argument line="0" by_reference="false">
           <name>$alias</name>
           <default>false</default>
-          <type/>
+          <type>string</type>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="PHPunk" line="43" package="phpunk">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="PHPunk" line="87" package="phpunk">
         <name>is_resource</name>
         <full_name>\PHPunk\url_schema::is_resource()</full_name>
-        <docblock line="43">
-          <description></description>
+        <docblock line="87">
+          <description>Returns canonical resource name, if it exists.</description>
           <long-description></long-description>
+          <tag name="param" line="87" description="&lt;p&gt;Resource name or alias&lt;/p&gt;" type="string" variable="$resource">
+            <type>string</type>
+          </tag>
+          <tag name="return" line="87" description="Canonical resource name, FALSE if no such resource or alias exists" type="string">
+            <type>string</type>
+          </tag>
         </docblock>
         <argument line="0" by_reference="false">
           <name>$resource</name>
           <default></default>
-          <type/>
+          <type>string</type>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="PHPunk" line="47" package="phpunk">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="PHPunk" line="96" package="phpunk">
         <name>add_alias</name>
         <full_name>\PHPunk\url_schema::add_alias()</full_name>
-        <docblock line="47">
-          <description></description>
+        <docblock line="96">
+          <description>Registers an alias for the given resource name.</description>
           <long-description></long-description>
+          <tag name="param" line="96" description="&lt;p&gt;Alias for the resource name&lt;/p&gt;" type="string" variable="$alias">
+            <type>string</type>
+          </tag>
+          <tag name="param" line="96" description="&lt;p&gt;Original resource name&lt;/p&gt;" type="string" variable="$resource">
+            <type>string</type>
+          </tag>
         </docblock>
         <argument line="0" by_reference="false">
           <name>$alias</name>
           <default></default>
-          <type/>
+          <type>string</type>
         </argument>
         <argument line="0" by_reference="false">
           <name>$resource</name>
           <default></default>
-          <type/>
+          <type>string</type>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="PHPunk" line="54" package="phpunk">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="PHPunk" line="108" package="phpunk">
         <name>is_alias</name>
         <full_name>\PHPunk\url_schema::is_alias()</full_name>
-        <docblock line="54">
-          <description></description>
+        <docblock line="108">
+          <description>Returns canonical resource name for the alias, if it exists.</description>
           <long-description></long-description>
+          <tag name="param" line="108" description="&lt;p&gt;Alias for the resource name&lt;/p&gt;" type="string" variable="$alias">
+            <type>string</type>
+          </tag>
+          <tag name="return" line="108" description="Canonical resource name, FALSE if no such alias exists" type="string">
+            <type>string</type>
+          </tag>
         </docblock>
         <argument line="0" by_reference="false">
           <name>$alias</name>
           <default></default>
-          <type/>
+          <type>string</type>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="PHPunk" line="58" package="phpunk">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="PHPunk" line="118" package="phpunk">
         <name>add_action</name>
         <full_name>\PHPunk\url_schema::add_action()</full_name>
-        <docblock line="58">
-          <description></description>
+        <docblock line="118">
+          <description>Registers an action name. If resource is omitted, the action is registered
+as a global action.</description>
           <long-description></long-description>
+          <tag name="param" line="118" description="&lt;p&gt;Action name&lt;/p&gt;" type="string" variable="$action">
+            <type>string</type>
+          </tag>
+          <tag name="param" line="118" description="&lt;p&gt;OPTIONAL Resource name&lt;/p&gt;" type="string" variable="$resource">
+            <type>string</type>
+          </tag>
         </docblock>
         <argument line="0" by_reference="false">
           <name>$action</name>
           <default></default>
-          <type/>
+          <type>string</type>
         </argument>
         <argument line="0" by_reference="false">
           <name>$resource</name>
           <default>false</default>
-          <type/>
+          <type>string</type>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="PHPunk" line="67" package="phpunk">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="PHPunk" line="133" package="phpunk">
         <name>is_action</name>
         <full_name>\PHPunk\url_schema::is_action()</full_name>
-        <docblock line="67">
-          <description></description>
+        <docblock line="133">
+          <description>Returns canonical action name, if it exists.</description>
           <long-description></long-description>
+          <tag name="param" line="133" description="&lt;p&gt;Action name&lt;/p&gt;" type="string" variable="$action">
+            <type>string</type>
+          </tag>
+          <tag name="param" line="133" description="&lt;p&gt;OPTIONAL Resource name&lt;/p&gt;" type="string" variable="$resource">
+            <type>string</type>
+          </tag>
+          <tag name="return" line="133" description="Canonical action name, FALSE if no such action exists" type="string">
+            <type>string</type>
+          </tag>
         </docblock>
         <argument line="0" by_reference="false">
           <name>$action</name>
           <default></default>
-          <type/>
+          <type>string</type>
         </argument>
         <argument line="0" by_reference="false">
           <name>$resource</name>
           <default>false</default>
-          <type/>
+          <type>string</type>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="PHPunk" line="75" package="phpunk">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="PHPunk" line="147" package="phpunk">
         <name>add_view</name>
         <full_name>\PHPunk\url_schema::add_view()</full_name>
-        <docblock line="75">
-          <description></description>
+        <docblock line="147">
+          <description>Registers a view name. If resource is omitted, the view is registered as
+a global view.</description>
           <long-description></long-description>
+          <tag name="param" line="147" description="&lt;p&gt;View name&lt;/p&gt;" type="string" variable="$action">
+            <type>string</type>
+          </tag>
+          <tag name="param" line="147" description="&lt;p&gt;OPTIONAL Resource name&lt;/p&gt;" type="string" variable="$resource">
+            <type>string</type>
+          </tag>
         </docblock>
         <argument line="0" by_reference="false">
           <name>$view</name>
@@ -3999,15 +3990,24 @@ have transformed field names/values and contain API hyperlinks.</description>
         <argument line="0" by_reference="false">
           <name>$resource</name>
           <default>false</default>
-          <type/>
+          <type>string</type>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="PHPunk" line="84" package="phpunk">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="PHPunk" line="162" package="phpunk">
         <name>is_view</name>
         <full_name>\PHPunk\url_schema::is_view()</full_name>
-        <docblock line="84">
-          <description></description>
+        <docblock line="162">
+          <description>Returns canonical view name, if it exists.</description>
           <long-description></long-description>
+          <tag name="param" line="162" description="&lt;p&gt;View name&lt;/p&gt;" type="string" variable="$action">
+            <type>string</type>
+          </tag>
+          <tag name="param" line="162" description="&lt;p&gt;OPTIONAL Resource name&lt;/p&gt;" type="string" variable="$resource">
+            <type>string</type>
+          </tag>
+          <tag name="return" line="162" description="Canonical view name, FALSE if no such view exists" type="string">
+            <type>string</type>
+          </tag>
         </docblock>
         <argument line="0" by_reference="false">
           <name>$view</name>
@@ -4017,165 +4017,218 @@ have transformed field names/values and contain API hyperlinks.</description>
         <argument line="0" by_reference="false">
           <name>$resource</name>
           <default>false</default>
-          <type/>
+          <type>string</type>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="PHPunk" line="92" package="phpunk">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="PHPunk" line="175" package="phpunk">
         <name>parse_path</name>
         <full_name>\PHPunk\url_schema::parse_path()</full_name>
-        <docblock line="92">
-          <description></description>
+        <docblock line="175">
+          <description>Parses a URL path into key-value parameters.</description>
           <long-description></long-description>
+          <tag name="param" line="175" description="&lt;p&gt;OPTIONAL Path to parse&lt;/p&gt;" type="string" variable="$path">
+            <type>string</type>
+          </tag>
+          <tag name="return" line="175" description="Key-value parameters" type="array">
+            <type>array</type>
+          </tag>
         </docblock>
         <argument line="0" by_reference="false">
           <name>$path</name>
           <default>''</default>
-          <type/>
+          <type>string</type>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="PHPunk" line="154" package="phpunk">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="PHPunk" line="242" package="phpunk">
         <name>build_path</name>
         <full_name>\PHPunk\url_schema::build_path()</full_name>
-        <docblock line="154">
-          <description></description>
+        <docblock line="242">
+          <description>Builds a URL path, based on given parameters.</description>
           <long-description></long-description>
+          <tag name="param" line="242" description="&lt;p&gt;OPTIONAL Key-value parameters for URL&lt;/p&gt;" type="array" variable="$params">
+            <type>array</type>
+          </tag>
+          <tag name="return" line="242" description="The URL path" type="string">
+            <type>string</type>
+          </tag>
         </docblock>
         <argument line="0" by_reference="false">
           <name>$params</name>
           <default>array()</default>
-          <type/>
+          <type>array</type>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="PHPunk" line="205" package="phpunk">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="PHPunk" line="299" package="phpunk">
         <name>build</name>
         <full_name>\PHPunk\url_schema::build()</full_name>
-        <docblock line="205">
-          <description></description>
+        <docblock line="299">
+          <description>Builds a complete URL, based on given parameters. Includes any base path.</description>
           <long-description></long-description>
+          <tag name="param" line="299" description="&lt;p&gt;Key-value parameters for URL&lt;/p&gt;" type="array" variable="$params">
+            <type>array</type>
+          </tag>
+          <tag name="param" line="299" description="&lt;p&gt;Whether the URL should use HTTPS&lt;/p&gt;" type="boolean" variable="$secure">
+            <type>boolean</type>
+          </tag>
+          <tag name="return" line="299" description="The complete URL" type="string">
+            <type>string</type>
+          </tag>
         </docblock>
         <argument line="0" by_reference="false">
           <name>$params</name>
           <default></default>
-          <type/>
+          <type>array</type>
         </argument>
         <argument line="0" by_reference="false">
           <name>$secure</name>
           <default>false</default>
-          <type/>
+          <type>boolean</type>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="protected" namespace="PHPunk" line="218" package="phpunk">
+      <method final="false" abstract="false" static="false" visibility="protected" namespace="PHPunk" line="319" package="phpunk">
         <name>split_slug</name>
         <full_name>\PHPunk\url_schema::split_slug()</full_name>
-        <docblock line="218">
-          <description></description>
+        <docblock line="319">
+          <description>Splits a URL slug at the first tilde (~). If slug does not contain a
+tilde, the first half will be the full slug and the second half will be
+an empty string.</description>
           <long-description></long-description>
+          <tag name="param" line="319" description="&lt;p&gt;URL slug to be split&lt;/p&gt;" type="string" variable="$slug">
+            <type>string</type>
+          </tag>
+          <tag name="param" line="319" description="&lt;p&gt;Array of two strings&lt;/p&gt;" type="array" variable="">
+            <type>array</type>
+          </tag>
         </docblock>
         <argument line="0" by_reference="false">
           <name>$slug</name>
           <default></default>
-          <type/>
+          <type>string</type>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="protected" namespace="PHPunk" line="226" package="phpunk">
+      <method final="false" abstract="false" static="false" visibility="protected" namespace="PHPunk" line="334" package="phpunk">
         <name>join_slug</name>
         <full_name>\PHPunk\url_schema::join_slug()</full_name>
-        <docblock line="226">
-          <description></description>
+        <docblock line="334">
+          <description>Joins two strings with a tilde (~) into a single URL slug. If second
+argument is empty, result will contain the base string with no tilde.</description>
           <long-description></long-description>
+          <tag name="param" line="334" description="&lt;p&gt;A base string&lt;/p&gt;" type="string" variable="$slug">
+            <type>string</type>
+          </tag>
+          <tag name="param" line="334" description="&lt;p&gt;A suffix to append&lt;/p&gt;" type="string" variable="$suffix">
+            <type>string</type>
+          </tag>
+          <tag name="return" line="334" description="The completed URL slug" type="string">
+            <type>string</type>
+          </tag>
         </docblock>
         <argument line="0" by_reference="false">
           <name>$slug</name>
           <default></default>
-          <type/>
+          <type>string</type>
         </argument>
         <argument line="0" by_reference="false">
           <name>$suffix</name>
           <default></default>
-          <type/>
+          <type>string</type>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="protected" namespace="PHPunk" line="233" package="phpunk">
+      <method final="false" abstract="false" static="false" visibility="protected" namespace="PHPunk" line="347" package="phpunk">
         <name>explode_slug</name>
         <full_name>\PHPunk\url_schema::explode_slug()</full_name>
-        <docblock line="233">
-          <description></description>
+        <docblock line="347">
+          <description>Splits a URL slug at each dot (.). If slug does not contain a dot, the
+original URL slug will be returned.</description>
           <long-description></long-description>
+          <tag name="param" line="347" description="&lt;p&gt;URL slug to be split&lt;/p&gt;" type="string" variable="$slug">
+            <type>string</type>
+          </tag>
+          <tag name="return" line="347" description="Array of strings, or original slug" type="mixed">
+            <type>mixed</type>
+          </tag>
         </docblock>
         <argument line="0" by_reference="false">
           <name>$slug</name>
           <default></default>
-          <type/>
+          <type>string</type>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="protected" namespace="PHPunk" line="240" package="phpunk">
+      <method final="false" abstract="false" static="false" visibility="protected" namespace="PHPunk" line="359" package="phpunk">
         <name>implode_slug</name>
         <full_name>\PHPunk\url_schema::implode_slug()</full_name>
-        <docblock line="240">
-          <description></description>
+        <docblock line="359">
+          <description>Joins an array of strings with dots (.) into a single URL slug.</description>
           <long-description></long-description>
+          <tag name="param" line="359" description="&lt;p&gt;Array of strings to be joined&lt;/p&gt;" type="array" variable="$slug">
+            <type>array</type>
+          </tag>
+          <tag name="return" line="359" description="The completed URL slug" type="string">
+            <type>string</type>
+          </tag>
         </docblock>
         <argument line="0" by_reference="false">
           <name>$slug</name>
           <default></default>
-          <type/>
+          <type>array</type>
         </argument>
       </method>
+      <property final="false" static="false" visibility="public" line="13">
+        <name>$resources</name>
+        <default/>
+        <docblock>
+          <description>Array of registered resources</description>
+          <long-description/>
+          <tag name="var" description="&lt;p&gt;Array of registered resources&lt;/p&gt;" type="array" line="13">
+            <type by_reference="false">array</type>
+          </tag>
+          <tag name="magic" line="13"/>
+          <tag name="property" line="13" description="Array of registered resources" type="array" variable="$resources">
+            <type>array</type>
+          </tag>
+        </docblock>
+      </property>
+      <property final="false" static="false" visibility="public" line="13">
+        <name>$actions</name>
+        <default/>
+        <docblock>
+          <description>Array of registered global actions</description>
+          <long-description/>
+          <tag name="var" description="&lt;p&gt;Array of registered global actions&lt;/p&gt;" type="array" line="13">
+            <type by_reference="false">array</type>
+          </tag>
+          <tag name="magic" line="13"/>
+          <tag name="property" line="13" description="Array of registered global actions" type="array" variable="$actions">
+            <type>array</type>
+          </tag>
+        </docblock>
+      </property>
+      <property final="false" static="false" visibility="public" line="13">
+        <name>$views</name>
+        <default/>
+        <docblock>
+          <description>Array of registered global views</description>
+          <long-description/>
+          <tag name="var" description="&lt;p&gt;Array of registered global views&lt;/p&gt;" type="array" line="13">
+            <type by_reference="false">array</type>
+          </tag>
+          <tag name="magic" line="13"/>
+          <tag name="property" line="13" description="Array of registered global views" type="array" variable="$views">
+            <type>array</type>
+          </tag>
+        </docblock>
+      </property>
     </class>
     <parse_markers>
       <error line="0" code="PPC:ERR-50000">No summary was found for this file</error>
-      <error line="8" code="PPC:ERR-50005">No summary for class \PHPunk\url_schema</error>
-      <error line="17" code="PPC:ERR-50015">Argument $host is missing from the Docblock of __construct</error>
-      <error line="17" code="PPC:ERR-50015">Argument $path is missing from the Docblock of __construct</error>
-      <error line="17" code="PPC:ERR-50008">No summary for method __construct()</error>
-      <error line="22" code="PPC:ERR-50015">Argument $key is missing from the Docblock of __get</error>
-      <error line="22" code="PPC:ERR-50008">No summary for method __get()</error>
-      <error line="31" code="PPC:ERR-50015">Argument $resource is missing from the Docblock of add_resource</error>
-      <error line="31" code="PPC:ERR-50015">Argument $alias is missing from the Docblock of add_resource</error>
-      <error line="31" code="PPC:ERR-50008">No summary for method add_resource()</error>
-      <error line="43" code="PPC:ERR-50015">Argument $resource is missing from the Docblock of is_resource</error>
-      <error line="43" code="PPC:ERR-50008">No summary for method is_resource()</error>
-      <error line="47" code="PPC:ERR-50015">Argument $alias is missing from the Docblock of add_alias</error>
-      <error line="47" code="PPC:ERR-50015">Argument $resource is missing from the Docblock of add_alias</error>
-      <error line="47" code="PPC:ERR-50008">No summary for method add_alias()</error>
-      <error line="54" code="PPC:ERR-50015">Argument $alias is missing from the Docblock of is_alias</error>
-      <error line="54" code="PPC:ERR-50008">No summary for method is_alias()</error>
-      <error line="58" code="PPC:ERR-50015">Argument $action is missing from the Docblock of add_action</error>
-      <error line="58" code="PPC:ERR-50015">Argument $resource is missing from the Docblock of add_action</error>
-      <error line="58" code="PPC:ERR-50008">No summary for method add_action()</error>
-      <error line="67" code="PPC:ERR-50015">Argument $action is missing from the Docblock of is_action</error>
-      <error line="67" code="PPC:ERR-50015">Argument $resource is missing from the Docblock of is_action</error>
-      <error line="67" code="PPC:ERR-50008">No summary for method is_action()</error>
-      <error line="75" code="PPC:ERR-50015">Argument $view is missing from the Docblock of add_view</error>
-      <error line="75" code="PPC:ERR-50015">Argument $resource is missing from the Docblock of add_view</error>
-      <error line="75" code="PPC:ERR-50008">No summary for method add_view()</error>
-      <error line="84" code="PPC:ERR-50015">Argument $view is missing from the Docblock of is_view</error>
-      <error line="84" code="PPC:ERR-50015">Argument $resource is missing from the Docblock of is_view</error>
-      <error line="84" code="PPC:ERR-50008">No summary for method is_view()</error>
-      <error line="92" code="PPC:ERR-50015">Argument $path is missing from the Docblock of parse_path</error>
-      <error line="92" code="PPC:ERR-50008">No summary for method parse_path()</error>
-      <error line="154" code="PPC:ERR-50015">Argument $params is missing from the Docblock of build_path</error>
-      <error line="154" code="PPC:ERR-50008">No summary for method build_path()</error>
-      <error line="205" code="PPC:ERR-50015">Argument $params is missing from the Docblock of build</error>
-      <error line="205" code="PPC:ERR-50015">Argument $secure is missing from the Docblock of build</error>
-      <error line="205" code="PPC:ERR-50008">No summary for method build()</error>
-      <error line="218" code="PPC:ERR-50015">Argument $slug is missing from the Docblock of split_slug</error>
-      <error line="218" code="PPC:ERR-50008">No summary for method split_slug()</error>
-      <error line="226" code="PPC:ERR-50015">Argument $slug is missing from the Docblock of join_slug</error>
-      <error line="226" code="PPC:ERR-50015">Argument $suffix is missing from the Docblock of join_slug</error>
-      <error line="226" code="PPC:ERR-50008">No summary for method join_slug()</error>
-      <error line="233" code="PPC:ERR-50015">Argument $slug is missing from the Docblock of explode_slug</error>
-      <error line="233" code="PPC:ERR-50008">No summary for method explode_slug()</error>
-      <error line="240" code="PPC:ERR-50015">Argument $slug is missing from the Docblock of implode_slug</error>
-      <error line="240" code="PPC:ERR-50008">No summary for method implode_slug()</error>
-      <error line="9" code="PPC:ERR-50007">No summary for property $_http_host</error>
-      <error line="10" code="PPC:ERR-50007">No summary for property $_base_path</error>
-      <error line="12" code="PPC:ERR-50007">No summary for property $_resources</error>
-      <error line="13" code="PPC:ERR-50007">No summary for property $_aliases</error>
-      <error line="14" code="PPC:ERR-50007">No summary for property $_actions</error>
-      <error line="15" code="PPC:ERR-50007">No summary for property $_views</error>
+      <error line="13" code="PPC:ERR-50005">No summary for class \PHPunk\url_schema</error>
+      <error line="48" code="PPC:ERR-50008">No summary for method __construct()</error>
+      <error line="147" code="PPC:ERR-50014">Name of argument $view does not match with the DocBlock's name $action in add_view()</error>
+      <notice line="147" code="PPC:ERR-50013">Parameter $action could not be found in add_view()</notice>
+      <error line="162" code="PPC:ERR-50014">Name of argument $view does not match with the DocBlock's name $action in is_view()</error>
+      <notice line="162" code="PPC:ERR-50013">Parameter $action could not be found in is_view()</notice>
     </parse_markers>
-    <source>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</source>
+    <source>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</source>
   </file>
   <file path="util/mutable.php" generated-path="util.mutable.html" hash="0a975f5156b5c6747de5fc98dd12fe07" package="phpunk\util">
     <docblock line="0">
