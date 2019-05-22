@@ -3637,7 +3637,7 @@ have transformed field names/values and contain API hyperlinks.</description>
     </parse_markers>
     <source>eJyVVk1v2zgQPVu/Yg7GygmcuJe9xNt0u81hF0iLIGhOjmHQ0thiQ1ECSSUNiv73nSFFSf7qhw+GNRzOvHnzZuS/3tVFnczOzxM4h79rkT2JLQLZGv30mFVlXWnUjg5nSaJFiZZcEO7+vePzD/F8niSN7cwPTqrHav0FMzoY2G+EE2th8dGgbdTJs6wyOQXsMJmqRuNewToj9RbGdLtqDKH4RHig2oArEDrjpjJkkBZ2wWdKWEteOkeDBr4lI44/4gRyqyuDILVDo4WCZ2GkWCvk01kyqo18Fg5hvOpyvIWNUBYJZB/lNMz7+IP5O4avzdOslcxg0+jMyUrDapVVmoI1mZt0wc4Y+WjMAS6uh4A6j3ky+p4cVleKLQUv0RVVfjLhFinVE76GLPZFuqyAgWWUUYcgjanSK7aNDLrGaNgHRUAIyQ6Ye0+/BQF5224IUvCsvL/7jx+JFIuXLanCiBKClHyJ7Huze3cKQTJToBhoDH2HC13/KkdPmPeVBhlM2oChNrmBaCApWCd0hqStELstfxzhMeGh3MwgiWMVD7qYvnpAUsnJwH3uncCLJd8dESMoPP3tXWGZAY/G097dWSx/CMff+CkcUcuVJ69FxG7SWnTReZGSr2tsujxrXUaFc3WXitSa4xFnX8yo0cdD+VOWyB65cUNE1Ic0aXzpQU9S/in1s1Ay7yClU587/Rz2Q7j5Qjy2jpfp2dynPlLIn2/eBNLYoUDBekk/VLQjtLtwrzVegcOvbvbFVjr1npgVFfDjCnXHhY94tjeT/zRS5TQF2kueRyFKfGOqcnc6uHuXNDg8YiTh1u9FKuVDFeIZwRmhLemlZI1LVLnfNHZGRTbIeXJaNtoJGRIWhN4oqZ/siSnjnMMp4+fg2Y5667qH/vS8nVJlWGZ7TQ3BJqE1wynwsHgKaB/B22sY+/riBJWiXvkDfz7vbN6pHxA2eY7CwSQEmUK8HxTphyRaoJ+0aPMT10XvdDL2rLYzvIM+JKf9uvIuPQNhqpWvx/fBxoLC04KVnXI+ehNgKKswuCHDmmW0aoyaxJvh2GfwS4FfMYK4pI2t0imkfDHtZd3VdXEdgYfLHnxc69FpT8Tv85zfpwqfhXYDTYGrWgVHmbSyi3F+oDke1OHNNfKbtH1p70pQGCNe4SMtCZnLErUlndG7O5hpn1GTgvIf7m/BJ0N6vdvTGj3Sm289CwtmNrWoNim3ahEWS/ci9O0LPY62dvfIPIXwYZcQ+eJa5ny69D5pVimFHsSvxvaX6Wu515OPorb98uhXAfeEW9Bbhk2If1jC6c3h9R3iW+/DcMdp7eeN/SYhyQ61wbRXyee40g7qCfNMf9aGJXnjsKZSfiUUYbj3Szpw/j0CQuhjMafw6eH2Fmh5BCP9ydOVYwpqzH+Fot2V9MeQrBbckT025HW+Tyu8iyRcgW6U8jR/T/4Hnq3PPQ==</source>
   </file>
-  <file path="cache.php" generated-path="cache.html" hash="ec30d1aef4ff36dc3e43bec92706768c" package="phpunk">
+  <file path="cache.php" generated-path="cache.html" hash="9a138e5026de08d94e1da5938e54496d" package="phpunk">
     <docblock line="0">
       <description></description>
       <long-description></long-description>
@@ -3652,139 +3652,144 @@ have transformed field names/values and contain API hyperlinks.</description>
         <long-description></long-description>
         <tag name="package" line="11" description="phpunk"/>
       </docblock>
-      <property static="false" visibility="protected" namespace="PHPunk" line="12" package="phpunk">
-        <name>$_memcache</name>
-        <full_name>\PHPunk\cache::_memcache</full_name>
-        <default></default>
-        <docblock line="12">
-          <description></description>
-          <long-description></long-description>
-        </docblock>
-      </property>
-      <property static="false" visibility="protected" namespace="PHPunk" line="13" package="phpunk">
-        <name>$_data</name>
-        <full_name>\PHPunk\cache::_data</full_name>
-        <default>array()</default>
-        <docblock line="13">
-          <description></description>
-          <long-description></long-description>
-        </docblock>
-      </property>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="PHPunk" line="15" package="phpunk">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="PHPunk" line="26" package="phpunk">
         <name>__construct</name>
         <full_name>\PHPunk\cache::__construct()</full_name>
-        <docblock line="15">
-          <description></description>
+        <docblock line="26">
+          <description>Memcache is required to preserve cache across multiple requests.</description>
           <long-description></long-description>
+          <tag name="param" line="26" description="&lt;p&gt;OPTIONAL Memcache or Memcached instance&lt;/p&gt;" type="object" variable="$memcache">
+            <type>object</type>
+          </tag>
         </docblock>
         <argument line="0" by_reference="false">
           <name>$memcache</name>
           <default>false</default>
-          <type/>
+          <type>object</type>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="PHPunk" line="19" package="phpunk">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="PHPunk" line="37" package="phpunk">
         <name>has</name>
         <full_name>\PHPunk\cache::has()</full_name>
-        <docblock line="19">
-          <description></description>
-          <long-description></long-description>
+        <docblock line="37">
+          <description>Returns whether or not a cached object exists for the given type and Id.</description>
+          <long-description>If the Id is omitted, returns whether type exists.</long-description>
+          <tag name="param" line="37" description="&lt;p&gt;Name of object type&lt;/p&gt;" type="string" variable="$type">
+            <type>string</type>
+          </tag>
+          <tag name="param" line="37" description="&lt;p&gt;OPTIONAL Unique object Id&lt;/p&gt;" type="mixed" variable="$id">
+            <type>mixed</type>
+          </tag>
+          <tag name="return" line="37" description="TRUE if object or type exists in cache, FALSE otherwise" type="boolean">
+            <type>boolean</type>
+          </tag>
         </docblock>
         <argument line="0" by_reference="false">
           <name>$type</name>
           <default></default>
-          <type/>
+          <type>string</type>
         </argument>
         <argument line="0" by_reference="false">
           <name>$id</name>
           <default>false</default>
-          <type/>
+          <type>mixed</type>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="PHPunk" line="26" package="phpunk">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="PHPunk" line="50" package="phpunk">
         <name>get</name>
         <full_name>\PHPunk\cache::get()</full_name>
-        <docblock line="26">
-          <description></description>
+        <docblock line="50">
+          <description>Returns a cached object for the given type and Id.</description>
           <long-description></long-description>
+          <tag name="param" line="50" description="&lt;p&gt;Name of object type&lt;/p&gt;" type="string" variable="$type">
+            <type>string</type>
+          </tag>
+          <tag name="param" line="50" description="&lt;p&gt;OPTIONAL Unique object Id&lt;/p&gt;" type="mixed" variable="$id">
+            <type>mixed</type>
+          </tag>
+          <tag name="return" line="50" description="The cached object, NULL if not exists" type="mixed">
+            <type>mixed</type>
+          </tag>
         </docblock>
         <argument line="0" by_reference="false">
           <name>$type</name>
           <default></default>
-          <type/>
+          <type>string</type>
         </argument>
         <argument line="0" by_reference="false">
           <name>$id</name>
           <default>false</default>
-          <type/>
+          <type>mixed</type>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="PHPunk" line="33" package="phpunk">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="PHPunk" line="64" package="phpunk">
         <name>put</name>
         <full_name>\PHPunk\cache::put()</full_name>
-        <docblock line="33">
-          <description></description>
+        <docblock line="64">
+          <description>Caches an object with the given type and Id.</description>
           <long-description></long-description>
+          <tag name="param" line="64" description="&lt;p&gt;Name of object type&lt;/p&gt;" type="string" variable="$type">
+            <type>string</type>
+          </tag>
+          <tag name="param" line="64" description="&lt;p&gt;Unique object Id&lt;/p&gt;" type="mixed" variable="$id">
+            <type>mixed</type>
+          </tag>
+          <tag name="param" line="64" description="&lt;p&gt;The object to cache&lt;/p&gt;" type="mixed" variable="$object">
+            <type>mixed</type>
+          </tag>
+          <tag name="return" line="64" description="The cached object" type="mixed">
+            <type>mixed</type>
+          </tag>
         </docblock>
         <argument line="0" by_reference="false">
           <name>$type</name>
           <default></default>
-          <type/>
+          <type>string</type>
         </argument>
         <argument line="0" by_reference="false">
           <name>$id</name>
           <default></default>
-          <type/>
+          <type>mixed</type>
         </argument>
         <argument line="0" by_reference="false">
           <name>$object</name>
           <default></default>
-          <type/>
+          <type>mixed</type>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="PHPunk" line="42" package="phpunk">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="PHPunk" line="79" package="phpunk">
         <name>remove</name>
         <full_name>\PHPunk\cache::remove()</full_name>
-        <docblock line="42">
-          <description></description>
+        <docblock line="79">
+          <description>Removes an object with the given type and Id from the cache. If the Id is
+omitted, removes all objects of the given type.</description>
           <long-description></long-description>
+          <tag name="param" line="79" description="&lt;p&gt;Name of object type&lt;/p&gt;" type="string" variable="$type">
+            <type>string</type>
+          </tag>
+          <tag name="param" line="79" description="&lt;p&gt;OPTIONAL Unique object Id&lt;/p&gt;" type="mixed" variable="$id">
+            <type>mixed</type>
+          </tag>
         </docblock>
         <argument line="0" by_reference="false">
           <name>$type</name>
           <default></default>
-          <type/>
+          <type>string</type>
         </argument>
         <argument line="0" by_reference="false">
           <name>$id</name>
           <default>false</default>
-          <type/>
+          <type>mixed</type>
         </argument>
       </method>
     </class>
     <markers>
-      <todo line="35">timeout?</todo>
+      <todo line="66">timeout?</todo>
     </markers>
     <parse_markers>
       <error line="0" code="PPC:ERR-50000">No summary was found for this file</error>
-      <error line="15" code="PPC:ERR-50015">Argument $memcache is missing from the Docblock of __construct</error>
-      <error line="15" code="PPC:ERR-50008">No summary for method __construct()</error>
-      <error line="19" code="PPC:ERR-50015">Argument $type is missing from the Docblock of has</error>
-      <error line="19" code="PPC:ERR-50015">Argument $id is missing from the Docblock of has</error>
-      <error line="19" code="PPC:ERR-50008">No summary for method has()</error>
-      <error line="26" code="PPC:ERR-50015">Argument $type is missing from the Docblock of get</error>
-      <error line="26" code="PPC:ERR-50015">Argument $id is missing from the Docblock of get</error>
-      <error line="26" code="PPC:ERR-50008">No summary for method get()</error>
-      <error line="33" code="PPC:ERR-50015">Argument $type is missing from the Docblock of put</error>
-      <error line="33" code="PPC:ERR-50015">Argument $id is missing from the Docblock of put</error>
-      <error line="33" code="PPC:ERR-50015">Argument $object is missing from the Docblock of put</error>
-      <error line="33" code="PPC:ERR-50008">No summary for method put()</error>
-      <error line="42" code="PPC:ERR-50015">Argument $type is missing from the Docblock of remove</error>
-      <error line="42" code="PPC:ERR-50015">Argument $id is missing from the Docblock of remove</error>
-      <error line="42" code="PPC:ERR-50008">No summary for method remove()</error>
-      <error line="12" code="PPC:ERR-50007">No summary for property $_memcache</error>
-      <error line="13" code="PPC:ERR-50007">No summary for property $_data</error>
     </parse_markers>
-    <source>eJyVkrtuwkAQRWv8FRPkAqMY9yE8FKVIE0GRDiG0rMd4g7229hEJRfx7xuuYmIeR0mxxZ+bOuZp9npVp6UXDoQdDmJeM79kOgTQr9yRFnidZjpoKCMu3Jaljr2l/YVpwUJigQkl1kZcZ5igNM6KQI3i3mRGhOZT4CEKGOeaFOgBnPMWR8+YZ07oW4NvrlaowyA3G4G+o2enjczlmhsEEmFLsMAgIpVfabUYUiZW82gqbDS+kNspyM/AbFxpJWKYxqNb0fJMKHU43rarf2ne84ZoyPfDrJL6Iz+1EAoMHoTXSwl/nCnPl+tdBQC09hcYqWU9V1I1Qmc2gc3hF9XUAT0B5utB2brQb7TJtm+eyFk4rt76zi8itH1zDzrs4CfNWrQO7tG1seortJ135DrerXB0vnOpz5D+rMUQRfCxeF2BEjoU1s3b0uonoHF4jd6ebtEZuBVL0vb/wf6foihRjhgYvDnFiPzE7TxG7i1p59w9VM0gwd1sDF+3o/QBYakS3</source>
+    <source>eJy9ld9P2zAQx5+bv+KG+tCilr6P8Wsb0yoVilh5Qqhyk0vjkdiZ7RQQ4n/f2U7apBDGJrG3ynf3vbvvx04/HeVJHox2dwPYheOchbdsiUBnhbilo1EQCJahpgDCxfcLOt0PqvTPTPMQFMaoUFCcZ3mKGQrDDJdiD86K1PChechxAFwMM8ykeoCQhQnuOe0wZVr7A3gMOla2Y8fgSyEV6QmDSrAUVkxxtkjRRkdBJ1fSYGgwgu6cRF09TfVP9REzDA6AKcUeev26ylmpDFzTjr8KrqjASMgValQrLOdmoZK0RGZ3pfVdKmqj9/woOVMsA7n4SQ2hW00L04vZeHp+Mtl0kWr9O6LJtWFkaTVwsUjJ6bgQoXUW5vNQUoYqQtPbaB5AzFKNfWtlp2sSroeH81q0u/Gq81Rb9BJNoYSGuwRNgspOIqQBBuUw5fB4z2ktiClMabDkKxRg4QITEYwjv/A4dtFxZG2TGTdk84BMabZwZV6w4RPtxMUSui5+ThcPZFz1t2f13IzfW4I82ph5JTiZXxWMI5/um8NCyhSZgNnl1SnwtaxsTEPO+7UH8O1k8uMUpJ33jus2FAnTva6/4naUBgNq0vvAtUaiVOKw1+3a5d/0+5TSKYdzVfb2VQdW7Ahai68pftOHj0CXoI3nNsA/kPsPCHz+LMHmZAM4v5pMLBN77zyIFruXzo52u7evfd3j7djw0KrtOLkRqe30nwM4bvOerH8ptoXii+1DJERlyB03ybtBeNn7RlYZswgqOelhvAVUC5S8qEMZVF1eoeIiz75Rw0PdBLKR2ofRCGbTr1MwPENZmKM6WJ9E3jvzq+N2dge1kubLyeTqjbwgVjJzIf+H1vjyObXa16+UTdNSV1ueTdn3foQvcPNz/d17aiMXYYoGt17TGtEajdPkkXuWhXj142ZrMLUf3ldS+47gU/Ab0pTEMg==</source>
   </file>
   <file path="url.php" generated-path="url.html" hash="1a18102f14616f0f5e92b51ba871f3df" package="phpunk">
     <docblock line="0">
