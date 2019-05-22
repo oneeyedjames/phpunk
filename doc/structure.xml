@@ -1380,366 +1380,410 @@
     </parse_markers>
     <source>eJydklFv2jAUhZ/jX3FVIRUQFe/b6FbtpZu2FWnbU1uhS3JJXBw7sh06VvHfd+2EkDGQqvHGPT7xd871u/dVUYnpeCxgDB8qTNeYE/Cs1mseTYXQWJJjgWB+O+fpWyFqR/DZGf2drEQlf+NSUTtuzjz89FI9pEYpSr2M6jnRaHZ291tTkfVbcN5KncMgNRnBV0wLqenKEmbhKiBrjYWgnXYxsAsxbusS9bGtFWO4VKFzgJVcNJosK0Ulae/gwDf5Jyu8iCTk+SugSEKKJADJXBtLILUnq1HBBtnLh4I6FUll5QY9wWARIvyfs03RN3/koJ44Dmh6bsOa5RMDwrP0BfiCIJcb0rE5QJ11XbC9ub9Ci+Xr2z/heVX3PV8pf1EGgww9wt38x6e7bzdfAK3FLbDBW9yQdfETbRazAswyGTbDBQXfvpx6qWQKq1rHtcGC69WMVad+GKNMOrpJe+EM7h9HYZvJwBfSXV3HjfB40GzmMN/HmnXf6KnKYHYTkIfxsyOWdie2WmLOfCX5wmRnmXNi2jVtGyzHm0sL6E2SFPnlXQa+yzeH/y1UM0os+dpqaPFeLhbBf7ELyLvTbN3Lx8ix4u6PX/0Z5KfeMRo2kO399wGmQQX+za6hX/MkqnvwvrrfUjwQGj2ye9O0PeIDj7HsnfgDP+uDIA==</source>
   </file>
-  <file path="database/schema.php" generated-path="database.schema.html" hash="8fe8d3cdab39c650187210dee7b1cabb" package="phpunk\database">
+  <file path="database/schema.php" generated-path="database.schema.html" hash="e4c2ac1efbc3ccf9631e54d200931714" package="phpunk\database">
     <docblock line="0">
       <description></description>
       <long-description></long-description>
       <tag name="package" line="0" description="phpunk\database"/>
     </docblock>
-    <class final="false" abstract="false" namespace="PHPunk\Database" line="8" package="phpunk\database">
+    <class final="false" abstract="false" namespace="PHPunk\Database" line="11" package="phpunk\database">
       <extends/>
       <name>schema</name>
       <full_name>\PHPunk\Database\schema</full_name>
-      <docblock line="8">
+      <docblock line="11">
         <description></description>
         <long-description></long-description>
-        <tag name="package" line="8" description="phpunk\database"/>
+        <tag name="package" line="11" description="phpunk\database"/>
       </docblock>
-      <property static="false" visibility="private" namespace="PHPunk\Database" line="9" package="phpunk\database">
-        <name>$_mysql</name>
-        <full_name>\PHPunk\Database\schema::_mysql</full_name>
-        <default>null</default>
-        <docblock line="9">
-          <description></description>
-          <long-description></long-description>
-        </docblock>
-      </property>
-      <property static="false" visibility="private" namespace="PHPunk\Database" line="11" package="phpunk\database">
-        <name>$_tables</name>
-        <full_name>\PHPunk\Database\schema::_tables</full_name>
-        <default>array()</default>
-        <docblock line="11">
-          <description></description>
-          <long-description></long-description>
-        </docblock>
-      </property>
-      <property static="false" visibility="private" namespace="PHPunk\Database" line="13" package="phpunk\database">
-        <name>$_rels</name>
-        <full_name>\PHPunk\Database\schema::_rels</full_name>
-        <default>array()</default>
-        <docblock line="13">
-          <description></description>
-          <long-description></long-description>
-        </docblock>
-      </property>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="PHPunk\Database" line="15" package="phpunk\database">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="PHPunk\Database" line="30" package="phpunk\database">
         <name>__construct</name>
         <full_name>\PHPunk\Database\schema::__construct()</full_name>
-        <docblock line="15">
+        <docblock line="30">
           <description></description>
           <long-description></long-description>
+          <tag name="param" line="30" description="&lt;p&gt;A previously-established MySQLi instance&lt;/p&gt;" type="object" variable="$mysql">
+            <type>object</type>
+          </tag>
         </docblock>
         <argument line="0" by_reference="false">
           <name>$mysql</name>
           <default></default>
-          <type/>
+          <type>object</type>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="PHPunk\Database" line="19" package="phpunk\database">
-        <name>__get</name>
-        <full_name>\PHPunk\Database\schema::__get()</full_name>
-        <docblock line="19">
-          <description></description>
-          <long-description></long-description>
-        </docblock>
-        <argument line="0" by_reference="false">
-          <name>$key</name>
-          <default></default>
-          <type/>
-        </argument>
-      </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="PHPunk\Database" line="28" package="phpunk\database">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="PHPunk\Database" line="53" package="phpunk\database">
         <name>query</name>
         <full_name>\PHPunk\Database\schema::query()</full_name>
-        <docblock line="28">
-          <description></description>
+        <docblock line="53">
+          <description>Executes a parameterized SELECT query.</description>
           <long-description></long-description>
+          <tag name="param" line="53" description="&lt;p&gt;A standard SQL query string&lt;/p&gt;" type="string" variable="$sql">
+            <type>string</type>
+          </tag>
+          <tag name="param" line="53" description="&lt;p&gt;OPTIONAL Index-based query parameters&lt;/p&gt;" type="array" variable="$params">
+            <type>array</type>
+          </tag>
+          <tag name="param" line="53" description="&lt;p&gt;OPTIONAL Table name to be passed on to result&lt;/p&gt;" type="string" variable="$table_name">
+            <type>string</type>
+          </tag>
+          <tag name="return" line="53" description="Database result object, FALSE on failure" type="object">
+            <type>object</type>
+          </tag>
         </docblock>
         <argument line="0" by_reference="false">
           <name>$sql</name>
           <default></default>
-          <type/>
+          <type>string</type>
         </argument>
         <argument line="0" by_reference="false">
           <name>$params</name>
           <default>array()</default>
-          <type/>
+          <type>array</type>
         </argument>
         <argument line="0" by_reference="false">
           <name>$table_name</name>
           <default>false</default>
-          <type/>
+          <type>string</type>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="PHPunk\Database" line="81" package="phpunk\database">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="PHPunk\Database" line="112" package="phpunk\database">
         <name>execute</name>
         <full_name>\PHPunk\Database\schema::execute()</full_name>
-        <docblock line="81">
-          <description></description>
+        <docblock line="112">
+          <description>Executes a parameterized INSERT, UPDATE, or DELETE query.</description>
           <long-description></long-description>
+          <tag name="param" line="112" description="&lt;p&gt;A standard SQL query string&lt;/p&gt;" type="string" variable="$sql">
+            <type>string</type>
+          </tag>
+          <tag name="param" line="112" description="&lt;p&gt;OPTIONAL Index-based query parameters&lt;/p&gt;" type="array" variable="$params">
+            <type>array</type>
+          </tag>
+          <tag name="return" line="112" description="TRUE on sucess, FALSE on failure" type="boolean">
+            <type>boolean</type>
+          </tag>
         </docblock>
         <argument line="0" by_reference="false">
           <name>$sql</name>
           <default></default>
-          <type/>
+          <type>string</type>
         </argument>
         <argument line="0" by_reference="false">
           <name>$params</name>
           <default>array()</default>
-          <type/>
+          <type>array</type>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="PHPunk\Database" line="121" package="phpunk\database">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="PHPunk\Database" line="157" package="phpunk\database">
         <name>table_exists</name>
         <full_name>\PHPunk\Database\schema::table_exists()</full_name>
-        <docblock line="121">
-          <description></description>
+        <docblock line="157">
+          <description>Returns whether a table with the given name has been defined in the database schema.</description>
           <long-description></long-description>
+          <tag name="param" line="157" description="&lt;p&gt;The name of the database table&lt;/p&gt;" type="string" variable="$name">
+            <type>string</type>
+          </tag>
+          <tag name="return" line="157" description="TRUE if the table name is defined, or FALSE otherwise" type="boolean">
+            <type>boolean</type>
+          </tag>
         </docblock>
         <argument line="0" by_reference="false">
           <name>$name</name>
           <default></default>
-          <type/>
+          <type>string</type>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="PHPunk\Database" line="125" package="phpunk\database">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="PHPunk\Database" line="166" package="phpunk\database">
         <name>get_table</name>
         <full_name>\PHPunk\Database\schema::get_table()</full_name>
-        <docblock line="125">
-          <description></description>
+        <docblock line="166">
+          <description>Returns the database table object with the given name.</description>
           <long-description></long-description>
+          <tag name="param" line="166" description="&lt;p&gt;The name of the database table&lt;/p&gt;" type="string" variable="$name">
+            <type>string</type>
+          </tag>
+          <tag name="return" line="166" description="Table object if the table name is defined, or FALSE otherwise" type="object">
+            <type>object</type>
+          </tag>
         </docblock>
         <argument line="0" by_reference="false">
           <name>$name</name>
           <default></default>
-          <type/>
+          <type>string</type>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="PHPunk\Database" line="129" package="phpunk\database">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="PHPunk\Database" line="177" package="phpunk\database">
         <name>add_table</name>
         <full_name>\PHPunk\Database\schema::add_table()</full_name>
-        <docblock line="129">
-          <description></description>
+        <docblock line="177">
+          <description>Defines a database table name in schema. If the table name already exists
+in the schema, this method will merely return the defined table object.</description>
           <long-description></long-description>
+          <tag name="param" line="177" description="&lt;p&gt;Table name&lt;/p&gt;" type="string" variable="$name">
+            <type>string</type>
+          </tag>
+          <tag name="param" line="177" description="&lt;p&gt;OPTIONAL Primary key field, defaults to 'id'&lt;/p&gt;" type="string" variable="$pkey">
+            <type>string</type>
+          </tag>
+          <tag name="return" line="177" description="Newly-defined table object" type="object">
+            <type>object</type>
+          </tag>
         </docblock>
         <argument line="0" by_reference="false">
           <name>$name</name>
           <default></default>
-          <type/>
+          <type>string</type>
         </argument>
         <argument line="0" by_reference="false">
           <name>$pkey</name>
           <default>'id'</default>
-          <type/>
+          <type>string</type>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="PHPunk\Database" line="139" package="phpunk\database">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="PHPunk\Database" line="191" package="phpunk\database">
         <name>remove_table</name>
         <full_name>\PHPunk\Database\schema::remove_table()</full_name>
-        <docblock line="139">
-          <description></description>
+        <docblock line="191">
+          <description>Removes a database table definition from the schema.</description>
           <long-description></long-description>
+          <tag name="param" line="191" description="&lt;p&gt;Table name&lt;/p&gt;" type="string" variable="$name">
+            <type>string</type>
+          </tag>
         </docblock>
         <argument line="0" by_reference="false">
           <name>$name</name>
           <default></default>
-          <type/>
+          <type>string</type>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="PHPunk\Database" line="143" package="phpunk\database">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="PHPunk\Database" line="198" package="phpunk\database">
         <name>clear_tables</name>
         <full_name>\PHPunk\Database\schema::clear_tables()</full_name>
-        <docblock line="143">
-          <description></description>
+        <docblock line="198">
+          <description>Removes all database table definitions from schema.</description>
           <long-description></long-description>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="PHPunk\Database" line="147" package="phpunk\database">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="PHPunk\Database" line="208" package="phpunk\database">
         <name>relation_exists</name>
         <full_name>\PHPunk\Database\schema::relation_exists()</full_name>
-        <docblock line="147">
-          <description></description>
+        <docblock line="208">
+          <description>Returns whether a foreign-key relationship with the given name has been
+defined in the database schema.</description>
           <long-description></long-description>
+          <tag name="param" line="208" description="&lt;p&gt;The name of the relationship&lt;/p&gt;" type="string" variable="$name">
+            <type>string</type>
+          </tag>
+          <tag name="return" line="208" description="TRUE if the relationship is defined, FALSE otherwise" type="boolean">
+            <type>boolean</type>
+          </tag>
         </docblock>
         <argument line="0" by_reference="false">
           <name>$name</name>
           <default></default>
-          <type/>
+          <type>string</type>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="PHPunk\Database" line="151" package="phpunk\database">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="PHPunk\Database" line="217" package="phpunk\database">
         <name>get_relation</name>
         <full_name>\PHPunk\Database\schema::get_relation()</full_name>
-        <docblock line="151">
-          <description></description>
+        <docblock line="217">
+          <description>Returns the foreign-key relationship object with the given name.</description>
           <long-description></long-description>
+          <tag name="param" line="217" description="&lt;p&gt;The name of the relationship&lt;/p&gt;" type="string" variable="$name">
+            <type>string</type>
+          </tag>
+          <tag name="return" line="217" description="Relation object if the relationship is defined, FALSE otherwise" type="object">
+            <type>object</type>
+          </tag>
         </docblock>
         <argument line="0" by_reference="false">
           <name>$name</name>
           <default></default>
-          <type/>
+          <type>string</type>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="PHPunk\Database" line="155" package="phpunk\database">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="PHPunk\Database" line="230" package="phpunk\database">
         <name>add_relation</name>
         <full_name>\PHPunk\Database\schema::add_relation()</full_name>
-        <docblock line="155">
-          <description></description>
+        <docblock line="230">
+          <description>Defines a relationship in the schema. If the relationship already exists
+in the schema, this method will merely return the defined relation object.</description>
           <long-description></long-description>
+          <tag name="param" line="230" description="&lt;p&gt;Relationship name&lt;/p&gt;" type="string" variable="$rel_name">
+            <type>string</type>
+          </tag>
+          <tag name="param" line="230" description="&lt;p&gt;Name of table containing primary key&lt;/p&gt;" type="string" variable="$ptable_name">
+            <type>string</type>
+          </tag>
+          <tag name="param" line="230" description="&lt;p&gt;Name of table containing foreign key&lt;/p&gt;" type="string" variable="$ftable_name">
+            <type>string</type>
+          </tag>
+          <tag name="param" line="230" description="&lt;p&gt;Name of foreign key field&lt;/p&gt;" type="string" variable="$fkey">
+            <type>string</type>
+          </tag>
+          <tag name="return" line="230" description="Newly-defined relation object" type="object">
+            <type>object</type>
+          </tag>
         </docblock>
         <argument line="0" by_reference="false">
           <name>$rel_name</name>
           <default></default>
-          <type/>
+          <type>string</type>
         </argument>
         <argument line="0" by_reference="false">
           <name>$ptable_name</name>
           <default></default>
-          <type/>
+          <type>string</type>
         </argument>
         <argument line="0" by_reference="false">
           <name>$ftable_name</name>
           <default></default>
-          <type/>
+          <type>string</type>
         </argument>
         <argument line="0" by_reference="false">
           <name>$fkey</name>
           <default></default>
-          <type/>
+          <type>string</type>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="PHPunk\Database" line="171" package="phpunk\database">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="PHPunk\Database" line="250" package="phpunk\database">
         <name>remove_relation</name>
         <full_name>\PHPunk\Database\schema::remove_relation()</full_name>
-        <docblock line="171">
-          <description></description>
+        <docblock line="250">
+          <description>Removes a relationship definition from the schema.</description>
           <long-description></long-description>
+          <tag name="param" line="250" description="&lt;p&gt;Relationship name&lt;/p&gt;" type="string" variable="$name">
+            <type>string</type>
+          </tag>
         </docblock>
         <argument line="0" by_reference="false">
           <name>$name</name>
           <default></default>
-          <type/>
+          <type>string</type>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="PHPunk\Database" line="183" package="phpunk\database">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="PHPunk\Database" line="265" package="phpunk\database">
         <name>clear_relations</name>
         <full_name>\PHPunk\Database\schema::clear_relations()</full_name>
-        <docblock line="183">
-          <description></description>
+        <docblock line="265">
+          <description>Removes all database relationship definitions from schema.</description>
           <long-description></long-description>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="PHPunk\Database" line="190" package="phpunk\database">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="PHPunk\Database" line="282" package="phpunk\database">
         <name>get_record</name>
         <full_name>\PHPunk\Database\schema::get_record()</full_name>
-        <docblock line="190">
-          <description></description>
+        <docblock line="282">
+          <description>Return database record by unique identifier. If the relationship argument
+is used, the identifier will be interpreted as the foreign record's
+primary key. Otherwise, the identifier will be interpreted as the record's
+own primary key.</description>
           <long-description></long-description>
+          <tag name="param" line="282" description="&lt;p&gt;Table name&lt;/p&gt;" type="string" variable="$table_name">
+            <type>string</type>
+          </tag>
+          <tag name="param" line="282" description="&lt;p&gt;Unique identifier for database record&lt;/p&gt;" type="mixed" variable="$record_id">
+            <type>mixed</type>
+          </tag>
+          <tag name="param" line="282" description="&lt;p&gt;OPTIONAL Relationship name&lt;/p&gt;" type="string" variable="$rel_name">
+            <type>string</type>
+          </tag>
+          <tag name="return" line="282" description="Record identified by parameter, NULL on failure" type="object">
+            <type>object</type>
+          </tag>
         </docblock>
         <argument line="0" by_reference="false">
           <name>$table_name</name>
           <default></default>
-          <type/>
+          <type>string</type>
         </argument>
         <argument line="0" by_reference="false">
           <name>$record_id</name>
           <default></default>
-          <type/>
+          <type>mixed</type>
         </argument>
         <argument line="0" by_reference="false">
           <name>$rel_name</name>
           <default>false</default>
-          <type/>
+          <type>string</type>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="PHPunk\Database" line="203" package="phpunk\database">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="PHPunk\Database" line="301" package="phpunk\database">
         <name>put_record</name>
         <full_name>\PHPunk\Database\schema::put_record()</full_name>
-        <docblock line="203">
-          <description></description>
+        <docblock line="301">
+          <description>Inserts or updates a database record and returns the record's primary key.</description>
           <long-description></long-description>
+          <tag name="param" line="301" description="&lt;p&gt;Table name&lt;/p&gt;" type="string" variable="$table_name">
+            <type>string</type>
+          </tag>
+          <tag name="param" line="301" description="&lt;p&gt;Key-value data for database record&lt;/p&gt;" type="mixed" variable="$record">
+            <type>mixed</type>
+          </tag>
+          <tag name="return" line="301" description="Record's primary key" type="mixed">
+            <type>mixed</type>
+          </tag>
         </docblock>
         <argument line="0" by_reference="false">
           <name>$table_name</name>
           <default></default>
-          <type/>
+          <type>string</type>
         </argument>
         <argument line="0" by_reference="false">
           <name>$record</name>
           <default></default>
-          <type/>
+          <type>mixed</type>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="PHPunk\Database" line="226" package="phpunk\database">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="PHPunk\Database" line="330" package="phpunk\database">
         <name>remove_record</name>
         <full_name>\PHPunk\Database\schema::remove_record()</full_name>
-        <docblock line="226">
-          <description></description>
+        <docblock line="330">
+          <description>Deletes a database record by primary key.</description>
           <long-description></long-description>
+          <tag name="param" line="330" description="&lt;p&gt;Table name&lt;/p&gt;" type="string" variable="$table_name">
+            <type>string</type>
+          </tag>
+          <tag name="param" line="330" description="&lt;p&gt;Record's primary key&lt;/p&gt;" type="mixed" variable="$record_id">
+            <type>mixed</type>
+          </tag>
+          <tag name="return" line="330" description="TRUE on success, False on failure" type="boolean">
+            <type>boolean</type>
+          </tag>
         </docblock>
         <argument line="0" by_reference="false">
           <name>$table_name</name>
           <default></default>
-          <type/>
+          <type>string</type>
         </argument>
         <argument line="0" by_reference="false">
           <name>$record_id</name>
           <default></default>
-          <type/>
+          <type>mixed</type>
         </argument>
       </method>
+      <property final="false" static="false" visibility="public" line="11">
+        <name>$insert_id</name>
+        <default/>
+        <docblock>
+          <description>Most recent auto-generated unique ID from MySQL</description>
+          <long-description/>
+          <tag name="var" description="&lt;p&gt;Most recent auto-generated unique ID from MySQL&lt;/p&gt;" type="mixed" line="11">
+            <type by_reference="false">mixed</type>
+          </tag>
+          <tag name="magic" line="11"/>
+          <tag name="property" line="11" description="Most recent auto-generated unique ID from MySQL" type="mixed" variable="$insert_id">
+            <type>mixed</type>
+          </tag>
+        </docblock>
+      </property>
     </class>
     <parse_markers>
       <error line="0" code="PPC:ERR-50000">No summary was found for this file</error>
-      <error line="8" code="PPC:ERR-50005">No summary for class \PHPunk\Database\schema</error>
-      <error line="15" code="PPC:ERR-50015">Argument $mysql is missing from the Docblock of __construct</error>
-      <error line="15" code="PPC:ERR-50008">No summary for method __construct()</error>
-      <error line="19" code="PPC:ERR-50015">Argument $key is missing from the Docblock of __get</error>
-      <error line="19" code="PPC:ERR-50008">No summary for method __get()</error>
-      <error line="28" code="PPC:ERR-50015">Argument $sql is missing from the Docblock of query</error>
-      <error line="28" code="PPC:ERR-50015">Argument $params is missing from the Docblock of query</error>
-      <error line="28" code="PPC:ERR-50015">Argument $table_name is missing from the Docblock of query</error>
-      <error line="28" code="PPC:ERR-50008">No summary for method query()</error>
-      <error line="81" code="PPC:ERR-50015">Argument $sql is missing from the Docblock of execute</error>
-      <error line="81" code="PPC:ERR-50015">Argument $params is missing from the Docblock of execute</error>
-      <error line="81" code="PPC:ERR-50008">No summary for method execute()</error>
-      <error line="121" code="PPC:ERR-50015">Argument $name is missing from the Docblock of table_exists</error>
-      <error line="121" code="PPC:ERR-50008">No summary for method table_exists()</error>
-      <error line="125" code="PPC:ERR-50015">Argument $name is missing from the Docblock of get_table</error>
-      <error line="125" code="PPC:ERR-50008">No summary for method get_table()</error>
-      <error line="129" code="PPC:ERR-50015">Argument $name is missing from the Docblock of add_table</error>
-      <error line="129" code="PPC:ERR-50015">Argument $pkey is missing from the Docblock of add_table</error>
-      <error line="129" code="PPC:ERR-50008">No summary for method add_table()</error>
-      <error line="139" code="PPC:ERR-50015">Argument $name is missing from the Docblock of remove_table</error>
-      <error line="139" code="PPC:ERR-50008">No summary for method remove_table()</error>
-      <error line="143" code="PPC:ERR-50008">No summary for method clear_tables()</error>
-      <error line="147" code="PPC:ERR-50015">Argument $name is missing from the Docblock of relation_exists</error>
-      <error line="147" code="PPC:ERR-50008">No summary for method relation_exists()</error>
-      <error line="151" code="PPC:ERR-50015">Argument $name is missing from the Docblock of get_relation</error>
-      <error line="151" code="PPC:ERR-50008">No summary for method get_relation()</error>
-      <error line="155" code="PPC:ERR-50015">Argument $rel_name is missing from the Docblock of add_relation</error>
-      <error line="155" code="PPC:ERR-50015">Argument $ptable_name is missing from the Docblock of add_relation</error>
-      <error line="155" code="PPC:ERR-50015">Argument $ftable_name is missing from the Docblock of add_relation</error>
-      <error line="155" code="PPC:ERR-50015">Argument $fkey is missing from the Docblock of add_relation</error>
-      <error line="155" code="PPC:ERR-50008">No summary for method add_relation()</error>
-      <error line="171" code="PPC:ERR-50015">Argument $name is missing from the Docblock of remove_relation</error>
-      <error line="171" code="PPC:ERR-50008">No summary for method remove_relation()</error>
-      <error line="183" code="PPC:ERR-50008">No summary for method clear_relations()</error>
-      <error line="190" code="PPC:ERR-50015">Argument $table_name is missing from the Docblock of get_record</error>
-      <error line="190" code="PPC:ERR-50015">Argument $record_id is missing from the Docblock of get_record</error>
-      <error line="190" code="PPC:ERR-50015">Argument $rel_name is missing from the Docblock of get_record</error>
-      <error line="190" code="PPC:ERR-50008">No summary for method get_record()</error>
-      <error line="203" code="PPC:ERR-50015">Argument $table_name is missing from the Docblock of put_record</error>
-      <error line="203" code="PPC:ERR-50015">Argument $record is missing from the Docblock of put_record</error>
-      <error line="203" code="PPC:ERR-50008">No summary for method put_record()</error>
-      <error line="226" code="PPC:ERR-50015">Argument $table_name is missing from the Docblock of remove_record</error>
-      <error line="226" code="PPC:ERR-50015">Argument $record_id is missing from the Docblock of remove_record</error>
-      <error line="226" code="PPC:ERR-50008">No summary for method remove_record()</error>
-      <error line="9" code="PPC:ERR-50007">No summary for property $_mysql</error>
-      <error line="11" code="PPC:ERR-50007">No summary for property $_tables</error>
-      <error line="13" code="PPC:ERR-50007">No summary for property $_rels</error>
+      <error line="11" code="PPC:ERR-50005">No summary for class \PHPunk\Database\schema</error>
+      <error line="30" code="PPC:ERR-50008">No summary for method __construct()</error>
     </parse_markers>
-    <source>eJztWF9v2zYQf7Y+BQsYkZTEa/saN06LNdsKDGmRrOhDZgi0RNlaZMklqaTBkO++I4+USUvynGJ760ti8e5+9/901JuLzWoTvDw+Dsgxebuh6R1dMgJnTXX3Z0YlXVDBgPYyCCq6ZgI4GPn02ydFfm/I0yBISyoEEemKrSn5OxhteHFPJSPjZP0ovpbknFRNWQKjQwHhkgkgUc7pYxT7VM7KXVqzKIuU5E2VyqKuSJKkdSUkb1IZjbWaWKkejeWqEJNZqxlp02D01AuyZCB+xx5RWDwUMl0R52SUgoskLCrBuEyKLDxThyPOZMMr4imbzFquqWLKWE6bUvYJgFYMAGpS7E/9Fn5tGH+MxgB/SsYbyunaiQscaZREJQeOc1oKhnYXOXgh5FqqEPhWbjgDIKZBY+OlYi9EIlJaUh4ZRXGsTd9RmwgwkEXKQhW9hPKlUKa81mlCqLRuKrmFQR2jcbLjQBgamVFec7C3AMorcKqC/z7ElADxDVDUj5MTi9hC3gL5hLyek/MjGyY4mht0616xRVRU45+D8mpOfjqHbIdTpEAVMiOblzU9TDpzpQd4hOF5QgOVjhcQ+zJpoIISHVsMEf7VmTwl4aKoMkQKVfITL08jyYvlEsQZ5zVHmclMP5ySy+TzzeV18uXd9dWHq191xRnlbaUA7zeWNpJFMTmCMHImoHxV/SBVJRvPom1KOUtrnnm9qs9zSF+m0mlS8LAqSgaKkF+BItRkljNouQQGSJ1G1hMLeztXs4M9EHy24l7d2xLaAnLGInuqvdt64ncCNld4c/n75c9/kF8+fr56n1x//HITxWHroUXoN5vXD9G2EKzTUGf3tLRSkHNrTddIpwjMiEB3dZhtGMBfDb3rt5IlqsqMrTrXSVkvsbcR/fuqwvClZS2Mna6mHUw/qsPYGtq4qWfVwFi2dTgw9sygb7NqoH5MvR9T7/D6NtWh+0q1sfAKCW2LOjOwnZBG+7OU9/VV4OwGqOx/6LUtcl+34Uhh3wohRTTWo0VrNsKFEGpHMnpxbbvVbGqs9SI6600H7m0v0gAQzTIXSM0C2JeIKtYs3C46L/bZaLqml6hmtUjUchppZEzqhZ7BC15kS9ajHpnONFMPtRP8Z/jL2bq+Z93YNdWzc5CWjHLDGvmrcXf1HjCmpOrHoaWhdvYDCsPC7qsNB2pPZWyR4Fdic7B9Q6rXpv/UrvW6aoy2jp8WzX1NRAZYj9qdPDgq52p10vURGd19Arkr4KxSZbvtDDrW+mTdsdsPkiezwcDAz3Y5O4wXmb2UWB585cCTGam9Je9nu43q/trvKw+zgpVuLN1qwwj6TeJXY7voDmcRBGBL0E/z2I9pv2kO6nCqNWruoeb/gjp4F8SWtvy7Xd29Mqv9glF9n/U7nwpyhJtkjKMRDerg7+1iXMi9/sJDuP9iCQ1dS02wuq8Cr49waptLvLFQsJKlMoFDr56C7r4W+Ts42BS7Cdu9EfRcs/1lO/Zu8e0WX3Ahdwc+fuvojdym2Ru574uRWdXqxV8sbe8MdottLy5rJld15sw4vEiFsn6n4hWaberC2jKZGUpkKGc676gluae8BRlIAA6bMX4T0Z6Y65BNpnpbwhxp74jab2Q3xvvJN19XTPLNPdBuyoG7ee4INpuMSjYk6CwHvfcOf0kb8OLizFaS9w3o0AtPOwr2NdV/0kEZdJCJxXMbxx/uQ7Eacvop+AcqgCuP</source>
+    <source>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</source>
   </file>
   <file path="token.php" generated-path="token.html" hash="5261766ab3b7d89c1b832d24e9a07047" package="phpunk">
     <docblock line="0">
@@ -3434,30 +3478,31 @@ Supported options for **PASSWORD_BCRYPT**:
     </function>
     <source>eJylVttu20YQfZa+YhqoIaUqvgSFH5IKiWzLqVHHNiQ7aYEAxIpcigtTXGZ3KUUt8u+d2eWKusV9KPxgkTu3M3PmLH97V2Zl+7jXa0MPzln8tGQq0a9iOS+ZEVORC7OCtCpiI2ShgRUJxPjDsMJodCGv9yW6sRkHjFQVT1+c75dYrUoj0eC43RYphD/5KBH/JrTRYaAwmpxH05XhOuh24Z92iwppYcwPvOCK4XvMCExNhVFMrSDnxcxkoI0SxQxkCi7JTLEyEzG4gGADgsmYQVcOuhKGTXMOqVQ7DpXmfTyPM2AalhkvYOYSU3jNcqP78MRXGtBTFMIIlou/GYGABY+NVPrIlvugxGzGlQauFJmmUEhKZUqfiuX5CjSPKyyoLrOo5lOufEaqDbFOqcyqSGxcGxvbq9gc0xuOKaBT9+Ah474d2AeTrcPWzbHwdSarPKGgiptKFTzBOK4/rvD37r13GtsnbLp/gbM2DJHbgBTla8W1wTB18bsjOACzyXbcbnkOwObswxqTZUCLuLJHFVnyQus8qt1KzatErpmDXq0ayDOG6zRv0Z7nmh/MNLd4olhxpF8kFkEXXr6EhKcCuxcGHy/Gf90/RJejT9HjeHh7efdxO/+uu0/ah31PLAQ9jeNOZKkTBrcS2IKJ3DL2YnI/vv2AU6in6KgR9GEUPU5G42g0Ht+NXZhmkFHJsFA0WqeOMxWedAn39/b3dnsN5n44mXy+G19G57Y2hEpEd8f7p32AU4yx7305uho+3pD7IW9/2oedgFT3YWEomdZLqZIoYzrbUYYL21miaMGX4C2BLHGdiaiWvJL0oeCvlmxlz+xBPpNKmGxeL21GDc1zudw61LVolKVUyPQ31hb/eruIej14BY+a282Y2rk3Ufa9HOgtJ8eI85u7z1fXk98bZzCkHoTTmlH9R1iuQI0SeQ6lkkkVcwsUaY6C7ZYw7ILX7ZxvdoSCvOi8XnVegEh4YUQquDqyDVBcV7lxcVmO3dLEMwZnJ8gaFJ7Y4JY7MejTeK+GN5MRdhZS5ChueaNTE98x3EF3WZDeHmhA01FSWNsQxDtnRWXVA9EtsEpCh8d0hCrtxNkPkvD4yR/BdQpyLgxm7qOTV0HmUSGcWmK5U1WbOpbapV6iamXI2kK6S4M3Y8ALgsx2pRTL2cuKrGfUxwXLK06qeHqyzm7td+W81tfOmsA0DLRUgV5DOyj/VB0MG+I3pPH3sgPj+7RFqmc7uZmOKYWL06kn+dxV4QmKc/eBfkyUzRtga8nDTuNsIfbXyWHgqgmdDrT4N0O0DP05iuGfD+No8sf1vVNCqylCa442RIPar9WxwxxAfURPXXgHukQ8Jg2Dn09eJ6Sa7uANBKcnwVvraMk0gIBWKIAjZ4L/A/tEkqt4mbOYh67S4BeMEwyCbp/cW/VL0u0A38GUaX72a8SLWCY83LoJT8+6VqdRqBtNd8u92SELy8v5f2jogiuRrnZU9BO9FP4riWY4E4uaF7iKJs7qZXCv18v2f2ns7W2eoUvnlA5Xa7XDie4W76ZS5hy/kDzxHsaPI/rS2qSw/T5tMGwSEc3UUuhneOgatdVnCuXY88NROJPBwP2qZ/IveSu9sA==</source>
   </file>
-  <file path="component/renderer.php" generated-path="component.renderer.html" hash="310775264efaf77375f55c025490aa8b" package="phpunk\component">
+  <file path="component/renderer.php" generated-path="component.renderer.html" hash="827b0f5a8d848544e3baad7ddde02a55" package="phpunk\component">
     <docblock line="0">
       <description></description>
       <long-description></long-description>
       <tag name="package" line="0" description="phpunk\component"/>
     </docblock>
+    <namespace-alias name="object">\PHPunk\Util\object</namespace-alias>
     <namespace-alias name="result">\PHPunk\Database\result</namespace-alias>
     <namespace-alias name="record">\PHPunk\Database\record</namespace-alias>
-    <class final="false" abstract="false" namespace="PHPunk\Component" line="14" package="phpunk\component">
+    <class final="false" abstract="false" namespace="PHPunk\Component" line="15" package="phpunk\component">
       <extends/>
       <name>renderer</name>
       <full_name>\PHPunk\Component\renderer</full_name>
-      <docblock line="14">
+      <docblock line="15">
         <description></description>
         <long-description></long-description>
-        <tag name="package" line="14" description="phpunk\component"/>
+        <tag name="package" line="15" description="phpunk\component"/>
       </docblock>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="PHPunk\Component" line="23" package="phpunk\component">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="PHPunk\Component" line="24" package="phpunk\component">
         <name>__construct</name>
         <full_name>\PHPunk\Component\renderer::__construct()</full_name>
-        <docblock line="23">
+        <docblock line="24">
           <description></description>
           <long-description></long-description>
-          <tag name="property" line="23" description="Resource name for this component" type="string" variable="$resource">
+          <tag name="property" line="24" description="Resource name for this component" type="string" variable="$resource">
             <type>string</type>
           </tag>
         </docblock>
@@ -3467,13 +3512,13 @@ Supported options for **PASSWORD_BCRYPT**:
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="protected" namespace="PHPunk\Component" line="41" package="phpunk\component">
+      <method final="false" abstract="false" static="false" visibility="protected" namespace="PHPunk\Component" line="42" package="phpunk\component">
         <name>render</name>
         <full_name>\PHPunk\Component\renderer::render()</full_name>
-        <docblock line="41">
+        <docblock line="42">
           <description>Renders a database result for API response.</description>
           <long-description></long-description>
-          <tag name="param" line="41" description="&lt;p&gt;Database result, record, or error object&lt;/p&gt;" type="object" variable="$result">
+          <tag name="param" line="42" description="&lt;p&gt;Database result, record, or error object&lt;/p&gt;" type="object" variable="$result">
             <type>object</type>
           </tag>
         </docblock>
@@ -3483,17 +3528,17 @@ Supported options for **PASSWORD_BCRYPT**:
           <type>object</type>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="protected" namespace="PHPunk\Component" line="72" package="phpunk\component">
+      <method final="false" abstract="false" static="false" visibility="protected" namespace="PHPunk\Component" line="73" package="phpunk\component">
         <name>create_response</name>
         <full_name>\PHPunk\Component\renderer::create_response()</full_name>
-        <docblock line="72">
+        <docblock line="73">
           <description>Builds an API data object from a database record. Returned object will
 have transformed field names/values and contain API hyperlinks.</description>
           <long-description></long-description>
-          <tag name="param" line="72" description="&lt;p&gt;Database record&lt;/p&gt;" type="object" variable="$record">
+          <tag name="param" line="73" description="&lt;p&gt;Database record&lt;/p&gt;" type="object" variable="$record">
             <type>object</type>
           </tag>
-          <tag name="return" line="72" description="API data object" type="object">
+          <tag name="return" line="73" description="API data object" type="object">
             <type>object</type>
           </tag>
         </docblock>
@@ -3503,16 +3548,16 @@ have transformed field names/values and contain API hyperlinks.</description>
           <type>object</type>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="protected" namespace="PHPunk\Component" line="99" package="phpunk\component">
+      <method final="false" abstract="false" static="false" visibility="protected" namespace="PHPunk\Component" line="100" package="phpunk\component">
         <name>get_links</name>
         <full_name>\PHPunk\Component\renderer::get_links()</full_name>
-        <docblock line="99">
+        <docblock line="100">
           <description>Adds relevant hyperlinks to a data object in API response</description>
           <long-description></long-description>
-          <tag name="param" line="99" description="&lt;p&gt;The data object being rendered&lt;/p&gt;" type="object" variable="$record">
+          <tag name="param" line="100" description="&lt;p&gt;The data object being rendered&lt;/p&gt;" type="object" variable="$record">
             <type>object</type>
           </tag>
-          <tag name="return" line="99" description="Multidimensional array of keys and URL parameters" type="array">
+          <tag name="return" line="100" description="Multidimensional array of keys and URL parameters" type="array">
             <type>array</type>
           </tag>
         </docblock>
@@ -3522,16 +3567,16 @@ have transformed field names/values and contain API hyperlinks.</description>
           <type>object</type>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="protected" namespace="PHPunk\Component" line="116" package="phpunk\component">
+      <method final="false" abstract="false" static="false" visibility="protected" namespace="PHPunk\Component" line="117" package="phpunk\component">
         <name>map_field_name</name>
         <full_name>\PHPunk\Component\renderer::map_field_name()</full_name>
-        <docblock line="116">
+        <docblock line="117">
           <description>Maps database field name to API field name</description>
           <long-description></long-description>
-          <tag name="param" line="116" description="&lt;p&gt;Database field name&lt;/p&gt;" type="string" variable="$field">
+          <tag name="param" line="117" description="&lt;p&gt;Database field name&lt;/p&gt;" type="string" variable="$field">
             <type>string</type>
           </tag>
-          <tag name="return" line="116" description="API field name" type="string">
+          <tag name="return" line="117" description="API field name" type="string">
             <type>string</type>
           </tag>
         </docblock>
@@ -3541,19 +3586,19 @@ have transformed field names/values and contain API hyperlinks.</description>
           <type>string</type>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="protected" namespace="PHPunk\Component" line="126" package="phpunk\component">
+      <method final="false" abstract="false" static="false" visibility="protected" namespace="PHPunk\Component" line="127" package="phpunk\component">
         <name>map_field_value</name>
         <full_name>\PHPunk\Component\renderer::map_field_value()</full_name>
-        <docblock line="126">
+        <docblock line="127">
           <description>Transforms database field value into API field value</description>
           <long-description></long-description>
-          <tag name="param" line="126" description="&lt;p&gt;Database field value&lt;/p&gt;" type="mixed" variable="$value">
+          <tag name="param" line="127" description="&lt;p&gt;Database field value&lt;/p&gt;" type="mixed" variable="$value">
             <type>mixed</type>
           </tag>
-          <tag name="param" line="126" description="&lt;p&gt;Database field name&lt;/p&gt;" type="string" variable="$field">
+          <tag name="param" line="127" description="&lt;p&gt;Database field name&lt;/p&gt;" type="string" variable="$field">
             <type>string</type>
           </tag>
-          <tag name="return" line="126" description="Database field value, NULL if field is not mapped" type="mixed">
+          <tag name="return" line="127" description="Database field value, NULL if field is not mapped" type="mixed">
             <type>mixed</type>
           </tag>
         </docblock>
@@ -3568,17 +3613,17 @@ have transformed field names/values and contain API hyperlinks.</description>
           <type>string</type>
         </argument>
       </method>
-      <property final="false" static="false" visibility="public" line="14">
+      <property final="false" static="false" visibility="public" line="15">
         <name>$resource</name>
         <default/>
         <docblock>
           <description>Name of the resource for this component</description>
           <long-description/>
-          <tag name="var" description="&lt;p&gt;Name of the resource for this component&lt;/p&gt;" type="string" line="14">
+          <tag name="var" description="&lt;p&gt;Name of the resource for this component&lt;/p&gt;" type="string" line="15">
             <type by_reference="false">string</type>
           </tag>
-          <tag name="magic" line="14"/>
-          <tag name="property" line="14" description="Name of the resource for this component" type="string" variable="$resource">
+          <tag name="magic" line="15"/>
+          <tag name="property" line="15" description="Name of the resource for this component" type="string" variable="$resource">
             <type>string</type>
           </tag>
         </docblock>
@@ -3586,11 +3631,11 @@ have transformed field names/values and contain API hyperlinks.</description>
     </class>
     <parse_markers>
       <error line="0" code="PPC:ERR-50000">No summary was found for this file</error>
-      <error line="14" code="PPC:ERR-50005">No summary for class \PHPunk\Component\renderer</error>
-      <error line="23" code="PPC:ERR-50015">Argument $resource is missing from the Docblock of __construct</error>
-      <error line="23" code="PPC:ERR-50008">No summary for method __construct()</error>
+      <error line="15" code="PPC:ERR-50005">No summary for class \PHPunk\Component\renderer</error>
+      <error line="24" code="PPC:ERR-50015">Argument $resource is missing from the Docblock of __construct</error>
+      <error line="24" code="PPC:ERR-50008">No summary for method __construct()</error>
     </parse_markers>
-    <source>eJyVVktv2zgQPku/Yg7GygmcuJe9xNt0u81hF0iLIGhPrmHQ0thmQ1MCSTkNiv73nSFFPfzowwfDmvd8883If72ptlU6vbxM4RL+rkT+JDYIJKv10+e83FWlRu1IOU1TLXZoyQTh4d8H1r+L+lma1rYV3wknVsLiZ4O2VqQ8rctLU5Bjm9uUFRr3AtYZqTcwIu+yNpTtA+WFcg1ui9AK16UhgbQwLDJXwlqy0gUaNPAtTTh+wgnkRpcGQWqHRgsFe2GkWClk7TRNKiP3wiGMlm2O17AWyiIV2UU5X+Zj/ME4naqvyVOvlMxhXevcyVLDcpmXmoLVuRu3wS648mTEAa5u+wW1FrM0+Z4ed7cTGwq+Q7cti7MJN0ipnvAlZLHP0uVb6EmSnCYEWUyV3bAsMehqo+GwKCqEKhkU8+jhtyCgaMYNgQoelbcP//EjgWLxugFVGLGDcvUFc+dbZNu7oe8EAmUmQDHQGPoODu38SkdPWHSdBhqMm4ChN7mGKCAqWCd0jsStELtpfxTLY8BDu7lBIscyKtqYvntAYsnZwF3uQeD5gn0TQgSFh7/xFZYR8NV42Fuf+eKH5XiPn5YjKrn04DUVsZm0Fl00nmdk62qbLS4ak2TrXNWmIrYWeMLYN5PU+nQor2WKHIAbL0Ss+hgmjc9d0eOMf0q9F0oWbUnZxOfOPob7EDyfCcfG8Dq7mPnUJxr589WrABobbFEwX7J3Jd0I7a7cS4U34PCrm36xpc68JebbEvhxibrFwke8ONjJf2qpCtoC7SnPqxApvjblbrgdPL1rWhxeMaJwY/cslfKhtmKP4IzQlviyY45LVIW/NHZKTdbIeQo6NtoJGRJuqXqjpH6yZ7aMc/a3jJ+DZbPqjelB9ef37RwrwzE7GGoINg6j6W+BL4u3gO4RvL6Fke8vbtBOVEuv8PpZK/NG3YKwyGMUFOMQZALRPzDSL0mUQLdpUeY3ro3e8mTkUW12eFB9SE73delNOgTCVivfj5+DjQ2FpzkzO+N89CbA0NbW4JoEK6bRsjZqHD2D2mfwR4FfMYKwpIutsglk7Jh1tG77urqNhQdnX3w869HogMRvi4Lfpwr3Qrsep8CVDYMjTRraxTg/4Bwvat9zhfwmbV7aQwoKY8QLvKcjIQu5Q22JZ/TuDmK6ZzSkwPxPj/fgkyG93u15jp6YzbcOhTkjm1lU64xHNQ+HpX0R+vGFGUdZc3tkkUH4sEmIfHUrC9YuvE2Wl0qhL+JXY3tn+loczOS9qGx3PLpTwDPhEXSS/hDiH5agvTt2HwDfWB+HOw1rt29sNw5JBtAG0UEnH+NJO+on7DP9Weu35IX9nnbyK1URlvuwpSPj3wMghD4VcwIfPt3fAx2PIKQ/ebp0DEGFxa9ANDxJf/TBaoo7ccf6uM4OYYU3EYQb0LVSHubv6f8Ye8aI</source>
+    <source>eJyVVk1v2zgQPVu/Yg7GygmcuJe9xNt0u81hF0iLIGhOjmHQ0thiQ1ECSSUNiv73nSFFSf7qhw+GNRzOvHnzZuS/3tVFnczOzxM4h79rkT2JLQLZGv30mFVlXWnUjg5nSaJFiZZcEO7+vePzD/F8niSN7cwPTqrHav0FMzoY2G+EE2th8dGgbdTJs6wyOQXsMJmqRuNewToj9RbGdLtqDKH4RHig2oArEDrjpjJkkBZ2wWdKWEteOkeDBr4lI44/4gRyqyuDILVDo4WCZ2GkWCvk01kyqo18Fg5hvOpyvIWNUBYJZB/lNMz7+IP5O4avzdOslcxg0+jMyUrDapVVmoI1mZt0wc4Y+WjMAS6uh4A6j3ky+p4cVleKLQUv0RVVfjLhFinVE76GLPZFuqyAgWWUUYcgjanSK7aNDLrGaNgHRUAIyQ6Ye0+/BQF5224IUvCsvL/7jx+JFIuXLanCiBKClHyJ7Huze3cKQTJToBhoDH2HC13/KkdPmPeVBhlM2oChNrmBaCApWCd0hqStELstfxzhMeGh3MwgiWMVD7qYvnpAUsnJwH3uncCLJd8dESMoPP3tXWGZAY/G097dWSx/CMff+CkcUcuVJ69FxG7SWnTReZGSr2tsujxrXUaFc3WXitSa4xFnX8yo0cdD+VOWyB65cUNE1Ic0aXzpQU9S/in1s1Ay7yClU587/Rz2Q7j5Qjy2jpfp2dynPlLIn2/eBNLYoUDBekk/VLQjtLtwrzVegcOvbvbFVjr1npgVFfDjCnXHhY94tjeT/zRS5TQF2kueRyFKfGOqcnc6uHuXNDg8YiTh1u9FKuVDFeIZwRmhLemlZI1LVLnfNHZGRTbIeXJaNtoJGRIWhN4oqZ/siSnjnMMp4+fg2Y5667qH/vS8nVJlWGZ7TQ3BJqE1wynwsHgKaB/B22sY+/riBJWiXvkDfz7vbN6pHxA2eY7CwSQEmUK8HxTphyRaoJ+0aPMT10XvdDL2rLYzvIM+JKf9uvIuPQNhqpWvx/fBxoLC04KVnXI+ehNgKKswuCHDmmW0aoyaxJvh2GfwS4FfMYK4pI2t0imkfDHtZd3VdXEdgYfLHnxc69FpT8Tv85zfpwqfhXYDTYGrWgVHmbSyi3F+oDke1OHNNfKbtH1p70pQGCNe4SMtCZnLErUlndG7O5hpn1GTgvIf7m/BJ0N6vdvTGj3Sm289CwtmNrWoNim3ahEWS/ci9O0LPY62dvfIPIXwYZcQ+eJa5ny69D5pVimFHsSvxvaX6Wu515OPorb98uhXAfeEW9Bbhk2If1jC6c3h9R3iW+/DcMdp7eeN/SYhyQ61wbRXyee40g7qCfNMf9aGJXnjsKZSfiUUYbj3Szpw/j0CQuhjMafw6eH2Fmh5BCP9ydOVYwpqzH+Fot2V9MeQrBbckT025HW+Tyu8iyRcgW6U8jR/T/4Hnq3PPQ==</source>
   </file>
   <file path="cache.php" generated-path="cache.html" hash="ec30d1aef4ff36dc3e43bec92706768c" package="phpunk">
     <docblock line="0">

@@ -5,17 +5,35 @@
 
 namespace PHPunk\Database;
 
+/**
+ * @property mixed $insert_id Most recent auto-generated unique ID from MySQL
+ */
 class schema {
+	/**
+	 * @ignore internal variable
+	 */
 	private $_mysql = null;
 
+	/**
+	 * @ignore internal variable
+	 */
 	private $_tables = array();
 
+	/**
+	 * @ignore internal variable
+	 */
 	private $_rels = array();
 
+	/**
+	 * @param object $mysql A previously-established MySQLi instance
+	 */
 	public function __construct($mysql) {
 		$this->_mysql = $mysql;
 	}
 
+	/**
+	 * @ignore magic method
+	 */
 	public function __get($key) {
 		switch ($key) {
 			case 'insert_id':
@@ -25,6 +43,13 @@ class schema {
 		}
 	}
 
+	/**
+	 * Executes a parameterized SELECT query.
+	 * @param string $sql A standard SQL query string
+	 * @param array $params OPTIONAL Index-based query parameters
+	 * @param string $table_name OPTIONAL Table name to be passed on to result
+	 * @return object Database result object, FALSE on failure
+	 */
 	public function query($sql, $params = array(), $table_name = false) {
 		if ($stmt = $this->_mysql->prepare($sql)) {
 			if (is_scalar($params))
@@ -78,6 +103,12 @@ class schema {
 		return false;
 	}
 
+	/**
+	 * Executes a parameterized INSERT, UPDATE, or DELETE query.
+	 * @param string $sql A standard SQL query string
+	 * @param array $params OPTIONAL Index-based query parameters
+	 * @return boolean TRUE on sucess, FALSE on failure
+	 */
 	public function execute($sql, $params = array()) {
 		$result = false;
 
@@ -118,14 +149,31 @@ class schema {
 		return $result;
 	}
 
+	/**
+	 * Returns whether a table with the given name has been defined in the database schema.
+	 * @param string $name The name of the database table
+	 * @return boolean TRUE if the table name is defined, or FALSE otherwise
+	 */
 	public function table_exists($name) {
 		return isset($this->_tables[$name]);
 	}
 
+	/**
+	 * Returns the database table object with the given name.
+	 * @param string $name The name of the database table
+	 * @return object Table object if the table name is defined, or FALSE otherwise
+	 */
 	public function get_table($name) {
 		return @$this->_tables[$name];
 	}
 
+	/**
+	 * Defines a database table name in schema. If the table name already exists
+	 * in the schema, this method will merely return the defined table object.
+	 * @param string $name Table name
+	 * @param string $pkey OPTIONAL Primary key field, defaults to 'id'
+	 * @return object Newly-defined table object
+	 */
 	public function add_table($name, $pkey = 'id') {
 		if (!isset($this->_tables[$name])) {
 			$this->_tables[$name] = is_null($pkey)
@@ -136,22 +184,49 @@ class schema {
 		return $this->_tables[$name];
 	}
 
+	/**
+	 * Removes a database table definition from the schema.
+	 * @param string $name Table name
+	 */
 	public function remove_table($name) {
 		unset($this->_tables[$name]);
 	}
 
+	/**
+	 * Removes all database table definitions from schema.
+	 */
 	public function clear_tables() {
 		$this->_tables = array();
 	}
 
+	/**
+	 * Returns whether a foreign-key relationship with the given name has been
+	 * defined in the database schema.
+	 * @param string $name The name of the relationship
+	 * @return boolean TRUE if the relationship is defined, FALSE otherwise
+	 */
 	public function relation_exists($name) {
 		return isset($this->_rels[$name]);
 	}
 
+	/**
+	 * Returns the foreign-key relationship object with the given name.
+	 * @param string $name The name of the relationship
+	 * @return object Relation object if the relationship is defined, FALSE otherwise
+	 */
 	public function get_relation($name) {
 		return @$this->_rels[$name];
 	}
 
+	/**
+	 * Defines a relationship in the schema. If the relationship already exists
+	 * in the schema, this method will merely return the defined relation object.
+	 * @param string $rel_name Relationship name
+	 * @param string $ptable_name Name of table containing primary key
+	 * @param string $ftable_name Name of table containing foreign key
+	 * @param string $fkey Name of foreign key field
+	 * @return object Newly-defined relation object
+	 */
 	public function add_relation($rel_name, $ptable_name, $ftable_name, $fkey) {
 		if (!$this->relation_exists($rel_name)) {
 			if (($ptable =& $this->_tables[$ptable_name]) &&
@@ -168,6 +243,10 @@ class schema {
 		return $this->get_relation($rel_name);
 	}
 
+	/**
+	 * Removes a relationship definition from the schema.
+	 * @param string $name Relationship name
+	 */
 	public function remove_relation($name) {
 		if ($rel =& $this->_rels[$name]) {
 			unset($this->_rels[$name]);
@@ -180,6 +259,9 @@ class schema {
 		}
 	}
 
+	/**
+	 * Removes all database relationship definitions from schema.
+	 */
 	public function clear_relations() {
 		$this->_rels = array();
 
@@ -187,6 +269,16 @@ class schema {
 			$table->clear_relations();
 	}
 
+	/**
+	 * Return database record by unique identifier. If the relationship argument
+	 * is used, the identifier will be interpreted as the foreign record's
+	 * primary key. Otherwise, the identifier will be interpreted as the record's
+	 * own primary key.
+	 * @param string $table_name Table name
+	 * @param mixed $record_id Unique identifier for database record
+	 * @param string $rel_name OPTIONAL Relationship name
+	 * @return object Record identified by parameter, NULL on failure
+	 */
 	public function get_record($table_name, $record_id, $rel_name = false) {
 		if ($table = @$this->_tables[$table_name]) {
 			$sql = $table->select_sql($rel_name);
@@ -200,6 +292,12 @@ class schema {
 		return null;
 	}
 
+	/**
+	 * Inserts or updates a database record and returns the record's primary key.
+	 * @param string $table_name Table name
+	 * @param mixed $record Key-value data for database record
+	 * @return mixed Record's primary key
+	 */
 	public function put_record($table_name, $record) {
 		if ($table = @$this->_tables[$table_name]) {
 			if (is_object($record))
@@ -223,6 +321,12 @@ class schema {
 		return false;
 	}
 
+	/**
+	 * Deletes a database record by primary key.
+	 * @param string $table_name Table name
+	 * @param mixed $record_id Record's primary key
+	 * @return boolean TRUE on success, False on failure
+	 */
 	public function remove_record($table_name, $record_id) {
 		if ($table = @$this->_tables[$table_name]) {
 			$sql = $table->delete_sql();
