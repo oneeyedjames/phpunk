@@ -1047,7 +1047,7 @@
     </parse_markers>
     <source>eJytUstqwzAQPFtfsQUf7JASeu6bQukxh95CMBtnbYsospHkQCn59+5aqU0f6amgizQzu7Ozurnvmk4tZjMFM3josNxhTcBvvd3x00Ipi3vyDBAsX5b8eq1UadB7oAPZUOzRssLBu0qkSiJldG1bR6BtIGfRwAGdxo0hQRcq6Zw+YCBIiwbt1pDzcAurNRceSzxutx4QSjRmw57gRISqdRAaAt9RqStN2+hCNLF1hw734IPTtoZ0AOGVBTIFtNUgHiWf9CduI/4gHRuKZrxUvS2Dbi2E9uTkax2Zqd8YXU5Mo30gm0UH86lwLkEluoJM+6I89c0mOOID4UJ7TyFLQ6P95d2Y1SrWXOe5EJNz8BjpecpKSGPra6YeFZ9pC8/aEa/BmB+L8P+8iV8SZGHNH+sUYcwlRVfLZ0Hn8K3wzKdMBEVNoRAsy+dwlQ9jx4z/TjCGzaMQlg2cJQL67xtMErkXvSdXDA4GS9MieeXiJ5dUJdYY7VF9ADnwFQI=</source>
   </file>
-  <file path="util/collectible.php" generated-path="util.collectible.html" hash="da9a63999d16afc0fc4245da92799ad0" package="phpunk\util">
+  <file path="util/collectible.php" generated-path="util.collectible.html" hash="0558df16174b2656e1974b9425d88248" package="phpunk\util">
     <docblock line="0">
       <description></description>
       <long-description></long-description>
@@ -1056,17 +1056,17 @@
     <namespace-alias name="ArrayAccess">\ArrayAccess</namespace-alias>
     <namespace-alias name="Countable">\Countable</namespace-alias>
     <namespace-alias name="Iterator">\Iterator</namespace-alias>
-    <function namespace="PHPunk\Util" line="158" package="phpunk\util">
+    <function namespace="PHPunk\Util" line="192" package="phpunk\util">
       <name>is_collectible</name>
       <full_name>\PHPunk\Util\is_collectible()</full_name>
-      <docblock line="158">
+      <docblock line="192">
         <description>Returns whether or not the object is an instance of collectible.</description>
         <long-description></long-description>
-        <tag name="package" line="158" description="phpunk\util"/>
-        <tag name="param" line="158" description="&lt;p&gt;Any object&lt;/p&gt;" type="object" variable="$obj">
+        <tag name="package" line="192" description="phpunk\util"/>
+        <tag name="param" line="192" description="&lt;p&gt;Any object&lt;/p&gt;" type="object" variable="$obj">
           <type>object</type>
         </tag>
-        <tag name="return" line="158" description="Returns **TRUE** if **obj** collectible, **FALSE** otherwise." type="boolean">
+        <tag name="return" line="192" description="Returns **TRUE** if **obj** collectible, **FALSE** otherwise." type="boolean">
           <type>boolean</type>
         </tag>
       </docblock>
@@ -1076,16 +1076,16 @@
         <type>object</type>
       </argument>
     </function>
-    <interface namespace="PHPunk\Util" line="150" package="phpunk\util">
+    <interface namespace="PHPunk\Util" line="184" package="phpunk\util">
       <extends>\ArrayAccess</extends>
       <extends>\Countable</extends>
       <extends>\Iterator</extends>
       <name>collection</name>
       <full_name>\PHPunk\Util\collection</full_name>
-      <docblock line="150">
+      <docblock line="184">
         <description>This inteface consolidates the interfaces ArrayAccess, Countable, and Iterator.</description>
         <long-description>Classes using the collectible trait must implement this interface.</long-description>
-        <tag name="package" line="150" description="phpunk\util"/>
+        <tag name="package" line="184" description="phpunk\util"/>
       </docblock>
     </interface>
     <trait namespace="PHPunk\Util" line="16" package="phpunk\util">
@@ -1110,95 +1110,121 @@
           </tag>
         </docblock>
       </property>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="PHPunk\Util" line="23" package="phpunk\util">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="PHPunk\Util" line="37" package="phpunk\util">
         <name>sort</name>
         <full_name>\PHPunk\Util\collectible::sort()</full_name>
-        <docblock line="23">
-          <description></description>
-          <long-description></long-description>
+        <docblock line="37">
+          <description>Sorts the data collection. If first argument is callable, it will be used
+as a comparison function. Otherwise, it will be used as a boolean flag to
+reverse-sort the collection. Omitting the sorting mode flag will sort the
+collection by its values and reset its keys to sequential indeces.</description>
+          <long-description>The sorting mode flag works as follows:
+  'k' will sort the collection by its keys
+  'a' will sort the collection by its values, preserving its keys</long-description>
+          <tag name="param" line="37" description="&lt;p&gt;Whether to reverse-sort the collection&lt;/p&gt;" type="mixed" variable="$reverse">
+            <type>mixed</type>
+          </tag>
+          <tag name="param" line="37" description="&lt;p&gt;OPTIONAL Sorting mode flag&lt;/p&gt;" type="string" variable="$mode">
+            <type>string</type>
+          </tag>
+          <tag name="return" line="37" description="TRUE on success, FALSE on failure" type="boolean">
+            <type>boolean</type>
+          </tag>
         </docblock>
         <argument line="0" by_reference="false">
           <name>$reverse</name>
           <default>false</default>
-          <type/>
+          <type>mixed</type>
         </argument>
         <argument line="0" by_reference="false">
           <name>$mode</name>
           <default>''</default>
-          <type/>
+          <type>string</type>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="PHPunk\Util" line="45" package="phpunk\util">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="PHPunk\Util" line="65" package="phpunk\util">
         <name>walk</name>
         <full_name>\PHPunk\Util\collectible::walk()</full_name>
-        <docblock line="45">
-          <description></description>
+        <docblock line="65">
+          <description>Apply a callback functon to each item in the collection.</description>
           <long-description></long-description>
+          <tag name="param" line="65" description="&lt;p&gt;A callable to apply to each item&lt;/p&gt;" type="mixed" variable="$func">
+            <type>mixed</type>
+          </tag>
+          <tag name="param" line="65" description="&lt;p&gt;OPTIONAL Data to pass along to callable&lt;/p&gt;" type="mixed" variable="$data">
+            <type>mixed</type>
+          </tag>
+          <tag name="return" line="65" description="TRUE" type="boolean">
+            <type>boolean</type>
+          </tag>
         </docblock>
         <argument line="0" by_reference="false">
           <name>$func</name>
           <default></default>
-          <type/>
+          <type>mixed</type>
         </argument>
         <argument line="0" by_reference="false">
           <name>$data</name>
           <default>null</default>
-          <type/>
+          <type>mixed</type>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="PHPunk\Util" line="49" package="phpunk\util">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="PHPunk\Util" line="72" package="phpunk\util">
         <name>keys</name>
         <full_name>\PHPunk\Util\collectible::keys()</full_name>
-        <docblock line="49">
+        <docblock line="72">
           <description></description>
           <long-description></long-description>
+          <tag name="return" line="72" description="Key set for collection" type="array">
+            <type>array</type>
+          </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="PHPunk\Util" line="53" package="phpunk\util">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="PHPunk\Util" line="79" package="phpunk\util">
         <name>values</name>
         <full_name>\PHPunk\Util\collectible::values()</full_name>
-        <docblock line="53">
+        <docblock line="79">
           <description></description>
           <long-description></long-description>
+          <tag name="return" line="79" description="Value set for collection" type="array">
+            <type>array</type>
+          </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="PHPunk\Util" line="57" package="phpunk\util">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="PHPunk\Util" line="87" package="phpunk\util">
         <name>toArray</name>
         <full_name>\PHPunk\Util\collectible::toArray()</full_name>
-        <docblock line="57">
-          <description></description>
+        <docblock line="87">
+          <description>Returns collection as array.</description>
           <long-description></long-description>
+          <tag name="return" line="87" description="collection of data" type="array">
+            <type>array</type>
+          </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="protected" namespace="PHPunk\Util" line="61" package="phpunk\util">
+      <method final="false" abstract="false" static="false" visibility="protected" namespace="PHPunk\Util" line="95" package="phpunk\util">
         <name>loadArray</name>
         <full_name>\PHPunk\Util\collectible::loadArray()</full_name>
-        <docblock line="61">
-          <description></description>
+        <docblock line="95">
+          <description>Replaces internal data collection.</description>
           <long-description></long-description>
+          <tag name="param" line="95" description="&lt;p&gt;OPTIONAL Any array or traversable object&lt;/p&gt;" type="mixed" variable="$data">
+            <type>mixed</type>
+          </tag>
         </docblock>
         <argument line="0" by_reference="false">
           <name>$data</name>
           <default></default>
-          <type/>
+          <type>mixed</type>
         </argument>
       </method>
     </trait>
     <parse_markers>
       <error line="0" code="PPC:ERR-50000">No summary was found for this file</error>
-      <error line="23" code="PPC:ERR-50015">Argument $reverse is missing from the Docblock of sort</error>
-      <error line="23" code="PPC:ERR-50015">Argument $mode is missing from the Docblock of sort</error>
-      <error line="23" code="PPC:ERR-50008">No summary for method sort()</error>
-      <error line="45" code="PPC:ERR-50015">Argument $func is missing from the Docblock of walk</error>
-      <error line="45" code="PPC:ERR-50015">Argument $data is missing from the Docblock of walk</error>
-      <error line="45" code="PPC:ERR-50008">No summary for method walk()</error>
-      <error line="49" code="PPC:ERR-50008">No summary for method keys()</error>
-      <error line="53" code="PPC:ERR-50008">No summary for method values()</error>
-      <error line="57" code="PPC:ERR-50008">No summary for method toArray()</error>
-      <error line="61" code="PPC:ERR-50015">Argument $data is missing from the Docblock of loadArray</error>
-      <error line="61" code="PPC:ERR-50008">No summary for method loadArray()</error>
+      <error line="72" code="PPC:ERR-50008">No summary for method keys()</error>
+      <error line="79" code="PPC:ERR-50008">No summary for method values()</error>
     </parse_markers>
-    <source>eJy1VttuGjEQfd79iqmEBFmR7HvSNEFVL5FatWoT9SGNkNkdwMXYyJdQFOXfO/Ze2IVtqarygFjbM+ecGY/Hfnm1mq/iNEliSOB6xbIFmyHQnJOL785yQfNpHEu2REOrCJ/ff/ZLd7R0EcfOIIy0ZptRlqExQ3itnLRsInAINxY1s0qTWYkfLE+N3QiEBW5OH5lwCIZsiNQb9G+WK4FLlNb0D+KSQxBtEGFu7eo8TWfczt3kLFPLVEnEDeY/vPC0iCdd8wVPP7qAc/pp8gMza8qA4ButhVitZtxCpoSgZU6W8BRHPoCIyG4kkUsmOuT75etHpoF53X6YxtFK80dmEXrjnFkGl3D/QOmIVm4ieAZTJ4lCSTBK20FP4yNqSuglTJkwFGlvqXI/7PdPvIiIT2HAzThjQvgQao+TYjkya26zOQyCXzkXZYwg+6x/HkaRRuu0BMcKTjvn5vRVUEd8Fd5Fw3Ox67k47JnjlDlhdxwP+j3H/hd3B9KOo8Ssc3ZFad/DP4Fz2I+z4GoHtw+36IbbD76Aa0W8j9YN1o1FWXjuqJE1E4tBzw8pbWU1SSdEkZ6SMtTeuDBtJ7rh6Fm6GKimzaADLszvyuwCCAeiE6Jc+RsQq8LBb6M0HSs/rSydUMy3rkKxvHAu4mweGtaYLyuqCUrJ7JXg0TMgHb/qsG0bwWHvrcI2CPct6xACL/va2KqW2j00FTrXH7FmaEszSr02e0idTr431eVXdbxrPpNKI/CqM/uEa7Vstmfgvi1O6Xqo2t7Onqrp1KB985MbS1qKUXehjbFlNISukjmCtndoO4VdN/nvS4uH4+n4utVBsYdjU+jp1OHrLtgcT9CdNLupccVUl6C/3qH6Pj8oI/OW7W5QTP1TZVSPh8O0TmvcIy4nj0tNx6BN6yeOSynxZxVq+Dwum8Y1l3kd4241/X9COiM8P5BTeHFZXKiB/bl+tN6STSDw+FR60igCo0edATtvlK/57YOVybyWeuYhXwtmDDk4w+UsoDSfm8UDdOmM3UYMtlIRuM7CS7Ue1u4UKu0eyvz3YuqcPW1D/BJSYmA9RxKjgValskFYcYkAkTNJ/MYySXxq2lR8Vr3EV0yzZeXSo38YyU05DgZl7idKCSS8ijdJbr/cvUkSoAsuSciePhv4Q5p8O/rw1VsoL3DNTZmCeod3b2oCCdtdvR+8mEp+W/0F7fUveTQoJw==</source>
+    <source>eJy1WFFvGzcMfrZ/BQcEcGI49nuyrDG6bgvWNUGTrA9dEcg2z1atk26Szo5R5L+PlO4ud/Y5LobmIUhOIj9+pEiJzM9vskXWHfX7XejDZSamSzFHoLVcL//JvVS0Pup2tUjR0S7CzR83vHVPW+fdbu4QxtaKzXg6RecG8Nbk2ouJwgFcebTCG0tiBX6QPHV+oxCWuDldCZUjOJIhoyzQu0ozhSlq73oHcUkhkHaIsPA+OxuN5tIv8slwatKR0YgbnH1l4qPoz2gtl3L0Vx5wTq8nX3HqXeEQfKK94Ku3QnqYGqVoW5IkfOt22IEOGbvSZFwL1UKfty9XwoJg3vw56nYyK1fCIxw9zIQXcAGfv1A4KrhbY4mBXyCE7dKo0UO4SiCR1nmCm+ccEZAOpkKpGASiuJZKwQSBzmAW0IQDxkgzYaUzGpJcF2DXZMKupdtVjEoTYxQK0lBiDt4ENIsrtA5PHXEMFOvsrlPpvdTzsMES/HdqZhghgoVSMaA9K8NkQyQchOiRcT0jUw59WKSwUjwMOPw3J58lRVrqGVIODBkmQN21mzR26dibhCyZtTsLsgC9Za9Jp4UKWy3FxWHxyHwAGfO2K+ZRR4mZQIcgUkjlI8X4qIglfFognwR7+EJ46wDOW8Y/Co5e39xdXX8Yvw9503A/qlj0udXVad59vH8HRNvlRRH9Nn5/G1YSIVVusUzSfKLktEqX4PpxxfmCpBVnTuRwAb3eCZdERyZwLN1DmZOVxknc7ri19NMFHAe9Yq0zFQRJQT4LX52CcS6iTb+Q7vSXUCuDKmon5zXN5bbm8rDmDBORK7+leFDvqcs/3XZHmn4UmFXM3lDV7uCfwBns+hltNZ3bhVu2w+06H+EaHu+itYO1Y1EUnmo31jjL1IavGTr1Cb0WMWsoaSilUVCUpMeUanb7xmgpCtaEcXWnMYII6HWoFr1wVVal8Ct/kUYmHJW/MnwnmQp0b13sSf21UMvjwGxQGLoAnSsVT73ACRf8QxRt5k9NkYNXD9xlXRn+xA3wnZcYu1X4LaT4YjluYRDWtw9sv82/43P1vVbjLddmt9h5yfLHIO/qlyc/NKw+bKFWEzNJeAv3kPImdAVNVnUiOzwyRV2Lo4wsHu7th/Zggo31pmBJUaPmgIso5KsJDUT10BtPX6RecVVGzCLbmBD1S1PU1osbpe4FZd1R4U3nCZCu3/KyfW5LDms/h6QJIrmBOoQgiy7rwZsG2x20GIYXseboCzHKHet2kFqVuFPauX4u5VwbiyDLPpEDbk1abxbjWSd07HuSyCQJVcG7R+k8cYlf7eX1gA2hAbxYbT+O2+/oW4ld1u1/LiS+vB6P22ce5Huo+8inlQfnXZB5PUL32m2HJo9LbYS++4Sq6eIgjSlLNq+fuPS/MqMcZQ6bza3FHcPF4uuapjJomuWF1zWp8bF0Nfz5utYsrmnGqHzczqYfb5BqRM4OxBR+uoidR7D+VI3QdyQTDDA+pZ52hsBoxIxjZGXa7R2feeAqqQ4Z8q2i1okUclcOdPXhN47DaU6TaOUx+JJFsDUMc3P1WX/N6fRQz/aTqWL27dnFsndYF8MS7WoTZ6T4iPAkTG2c1M4LTfaoZagxHpb/F4hveqFyRL/DU1682i1tYWm33+cGsd8HeuD6fZLv9+v4A1oMgxQtm3KujiGoTnj7pSaQcNxlw8JkSvpN9ud01v8B982jpg==</source>
   </file>
   <file path="error.php" generated-path="error.html" hash="c37f2b37850f67ad5ac5b319e2b18c0f" package="phpunk">
     <docblock line="0">
@@ -1264,82 +1290,117 @@
           <type>mixed</type>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="PHPunk" line="23" package="phpunk\util">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="PHPunk" line="37" package="phpunk\util">
         <name>sort</name>
         <full_name>\PHPunk\Util\collectible::sort()</full_name>
-        <docblock line="23">
-          <description></description>
-          <long-description></long-description>
+        <docblock line="37">
+          <description>Sorts the data collection. If first argument is callable, it will be used
+as a comparison function. Otherwise, it will be used as a boolean flag to
+reverse-sort the collection. Omitting the sorting mode flag will sort the
+collection by its values and reset its keys to sequential indeces.</description>
+          <long-description>The sorting mode flag works as follows:
+  'k' will sort the collection by its keys
+  'a' will sort the collection by its values, preserving its keys</long-description>
+          <tag name="param" line="37" description="&lt;p&gt;Whether to reverse-sort the collection&lt;/p&gt;" type="mixed" variable="$reverse">
+            <type>mixed</type>
+          </tag>
+          <tag name="param" line="37" description="&lt;p&gt;OPTIONAL Sorting mode flag&lt;/p&gt;" type="string" variable="$mode">
+            <type>string</type>
+          </tag>
+          <tag name="return" line="37" description="TRUE on success, FALSE on failure" type="boolean">
+            <type>boolean</type>
+          </tag>
         </docblock>
         <argument line="0" by_reference="false">
           <name>$reverse</name>
           <default>false</default>
-          <type/>
+          <type>mixed</type>
         </argument>
         <argument line="0" by_reference="false">
           <name>$mode</name>
           <default>''</default>
-          <type/>
+          <type>string</type>
         </argument>
         <inherited_from>\PHPunk\Util\collectible</inherited_from>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="PHPunk" line="45" package="phpunk\util">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="PHPunk" line="65" package="phpunk\util">
         <name>walk</name>
         <full_name>\PHPunk\Util\collectible::walk()</full_name>
-        <docblock line="45">
-          <description></description>
+        <docblock line="65">
+          <description>Apply a callback functon to each item in the collection.</description>
           <long-description></long-description>
+          <tag name="param" line="65" description="&lt;p&gt;A callable to apply to each item&lt;/p&gt;" type="mixed" variable="$func">
+            <type>mixed</type>
+          </tag>
+          <tag name="param" line="65" description="&lt;p&gt;OPTIONAL Data to pass along to callable&lt;/p&gt;" type="mixed" variable="$data">
+            <type>mixed</type>
+          </tag>
+          <tag name="return" line="65" description="TRUE" type="boolean">
+            <type>boolean</type>
+          </tag>
         </docblock>
         <argument line="0" by_reference="false">
           <name>$func</name>
           <default></default>
-          <type/>
+          <type>mixed</type>
         </argument>
         <argument line="0" by_reference="false">
           <name>$data</name>
           <default>null</default>
-          <type/>
+          <type>mixed</type>
         </argument>
         <inherited_from>\PHPunk\Util\collectible</inherited_from>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="PHPunk" line="49" package="phpunk\util">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="PHPunk" line="72" package="phpunk\util">
         <name>keys</name>
         <full_name>\PHPunk\Util\collectible::keys()</full_name>
-        <docblock line="49">
+        <docblock line="72">
           <description></description>
           <long-description></long-description>
+          <tag name="return" line="72" description="Key set for collection" type="array">
+            <type>array</type>
+          </tag>
         </docblock>
         <inherited_from>\PHPunk\Util\collectible</inherited_from>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="PHPunk" line="53" package="phpunk\util">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="PHPunk" line="79" package="phpunk\util">
         <name>values</name>
         <full_name>\PHPunk\Util\collectible::values()</full_name>
-        <docblock line="53">
+        <docblock line="79">
           <description></description>
           <long-description></long-description>
+          <tag name="return" line="79" description="Value set for collection" type="array">
+            <type>array</type>
+          </tag>
         </docblock>
         <inherited_from>\PHPunk\Util\collectible</inherited_from>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="PHPunk" line="57" package="phpunk\util">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="PHPunk" line="87" package="phpunk\util">
         <name>toArray</name>
         <full_name>\PHPunk\Util\collectible::toArray()</full_name>
-        <docblock line="57">
-          <description></description>
+        <docblock line="87">
+          <description>Returns collection as array.</description>
           <long-description></long-description>
+          <tag name="return" line="87" description="collection of data" type="array">
+            <type>array</type>
+          </tag>
         </docblock>
         <inherited_from>\PHPunk\Util\collectible</inherited_from>
       </method>
-      <method final="false" abstract="false" static="false" visibility="protected" namespace="PHPunk" line="61" package="phpunk\util">
+      <method final="false" abstract="false" static="false" visibility="protected" namespace="PHPunk" line="95" package="phpunk\util">
         <name>loadArray</name>
         <full_name>\PHPunk\Util\collectible::loadArray()</full_name>
-        <docblock line="61">
-          <description></description>
+        <docblock line="95">
+          <description>Replaces internal data collection.</description>
           <long-description></long-description>
+          <tag name="param" line="95" description="&lt;p&gt;OPTIONAL Any array or traversable object&lt;/p&gt;" type="mixed" variable="$data">
+            <type>mixed</type>
+          </tag>
         </docblock>
         <argument line="0" by_reference="false">
           <name>$data</name>
           <default></default>
-          <type/>
+          <type>mixed</type>
         </argument>
         <inherited_from>\PHPunk\Util\collectible</inherited_from>
       </method>
