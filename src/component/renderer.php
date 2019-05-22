@@ -8,13 +8,25 @@ namespace PHPunk\Component;
 use PHPunk\Database\result;
 use PHPunk\Database\record;
 
+/**
+ * @property string $resource Name of the resource for this component
+ */
 class renderer {
+	/**
+	 * @ignore internal variable
+	 */
 	private $_resource = false;
 
+	/**
+	 * @property string $resource Resource name for this component
+	 */
 	public function __construct($resource) {
 		$this->_resource = $resource;
 	}
 
+	/**
+	 * @ignore magic method
+	 */
 	public function __get($key) {
 		switch ($key) {
 			case 'resource':
@@ -22,9 +34,11 @@ class renderer {
 		}
 	}
 
-	public function render($view) {}
-
-	protected function render_result($result) {
+	/**
+	 * Renders a database result for API response.
+	 * @param object $result Database result, record, or error object
+	 */
+	protected function render($result) {
 		if ($result instanceof record) {
 			$response = $this->create_response($result);
 		} elseif ($result instanceof result) {
@@ -49,6 +63,12 @@ class renderer {
 		echo json_encode($response);
 	}
 
+	/**
+	 * Builds an API data object from a database record. Returned object will
+	 * have transformed field names/values and contain API hyperlinks.
+	 * @param object $record Database record
+	 * @return object API data object
+	 */
 	protected function create_response($record) {
 		$response = new object();
 
@@ -71,6 +91,11 @@ class renderer {
 		return $response;
 	}
 
+	/**
+	 * Adds relevant hyperlinks to a data object in API response
+	 * @param object $record The data object being rendered
+	 * @return array Multidimensional array of keys and URL parameters
+	 */
 	protected function get_links($record) {
 		return [
 			'self' => [
@@ -83,10 +108,21 @@ class renderer {
 		];
 	}
 
+	/**
+	 * Maps database field name to API field name
+	 * @param string $field Database field name
+	 * @return string API field name
+	 */
 	protected function map_field_name($field) {
 		return $field;
 	}
 
+	/**
+	 * Transforms database field value into API field value
+	 * @param mixed $value Database field value
+	 * @param string $field Database field name
+	 * @return mixed Database field value, NULL if field is not mapped
+	 */
 	protected function map_field_value($value, &$field) {
 		$field = $this->map_field_name($field);
 		return $field ? $value : null;
