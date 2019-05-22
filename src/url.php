@@ -5,20 +5,54 @@
 
 namespace PHPunk;
 
+/**
+ * @property array $resources Array of registered resources
+ * @property array $actions Array of registered global actions
+ * @property array $views Array of registered global views
+ */
 class url_schema {
+	/**
+	 * @ignore internal variable
+	 */
 	private $_http_host;
+
+	/**
+	 * @ignore internal variable
+	 */
 	private $_base_path;
 
+	/**
+	 * @ignore internal variable
+	 */
 	private $_resources = array();
+
+	/**
+	 * @ignore internal variable
+	 */
 	private $_aliases = array();
+
+	/**
+	 * @ignore internal variable
+	 */
 	private $_actions = array();
+
+	/**
+	 * @ignore internal variable
+	 */
 	private $_views = array();
 
+	/**
+	 * @param string $host A fully-qualified domain name
+	 * @param string $path OPTIONAL base path for URL's
+	 */
 	public function __construct($host = false, $path = '/') {
 		$this->_http_host = !empty($host) ? $host : $_SERVER['HTTP_HOST'];
 		$this->_base_path = $path;
 	}
 
+	/**
+	 * @ignore magic method
+	 */
 	public function __get($key) {
 		switch ($key) {
 			case 'resources':
@@ -28,6 +62,11 @@ class url_schema {
 		}
 	}
 
+	/**
+	 * Registers a resource name. Registers alias for resource, if included.
+	 * @param string $resource Resource name
+	 * @param string $alias Alias for resource name
+	 */
 	public function add_resource($resource, $alias = false) {
 		if (!$this->is_resource($resource)) {
 			$this->_resources[$resource] = array(
@@ -40,10 +79,20 @@ class url_schema {
 			$this->add_alias($alias, $resource);
 	}
 
+	/**
+	 * Returns canonical resource name, if it exists.
+	 * @param string $resource Resource name or alias
+	 * @return string Canonical resource name, FALSE if no such resource or alias exists
+	 */
 	public function is_resource($resource) {
 		return isset($this->_resources[$resource]) ? $resource : $this->is_alias($resource);
 	}
 
+	/**
+	 * Registers an alias for the given resource name.
+	 * @param string $alias Alias for the resource name
+	 * @param string $resource Original resource name
+	 */
 	public function add_alias($alias, $resource) {
 		$resource = $this->is_resource($resource);
 
@@ -51,10 +100,21 @@ class url_schema {
 			$this->_aliases[$alias] = $resource;
 	}
 
+	/**
+	 * Returns canonical resource name for the alias, if it exists.
+	 * @param string $alias Alias for the resource name
+	 * @return string Canonical resource name, FALSE if no such alias exists
+	 */
 	public function is_alias($alias) {
 		return isset($this->_aliases[$alias]) ? $this->_aliases[$alias] : false;
 	}
 
+	/**
+	 * Registers an action name. If resource is omitted, the action is registered
+	 * as a global action.
+	 * @param string $action Action name
+	 * @param string $resource OPTIONAL Resource name
+	 */
 	public function add_action($action, $resource = false) {
 		$resource = $this->is_resource($resource);
 
@@ -64,6 +124,12 @@ class url_schema {
 			$this->_actions[] = $action;
 	}
 
+	/**
+	 * Returns canonical action name, if it exists.
+	 * @param string $action Action name
+	 * @param string $resource OPTIONAL Resource name
+	 * @return string Canonical action name, FALSE if no such action exists
+	 */
 	public function is_action($action, $resource = false) {
 		$resource = $this->is_resource($resource);
 
@@ -72,6 +138,12 @@ class url_schema {
 		return in_array($action, $actions) ? $action : false;
 	}
 
+	/**
+	 * Registers a view name. If resource is omitted, the view is registered as
+	 * a global view.
+	 * @param string $action View name
+	 * @param string $resource OPTIONAL Resource name
+	 */
 	public function add_view($view, $resource = false) {
 		$resource = $this->is_resource($resource);
 
@@ -81,6 +153,12 @@ class url_schema {
 			$this->_views[] = $view;
 	}
 
+	/**
+	 * Returns canonical view name, if it exists.
+	 * @param string $action View name
+	 * @param string $resource OPTIONAL Resource name
+	 * @return string Canonical view name, FALSE if no such view exists
+	 */
 	public function is_view($view, $resource = false) {
 		$resource = $this->is_resource($resource);
 
