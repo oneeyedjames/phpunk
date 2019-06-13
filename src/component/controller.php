@@ -5,6 +5,8 @@
 
 namespace PHPunk\Component;
 
+use PHPunk\api_error;
+
 /**
  * @property string $resource Resource name for this component
  */
@@ -52,5 +54,25 @@ class controller {
 		$method = str_replace('-', '_', $view) . '_view';
 		if (method_exists($this, $method))
 			$vars = call_user_func(array($this, $method), $vars);
+	}
+
+	/**
+	 * Executes concrete api view methods in child classes
+	 * @param string $view API name of the relevant view
+	 * @param mixed $result Database result/record or error that will be rendered
+	 */
+	public function pre_render($view, &$result) {
+		$method = 'api_' . str_replace('-', '_', $view) . '_view';
+		if (method_exists($this, $method)) {
+			$result = call_user_func([$this, $method], $_GET, $_POST);
+		} else {
+			$result = new api_error('api_undefined_view',
+				'The requested API view is not defined', [
+					'status'   => 400,
+					'resource' => $this->resource,
+					'view'     => $view
+				]
+			);
+		}
 	}
 }

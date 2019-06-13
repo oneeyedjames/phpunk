@@ -6,6 +6,7 @@
 namespace PHPunk\Component;
 
 use PHPunk\Database\query;
+use PHPunk\Database\record;
 
 /**
  * @property string $resource Resource name for this component
@@ -48,6 +49,16 @@ class model {
 			case 'insert_id':
 				return $this->_database->insert_id;
 		}
+	}
+
+	/**
+	 * Instantiates a new database record with the given data.
+	 * @param mixed $data Associative array of data or record ID
+	 * @return object New database record
+	 */
+	public function create_record($data = []) {
+		if (is_numeric($data)) $data = ['id' => $data];
+		return new record($data, $this->_resource);
 	}
 
 	/**
