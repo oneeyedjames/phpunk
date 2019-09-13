@@ -1,28 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <project title="API Documentation" version="2.8.5">
   <partials/>
-  <file path="component/controller.php" generated-path="component.controller.html" hash="f77ad3b68504d8fdf685e6cb22b7d7d7" package="phpunk\component">
+  <file path="component/controller.php" generated-path="component.controller.html" hash="7822c23613b37594fdcedc6ab6a7f53f" package="phpunk\component">
     <docblock line="0">
       <description></description>
       <long-description></long-description>
       <tag name="package" line="0" description="phpunk\component"/>
     </docblock>
-    <class final="false" abstract="false" namespace="PHPunk\Component" line="11" package="phpunk\component">
+    <namespace-alias name="api_error">\PHPunk\api_error</namespace-alias>
+    <class final="false" abstract="false" namespace="PHPunk\Component" line="13" package="phpunk\component">
       <extends/>
       <name>controller</name>
       <full_name>\PHPunk\Component\controller</full_name>
-      <docblock line="11">
+      <docblock line="13">
         <description></description>
         <long-description></long-description>
-        <tag name="package" line="11" description="phpunk\component"/>
+        <tag name="package" line="13" description="phpunk\component"/>
       </docblock>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="PHPunk\Component" line="20" package="phpunk\component">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="PHPunk\Component" line="22" package="phpunk\component">
         <name>__construct</name>
         <full_name>\PHPunk\Component\controller::__construct()</full_name>
-        <docblock line="20">
+        <docblock line="22">
           <description></description>
           <long-description></long-description>
-          <tag name="param" line="20" description="&lt;p&gt;Model instance for this component&lt;/p&gt;" type="object" variable="$model">
+          <tag name="param" line="22" description="&lt;p&gt;Model instance for this component&lt;/p&gt;" type="object" variable="$model">
             <type>object</type>
           </tag>
         </docblock>
@@ -32,13 +33,13 @@
           <type>object</type>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="PHPunk\Component" line="38" package="phpunk\component">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="PHPunk\Component" line="40" package="phpunk\component">
         <name>do_action</name>
         <full_name>\PHPunk\Component\controller::do_action()</full_name>
-        <docblock line="38">
+        <docblock line="40">
           <description>Executes concrete action methods in child classes</description>
           <long-description></long-description>
-          <tag name="param" line="38" description="&lt;p&gt;API name of the relevant action&lt;/p&gt;" type="string" variable="$action">
+          <tag name="param" line="40" description="&lt;p&gt;API name of the relevant action&lt;/p&gt;" type="string" variable="$action">
             <type>string</type>
           </tag>
         </docblock>
@@ -48,16 +49,16 @@
           <type>string</type>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="PHPunk\Component" line="51" package="phpunk\component">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="PHPunk\Component" line="53" package="phpunk\component">
         <name>pre_view</name>
         <full_name>\PHPunk\Component\controller::pre_view()</full_name>
-        <docblock line="51">
+        <docblock line="53">
           <description>Executes concrete view methods in child classes</description>
           <long-description></long-description>
-          <tag name="param" line="51" description="&lt;p&gt;API name of the relevant view&lt;/p&gt;" type="string" variable="$view">
+          <tag name="param" line="53" description="&lt;p&gt;API name of the relevant view&lt;/p&gt;" type="string" variable="$view">
             <type>string</type>
           </tag>
-          <tag name="param" line="51" description="&lt;p&gt;Array of named parameters that will be passed into the view&lt;/p&gt;" type="array" variable="$vars">
+          <tag name="param" line="53" description="&lt;p&gt;Array of named parameters that will be passed into the view&lt;/p&gt;" type="array" variable="$vars">
             <type>array</type>
           </tag>
         </docblock>
@@ -72,17 +73,41 @@
           <type>array</type>
         </argument>
       </method>
-      <property final="false" static="false" visibility="public" line="11">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="PHPunk\Component" line="64" package="phpunk\component">
+        <name>pre_render</name>
+        <full_name>\PHPunk\Component\controller::pre_render()</full_name>
+        <docblock line="64">
+          <description>Executes concrete api view methods in child classes</description>
+          <long-description></long-description>
+          <tag name="param" line="64" description="&lt;p&gt;API name of the relevant view&lt;/p&gt;" type="string" variable="$view">
+            <type>string</type>
+          </tag>
+          <tag name="param" line="64" description="&lt;p&gt;Database result/record or error that will be rendered&lt;/p&gt;" type="mixed" variable="$result">
+            <type>mixed</type>
+          </tag>
+        </docblock>
+        <argument line="0" by_reference="false">
+          <name>$view</name>
+          <default></default>
+          <type>string</type>
+        </argument>
+        <argument line="0" by_reference="true">
+          <name>$result</name>
+          <default></default>
+          <type>mixed</type>
+        </argument>
+      </method>
+      <property final="false" static="false" visibility="public" line="13">
         <name>$resource</name>
         <default/>
         <docblock>
           <description>Resource name for this component</description>
           <long-description/>
-          <tag name="var" description="&lt;p&gt;Resource name for this component&lt;/p&gt;" type="string" line="11">
+          <tag name="var" description="&lt;p&gt;Resource name for this component&lt;/p&gt;" type="string" line="13">
             <type by_reference="false">string</type>
           </tag>
-          <tag name="magic" line="11"/>
-          <tag name="property" line="11" description="Resource name for this component" type="string" variable="$resource">
+          <tag name="magic" line="13"/>
+          <tag name="property" line="13" description="Resource name for this component" type="string" variable="$resource">
             <type>string</type>
           </tag>
         </docblock>
@@ -90,10 +115,10 @@
     </class>
     <parse_markers>
       <error line="0" code="PPC:ERR-50000">No summary was found for this file</error>
-      <error line="11" code="PPC:ERR-50005">No summary for class \PHPunk\Component\controller</error>
-      <error line="20" code="PPC:ERR-50008">No summary for method __construct()</error>
+      <error line="13" code="PPC:ERR-50005">No summary for class \PHPunk\Component\controller</error>
+      <error line="22" code="PPC:ERR-50008">No summary for method __construct()</error>
     </parse_markers>
-    <source>eJyVVF1vGjEQfL77FasIlQNBeU+aNKhCaR6aonyoL5Us41sOF2OfbB9JVOW/Z23fldAGNXk5jHdndnbm4NPnelXnk+EwhyGc11yseYVAd41e/xRmUxuN2lNxkueab9BRC8L86zzUv3T1k3xHYU2N1j+C81bqCnoWnWksga67Q+CBpbHgV9LB/hChuAt32lujFFr4nWeBOgvcstLGIkjt0WquYMut5AuFoTrJMxrtUXgsocc2pkRFsnbgmlu+AbP4RS3Qi3X4Fp9SO8+1eFVTy9wslBSwbLTw0mhgjBTSgo3wRaIaBKFZL6DHZ2k6nLZjTvLsKf93jQ2viHODfmXKg3MqpAlrfEz87l56sYIXN5ngDqHfmdw/DneZRd9YDed7esZnXRcJIkV7omYPKBqP0XpBcASeJCR9jkwCsZKqhJgQupemdlG3kOn8MmVslmQngkWFW659S3lg19KwVC9antbSJIDMpCnMYq3oBSz64/4I+owef5o/0vd07of95BKKBGX4IJ13RTSDAOl2MMh3RgmuFGscWhbkFNxa/vh3P53Yxew2fMy/39wOwhBUDgMN7V9VhEZrjS2O7nSJS6npRWwdaXPo/D9uRR+NYMbubmbX7Mf0+ury6mJw8r9UthLv35VJBBxMJFRfouLmBOLWwTSeCRGQJcQGkkAVv+Ie7qVSsKD/ijC6DD9KE7k7ylciri2yUC6iqhF8iIPemHOApJTD6R0Zp21O3xpylBRzeMqfAUW1ocw=</source>
+    <source>eJy1Vd1P2zAQf07+ihOqlhSVlYc9wWCgrWI8jFV8aA8MRa5zbT1cO7OdApr433e2k0ILFSBtfUid+/zd/XyXj5+qaZX2NzdT2ISDivFrNkEgWa2uf3I9q7RC5UjZT1PFZmjJBGH4dej1n1v9bprWdiFmlSjQGG1IvIhsdIXG3YF1RqgJdAxaXRuKddoefHgYawNuKiws5+aSWS9Tzmgp0cCfNPGhEx9bTJQ2CEI5NIpJmDMj2Eii1/bThFI75A5L6BQzXaIkWA/OFTNsBnr0i0ygE/TwLTyFso4p/iymJnI9koLDuFbcCa2gKAghFVhzl8dQXQ806Xjvrf2YHfaaNLtpcp8+LWPGJhRzhm6qy7V5JkgZrvEuxrc3wvEpPJIknBEfWdvkbMfLEoOuNgoOlvBs7bdWBIgQLYEa3CKvHYbWc3JHYBFCxGepScCnQpYQGEL7uKkt1Y3L4fA4cqzH1E4EgxLnTLkm5JpaS11Efd7EaVoaAVAzKUthsJJ0L/NsK+tBVtBjYfye3uM58/WJMeTRtcBbYZ3NQzPIIUq73fShUZxJWdDFNoWHkzNj2N2qPZ2Ko8G5/xt+Pzvv+iQoLfowVP9kQt5hGPKNC1XiWCi6iE1HGh7a/u80oDd6MCguzganxY/D05Pjk6Pu7kuszAXevImT4LCWEa997BUqJydmLByGM3l4zxKCAUEgjZsyBzdCShjRCvGpSz+UOsRuQz5DcWWw8Oo8oOrBu5DolTx7l8iyP72B41jN3mtJDpBe5IFW3//mYiZu/SqjS1NLB1+YYyM/6/G9b5BrUwJtrHDpljkxSDfQ4Lq14nmIJg9MxLCrXGR+xWfU9X9JSlxcbWFPiLlctr96bvDuwY/eaiBF7V18k/KAvW5HMQLshfWYnYe+/67R+q+FZyRQQ5tfaQeNB9V3GcyTjL4PrrYZAOztw4ft7V4jX6xdL18Z8tYm5AWIvp1IMv2u/LO72MT36V84gGaU</source>
   </file>
   <file path="compat/http.php" generated-path="compat.http.html" hash="4caac4c8b7ae8834b501b7fee0943326" package="phpunk\compat\http">
     <docblock line="0">
@@ -2724,35 +2749,36 @@ own primary key.</description>
     </parse_markers>
     <source>eJytVF1v2jAUfSa/4gohNSBW3ss6hrZqQ9soop02aZsi49wQq8GObIe2mvjvuzb5okCflgcUfM89Pjn32G8neZoHo8EggAG8zxl/YGsEWivkw2+uNrmSKC0VR0Eg2QYNQRAWnxeu/qGqj4OAZ8wYsLjJM2YR/gYdR9pxrGItlUYQ0qKWLIMt04KtMnTVUQD05FpsXVcvioU2cA1Ma/Yc9om3ocmZZhswVgu5ht6KGXRo+Cg0cqv0M+TMpsCVtExIh6nFJCJD09qtWGWCQ1JIboWSEEXURLwFt2HN26dPgPLp2VSYN+8OxTXIsQfuWlqncWwgLoUJNOdVXZ76tuPPOi+exXGUqCxGHfZekf3rDwl3gGOxd8g0T/FQcKI0bJjl6ZHkk4q3Ah9hTvkAlYBNEdzCKaBGowpNEWqDq8V9g0ZbaFl1LNxQrTrUcN6OTHEChV7QsLXdNSQsM+js6XR63npnSFO/LhEwqea7p7gQMsaniz5cUWNnX+rWfSOP6g6hRLcqvq/bEFCWq8GQuch4CmEphBnwb+6AtQd4iG2H0HXQS9VAyjoigVCYyPGQwLI4qnkv6Ux3+33P7eCly+eQ4xK4q8XsGv019MDCCbz0xTPBFa3X/1ou0HzXa9QRaq102P0mjDkKW7MVOXkTfb+7WUY/psv5bP6pMrT6Ej+943Qvkewnx47D/CgoWblWWxFjDD6mSDfU6SP5PwO+b/BRImJG4m4X97Pb+fSrb2proVdjaIXuzuYIvJZ+Fp/N/rDcrL5d21Fz6fFeu5Huk3bmKPVfJhSfrGbu6nTsNKWf98vo7stsUd6L9Q6SZ0VcTnTcitX+dxf8A2wpAjQ=</source>
   </file>
-  <file path="component/model.php" generated-path="component.model.html" hash="8a7dc0f63cf792bd50f9af9d488546bc" package="phpunk\component">
+  <file path="component/model.php" generated-path="component.model.html" hash="4f4d4cd0f997bea74b90db53210e100b" package="phpunk\component">
     <docblock line="0">
       <description></description>
       <long-description></long-description>
       <tag name="package" line="0" description="phpunk\component"/>
     </docblock>
     <namespace-alias name="query">\PHPunk\Database\query</namespace-alias>
-    <class final="false" abstract="false" namespace="PHPunk\Component" line="14" package="phpunk\component">
+    <namespace-alias name="record">\PHPunk\Database\record</namespace-alias>
+    <class final="false" abstract="false" namespace="PHPunk\Component" line="15" package="phpunk\component">
       <extends/>
       <name>model</name>
       <full_name>\PHPunk\Component\model</full_name>
-      <docblock line="14">
+      <docblock line="15">
         <description></description>
         <long-description></long-description>
-        <tag name="package" line="14" description="phpunk\component"/>
+        <tag name="package" line="15" description="phpunk\component"/>
       </docblock>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="PHPunk\Component" line="35" package="phpunk\component">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="PHPunk\Component" line="36" package="phpunk\component">
         <name>__construct</name>
         <full_name>\PHPunk\Component\model::__construct()</full_name>
-        <docblock line="35">
+        <docblock line="36">
           <description></description>
           <long-description></long-description>
-          <tag name="property" line="35" description="Resource name for this component" type="string" variable="$resource">
+          <tag name="property" line="36" description="Resource name for this component" type="string" variable="$resource">
             <type>string</type>
           </tag>
-          <tag name="property" line="35" description="Database instance for this component" type="object" variable="$database">
+          <tag name="property" line="36" description="Database instance for this component" type="object" variable="$database">
             <type>object</type>
           </tag>
-          <tag name="property" line="35" description="OPTIONAL Cache instance for this component" type="object" variable="$cache">
+          <tag name="property" line="36" description="OPTIONAL Cache instance for this component" type="object" variable="$cache">
             <type>object</type>
           </tag>
         </docblock>
@@ -2773,15 +2799,34 @@ own primary key.</description>
         </argument>
       </method>
       <method final="false" abstract="false" static="false" visibility="public" namespace="PHPunk\Component" line="59" package="phpunk\component">
-        <name>get_record</name>
-        <full_name>\PHPunk\Component\model::get_record()</full_name>
+        <name>create_record</name>
+        <full_name>\PHPunk\Component\model::create_record()</full_name>
         <docblock line="59">
-          <description>Fetches a single database record by unique identifier.</description>
-          <long-description>Returns cached copy, if available.</long-description>
-          <tag name="param" line="59" description="&lt;p&gt;Unique identifier for database record&lt;/p&gt;" type="mixed" variable="$id">
+          <description>Instantiates a new database record with the given data.</description>
+          <long-description></long-description>
+          <tag name="param" line="59" description="&lt;p&gt;Associative array of data or record ID&lt;/p&gt;" type="mixed" variable="$data">
             <type>mixed</type>
           </tag>
-          <tag name="return" line="59" description="Record identified by parameter, NULL on failure" type="object">
+          <tag name="return" line="59" description="New database record" type="object">
+            <type>object</type>
+          </tag>
+        </docblock>
+        <argument line="0" by_reference="false">
+          <name>$data</name>
+          <default>array()</default>
+          <type>mixed</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="PHPunk\Component" line="70" package="phpunk\component">
+        <name>get_record</name>
+        <full_name>\PHPunk\Component\model::get_record()</full_name>
+        <docblock line="70">
+          <description>Fetches a single database record by unique identifier.</description>
+          <long-description>Returns cached copy, if available.</long-description>
+          <tag name="param" line="70" description="&lt;p&gt;Unique identifier for database record&lt;/p&gt;" type="mixed" variable="$id">
+            <type>mixed</type>
+          </tag>
+          <tag name="return" line="70" description="Record identified by parameter, NULL on failure" type="object">
             <type>object</type>
           </tag>
         </docblock>
@@ -2791,16 +2836,16 @@ own primary key.</description>
           <type>mixed</type>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="PHPunk\Component" line="75" package="phpunk\component">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="PHPunk\Component" line="86" package="phpunk\component">
         <name>put_record</name>
         <full_name>\PHPunk\Component\model::put_record()</full_name>
-        <docblock line="75">
+        <docblock line="86">
           <description>Saves a single database record to the database.</description>
           <long-description>Invalidates any previously-cached copy of record.</long-description>
-          <tag name="param" line="75" description="&lt;p&gt;Record instance to save to database&lt;/p&gt;" type="object" variable="$record">
+          <tag name="param" line="86" description="&lt;p&gt;Record instance to save to database&lt;/p&gt;" type="object" variable="$record">
             <type>object</type>
           </tag>
-          <tag name="return" line="75" description="Record instance updated with auto-generated id, FALSE on failure" type="object">
+          <tag name="return" line="86" description="Record instance updated with auto-generated id, FALSE on failure" type="object">
             <type>object</type>
           </tag>
         </docblock>
@@ -2810,16 +2855,16 @@ own primary key.</description>
           <type>object</type>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="PHPunk\Component" line="88" package="phpunk\component">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="PHPunk\Component" line="99" package="phpunk\component">
         <name>remove_record</name>
         <full_name>\PHPunk\Component\model::remove_record()</full_name>
-        <docblock line="88">
+        <docblock line="99">
           <description>Deletes a single database record by unique identifier.</description>
           <long-description>Invalidates any previously-cached copy of the record.</long-description>
-          <tag name="param" line="88" description="&lt;p&gt;Unique identifier for database record&lt;/p&gt;" type="mixed" variable="$id">
+          <tag name="param" line="99" description="&lt;p&gt;Unique identifier for database record&lt;/p&gt;" type="mixed" variable="$id">
             <type>mixed</type>
           </tag>
-          <tag name="return" line="88" description="TRUE on success, FALSE on failure" type="boolean">
+          <tag name="return" line="99" description="TRUE on success, FALSE on failure" type="boolean">
             <type>boolean</type>
           </tag>
         </docblock>
@@ -2829,47 +2874,20 @@ own primary key.</description>
           <type>mixed</type>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="protected" namespace="PHPunk\Component" line="102" package="phpunk\component">
+      <method final="false" abstract="false" static="false" visibility="protected" namespace="PHPunk\Component" line="113" package="phpunk\component">
         <name>query</name>
         <full_name>\PHPunk\Component\model::query()</full_name>
-        <docblock line="102">
+        <docblock line="113">
           <description>Runs a raw parameterized SQL query against the database.</description>
           <long-description>Retrieves data from database.</long-description>
-          <tag name="param" line="102" description="&lt;p&gt;SQL query to run&lt;/p&gt;" type="string" variable="$sql">
+          <tag name="param" line="113" description="&lt;p&gt;SQL query to run&lt;/p&gt;" type="string" variable="$sql">
             <type>string</type>
           </tag>
-          <tag name="param" line="102" description="&lt;p&gt;OPTIONAL Array of parameter values for query&lt;/p&gt;" type="array" variable="$params">
+          <tag name="param" line="113" description="&lt;p&gt;OPTIONAL Array of parameter values for query&lt;/p&gt;" type="array" variable="$params">
             <type>array</type>
           </tag>
-          <tag name="return" line="102" description="Result instance returned by query" type="object">
+          <tag name="return" line="113" description="Result instance returned by query" type="object">
             <type>object</type>
-          </tag>
-        </docblock>
-        <argument line="0" by_reference="false">
-          <name>$sql</name>
-          <default></default>
-          <type>string</type>
-        </argument>
-        <argument line="0" by_reference="false">
-          <name>$params</name>
-          <default>array()</default>
-          <type>array</type>
-        </argument>
-      </method>
-      <method final="false" abstract="false" static="false" visibility="protected" namespace="PHPunk\Component" line="114" package="phpunk\component">
-        <name>execute</name>
-        <full_name>\PHPunk\Component\model::execute()</full_name>
-        <docblock line="114">
-          <description>Runs a raw parameterized SQL query against the database.</description>
-          <long-description>Manipulates data in database.</long-description>
-          <tag name="param" line="114" description="&lt;p&gt;SQL query to run&lt;/p&gt;" type="string" variable="$sql">
-            <type>string</type>
-          </tag>
-          <tag name="param" line="114" description="&lt;p&gt;OPTIONAL Array of parameter values for query&lt;/p&gt;" type="array" variable="$params">
-            <type>array</type>
-          </tag>
-          <tag name="return" line="114" description="TRUE on success, FALSE on failure" type="boolean">
-            <type>boolean</type>
           </tag>
         </docblock>
         <argument line="0" by_reference="false">
@@ -2884,16 +2902,43 @@ own primary key.</description>
         </argument>
       </method>
       <method final="false" abstract="false" static="false" visibility="protected" namespace="PHPunk\Component" line="125" package="phpunk\component">
-        <name>make_query</name>
-        <full_name>\PHPunk\Component\model::make_query()</full_name>
+        <name>execute</name>
+        <full_name>\PHPunk\Component\model::execute()</full_name>
         <docblock line="125">
-          <description>Creates a new database query object for this component.</description>
-          <long-description></long-description>
-          <tag name="see" line="125" description="" link="\PHPunk\Component\PHPunk\Database\query"/>
-          <tag name="param" line="125" description="&lt;p&gt;Name parameters to pass to query object&lt;/p&gt;" type="array" variable="$args">
+          <description>Runs a raw parameterized SQL query against the database.</description>
+          <long-description>Manipulates data in database.</long-description>
+          <tag name="param" line="125" description="&lt;p&gt;SQL query to run&lt;/p&gt;" type="string" variable="$sql">
+            <type>string</type>
+          </tag>
+          <tag name="param" line="125" description="&lt;p&gt;OPTIONAL Array of parameter values for query&lt;/p&gt;" type="array" variable="$params">
             <type>array</type>
           </tag>
-          <tag name="return" line="125" description="Database query object" type="object">
+          <tag name="return" line="125" description="TRUE on success, FALSE on failure" type="boolean">
+            <type>boolean</type>
+          </tag>
+        </docblock>
+        <argument line="0" by_reference="false">
+          <name>$sql</name>
+          <default></default>
+          <type>string</type>
+        </argument>
+        <argument line="0" by_reference="false">
+          <name>$params</name>
+          <default>array()</default>
+          <type>array</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="protected" namespace="PHPunk\Component" line="136" package="phpunk\component">
+        <name>make_query</name>
+        <full_name>\PHPunk\Component\model::make_query()</full_name>
+        <docblock line="136">
+          <description>Creates a new database query object for this component.</description>
+          <long-description></long-description>
+          <tag name="see" line="136" description="" link="\PHPunk\Component\PHPunk\Database\query"/>
+          <tag name="param" line="136" description="&lt;p&gt;Name parameters to pass to query object&lt;/p&gt;" type="array" variable="$args">
+            <type>array</type>
+          </tag>
+          <tag name="return" line="136" description="Database query object" type="object">
             <type>object</type>
           </tag>
         </docblock>
@@ -2903,16 +2948,16 @@ own primary key.</description>
           <type>array</type>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="protected" namespace="PHPunk\Component" line="135" package="phpunk\component">
+      <method final="false" abstract="false" static="false" visibility="protected" namespace="PHPunk\Component" line="146" package="phpunk\component">
         <name>get_cached_object</name>
         <full_name>\PHPunk\Component\model::get_cached_object()</full_name>
-        <docblock line="135">
+        <docblock line="146">
           <description>Fetches a cached copy of a data object by unique identifier.</description>
           <long-description></long-description>
-          <tag name="param" line="135" description="&lt;p&gt;Unique identifier for database record&lt;/p&gt;" type="mixed" variable="$id">
+          <tag name="param" line="146" description="&lt;p&gt;Unique identifier for database record&lt;/p&gt;" type="mixed" variable="$id">
             <type>mixed</type>
           </tag>
-          <tag name="return" line="135" description="Cached data object, NULL on failure" type="object">
+          <tag name="return" line="146" description="Cached data object, NULL on failure" type="object">
             <type>object</type>
           </tag>
         </docblock>
@@ -2922,19 +2967,19 @@ own primary key.</description>
           <type>mixed</type>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="protected" namespace="PHPunk\Component" line="145" package="phpunk\component">
+      <method final="false" abstract="false" static="false" visibility="protected" namespace="PHPunk\Component" line="156" package="phpunk\component">
         <name>put_cached_object</name>
         <full_name>\PHPunk\Component\model::put_cached_object()</full_name>
-        <docblock line="145">
+        <docblock line="156">
           <description>Caches a copy of a single data object by unique identifier.</description>
           <long-description></long-description>
-          <tag name="param" line="145" description="&lt;p&gt;Unique identifier for data object&lt;/p&gt;" type="mixed" variable="$id">
+          <tag name="param" line="156" description="&lt;p&gt;Unique identifier for data object&lt;/p&gt;" type="mixed" variable="$id">
             <type>mixed</type>
           </tag>
-          <tag name="param" line="145" description="&lt;p&gt;data object to cache&lt;/p&gt;" type="object" variable="$object">
+          <tag name="param" line="156" description="&lt;p&gt;data object to cache&lt;/p&gt;" type="object" variable="$object">
             <type>object</type>
           </tag>
-          <tag name="return" line="145" description="Cached data object" type="object">
+          <tag name="return" line="156" description="Cached data object" type="object">
             <type>object</type>
           </tag>
         </docblock>
@@ -2949,13 +2994,13 @@ own primary key.</description>
           <type>object</type>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="protected" namespace="PHPunk\Component" line="153" package="phpunk\component">
+      <method final="false" abstract="false" static="false" visibility="protected" namespace="PHPunk\Component" line="164" package="phpunk\component">
         <name>remove_cached_object</name>
         <full_name>\PHPunk\Component\model::remove_cached_object()</full_name>
-        <docblock line="153">
+        <docblock line="164">
           <description>Un-caches a copy of a single data object by unique identifier.</description>
           <long-description></long-description>
-          <tag name="param" line="153" description="&lt;p&gt;Unique identifier for database record&lt;/p&gt;" type="mixed" variable="$id">
+          <tag name="param" line="164" description="&lt;p&gt;Unique identifier for database record&lt;/p&gt;" type="mixed" variable="$id">
             <type>mixed</type>
           </tag>
         </docblock>
@@ -2965,32 +3010,32 @@ own primary key.</description>
           <type>mixed</type>
         </argument>
       </method>
-      <property final="false" static="false" visibility="public" line="14">
+      <property final="false" static="false" visibility="public" line="15">
         <name>$resource</name>
         <default/>
         <docblock>
           <description>Resource name for this component</description>
           <long-description/>
-          <tag name="var" description="&lt;p&gt;Resource name for this component&lt;/p&gt;" type="string" line="14">
+          <tag name="var" description="&lt;p&gt;Resource name for this component&lt;/p&gt;" type="string" line="15">
             <type by_reference="false">string</type>
           </tag>
-          <tag name="magic" line="14"/>
-          <tag name="property" line="14" description="Resource name for this component" type="string" variable="$resource">
+          <tag name="magic" line="15"/>
+          <tag name="property" line="15" description="Resource name for this component" type="string" variable="$resource">
             <type>string</type>
           </tag>
         </docblock>
       </property>
-      <property final="false" static="false" visibility="public" line="14">
+      <property final="false" static="false" visibility="public" line="15">
         <name>$insert_id</name>
         <default/>
         <docblock>
           <description>Most recent auto-generated Id on the database connection</description>
           <long-description/>
-          <tag name="var" description="&lt;p&gt;Most recent auto-generated Id on the database connection&lt;/p&gt;" type="mixed" line="14">
+          <tag name="var" description="&lt;p&gt;Most recent auto-generated Id on the database connection&lt;/p&gt;" type="mixed" line="15">
             <type by_reference="false">mixed</type>
           </tag>
-          <tag name="magic" line="14"/>
-          <tag name="property" line="14" description="Most recent auto-generated Id on the database connection" type="mixed" variable="$insert_id">
+          <tag name="magic" line="15"/>
+          <tag name="property" line="15" description="Most recent auto-generated Id on the database connection" type="mixed" variable="$insert_id">
             <type>mixed</type>
           </tag>
         </docblock>
@@ -2998,13 +3043,13 @@ own primary key.</description>
     </class>
     <parse_markers>
       <error line="0" code="PPC:ERR-50000">No summary was found for this file</error>
-      <error line="14" code="PPC:ERR-50005">No summary for class \PHPunk\Component\model</error>
-      <error line="35" code="PPC:ERR-50015">Argument $resource is missing from the Docblock of __construct</error>
-      <error line="35" code="PPC:ERR-50015">Argument $database is missing from the Docblock of __construct</error>
-      <error line="35" code="PPC:ERR-50015">Argument $cache is missing from the Docblock of __construct</error>
-      <error line="35" code="PPC:ERR-50008">No summary for method __construct()</error>
+      <error line="15" code="PPC:ERR-50005">No summary for class \PHPunk\Component\model</error>
+      <error line="36" code="PPC:ERR-50015">Argument $resource is missing from the Docblock of __construct</error>
+      <error line="36" code="PPC:ERR-50015">Argument $database is missing from the Docblock of __construct</error>
+      <error line="36" code="PPC:ERR-50015">Argument $cache is missing from the Docblock of __construct</error>
+      <error line="36" code="PPC:ERR-50008">No summary for method __construct()</error>
     </parse_markers>
-    <source>eJzNV9tuGzcQfdZ+xTwIsGTIMfoa10kMu0ENOI4rx09NIVC7I4n1itzwIkct/O8dXna1Wu/Klxht/SKL5MycOWeGHP38vlgUyeH+fgL78KFg6S2bI9CaFbdfU7kspEBhaPMwSQRboqYjCFe/Xrn903L/KEmsrpbPmGFTpvHrN4tqTXuVeyULVGYN2igu5tBXqKVV5HBc/uNiwEwqMAuuoQ6gZr7k3zGDPheavk54Bp+kNqAwpZPArJEHcxSomKFT5xlIQd4QsgiLvAqBqeFS+LzSnGkNS5lhDn8nPQe258LxuZAKgQuDSrAcVkxxNs3R7R4mvULxFUWA/qTMgjJ9gXUJ62XWKUsX26Y/QPK2vZz+SSxBv+Kt1JVgacNE+gwfHiZ8vvpy/vny5AJO/ddH3Lg87TTnKcys8HLBZELaUV42NYMqr9EG4qiMdAzC5vnQ6dnrO9cH7yqZaLO/kWyzX+V5vHFY3w+e6e84RqHN+xbRlmxOmJdoFjLrzGOOlMEtrgNEfcdNuoDaSi91SPZKnHtv3VpPobFKQDOjo41B1RPtFmVeB++qg874fjuTj0hoUAMDTRWU11qHekyqDKZrsIJTewPPSC0+46jeeNOxj0dKOoIyErRYj4DPgK0Yz10Fv4kVwhRbVo2cwU3TnS+KRtxgGlOKpTUOiCpDD857R+qdEVzeXFy4G2BG8a3CDkFIjkmIMSA0QQJC7YrMuz8uGXQHQ26TAMCfHyY1qoOJ68l2FzUR6mEbmo6gchy3CtsSelTGG/qATQxbsl6z1S5Rjdy6JoNQ52LFck5rzlIQswpXXFqdrw9qEoOcRS9b8pbdHwOUUpVtTwE1QXKfZdBdCpdmtsj8zU49s2je9o6QjycX1788Lrmjs+Q+Utgte02zut1DzaKnR3QLp6gJn6XfGeZoXtaWT5fRlUCLlD/SqVMpc2QCvoxvvC7apilq/WSlFC7lCrv6U9vctArVMHu0v+L5h93dUMYFbCgztsLJotjd5urhfxFh179dgJ+CgM2Zq+CWFqMrU3F0renWYabksnEialA+6PpbXnNM3aOsqJ9jSrE19P0XvXl0T/wySVxBpLEitxTXCeidtbefZ7hqv7Ab7tnKyM8k0tB52qiE89sDh3dUwTkO8AbD+DhXy1xPwk5cGsL7yuhtMJpoqgscOP/uAaXzcz0YjuCn4VGy46lrgTF8TQE/McELm/vm8hJy8b8Q8Nl991BB/I6pNfjfa9gKpKniqcJww4HAu82VFGiO5fxw1owSaez4AdOijAMNl26KrqTQTsfC/ZKgz3rEtp46a4PWrcKS3eIkVrELHWl3//6+Z9xUtfdH7Qqsj4UxruMjOmhQOwrZNKncjICN94GFEo+JdL84rzfhnQYAtbCdU91D6trnNc9fjPJha773M1nHY9GsNlYyVFFTe5dflaGtUtqereJnPSQVoM/laWR2c9c1cIYvO0kk03YSN+YNNm9EmET+HUIbJdeef+dAsCvzYLSrgu6TfwB/a7kx</source>
+    <source>eJzNV1lT20gQfrZ/RT+4CpsyofY1rEko2NRSRQgL4SmhXGOpbc8ijZQ5TLxb/Pf0HJJlHZyp7PJipL6/r3um9fu7fJn393d3+7AL73MW3bIFAr0z4vZrlKV5JlBoEu73+4KlqEgF4eLPCys/LuQH/b5R5esTptmMKfz6zaBcH7SKJEaZjMmuDC2zHKVeg9KSiwUMJKrMSAp2Wfxj48M8k6CXXEE1uYp5yr9jDAMuFD1OeQwfM6WBwpEmMKOzvQUKlEyT1mkMmSBvCHHIi7wKgZHmmXA1RwlTCtIsxgT+7fdssj0bji9EJhG40CgFS2DFJGezBK10v9/LJV9RBBhMiyqo0hdYF2m9zDpi0XLb9BUgb9tns78JJRiUuBXEUlpKMxE9w4dLEz5dfD79dH50Bsfu8RE3tk4zS3gEcyMcXTCdEndUl4n0sKxrvElxXESagDBJMrJ89gbW9d5hSRMJBxvKNvKyzsnGYVXuPdPfJEQh4X0LaSlbUM4p6mUWd9axQKrgFtc+RXXHdbSEypteZDPZKfLceWvf9SRqIwXUKzrYGJQz0W5R1LV3WCpa4/vtSk4dMZpTiylgIPBuMzx+qIESXrqpWvAVCid+E7hnkqXFiNr3cKRUFpEz0gQmJaO2mDsLIN6Dv9MTbx3yDX1z3ozcgWgkkbKdep2hjzuBLzceTT6HIVdTYVKUPPLi0QhKtR3CCyaH/sWNRSTkYUuv+hw3sB/VuuADEpMONkXTl2ADudkajOB0bAKPqdP5nKP00F26mDQFtrliGoZ8PQZKna0YT+z0tyFMp9913Z0bqBbc6vBe+oxKQ5ec84507ozh/PrszJ6ec4pvJHZAT61c4s7jDeCDUPCkwMwq+tqmPgGnP+pX2rS8MjpcVBq4GrbGyRhKx0GUm5bQ4yLeyAWs57BF6xVbPUSqzraumDdhjFYs4bGfIkHISlzxzKhkvVeh2A6D97JFb3FyhgAFVcWRSQEVpWR/i6APMVyYmTx2t6Ib39pNaQH5cHR29cfjlFs4C+wDhN20Vzir2jU5C54e4c1r0QH2LP5OMEH9srF8Oo22BVqofM2kzrIsQSbg8+W140WZKEKlnsyUxDRbYdd8KpPoVqJqZo/OV9BvTneNGRuwxsylEZYWye42Rw//hwC7+usM3HYJbMFsB7eMGB2ZkqMdTXeUz2WW1jQCB8UypL4lFcc0PdKIqp6/nwbuQW0WlqPi2ipTpJUsMRTXEuictY+fQ7gcPy/152xp5Pa5TJM+CUrinHho8x2X6Ux8esNRWGzK13S3eUl4NYJ3pdFbbzRV1Bc4tP7t8kH6CzUcjeG3UeW6azZCSxr1G+9VBH5kgucmccPlKOTif0Hgs+euySB+x8ho/O85bE2kzuKxW6Aa656HObRzc08PFCns+DBsYcYmDef2C6SkQlkec/sVRr/ViG0zddKWWjcLKbvFaehiGzrAbv/9sqPtVrVzUzkCqyt1ZQcMDmrQjn013Stg7X5gYev1hXTfOD9vwzv2CVTCdm51Teja9zWHX4jyfuvbyO1kHZdFvdtYgVAJTeVe/qkIbbXS9m4VfqshqQFdLU8Dsxu7roXTPzwIIpm2g7gxr6F5Lfwm8msAbfkYa9bfuRA8VLk3eqiD7vs/AK5WKRk=</source>
   </file>
   <file path="index.php" generated-path="index.html" hash="399facb524ecf68016f9cdefd0cf1f9f" package="Default">
     <docblock line="0">
@@ -3360,43 +3405,119 @@ own primary key.</description>
     </function>
     <source>eJytk89u2zAMxs/2U3DAgCZBmzzAgu4PsJ126rydBhSyQidcbMmQ5LbG2ncfadld29htDrkJ5seP/H6y1h/rXZ2uFosUFvBF6f2tcht/oW1Vq0A5lRRaKBqjA1njWSS6TzUL1RaBexuz/x3VXFmlKRUwezc0XOMd+eBnZ7m15Y0qz+Zz+JsmMi5hnysMjTMewg5BFKgMsKpBsAUf3FJUnZInOlVBRXe4gfdcgox7vFYlH2NLjmS2oK25QRdYFSyowTV6uG7c46RsbOo6v2T39Sq/lJ5VmgxRoI8wk+ldiqT3m0llLp8/pMlD+jDFgEx4HQELcIvutAjMYDvJ4GDsNIMYYQQBF44gUJRWvcGgk5z4J+g8n8WPU7LDedPRh91HwnelI+L74Hi71/NHzYkBRNMJAi8nTiN43H+EQawd8wr8NQV0Ki/xBYZf6KhomQIvJig4REATvCylBARJE5AHpTXWki5v48PpDaH22GzsRWhrPAda4jK6Uei6DCjnVAvWydnmf1BzoapLrHiOQMicYm5evN6iHnkxXr1DvR99XMO9MtHs6udXQQr0FLBsNex+Lt+/ff7+I+os53K35OMez97gf4CH98DFLmNfub+PC5PxQRmNTPJJxP6i/gHGe/E1</source>
   </file>
-  <file path="compat/crypto.php" generated-path="compat.crypto.html" hash="77d4cbc2a57c750d063b7b6d274b4601" package="phpunk\compat\crypto">
+  <file path="compat/crypto.php" generated-path="compat.crypto.html" hash="4de23e4aff5ae89b99a04235eba39edb" package="phpunk\compat\crypto">
     <docblock line="0">
       <description>Backwards-compatibility functions and constants</description>
       <long-description></long-description>
       <tag name="package" line="0" description="phpunk\compat\crypto"/>
     </docblock>
-    <constant namespace="" line="28" package="phpunk\compat\crypto">
+    <constant namespace="" line="8" package="phpunk\compat\crypto">
       <name>PASSWORD_BCRYPT</name>
       <full_name>\PASSWORD_BCRYPT</full_name>
       <value>1</value>
-      <docblock line="28">
+      <docblock line="8">
         <description></description>
         <long-description></long-description>
-        <tag name="package" line="28" description="phpunk\compat\crypto"/>
+        <tag name="package" line="8" description="phpunk\compat\crypto"/>
       </docblock>
     </constant>
-    <constant namespace="" line="29" package="phpunk\compat\crypto">
+    <constant namespace="" line="9" package="phpunk\compat\crypto">
       <name>PASSWORD_DEFAULT</name>
       <full_name>\PASSWORD_DEFAULT</full_name>
       <value>PASSWORD_BCRYPT</value>
-      <docblock line="29">
+      <docblock line="9">
         <description></description>
         <long-description></long-description>
-        <tag name="package" line="29" description="phpunk\compat\crypto"/>
+        <tag name="package" line="9" description="phpunk\compat\crypto"/>
       </docblock>
     </constant>
-    <function namespace="" line="16" package="phpunk\compat\crypto">
+    <function namespace="" line="12" package="phpunk\compat\crypto">
       <name>random_bytes</name>
       <full_name>\random_bytes()</full_name>
-      <docblock line="16">
+      <docblock line="12">
+        <description></description>
+        <long-description></long-description>
+        <tag name="package" line="12" description="phpunk\compat\crypto"/>
+      </docblock>
+      <argument line="0" by_reference="false">
+        <name>$length</name>
+        <default></default>
+        <type/>
+      </argument>
+    </function>
+    <function namespace="" line="18" package="phpunk\compat\crypto">
+      <name>hash_equals</name>
+      <full_name>\hash_equals()</full_name>
+      <docblock line="18">
+        <description></description>
+        <long-description></long-description>
+        <tag name="package" line="18" description="phpunk\compat\crypto"/>
+      </docblock>
+      <argument line="0" by_reference="false">
+        <name>$hash1</name>
+        <default></default>
+        <type/>
+      </argument>
+      <argument line="0" by_reference="false">
+        <name>$hash2</name>
+        <default></default>
+        <type/>
+      </argument>
+    </function>
+    <function namespace="" line="24" package="phpunk\compat\crypto">
+      <name>password_hash</name>
+      <full_name>\password_hash()</full_name>
+      <docblock line="24">
+        <description></description>
+        <long-description></long-description>
+        <tag name="package" line="24" description="phpunk\compat\crypto"/>
+      </docblock>
+      <argument line="0" by_reference="false">
+        <name>$password</name>
+        <default></default>
+        <type/>
+      </argument>
+      <argument line="0" by_reference="false">
+        <name>$algo</name>
+        <default></default>
+        <type/>
+      </argument>
+      <argument line="0" by_reference="false">
+        <name>$options</name>
+        <default>array()</default>
+        <type/>
+      </argument>
+    </function>
+    <function namespace="" line="30" package="phpunk\compat\crypto">
+      <name>password_verify</name>
+      <full_name>\password_verify()</full_name>
+      <docblock line="30">
+        <description></description>
+        <long-description></long-description>
+        <tag name="package" line="30" description="phpunk\compat\crypto"/>
+      </docblock>
+      <argument line="0" by_reference="false">
+        <name>$password</name>
+        <default></default>
+        <type/>
+      </argument>
+      <argument line="0" by_reference="false">
+        <name>$hash</name>
+        <default></default>
+        <type/>
+      </argument>
+    </function>
+    <function namespace="" line="42" package="phpunk\compat\crypto">
+      <name>_random_bytes</name>
+      <full_name>\_random_bytes()</full_name>
+      <docblock line="42">
         <description>Generates an arbitrary length string of cryptographic random bytes that are suitable for cryptographic use, such as when generating salts, keys or initialization vectors.</description>
         <long-description>Triggers error if no crytpographically secure random number generator can be found.</long-description>
-        <tag name="package" line="16" description="phpunk\compat\crypto"/>
-        <tag name="param" line="16" description="&lt;p&gt;The length of the random string that should be returned in bytes.&lt;/p&gt;" type="integer" variable="$length">
+        <tag name="package" line="42" description="phpunk\compat\crypto"/>
+        <tag name="param" line="42" description="&lt;p&gt;The length of the random string that should be returned in bytes.&lt;/p&gt;" type="integer" variable="$length">
           <type>integer</type>
         </tag>
-        <tag name="return" line="16" description="Returns a string containing the requested number of cryptographically secure random bytes." type="string">
+        <tag name="return" line="42" description="Returns a string containing the requested number of cryptographically secure random bytes." type="string">
           <type>string</type>
         </tag>
       </docblock>
@@ -3406,10 +3527,35 @@ own primary key.</description>
         <type>integer</type>
       </argument>
     </function>
-    <function namespace="" line="47" package="phpunk\compat\crypto">
-      <name>password_hash</name>
-      <full_name>\password_hash()</full_name>
-      <docblock line="47">
+    <function namespace="" line="60" package="phpunk\compat\crypto">
+      <name>_hash_equals</name>
+      <full_name>\_hash_equals()</full_name>
+      <docblock line="60">
+        <description>Compares two strings using the same time whether they're equal or not.</description>
+        <long-description>This function should be used to mitigate timing attacks; for instance, when testing crypt() password hashes.</long-description>
+        <tag name="package" line="60" description="phpunk\compat\crypto"/>
+        <tag name="param" line="60" description="&lt;p&gt;The string of known length to compare against&lt;/p&gt;" type="string" variable="$hash1">
+          <type>string</type>
+        </tag>
+        <tag name="param" line="60" description="&lt;p&gt;The user-supplied string&lt;/p&gt;" type="string" variable="$hash2">
+          <type>string</type>
+        </tag>
+      </docblock>
+      <argument line="0" by_reference="false">
+        <name>$hash1</name>
+        <default></default>
+        <type>string</type>
+      </argument>
+      <argument line="0" by_reference="false">
+        <name>$hash2</name>
+        <default></default>
+        <type>string</type>
+      </argument>
+    </function>
+    <function namespace="" line="87" package="phpunk\compat\crypto">
+      <name>_password_hash</name>
+      <full_name>\_password_hash()</full_name>
+      <docblock line="87">
         <description>Creates a new password hash using a strong one-way hashing algorithm.</description>
         <long-description>The following algorithms are supported:
 * **PASSWORD_DEFAULT** - Use the bcrypt algorithm
@@ -3418,17 +3564,17 @@ own primary key.</description>
 Supported options for **PASSWORD_BCRYPT**:
 * **salt** - to manually provide a salt to use when hashing the password. If omitted, a random salt will be generated.
 * **cost** - which denotes the algorithmic cost that should be used. If omitted, a default value of 10 will be used.</long-description>
-        <tag name="package" line="47" description="phpunk\compat\crypto"/>
-        <tag name="param" line="47" description="&lt;p&gt;The user's password&lt;/p&gt;" type="string" variable="$password">
+        <tag name="package" line="87" description="phpunk\compat\crypto"/>
+        <tag name="param" line="87" description="&lt;p&gt;The user's password&lt;/p&gt;" type="string" variable="$password">
           <type>string</type>
         </tag>
-        <tag name="param" line="47" description="&lt;p&gt;A password algorithm constant denoting the algorithm to use when hashing the password&lt;/p&gt;" type="integer" variable="$algo">
+        <tag name="param" line="87" description="&lt;p&gt;A password algorithm constant denoting the algorithm to use when hashing the password&lt;/p&gt;" type="integer" variable="$algo">
           <type>integer</type>
         </tag>
-        <tag name="param" line="47" description="" type="array" variable="$options">
+        <tag name="param" line="87" description="" type="array" variable="$options">
           <type>array</type>
         </tag>
-        <tag name="return" line="47" description="Returns the hashed password, or FALSE on failure." type="string">
+        <tag name="return" line="87" description="Returns the hashed password, or FALSE on failure." type="string">
           <type>string</type>
         </tag>
       </docblock>
@@ -3448,20 +3594,20 @@ Supported options for **PASSWORD_BCRYPT**:
         <type>array</type>
       </argument>
     </function>
-    <function namespace="" line="68" package="phpunk\compat\crypto">
-      <name>password_verify</name>
-      <full_name>\password_verify()</full_name>
-      <docblock line="68">
+    <function namespace="" line="106" package="phpunk\compat\crypto">
+      <name>_password_verify</name>
+      <full_name>\_password_verify()</full_name>
+      <docblock line="106">
         <description>Verifies that the given hash matches the given password.</description>
         <long-description></long-description>
-        <tag name="package" line="68" description="phpunk\compat\crypto"/>
-        <tag name="param" line="68" description="&lt;p&gt;The user's password&lt;/p&gt;" type="string" variable="$password">
+        <tag name="package" line="106" description="phpunk\compat\crypto"/>
+        <tag name="param" line="106" description="&lt;p&gt;The user's password&lt;/p&gt;" type="string" variable="$password">
           <type>string</type>
         </tag>
-        <tag name="param" line="68" description="&lt;p&gt;A hash created by password_hash()&lt;/p&gt;" type="string" variable="$hash">
+        <tag name="param" line="106" description="&lt;p&gt;A hash created by password_hash()&lt;/p&gt;" type="string" variable="$hash">
           <type>string</type>
         </tag>
-        <tag name="return" line="68" description="Returns TRUE if the password and hash match, or FALSE otherwise." type="boolean">
+        <tag name="return" line="106" description="Returns TRUE if the password and hash match, or FALSE otherwise." type="boolean">
           <type>boolean</type>
         </tag>
       </docblock>
@@ -3476,7 +3622,21 @@ Supported options for **PASSWORD_BCRYPT**:
         <type>string</type>
       </argument>
     </function>
-    <source>eJylVttu20YQfZa+YhqoIaUqvgSFH5IKiWzLqVHHNiQ7aYEAxIpcigtTXGZ3KUUt8u+d2eWKusV9KPxgkTu3M3PmLH97V2Zl+7jXa0MPzln8tGQq0a9iOS+ZEVORC7OCtCpiI2ShgRUJxPjDsMJodCGv9yW6sRkHjFQVT1+c75dYrUoj0eC43RYphD/5KBH/JrTRYaAwmpxH05XhOuh24Z92iwppYcwPvOCK4XvMCExNhVFMrSDnxcxkoI0SxQxkCi7JTLEyEzG4gGADgsmYQVcOuhKGTXMOqVQ7DpXmfTyPM2AalhkvYOYSU3jNcqP78MRXGtBTFMIIlou/GYGABY+NVPrIlvugxGzGlQauFJmmUEhKZUqfiuX5CjSPKyyoLrOo5lOufEaqDbFOqcyqSGxcGxvbq9gc0xuOKaBT9+Ah474d2AeTrcPWzbHwdSarPKGgiptKFTzBOK4/rvD37r13GtsnbLp/gbM2DJHbgBTla8W1wTB18bsjOACzyXbcbnkOwObswxqTZUCLuLJHFVnyQus8qt1KzatErpmDXq0ayDOG6zRv0Z7nmh/MNLd4olhxpF8kFkEXXr6EhKcCuxcGHy/Gf90/RJejT9HjeHh7efdxO/+uu0/ah31PLAQ9jeNOZKkTBrcS2IKJ3DL2YnI/vv2AU6in6KgR9GEUPU5G42g0Ht+NXZhmkFHJsFA0WqeOMxWedAn39/b3dnsN5n44mXy+G19G57Y2hEpEd8f7p32AU4yx7305uho+3pD7IW9/2oedgFT3YWEomdZLqZIoYzrbUYYL21miaMGX4C2BLHGdiaiWvJL0oeCvlmxlz+xBPpNKmGxeL21GDc1zudw61LVolKVUyPQ31hb/eruIej14BY+a282Y2rk3Ufa9HOgtJ8eI85u7z1fXk98bZzCkHoTTmlH9R1iuQI0SeQ6lkkkVcwsUaY6C7ZYw7ILX7ZxvdoSCvOi8XnVegEh4YUQquDqyDVBcV7lxcVmO3dLEMwZnJ8gaFJ7Y4JY7MejTeK+GN5MRdhZS5ChueaNTE98x3EF3WZDeHmhA01FSWNsQxDtnRWXVA9EtsEpCh8d0hCrtxNkPkvD4yR/BdQpyLgxm7qOTV0HmUSGcWmK5U1WbOpbapV6iamXI2kK6S4M3Y8ALgsx2pRTL2cuKrGfUxwXLK06qeHqyzm7td+W81tfOmsA0DLRUgV5DOyj/VB0MG+I3pPH3sgPj+7RFqmc7uZmOKYWL06kn+dxV4QmKc/eBfkyUzRtga8nDTuNsIfbXyWHgqgmdDrT4N0O0DP05iuGfD+No8sf1vVNCqylCa442RIPar9WxwxxAfURPXXgHukQ8Jg2Dn09eJ6Sa7uANBKcnwVvraMk0gIBWKIAjZ4L/A/tEkqt4mbOYh67S4BeMEwyCbp/cW/VL0u0A38GUaX72a8SLWCY83LoJT8+6VqdRqBtNd8u92SELy8v5f2jogiuRrnZU9BO9FP4riWY4E4uaF7iKJs7qZXCv18v2f2ns7W2eoUvnlA5Xa7XDie4W76ZS5hy/kDzxHsaPI/rS2qSw/T5tMGwSEc3UUuhneOgatdVnCuXY88NROJPBwP2qZ/IveSu9sA==</source>
+    <parse_markers>
+      <error line="12" code="PPC:ERR-50015">Argument $length is missing from the Docblock of random_bytes</error>
+      <error line="12" code="PPC:ERR-50011">No summary for function \random_bytes()</error>
+      <error line="18" code="PPC:ERR-50015">Argument $hash1 is missing from the Docblock of hash_equals</error>
+      <error line="18" code="PPC:ERR-50015">Argument $hash2 is missing from the Docblock of hash_equals</error>
+      <error line="18" code="PPC:ERR-50011">No summary for function \hash_equals()</error>
+      <error line="24" code="PPC:ERR-50015">Argument $password is missing from the Docblock of password_hash</error>
+      <error line="24" code="PPC:ERR-50015">Argument $algo is missing from the Docblock of password_hash</error>
+      <error line="24" code="PPC:ERR-50015">Argument $options is missing from the Docblock of password_hash</error>
+      <error line="24" code="PPC:ERR-50011">No summary for function \password_hash()</error>
+      <error line="30" code="PPC:ERR-50015">Argument $password is missing from the Docblock of password_verify</error>
+      <error line="30" code="PPC:ERR-50015">Argument $hash is missing from the Docblock of password_verify</error>
+      <error line="30" code="PPC:ERR-50011">No summary for function \password_verify()</error>
+    </parse_markers>
+    <source>eJylV21z00YQ/hz/ioVxkRxMSDIdPhA8ECBQpkAydgLtAPWcpbN1E1kn7k4xbst/7+6eTpYdJ6XTyUxsad93n33xk6dlVnYe7u52YBeei+RyIUxqHyR6XgqnJipXbgnTqkic0oUFUaSQ4BcnCmdRhKSelSgmZhJQU1VcfvaynxOzLJ1GhoedTiqnqpBpHJ0dj0YfT4cvx89fDH8/O496ANqAJ1+n9gEOekdbpF+evDq+eEvi26QDtQ8bClFXR00hvhMCGstvyjobRwYD0/PxZOmkjXo9+KuzE3igTYu7uSxmLmOOHSNdZQoYb+U46ux873y/yWAmbDaWXyuRX7PXIsVdejjoA38erlu9he9226WwdqFNyho2ra8R4254RNUin2n80KWHwgA+fVl36EdFf9S9K2nUdHmjg568ZocM3+DTTdzBl7oFXstCGoF1RKiDMBPljDBL8DUF64wqZqCn4NE9M6LMVFJDBBgA4DLhUFSCrZQTk1zCFFG6LlBZ2Ud6koGwsMhkATNvmNRbkTvbh0u5tIRvVSinRK7+FBz/lUycNnaPvD03ajaTxoI0hjinUGiy5MpgSeT5EqxMKvSn9rKo5hNpgkFyDUOdkJdVke6tmtqIOdp2Eg1ADWo4z2TIBSbBZY3SOjMcu810laek0ldBpqjHJ4e9flYXp5YZ8hMmPLzAAeMERs36SMnXSlqHWmrPN9O/JcbG2MNOA5ztbUpoIRxeg6EuZWFtHqRKK6tUNxNiBbFb+NqzQOZWbrUz51jGiZEIu7G6wqF27x40M+8dTy6caR/GF8Pj9y9P361Z35QOJvtwXZDG347zkBkzYuLovQZxJVTOOH0xOhu+f435r8vnEYFz9GR8MToZjk+Gw9Mha1lVEDsMvUSexnCSmXi/h2yrrnpBK8FQbyx0XWWLPRAqbMVcglP4D1sBXxh6u4ywnDzeqAkK7TziM2WbfdRCGjZUCk7DHHtlhqkgdaReOIfbyR5xDypeXAm2HrccVoj7jVMY95rJwhPYw6fVCjU4/aTlRlhNg8tCL4rQGOhF4uMFMRNk8wYth6wFPTcPbFWWucIQPH0DuP+yEQhWKIfma2oP7gwG0H51iEO0rtkUtUiqYXeCXTkIAf1Ra0SodpETCfvERGmLu4oe0SbxB7Uo3TsCJD3B9/Tl/n3CJQv/PcCapczzqau+tCHjlQ9YfQsgjF+aAYVcrBeixglPB03pLuSDhVgyjQm4W4xy2bzGB8E2z/VijWbrgVyW2uAkeUys+Le7eTPs7sIDuLCSYTlhYKyUXBPyV8WajG+6529PP756M/plJcuo4CCZjZzf82BeqDyH0ui0SiRHiXMEb7AGleEUy2U7HaTkbvdw2b0LKpWFU1MlzR6Hj31W5c7rFTmmylKDCHi0j62JIEwcNpjHWZ9a69Xx29EJphWRoXKcoQH3o5AtCCufwLAl/CabtLg4G9SIoqh4MGNoV+gihYZkIiHifQOGElIwoeZ78GYKGtsYDfdRKOwXEULCWOrVJXlbseVEW295gfsgw+mJ84JXsVyVANcusW3uKJocm0Zx+grK4ZXIK0kNfrDfGGf+7aOhwW3o68g2cW1bquQaHK/gvkJLuLF9JCFHa2i6NYsta8IY7JZwe92yfwMuseCrI+kGfLSn03+4GNmX2B908psjLMaBjFvmt/PhePTrmzOeF3wcKmslslD1vdROl2s4gJpCTz14CrbEWNw0jn7aP0xpG3nCY4gO9qMjkmMEDSCipolgz3PgZ8RPtMmMLHORyNh7Gd1HNdEg6vVReqd+R8swwlcwEVY++nksi0SnMl67LA4e9Xr+rGyGnu/ldmo4ovYE/ED3qQrnI9Vipq7q6mIzuSSr8exfN+3yv5DY3kYIRP7wUwpbY7nxW6DXxs5E61zi3RjAcz68OKH7sw1C/rW48r8NJlryC2VvxtJtx33twrWt2N+SZxbiRP8DCbn5aQ==</source>
   </file>
   <file path="component/renderer.php" generated-path="component.renderer.html" hash="827b0f5a8d848544e3baad7ddde02a55" package="phpunk\component">
     <docblock line="0">
