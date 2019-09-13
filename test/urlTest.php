@@ -10,11 +10,19 @@ class urlTest extends TestCase {
 
 	const RESOURCE = 'document';
 	const RESOURCE_ALIAS = 'documents';
-	const RESOURCE_ACTION = 'save';
-	const RESOURCE_VIEW = 'list';
+
+	const SAVE_ACTION = 'save';
+	const DELETE_ACTION = 'delete';
+
+	const LIST_VIEW = 'list';
+	const GRID_VIEW = 'grid';
+	const ITEM_VIEW = 'item';
+	const FORM_VIEW = 'form';
 
 	const GLOBAL_ACTION = 'login';
 	const GLOBAL_VIEW = 'dashboard';
+
+	const FORMAT = 'xml';
 
 	var $schema;
 
@@ -62,49 +70,49 @@ class urlTest extends TestCase {
 
 	public function testResourceAction() {
 		$this->assertFalse($this->schema->is_resource(self::RESOURCE));
-		$this->assertFalse($this->schema->is_action(self::RESOURCE_ACTION, self::RESOURCE));
-		$this->assertFalse($this->schema->is_action('delete', self::RESOURCE));
+		$this->assertFalse($this->schema->is_action(self::SAVE_ACTION, self::RESOURCE));
+		$this->assertFalse($this->schema->is_action(self::DELETE_ACTION, self::RESOURCE));
 		$this->assertFalse($this->schema->is_action('custom', self::RESOURCE));
 
 		$this->schema->add_resource(self::RESOURCE);
 
 		$this->assertEquals(self::RESOURCE, $this->schema->is_resource(self::RESOURCE));
-		$this->assertEquals(self::RESOURCE_ACTION, $this->schema->is_action(self::RESOURCE_ACTION, self::RESOURCE));
-		$this->assertEquals('delete', $this->schema->is_action('delete', self::RESOURCE));
+		$this->assertEquals(self::SAVE_ACTION, $this->schema->is_action(self::SAVE_ACTION, self::RESOURCE));
+		$this->assertEquals(self::DELETE_ACTION, $this->schema->is_action(self::DELETE_ACTION, self::RESOURCE));
 		$this->assertFalse($this->schema->is_action('custom', self::RESOURCE));
 
 		$this->schema->add_action('custom', self::RESOURCE);
 
 		$this->assertEquals(self::RESOURCE, $this->schema->is_resource(self::RESOURCE));
-		$this->assertEquals(self::RESOURCE_ACTION, $this->schema->is_action(self::RESOURCE_ACTION, self::RESOURCE));
-		$this->assertEquals('delete', $this->schema->is_action('delete', self::RESOURCE));
+		$this->assertEquals(self::SAVE_ACTION, $this->schema->is_action(self::SAVE_ACTION, self::RESOURCE));
+		$this->assertEquals(self::DELETE_ACTION, $this->schema->is_action(self::DELETE_ACTION, self::RESOURCE));
 		$this->assertEquals('custom', $this->schema->is_action('custom', self::RESOURCE));
 	}
 
 	public function testResourceView() {
 		$this->assertFalse($this->schema->is_resource(self::RESOURCE));
-		$this->assertFalse($this->schema->is_view(self::RESOURCE_VIEW, self::RESOURCE));
-		$this->assertFalse($this->schema->is_view('grid', self::RESOURCE));
-		$this->assertFalse($this->schema->is_view('item', self::RESOURCE));
-		$this->assertFalse($this->schema->is_view('form', self::RESOURCE));
+		$this->assertFalse($this->schema->is_view(self::LIST_VIEW, self::RESOURCE));
+		$this->assertFalse($this->schema->is_view(self::GRID_VIEW, self::RESOURCE));
+		$this->assertFalse($this->schema->is_view(self::ITEM_VIEW, self::RESOURCE));
+		$this->assertFalse($this->schema->is_view(self::FORM_VIEW, self::RESOURCE));
 		$this->assertFalse($this->schema->is_view('custom', self::RESOURCE));
 
 		$this->schema->add_resource(self::RESOURCE);
 
 		$this->assertEquals(self::RESOURCE, $this->schema->is_resource(self::RESOURCE));
-		$this->assertEquals(self::RESOURCE_VIEW, $this->schema->is_view(self::RESOURCE_VIEW, self::RESOURCE));
-		$this->assertEquals('grid', $this->schema->is_view('grid', self::RESOURCE));
-		$this->assertEquals('item', $this->schema->is_view('item', self::RESOURCE));
-		$this->assertEquals('form', $this->schema->is_view('form', self::RESOURCE));
+		$this->assertEquals(self::LIST_VIEW, $this->schema->is_view(self::LIST_VIEW, self::RESOURCE));
+		$this->assertEquals(self::GRID_VIEW, $this->schema->is_view(self::GRID_VIEW, self::RESOURCE));
+		$this->assertEquals(self::ITEM_VIEW, $this->schema->is_view(self::ITEM_VIEW, self::RESOURCE));
+		$this->assertEquals(self::FORM_VIEW, $this->schema->is_view(self::FORM_VIEW, self::RESOURCE));
 		$this->assertFalse($this->schema->is_view('custom', self::RESOURCE));
 
 		$this->schema->add_view('custom', self::RESOURCE);
 
 		$this->assertEquals(self::RESOURCE, $this->schema->is_resource(self::RESOURCE));
-		$this->assertEquals(self::RESOURCE_VIEW, $this->schema->is_view(self::RESOURCE_VIEW, self::RESOURCE));
-		$this->assertEquals('grid', $this->schema->is_view('grid', self::RESOURCE));
-		$this->assertEquals('item', $this->schema->is_view('item', self::RESOURCE));
-		$this->assertEquals('form', $this->schema->is_view('form', self::RESOURCE));
+		$this->assertEquals(self::LIST_VIEW, $this->schema->is_view(self::LIST_VIEW, self::RESOURCE));
+		$this->assertEquals(self::GRID_VIEW, $this->schema->is_view(self::GRID_VIEW, self::RESOURCE));
+		$this->assertEquals(self::ITEM_VIEW, $this->schema->is_view(self::ITEM_VIEW, self::RESOURCE));
+		$this->assertEquals(self::FORM_VIEW, $this->schema->is_view(self::FORM_VIEW, self::RESOURCE));
 		$this->assertEquals('custom', $this->schema->is_view('custom', self::RESOURCE));
 	}
 
@@ -138,19 +146,19 @@ class urlTest extends TestCase {
 		$this->schema->add_resource(self::RESOURCE, self::RESOURCE_ALIAS);
 
 		$this->assertEquals(self::RESOURCE, $this->schema->is_resource(self::RESOURCE));
-		$this->assertEquals(self::RESOURCE_ACTION, $this->schema->is_action(self::RESOURCE_ACTION, self::RESOURCE));
-		$this->assertEquals(self::RESOURCE_VIEW, $this->schema->is_view(self::RESOURCE_VIEW, self::RESOURCE));
+		$this->assertEquals(self::SAVE_ACTION, $this->schema->is_action(self::SAVE_ACTION, self::RESOURCE));
+		$this->assertEquals(self::LIST_VIEW, $this->schema->is_view(self::LIST_VIEW, self::RESOURCE));
 
 		$this->assertEquals('document/save', $this->schema->build_path([
 			'resource' => self::RESOURCE,
-			'action'   => self::RESOURCE_ACTION,
-			'view'     => self::RESOURCE_VIEW // ignore view when action is valid
+			'action'   => self::SAVE_ACTION,
+			'view'     => self::LIST_VIEW // ignore view when action is valid
 		]));
 
 		$this->assertEquals('document/list', $this->schema->build_path([
 			'resource' => self::RESOURCE,
 			'action'   => self::GLOBAL_ACTION, // ignore invalid resource action
-			'view'     => self::RESOURCE_VIEW
+			'view'     => self::LIST_VIEW
 		]));
 
 		$this->assertEquals('document/111', $this->schema->build_path([
@@ -160,15 +168,15 @@ class urlTest extends TestCase {
 
 		$this->assertEquals('document/111/save', $this->schema->build_path([
 			'resource' => self::RESOURCE,
-			'action'   => self::RESOURCE_ACTION,
-			'view'     => self::RESOURCE_VIEW, // ignore view when action is valid
+			'action'   => self::SAVE_ACTION,
+			'view'     => self::LIST_VIEW, // ignore view when action is valid
 			'id'       => 111
 		]));
 
 		$this->assertEquals('document/111/list', $this->schema->build_path([
 			'resource' => self::RESOURCE,
 			'action'   => self::GLOBAL_ACTION, // ignore invalid resource action
-			'view'     => self::RESOURCE_VIEW,
+			'view'     => self::LIST_VIEW,
 			'id'       => 111
 		]));
 	}
@@ -186,7 +194,7 @@ class urlTest extends TestCase {
 		]));
 
 		$this->assertEquals(self::GLOBAL_VIEW, $this->schema->build_path([
-			'action' => self::RESOURCE_ACTION, // ignore invalid global action
+			'action' => self::SAVE_ACTION, // ignore invalid global action
 			'view'   => self::GLOBAL_VIEW
 		]));
 	}
@@ -252,7 +260,7 @@ class urlTest extends TestCase {
 		$path = 'document/list/page/3/per_page/12/sort~asc/title/author/John+Smith';
 		$params = [
 			'resource' => self::RESOURCE,
-			'view'     => self::RESOURCE_VIEW,
+			'view'     => self::LIST_VIEW,
 			'page'     => 3,
 			'per_page' => 12,
 			'sort'     => [ 'title' => 'asc' ],
@@ -267,20 +275,109 @@ class urlTest extends TestCase {
 		$this->schema->add_resource(self::RESOURCE, self::RESOURCE_ALIAS);
 
 		$this->assertEquals(self::RESOURCE, $this->schema->is_resource(self::RESOURCE));
-		$this->assertEquals(self::RESOURCE_ACTION, $this->schema->is_action(self::RESOURCE_ACTION, self::RESOURCE));
-		$this->assertEquals(self::RESOURCE_VIEW, $this->schema->is_view(self::RESOURCE_VIEW, self::RESOURCE));
+		$this->assertEquals(self::SAVE_ACTION, $this->schema->is_action(self::SAVE_ACTION, self::RESOURCE));
+		$this->assertEquals(self::LIST_VIEW, $this->schema->is_view(self::LIST_VIEW, self::RESOURCE));
+
+		$params = $this->schema->parse_path('document.xml');
+
+		$this->assertEquals(self::RESOURCE, $params['resource']);
+		$this->assertEquals(self::FORMAT, $params['format']);
+
+		$params = $this->schema->parse_path('document/111.xml');
+
+		$this->assertEquals(self::RESOURCE, $params['resource']);
+		$this->assertEquals(111, $params['id']);
+		$this->assertEquals(self::FORMAT, $params['format']);
+
+		$this->schema->add_resource('version', 'versions');
+
+		$params = $this->schema->parse_path('document/111/versions');
+
+		$this->assertEquals('version', $params['resource']);
+		$this->assertNull(@$params['format']);
+		$this->assertEquals(111, $params['filter'][self::RESOURCE]);
+
+		$params = $this->schema->parse_path('document/111/versions.xml');
+
+		$this->assertEquals('version', $params['resource']);
+		$this->assertEquals(self::FORMAT, $params['format']);
+		$this->assertEquals(111, $params['filter'][self::RESOURCE]);
+	}
+
+	public function testResourceActionPath() {
+		$this->schema->add_resource(self::RESOURCE, self::RESOURCE_ALIAS);
+
+		$this->assertEquals(self::RESOURCE, $this->schema->is_resource(self::RESOURCE));
+		$this->assertEquals(self::SAVE_ACTION, $this->schema->is_action(self::SAVE_ACTION, self::RESOURCE));
+		$this->assertEquals(self::DELETE_ACTION, $this->schema->is_action(self::DELETE_ACTION, self::RESOURCE));
 
 		$params = $this->schema->parse_path('document/111/save');
 
 		$this->assertEquals(self::RESOURCE, $params['resource']);
-		$this->assertEquals(self::RESOURCE_ACTION, $params['action']);
+		$this->assertEquals(self::SAVE_ACTION, $params['action']);
 		$this->assertEquals(111, $params['id']);
+		$this->assertNull(@$params['format']);
+
+		$params = $this->schema->parse_path('document/111/save.xml');
+
+		$this->assertEquals(self::RESOURCE, $params['resource']);
+		$this->assertEquals(self::SAVE_ACTION, $params['action']);
+		$this->assertEquals(111, $params['id']);
+		$this->assertEquals(self::FORMAT, $params['format']);
+
+		$this->schema->add_resource('version', 'versions');
+
+		$params = $this->schema->parse_path('document/111/versions/save');
+
+		$this->assertEquals('version', $params['resource']);
+		$this->assertEquals(self::SAVE_ACTION, $params['action']);
+		$this->assertNull(@$params['format']);
+		$this->assertEquals(111, $params['filter'][self::RESOURCE]);
+
+		$params = $this->schema->parse_path('document/111/versions/save.xml');
+
+		$this->assertEquals('version', $params['resource']);
+		$this->assertEquals(self::SAVE_ACTION, $params['action']);
+		$this->assertEquals(self::FORMAT, $params['format']);
+		$this->assertEquals(111, $params['filter'][self::RESOURCE]);
+	}
+
+	public function testResourceViewPath() {
+		$this->schema->add_resource(self::RESOURCE, self::RESOURCE_ALIAS);
+
+		$this->assertEquals(self::RESOURCE, $this->schema->is_resource(self::RESOURCE));
+		$this->assertEquals(self::SAVE_ACTION, $this->schema->is_action(self::SAVE_ACTION, self::RESOURCE));
+		$this->assertEquals(self::DELETE_ACTION, $this->schema->is_action(self::DELETE_ACTION, self::RESOURCE));
 
 		$params = $this->schema->parse_path('document/111/list');
 
 		$this->assertEquals(self::RESOURCE, $params['resource']);
-		$this->assertEquals(self::RESOURCE_VIEW, $params['view']);
+		$this->assertEquals(self::LIST_VIEW, $params['view']);
 		$this->assertEquals(111, $params['id']);
+		$this->assertNull(@$params['format']);
+
+		$params = $this->schema->parse_path('document/111/list.xml');
+
+		$this->assertEquals(self::RESOURCE, $params['resource']);
+		$this->assertEquals(self::LIST_VIEW, $params['view']);
+		$this->assertEquals(111, $params['id']);
+		$this->assertEquals(self::FORMAT, $params['format']);
+
+		$this->schema->add_resource('version', 'versions');
+
+		$params = $this->schema->parse_path('document/111/versions/list');
+
+		$this->assertEquals('version', $params['resource']);
+		$this->assertNull(self::FORMAT, $params['format']);
+		$this->assertEquals(self::LIST_VIEW, $params['view']);
+		$this->assertEquals(111, $params['filter'][self::RESOURCE]);
+
+		$params = $this->schema->parse_path('document/111/versions/list.xml');
+
+		$this->assertEquals('version', $params['resource']);
+		$this->assertEquals(self::FORMAT, $params['format']);
+		$this->assertEquals(self::LIST_VIEW, $params['view']);
+		$this->assertEquals(111, $params['filter'][self::RESOURCE]);
 	}
 
 	public function testParseGlobalPath() {
@@ -299,6 +396,20 @@ class urlTest extends TestCase {
 
 		$this->assertNull(@$params['action']);
 		$this->assertEquals(self::GLOBAL_VIEW, $params['view']);
+
+		$extended = implode('.', [self::GLOBAL_ACTION, self::FORMAT]);
+
+		$params = $this->schema->parse_path($extended);
+
+		$this->assertEquals(self::GLOBAL_ACTION, $params['action']);
+		$this->assertEquals(self::FORMAT, $params['format']);
+
+		$extended = implode('.', [self::GLOBAL_VIEW, self::FORMAT]);
+
+		$params = $this->schema->parse_path($extended);
+
+		$this->assertEquals(self::GLOBAL_VIEW, $params['view']);
+		$this->assertEquals(self::FORMAT, $params['format']);
 	}
 
 	public function testParsePaginationPath() {
@@ -338,7 +449,7 @@ class urlTest extends TestCase {
 		$params = $this->schema->parse_path('documents/list/page/3/per_page/12/sort~asc/title/author/John+Smith');
 
 		$this->assertEquals(self::RESOURCE, $params['resource']);
-		$this->assertEquals(self::RESOURCE_VIEW, $params['view']);
+		$this->assertEquals(self::LIST_VIEW, $params['view']);
 		$this->assertEquals(3, $params['page']);
 		$this->assertEquals(12, $params['per_page']);
 		$this->assertEquals('asc', $params['sort']['title']);

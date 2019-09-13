@@ -182,37 +182,51 @@ class url_schema {
 			array_shift($path);
 
 		if (isset($path[0])) {
-			if ($resource = $this->is_resource($path[0])) {
-				$params['resource'] = $resource;
+			$slug = self::strip_extension($path[0], $ext);
+			if ($resource = $this->is_resource($slug)) {
+				self::set_param($params, 'resource', $resource, $ext);
 				array_shift($path);
 
-				if (isset($path[0]) && is_numeric($path[0]))
-					$params['id'] = intval(array_shift($path));
-			} else {
-				if ($this->is_action($path[0]))
-					$params['action'] = array_shift($path);
-				elseif ($this->is_view($path[0]))
-					$params['view'] = array_shift($path);
+				if (isset($path[0])) {
+					$slug = self::strip_extension($path[0], $ext);
+					if (is_numeric($slug)) {
+						self::set_param($params, 'id', intval($slug), $ext);
+						array_shift($path);
+					}
+				}
+			} elseif ($this->is_action($slug)) {
+				self::set_param($params, 'action', $slug, $ext);
+				array_shift($path);
+			} elseif ($this->is_view($slug)) {
+				self::set_param($params, 'view', $slug, $ext);
+				array_shift($path);
 			}
 		}
 
 		if (isset($path[0], $params['resource'])) {
-			if ($this->is_action($path[0], $params['resource'])) {
-				$params['action'] = array_shift($path);
-			} elseif ($this->is_view($path[0], $params['resource'])) {
-				$params['view'] = array_shift($path);
-			} elseif (isset($params['id']) && $resource = $this->is_resource($path[0])) {
+			$slug = self::strip_extension($path[0], $ext);
+			if ($this->is_action($slug, $params['resource'])) {
+				self::set_param($params, 'action', $slug, $ext);
+				array_shift($path);
+			} elseif ($this->is_view($slug, $params['resource'])) {
+				self::set_param($params, 'view', $slug, $ext);
+				array_shift($path);
+			} elseif (isset($params['id']) && $resource = $this->is_resource($slug)) {
 				$params['filter'] = array($params['resource'] => $params['id']);
-				$params['resource'] = $resource;
+				self::set_param($params, 'resource', $resource, $ext);
 
 				unset($params['id']);
 				array_shift($path);
 
 				if (isset($path[0])) {
-					if ($this->is_action($path[0], $params['resource']))
-						$params['action'] = array_shift($path);
-					elseif ($this->is_view($path[0], $params['resource']))
-						$params['view'] = array_shift($path);
+					$slug = self::strip_extension($path[0], $ext);
+					if ($this->is_action($slug, $params['resource'])) {
+						self::set_param($params, 'action', $slug, $ext);
+						array_shift($path);
+					} elseif ($this->is_view($slug, $params['resource'])) {
+						self::set_param($params, 'view', $slug, $ext);
+						array_shift($path);
+					}
 				}
 			}
 		}
@@ -358,5 +372,20 @@ class url_schema {
 	 */
 	protected function implode_slug($slug) {
 		return implode('.', $slug);
+	}
+
+	protected static function strip_extension($slug, &$ext = null) {
+		if (strpos($slug, '.') !== false)
+			list($slug, $ext) = explode('.', $slug, 2);
+
+		return $slug;
+	}
+
+	protected static function set_param(&$params, $key, $value, $ext = null) {
+		$params[$key] = $value;
+
+		unset($params['format']);
+		if (!empty($ext))
+			$params['format'] = $ext;
 	}
 }
