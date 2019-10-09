@@ -25,17 +25,17 @@ if ( ! function_exists( 'http_parse_cookie' ) ) {
 	 * @param array $extras
 	 * @return object
 	 */
-	function http_parse_cookie( $cookie, $flags = HTTP_COOKIE_PARSE_RAW, $extras = array() ) {
-		$attr = array( 'expires', 'path', 'domain', 'secure', 'httponly' );
+	function http_parse_cookie( $cookie, $flags = HTTP_COOKIE_PARSE_RAW, $extras = [] ) {
+		$attr = [ 'expires', 'path', 'domain', 'secure', 'httponly' ];
 
-		$output = array(
-			'cookies' => array(),
-			'extras'  => array(),
+		$output = [
+			'cookies' => [],
+			'extras'  => [],
 			'flags'   => 0,
 			'expires' => 0,
 			'path'    => '',
 			'domain'  => ''
-		);
+		];
 
 		$parts = explode( ';', $cookie );
 
@@ -48,7 +48,7 @@ if ( ! function_exists( 'http_parse_cookie' ) ) {
 			if ( strtolower( $key ) == 'expires' )
 				$value = strtotime( $value );
 
-			if ( in_array( strtolower( $key ), array( 'secure', 'httponly' ) ) )
+			if ( in_array( strtolower( $key ), [ 'secure', 'httponly' ] ) )
 				$value = true;
 
 			if ( in_array( strtolower( $key ), $attr ) )
@@ -73,7 +73,7 @@ if ( ! function_exists( 'http_parse_params' ) ) {
 	 */
 	function http_parse_params( $param, $flags = HTTP_PARAMS_DEFAULT ) {
 		$parts = explode( ',', $param );
-		$result = (object) array( 'params' => array() );
+		$result = (object) [ 'params' => [] ];
 
 		foreach ( $parts as $part ) {
 			if ( strpos( $part, ';' ) !== false ) {
@@ -90,9 +90,9 @@ if ( ! function_exists( 'http_parse_params' ) ) {
 							if ( is_array( $result->params[ $count - 1 ] ) )
 								$result->params[ $count - 1 ][ $key ] = $value;
 							else
-								$result->params[] = array( $key => $value );
+								$result->params[] = [ $key => $value ];
 						} else {
-							$result->params[] = array( $key => $value );
+							$result->params[] = [ $key => $value ];
 						}
 					} else {
 						$result->params[] = $arg;
@@ -113,7 +113,7 @@ if ( ! function_exists( 'http_parse_headers' ) ) {
 	 * @return array Sssociative array of HTTP headers
 	 */
     function http_parse_headers( $header ) {
-        $headers = array();
+        $headers = [];
         $prev_key = '';
 
         foreach( explode( "\n", $header ) as $line ) {
@@ -130,7 +130,7 @@ if ( ! function_exists( 'http_parse_headers' ) ) {
 				} elseif ( is_array( $headers[ $key ] ) ) {
 					$headers[ $key ][] = $value;
 				} else {
-					$headers[ $key ] = array( $headers[ $key ], $value );
+					$headers[ $key ] = [ $headers[ $key ], $value ];
 				}
 
 				$prev_key = $key;

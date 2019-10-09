@@ -8,21 +8,21 @@ namespace PHPunk\Database;
 use PHPunk\Util\object;
 
 class query {
-	private static $_defaults = array(
+	private static $_defaults = [
 		'table'  => '',
 		'bridge' => '',
-		'args'   => array(),
-		'sort'   => array(),
+		'args'   => [],
+		'sort'   => [],
 		'limit'  => 0,
 		'offset' => 0
-	);
+	];
 
 	private $_database;
 
 	private $_table;
 	private $_bridge;
-	private $_args = array();
-	private $_sort = array();
+	private $_args = [];
+	private $_sort = [];
 	private $_limit = 0;
 	private $_offset = 0;
 
@@ -72,11 +72,11 @@ class query {
 		if ($table = $this->_database->get_table($this->table)) {
 			$query = "SELECT SQL_CALC_FOUND_ROWS `$table->name`.*";
 
-			$joins = array();
-			$where = array();
-			$order = array();
+			$joins = [];
+			$where = [];
+			$order = [];
 
-			$params = array();
+			$params = [];
 
 			if ($rel = $table->get_relation($this->bridge)) {
 				$bridge = $table->name == $rel->ptable ? $rel->ftable : $rel->ptable;

@@ -9,13 +9,13 @@ class template {
 	/**
 	 * @ignore internal variable
 	 */
-    private $_dirs = array();
+    private $_dirs = [];
 
 	/**
 	 * @param string $base_dir Directory path containing template files
 	 */
     public function __construct($base_dir) {
-        $this->_dirs = array($base_dir);
+        $this->_dirs = [$base_dir];
     }
 
 	/**
@@ -33,8 +33,8 @@ class template {
 	 * @return string Path to template file
 	 */
     public function locate($view, $resource = false) {
-		$files = $resource === false ? array($view, 'index') :
-			array("$resource/$view", $view, "$resource/index", 'index');
+		$files = $resource === false ? [$view, 'index'] :
+			["$resource/$view", $view, "$resource/index", 'index'];
 
         foreach ($files as $filename) {
             foreach ($this->_dirs as $dirname) {
@@ -56,7 +56,7 @@ class template {
 	 * @param string $resource Name of the resource
 	 * @param array $vars OPTIONAL Named parameters passed into template
 	 */
-    public function load($view, $resource = false, $vars = array()) {
+    public function load($view, $resource = false, $vars = []) {
         if ($file = $this->locate($view, $resource)) {
             extract($vars, EXTR_SKIP);
             include $file;

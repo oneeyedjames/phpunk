@@ -17,7 +17,7 @@ class cache {
 	/**
 	 * @ignore internal variable
 	 */
-	protected $_data = array();
+	protected $_data = [];
 
 	/**
 	 * Memcache is required to preserve cache across multiple requests.

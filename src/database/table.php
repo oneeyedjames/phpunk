@@ -8,7 +8,7 @@ namespace PHPunk\Database;
 class table {
 	private $_name = null;
 	private $_pkey = null;
-	private $_rels = array();
+	private $_rels = [];
 
 	public function __construct($name, $pkey = 'id') {
 		$this->_name = $name;
@@ -43,7 +43,7 @@ class table {
 	}
 
 	public function clear_relations() {
-		$this->_rels = array();
+		$this->_rels = [];
 	}
 
 	public function select_sql($name = false) {
@@ -60,7 +60,7 @@ class table {
 	}
 
 	public function insert_sql($record, &$params) {
-		$fields = array();
+		$fields = [];
 
 		foreach ($record as $field => $value) {
 			if ($field != $this->pkey) {
@@ -76,7 +76,7 @@ class table {
 	}
 
 	public function update_sql($record, &$params) {
-		$fields = array();
+		$fields = [];
 
 		foreach ($record as $field => $value) {
 			if ($field != $this->pkey) {

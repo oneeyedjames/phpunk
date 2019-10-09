@@ -16,13 +16,13 @@ class bridge_table extends table {
 		}
 	}
 
-	public function select_sql($name = false, $args = array()) {
+	public function select_sql($name = false, $args = []) {
 		if ($rel = $this->get_relation($name)) {
 			$table = $this->name != $rel->ptable ? $rel->ptable : $rel->ftable;
 			$query = "SELECT SQL_CALC_FOUND_ROWS `$table`.* FROM $rel->join";
 
 			if (!empty($args)) {
-				$where = array();
+				$where = [];
 
 				foreach ($args as $fkey)
 					$where[] = "`$this->name`.`$fkey` = ?";

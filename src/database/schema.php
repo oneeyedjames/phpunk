@@ -17,12 +17,12 @@ class schema {
 	/**
 	 * @ignore internal variable
 	 */
-	private $_tables = array();
+	private $_tables = [];
 
 	/**
 	 * @ignore internal variable
 	 */
-	private $_rels = array();
+	private $_rels = [];
 
 	/**
 	 * @param object $mysql A previously-established MySQLi instance
@@ -50,13 +50,13 @@ class schema {
 	 * @param string $table_name OPTIONAL Table name to be passed on to result
 	 * @return object Database result object, FALSE on failure
 	 */
-	public function query($sql, $params = array(), $table_name = false) {
+	public function query($sql, $params = [], $table_name = false) {
 		if ($stmt = $this->_mysql->prepare($sql)) {
 			if (is_scalar($params))
 				$params = array_slice(func_get_args(), 1);
 
 			if (count($params)) {
-				$_params = array('');
+				$_params = [''];
 
 				for ($i = 0, $n = count($params); $i < $n; $i++) {
 					$_params[$i + 1] =& $params[$i];
@@ -69,12 +69,12 @@ class schema {
 						$_params[0] .= 's';
 				}
 
-				if (!call_user_func_array(array($stmt, 'bind_param'), $_params))
+				if (!call_user_func_array([$stmt, 'bind_param'], $_params))
 					trigger_error($stmt->error, E_USER_WARNING);
 			}
 
 			if ($stmt->execute() && $result = $stmt->get_result()) {
-				$records = array();
+				$records = [];
 				$found = 0;
 
 				while ($record = $result->fetch_assoc())
@@ -109,7 +109,7 @@ class schema {
 	 * @param array $params OPTIONAL Index-based query parameters
 	 * @return boolean TRUE on sucess, FALSE on failure
 	 */
-	public function execute($sql, $params = array()) {
+	public function execute($sql, $params = []) {
 		$result = false;
 
 		if ($stmt = $this->_mysql->prepare($sql)) {
@@ -117,7 +117,7 @@ class schema {
 				$params = array_slice(func_get_args(), 1);
 
 			if (count($params)) {
-				$_params = array('');
+				$_params = [''];
 
 				for ($i = 0, $n = count($params); $i < $n; $i++) {
 					$_params[$i + 1] =& $params[$i];
@@ -130,7 +130,7 @@ class schema {
 						$_params[0] .= 's';
 				}
 
-				if (!call_user_func_array(array($stmt, 'bind_param'), $_params))
+				if (!call_user_func_array([$stmt, 'bind_param'], $_params))
 					trigger_error($stmt->error, E_USER_WARNING);
 			}
 
@@ -196,7 +196,7 @@ class schema {
 	 * Removes all database table definitions from schema.
 	 */
 	public function clear_tables() {
-		$this->_tables = array();
+		$this->_tables = [];
 	}
 
 	/**
@@ -263,7 +263,7 @@ class schema {
 	 * Removes all database relationship definitions from schema.
 	 */
 	public function clear_relations() {
-		$this->_rels = array();
+		$this->_rels = [];
 
 		foreach ($this->_tables as &$table)
 			$table->clear_relations();
@@ -283,7 +283,7 @@ class schema {
 		if ($table = @$this->_tables[$table_name]) {
 			$sql = $table->select_sql($rel_name);
 
-			$params = array(intval($record_id));
+			$params = [intval($record_id)];
 
 			if ($result = $this->query($sql, $params, $table_name))
 				return $result->first;
@@ -305,7 +305,7 @@ class schema {
 					? $record->toArray()
 					: get_object_vars($record);
 
-			$params = array();
+			$params = [];
 			$insert = @$record[$table->pkey] == 0;
 
 			if ($insert)
@@ -331,7 +331,7 @@ class schema {
 		if ($table = @$this->_tables[$table_name]) {
 			$sql = $table->delete_sql();
 
-			$params = array(intval($record_id));
+			$params = [intval($record_id)];
 
 			return $this->execute($sql, $params);
 		}

@@ -126,7 +126,7 @@ class model {
 	 * @param array $params OPTIONAL Array of parameter values for query
 	 * @return object Result instance returned by query
 	 */
-	protected function query($sql, $params = array()) {
+	protected function query($sql, $params = []) {
 		$params = is_array($params) ? $params : array_slice(func_get_args(), 1);
 		return $this->_database->query($sql, $params);
 	}
@@ -138,7 +138,7 @@ class model {
 	 * @param array $params OPTIONAL Array of parameter values for query
 	 * @return boolean TRUE on success, FALSE on failure
 	 */
-	protected function execute($sql, $params = array()) {
+	protected function execute($sql, $params = []) {
 		$params = is_array($params) ? $params : array_slice(func_get_args(), 1);
 		return $this->_database->execute($sql, $params);
 	}
