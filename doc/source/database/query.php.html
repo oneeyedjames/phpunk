@@ -44,6 +44,9 @@ namespace PHPunk\Database;
 use PHPunk\Util\object;
 
 class query {
+	/**
+	 * @ignore internal variable
+	 */
 	private static $_defaults = array(
 		'table'  =&gt; '',
 		'bridge' =&gt; '',
@@ -53,19 +56,60 @@ class query {
 		'offset' =&gt; 0
 	);
 
+	/**
+	 * @ignore internal variable
+	 */
 	private $_database;
 
+	/**
+	 * @ignore internal variable
+	 */
 	private $_table;
+
+	/**
+	 * @ignore internal variable
+	 */
 	private $_bridge;
+
+	/**
+	 * @ignore internal variable
+	 */
 	private $_args = array();
+
+	/**
+	 * @ignore internal variable
+	 */
 	private $_sort = array();
+
+	/**
+	 * @ignore internal variable
+	 */
 	private $_limit = 0;
+
+	/**
+	 * @ignore internal variable
+	 */
 	private $_offset = 0;
 
+	/**
+	 * @ignore internal variable
+	 */
 	private $_query;
+
+	/**
+	 * @ignore internal variable
+	 */
 	private $_params;
+
+	/**
+	 * @ignore internal variable
+	 */
 	private $_result;
 
+	/**
+	 * @param object $database Database schema for connection
+	 * @param mixed $args Array or iterable object or field values
+	 */
 	public function __construct($database, $args) {
 		$this-&gt;_database = $database;
 
@@ -79,6 +123,9 @@ class query {
 		$this-&gt;_offset = $args-&gt;offset;
 	}
 
+	/**
+	 * @ignore magic method
+	 */
 	public function __get($key) {
 		switch ($key) {
 			case 'table':
@@ -94,6 +141,10 @@ class query {
 		}
 	}
 
+	/**
+	 * Returns a result for this database query
+	 * @return object A database result instance
+	 */
 	public function get_result() {
 		if (!is_null($this-&gt;_result))
 			return $this-&gt;_result;
@@ -104,6 +155,10 @@ class query {
 		return null;
 	}
 
+	/**
+	 * Executes the SELECT query
+	 * @return boolean TRUE is query succeeds, FALSE otherwise
+	 */
 	public function execute() {
 		if ($table = $this-&gt;_database-&gt;get_table($this-&gt;table)) {
 			$query = &quot;SELECT SQL_CALC_FOUND_ROWS `$table-&gt;name`.*&quot;;
@@ -208,6 +263,9 @@ class query {
 		return false;
 	}
 
+	/**
+	 * Disposes of the cached database result
+	 */
 	public function reset() {
 		$this-&gt;_result = null;
 	}
