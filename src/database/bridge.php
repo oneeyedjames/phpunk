@@ -9,8 +9,11 @@ class bridge_table extends table {
 	public function __get($key) {
 		switch ($key) {
 			case 'join':
+				return $this->_join();
+			case 'left':
+			case 'right':
 			case 'inner':
-				return $this->_join('INNER');
+				return $this->_join($key);
 			default:
 				return parent::__get($key);
 		}
@@ -36,13 +39,14 @@ class bridge_table extends table {
 		return false;
 	}
 
-	private function _join($type) {
+	private function _join($type = 'inner') {
 		$type = strtoupper($type);
-		$join = $this->name;
+		$join = "`$this->name`";
 
 		foreach ($this->relations as $rel) {
 			$table = $this->name != $rel->ptable ? $rel->ptable : $rel->ftable;
-			$join .= " $type JOIN `$table` ON `$rel->ftable`.`$rel->fkey` = `$rel->ptable`.`$rel->pkey`";
+
+			$join .= " $type JOIN `$table` ON $rel->match";
 		}
 
 		return $join;

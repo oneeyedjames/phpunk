@@ -69,6 +69,16 @@ class query {
 	}
 
 	public function execute() {
+		if ($this->build()) {
+			$this->_result = $this->_database->query($this->query, $this->params, $this->table);
+
+			return !is_null($this->_result);
+		}
+
+		return false;
+	}
+
+	public function build() {
 		if ($table = $this->_database->get_table($this->table)) {
 			$query = "SELECT SQL_CALC_FOUND_ROWS `$table->name`.*";
 
@@ -93,35 +103,11 @@ class query {
 
 			foreach ($this->args as $field => $value) {
 				if ($rel = $table->get_relation($field)) {
-					$match = "`$rel->ftable`.`$rel->fkey` = `$rel->ptable`.`$rel->pkey`";
-
-					if ($table->name == $rel->ptable) {
-						$ftable = $this->_database->get_table($rel->ftable);
-
-						$joins[] = "`$rel->ftable` ON $match";
-						$field = "$rel->ftable`.`$ftable->pkey";
-					} else {
-						if (0 == $value) {
-							$field = "$rel->ftable`.`$rel->fkey";
-						} else {
-							$joins[] = "`$rel->ptable` ON $match";
-							$field = "$rel->ptable`.`$rel->pkey";
-						}
-					}
+					if ($join = $this->join_table($table, $rel, $field))
+						$joins[] = $join;
 				} elseif ($rel = $bridge->get_relation($field)) {
-					$match = "`$rel->ftable`.`$rel->fkey` = `$rel->ptable`.`$rel->pkey`";
-
-					if ($bridge->name == $rel->ptable) {
-						$joins[] = "`$rel->ftable` ON $match";
-						$field = "$bridge->name`.`$bridge->pkey";
-					} else {
-						if (0 == $value) {
-							$field = "$rel->ftable`.`$rel->fkey";
-						} else {
-							$joins[] = "`$rel->ptable` ON $match";
-							$field = "$rel->ptable`.`$rel->pkey";
-						}
-					}
+					if ($join = $this->join_table($bridge, $rel, $field))
+						$joins[] = $join;
 				}
 
 				if (is_scalar($value)) {
@@ -164,15 +150,29 @@ class query {
 
 			$this->_query = $query;
 			$this->_params = $params;
-			$this->_result = $this->_database->query($query, $params, $this->table);
 
-			return !is_null($this->_result);
+			return true;
 		}
 
 		return false;
 	}
 
 	public function reset() {
+		$this->_query = null;
+		$this->_params = null;
 		$this->_result = null;
+	}
+
+	protected function join_table($table, $rel, &$field = null) {
+		if ($table->name == $rel->ptable) {
+			$ftable = $this->_database->get_table($rel->ftable);
+			$field = "$ftable->name`.`$ftable->pkey";
+
+			return "`$rel->ftable` ON $rel->match";
+		} else {
+			$field = "$rel->ftable`.`$rel->fkey";
+		}
+
+		return false;
 	}
 }

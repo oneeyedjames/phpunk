@@ -23,6 +23,8 @@ class table {
 				return $this->_pkey;
 			case 'relations':
 				return $this->_rels;
+			case 'where':
+				return $this->_where();
 		}
 	}
 
@@ -50,13 +52,13 @@ class table {
 		if ($name) {
 			if ($rel = $this->get_relation($name)) {
 				$table = $this->name != $rel->ptable ? $rel->ptable : $rel->ftable;
-				return "SELECT SQL_CALC_FOUND_ROWS `$table`.* FROM $rel->join WHERE `$this->name`.`$this->pkey` = ?";
+				return "SELECT SQL_CALC_FOUND_ROWS `$table`.* FROM $rel->join WHERE $this->where";
 			}
 
 			return false;
 		}
 
-		return "SELECT SQL_CALC_FOUND_ROWS * FROM `$this->name` WHERE `$this->pkey` = ?";
+		return "SELECT SQL_CALC_FOUND_ROWS * FROM `$this->name` WHERE $this->where";
 	}
 
 	public function insert_sql($record, &$params) {
@@ -79,7 +81,7 @@ class table {
 		$fields = [];
 
 		foreach ($record as $field => $value) {
-			if ($field != $this->pkey) {
+			if (!$this->is_pkey($field)) {
 				$fields[] = "`$field` = ?";
 				$params[] = $value;
 			}
@@ -87,21 +89,46 @@ class table {
 
 		$fields = implode(", ", $fields);
 
-		$params[] = $record[$this->pkey];
+		if (is_scalar($this->pkey)) {
+			$params[] = $record[$this->pkey];
+		} elseif (is_array($this->pkey)) {
+			foreach ($this->pkey as $field) {
+				$params[] = $record[$field];
+			}
+		}
 
-		return "UPDATE `$this->name` SET $fields WHERE `$this->pkey` = ?";
+		return "UPDATE `$this->name` SET $fields WHERE $this->where";
 	}
 
 	public function delete_sql($name = false) {
 		if ($name) {
 			if ($rel = $this->get_relation($name)) {
 				$table = $this->name != $rel->ptable ? $rel->ptable : $rel->ftable;
-				return "DELETE `$table`.* FROM $rel->join WHERE `$this->name`.`$this->pkey` = ?";
+				return "DELETE `$table`.* FROM $rel->join WHERE $this->where";
 			}
 
 			return false;
 		}
 
-		return "DELETE FROM `$this->name` WHERE `$this->pkey` = ?";
+		return "DELETE FROM `$this->name` WHERE $this->where";
+	}
+
+	private function is_pkey($field) {
+		return is_array($this->pkey)
+			? in_array($field, $this->pkey)
+			: $field == $this->pkey;
+	}
+
+	private function _where() {
+		if (is_array($this->pkey)) {
+			$fields = [];
+
+			foreach ($this->pkey as $field)
+				$fields[] = "`$this->name`.`$field` = ?";
+
+			return implode(" AND ", $fields);
+		}
+
+		return "`$this->name`.`$this->pkey` = ?";
 	}
 }

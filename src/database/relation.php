@@ -38,23 +38,35 @@ class relation {
 			case 'pkey':
 				return $this->_ptable->pkey;
 			case 'join':
-			case 'inner':
-				return $this->_join('INNER');
+				return $this->_join();
 			case 'left':
 			case 'right':
+			case 'inner':
 				return $this->_join($key);
+			case 'match':
+				return $this->_match();
 		}
 	}
 
-	private function _join($type = 'INNER') {
-		$ptable = $this->_ptable->name;
-		$pkey   = $this->_ptable->pkey;
-
-		$ftable = $this->_ftable->name;
-		$fkey   = $this->_fkey;
-
+	private function _join($type = 'inner') {
 		$type = strtoupper($type);
 
-		return "`$ptable` $type JOIN `$ftable` ON `$ptable`.`$pkey` = `$ftable`.`$fkey`";
+		return "`$this->ftable` $type JOIN `$this->ptable` ON $this->match";
+	}
+
+	private function _match() {
+		if (is_scalar($this->pkey) && is_scalar($this->fkey)) {
+			return "`$this->ftable`.`$this->fkey` = `$this->ptable`.`$this->pkey`";
+		} elseif (is_array($this->pkey) && is_array($this->fkey)) {
+			$match = [];
+
+			foreach ($this->pkey as $index => $field) {
+				$match[] = "`$this->ftable`.`{$this->fkey[$index]}` = `$this->ptable`.`$field`";
+			}
+
+			return implode(" AND ", $match);
+		}
+
+		return false;
 	}
 }
