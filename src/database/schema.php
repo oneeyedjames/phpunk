@@ -283,7 +283,14 @@ class schema {
 		if ($table = @$this->_tables[$table_name]) {
 			$sql = $table->select_sql($rel_name);
 
-			$params = [intval($record_id)];
+			$params = [];
+
+			if (is_string($table->pkey)) {
+				$params[] = intval($record_id);
+			} elseif (is_array($table->pkey)) {
+				foreach ($table->pkey as $field)
+					$params[] = @$record_id[$field];
+			}
 
 			if ($result = $this->query($sql, $params, $table_name))
 				return $result->first;
@@ -306,7 +313,19 @@ class schema {
 					: get_object_vars($record);
 
 			$params = [];
-			$insert = @$record[$table->pkey] == 0;
+
+			if (is_string($table->pkey)) {
+				$insert = @$record[$table->pkey] == 0;
+			} elseif (is_array($table->pkey)) {
+				$insert = false;
+
+				foreach ($table->pkey as $field) {
+					if (empty($record[$field])) {
+						$insert = true;
+						break;
+					}
+				}
+			}
 
 			if ($insert)
 				$sql = $table->insert_sql($record, $params);
@@ -315,7 +334,15 @@ class schema {
 
 			$this->execute($sql, $params);
 
-			return @$record[$table->pkey] ?: $this->insert_id;
+			if (is_string($table->pkey)) {
+				return @$record[$table->pkey] ?: $this->insert_id;
+			} else {
+				$record_id = [];
+				foreach ($table->pkey as $field)
+					$record_id[$field] = @$record[$field];
+
+				return $record_id;
+			}
 		}
 
 		return false;
@@ -331,7 +358,14 @@ class schema {
 		if ($table = @$this->_tables[$table_name]) {
 			$sql = $table->delete_sql();
 
-			$params = [intval($record_id)];
+			$params = [];
+
+			if (is_string($table->pkey)) {
+				$params[] = intval($record_id);
+			} elseif (is_array($table->pkey)) {
+				foreach ($table->pkey as $field)
+					$params[] = @$record_id[$field];
+			}
 
 			return $this->execute($sql, $params);
 		}
