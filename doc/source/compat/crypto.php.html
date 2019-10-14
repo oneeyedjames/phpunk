@@ -120,13 +120,13 @@ function _hash_equals($hash1, $hash2) {
  * @param array $options
  * @return string Returns the hashed password, or FALSE on failure.
  */
-function _password_hash($password, $algo, $options = array()) {
+function _password_hash($password, $algo, $options = []) {
 	extract($options, EXTR_SKIP);
 
 	if (!isset($salt)) {
 		$cost = isset($cost) ? sprintf('%02d', $cost) : '10';
-		$salt = '$2y$' . $cost . '$' . str_replace(array('+', '='),
-			array('.', ''), base64_encode(random_bytes(16)));
+		$salt = '$2y$' . $cost . '$' . str_replace(['+', '='],
+			['.', ''], base64_encode(random_bytes(16)));
 	}
 
 	return crypt($password, $salt);

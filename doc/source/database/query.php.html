@@ -47,14 +47,14 @@ class query {
 	/**
 	 * @ignore internal variable
 	 */
-	private static $_defaults = array(
+	private static $_defaults = [
 		'table'  =&gt; '',
 		'bridge' =&gt; '',
-		'args'   =&gt; array(),
-		'sort'   =&gt; array(),
+		'args'   =&gt; [],
+		'sort'   =&gt; [],
 		'limit'  =&gt; 0,
 		'offset' =&gt; 0
-	);
+	];
 
 	/**
 	 * @ignore internal variable
@@ -74,12 +74,12 @@ class query {
 	/**
 	 * @ignore internal variable
 	 */
-	private $_args = array();
+	private $_args = [];
 
 	/**
 	 * @ignore internal variable
 	 */
-	private $_sort = array();
+	private $_sort = [];
 
 	/**
 	 * @ignore internal variable
@@ -160,14 +160,24 @@ class query {
 	 * @return boolean TRUE is query succeeds, FALSE otherwise
 	 */
 	public function execute() {
+		if ($this-&gt;build()) {
+			$this-&gt;_result = $this-&gt;_database-&gt;query($this-&gt;query, $this-&gt;params, $this-&gt;table);
+
+			return !is_null($this-&gt;_result);
+		}
+
+		return false;
+	}
+
+	public function build() {
 		if ($table = $this-&gt;_database-&gt;get_table($this-&gt;table)) {
 			$query = &quot;SELECT SQL_CALC_FOUND_ROWS `$table-&gt;name`.*&quot;;
 
-			$joins = array();
-			$where = array();
-			$order = array();
+			$joins = [];
+			$where = [];
+			$order = [];
 
-			$params = array();
+			$params = [];
 
 			if ($rel = $table-&gt;get_relation($this-&gt;bridge)) {
 				$bridge = $table-&gt;name == $rel-&gt;ptable ? $rel-&gt;ftable : $rel-&gt;ptable;
@@ -184,35 +194,11 @@ class query {
 
 			foreach ($this-&gt;args as $field =&gt; $value) {
 				if ($rel = $table-&gt;get_relation($field)) {
-					$match = &quot;`$rel-&gt;ftable`.`$rel-&gt;fkey` = `$rel-&gt;ptable`.`$rel-&gt;pkey`&quot;;
-
-					if ($table-&gt;name == $rel-&gt;ptable) {
-						$ftable = $this-&gt;_database-&gt;get_table($rel-&gt;ftable);
-
-						$joins[] = &quot;`$rel-&gt;ftable` ON $match&quot;;
-						$field = &quot;$rel-&gt;ftable`.`$ftable-&gt;pkey&quot;;
-					} else {
-						if (0 == $value) {
-							$field = &quot;$rel-&gt;ftable`.`$rel-&gt;fkey&quot;;
-						} else {
-							$joins[] = &quot;`$rel-&gt;ptable` ON $match&quot;;
-							$field = &quot;$rel-&gt;ptable`.`$rel-&gt;pkey&quot;;
-						}
-					}
+					if ($join = $this-&gt;join_table($table, $rel, $field))
+						$joins[] = $join;
 				} elseif ($rel = $bridge-&gt;get_relation($field)) {
-					$match = &quot;`$rel-&gt;ftable`.`$rel-&gt;fkey` = `$rel-&gt;ptable`.`$rel-&gt;pkey`&quot;;
-
-					if ($bridge-&gt;name == $rel-&gt;ptable) {
-						$joins[] = &quot;`$rel-&gt;ftable` ON $match&quot;;
-						$field = &quot;$bridge-&gt;name`.`$bridge-&gt;pkey&quot;;
-					} else {
-						if (0 == $value) {
-							$field = &quot;$rel-&gt;ftable`.`$rel-&gt;fkey&quot;;
-						} else {
-							$joins[] = &quot;`$rel-&gt;ptable` ON $match&quot;;
-							$field = &quot;$rel-&gt;ptable`.`$rel-&gt;pkey&quot;;
-						}
-					}
+					if ($join = $this-&gt;join_table($bridge, $rel, $field))
+						$joins[] = $join;
 				}
 
 				if (is_scalar($value)) {
@@ -255,9 +241,8 @@ class query {
 
 			$this-&gt;_query = $query;
 			$this-&gt;_params = $params;
-			$this-&gt;_result = $this-&gt;_database-&gt;query($query, $params, $this-&gt;table);
 
-			return !is_null($this-&gt;_result);
+			return true;
 		}
 
 		return false;
@@ -267,7 +252,22 @@ class query {
 	 * Disposes of the cached database result
 	 */
 	public function reset() {
+		$this-&gt;_query = null;
+		$this-&gt;_params = null;
 		$this-&gt;_result = null;
+	}
+
+	protected function join_table($table, $rel, &amp;$field = null) {
+		if ($table-&gt;name == $rel-&gt;ptable) {
+			$ftable = $this-&gt;_database-&gt;get_table($rel-&gt;ftable);
+			$field = &quot;$ftable-&gt;name`.`$ftable-&gt;pkey&quot;;
+
+			return &quot;`$rel-&gt;ftable` ON $rel-&gt;match&quot;;
+		} else {
+			$field = &quot;$rel-&gt;ftable`.`$rel-&gt;fkey&quot;;
+		}
+
+		return false;
 	}
 }
 </pre>

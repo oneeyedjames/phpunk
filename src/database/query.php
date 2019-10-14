@@ -216,8 +216,6 @@ class query {
 	 * Disposes of the cached database result
 	 */
 	public function reset() {
-		$this->_query = null;
-		$this->_params = null;
 		$this->_result = null;
 	}
 
