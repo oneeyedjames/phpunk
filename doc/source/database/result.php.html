@@ -52,18 +52,19 @@ use PHPunk\Util\object;
  */
 class result extends object {
 	/**
-	 * The name of the related database table
-	 * @var string
+	 * @ignore internal variable
 	 */
 	private $_table;
 
 	/**
-	 * The total number of records matching the query
-	 * @var integer
+	 * @ignore internal variable
 	 */
 	private $_found;
 
 	/**
+	 * @param array $records Array of database records
+	 * @param integer $found Total count of matching records
+	 * @param string $table OPTIONAL database table name
 	 */
 	public function __construct($records, $found, $table = false) {
 		parent::__construct($records);
@@ -88,12 +89,21 @@ class result extends object {
 	}
 
 	/**
+	 * Returns a new result after applying the given callback function to each
+	 * record in the result.
+	 *
+	 * @param callable $func The callback function to apply to each record
+	 * @return object a new result instance
 	 */
 	public function map($func) {
 		return new self(array_map($func, $this-&gt;toArray()), $this-&gt;_found);
 	}
 
 	/**
+	 * Returns a new result keyed by the results of the given callback function.
+	 *
+	 * @param callable $func The callback function to apply to each record
+	 * @return object a new result instance
 	 */
 	public function key_map($func) {
 		$keys   = array_map($func, $this-&gt;toArray());

@@ -8,6 +8,9 @@ namespace PHPunk\Database;
 use PHPunk\Util\object;
 
 class query {
+	/**
+	 * @ignore internal variable
+	 */
 	private static $_defaults = [
 		'table'  => '',
 		'bridge' => '',
@@ -17,19 +20,60 @@ class query {
 		'offset' => 0
 	];
 
+	/**
+	 * @ignore internal variable
+	 */
 	private $_database;
 
+	/**
+	 * @ignore internal variable
+	 */
 	private $_table;
+
+	/**
+	 * @ignore internal variable
+	 */
 	private $_bridge;
+
+	/**
+	 * @ignore internal variable
+	 */
 	private $_args = [];
+
+	/**
+	 * @ignore internal variable
+	 */
 	private $_sort = [];
+
+	/**
+	 * @ignore internal variable
+	 */
 	private $_limit = 0;
+
+	/**
+	 * @ignore internal variable
+	 */
 	private $_offset = 0;
 
+	/**
+	 * @ignore internal variable
+	 */
 	private $_query;
+
+	/**
+	 * @ignore internal variable
+	 */
 	private $_params;
+
+	/**
+	 * @ignore internal variable
+	 */
 	private $_result;
 
+	/**
+	 * @param object $database Database schema for connection
+	 * @param mixed $args Array or iterable object or field values
+	 */
 	public function __construct($database, $args) {
 		$this->_database = $database;
 
@@ -43,6 +87,9 @@ class query {
 		$this->_offset = $args->offset;
 	}
 
+	/**
+	 * @ignore magic method
+	 */
 	public function __get($key) {
 		switch ($key) {
 			case 'table':
@@ -58,6 +105,10 @@ class query {
 		}
 	}
 
+	/**
+	 * Returns a result for this database query
+	 * @return object A database result instance
+	 */
 	public function get_result() {
 		if (!is_null($this->_result))
 			return $this->_result;
@@ -68,6 +119,10 @@ class query {
 		return null;
 	}
 
+	/**
+	 * Executes the SELECT query
+	 * @return boolean TRUE is query succeeds, FALSE otherwise
+	 */
 	public function execute() {
 		if ($this->build()) {
 			$this->_result = $this->_database->query($this->query, $this->params, $this->table);
@@ -157,6 +212,9 @@ class query {
 		return false;
 	}
 
+	/**
+	 * Disposes of the cached database result
+	 */
 	public function reset() {
 		$this->_query = null;
 		$this->_params = null;

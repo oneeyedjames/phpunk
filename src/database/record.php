@@ -13,14 +13,11 @@ use PHPunk\Util\object;
  */
 class record extends object {
 	/**
-	 * Table name
-	 * @var string
+	 * @ignore internal variable
 	 */
 	private $_table;
 
 	/**
-	 * Creates a shallow clone of the passed data.
-	 *
 	 * @param mixed $data OPTIONAL Any array or traversable object
 	 * @param string $table OPTIONAL The name of the related database table
 	 */
