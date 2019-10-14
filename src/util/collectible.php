@@ -20,6 +20,20 @@ trait collectible {
 	 */
 	private $_data = [];
 
+	/**
+	 * Sorts the data collection. If first argument is callable, it will be used
+	 * as a comparison function. Otherwise, it will be used as a boolean flag to
+	 * reverse-sort the collection. Omitting the sorting mode flag will sort the
+	 * collection by its values and reset its keys to sequential indeces.
+	 *
+	 * The sorting mode flag works as follows:
+	 *   'k' will sort the collection by its keys
+	 *   'a' will sort the collection by its values, preserving its keys
+	 *
+	 * @param mixed $reverse Whether to reverse-sort the collection
+	 * @param string $mode OPTIONAL Sorting mode flag
+	 * @return boolean TRUE on success, FALSE on failure
+	 */
 	public function sort($reverse = false, $mode = '') {
 		if (is_callable($reverse)) {
 			switch ($mode) {
@@ -42,22 +56,42 @@ trait collectible {
 		}
 	}
 
+	/**
+	 * Apply a callback functon to each item in the collection.
+	 * @param mixed $func A callable to apply to each item
+	 * @param mixed $data OPTIONAL Data to pass along to callable
+	 * @return boolean TRUE
+	 */
 	public function walk($func, $data = null) {
 		return array_walk($this->_data, $func, $data);
 	}
 
+	/**
+	 * @return array Key set for collection
+	 */
 	public function keys() {
 		return array_keys($this->_data);
 	}
 
+	/**
+	 * @return array Value set for collection
+	 */
 	public function values() {
 		return array_values($this->_data);
 	}
 
+	/**
+	 * Returns collection as array.
+	 * @return array collection of data
+	 */
 	public function toArray() {
 		return $this->_data;
 	}
 
+	/**
+	 * Replaces internal data collection.
+	 * @param mixed $data OPTIONAL Any array or traversable object
+	 */
 	protected function loadArray($data) {
 		if (is_array($data)) {
 			$this->_data = $data;
