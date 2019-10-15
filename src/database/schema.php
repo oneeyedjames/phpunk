@@ -73,25 +73,26 @@ class schema {
 					trigger_error($stmt->error, E_USER_WARNING);
 			}
 
-			if ($stmt->execute() && $result = $stmt->get_result()) {
+			if ($stmt->execute()) {
 				$records = [];
 				$found = 0;
 
-				while ($record = $result->fetch_assoc())
-					$records[] = new record($record, $table_name);
-
-				$result->free();
-
-				if ($result = $this->_mysql->query('SELECT FOUND_ROWS()')) {
-					if ($record = $result->fetch_row())
-						$found = intval($record[0]);
+				if ($result = $stmt->get_result()) {
+					while ($record = $result->fetch_assoc())
+						$records[] = new record($record, $table_name);
 
 					$result->free();
+
+					if ($result = $this->_mysql->query('SELECT FOUND_ROWS()')) {
+						if ($record = $result->fetch_row())
+							$found = intval($record[0]);
+
+						$result->free();
+					}
 				}
 
 				return new result($records, $found, $table_name);
 			} else {
-				error_log($sql);
 				trigger_error($stmt->error, E_USER_WARNING);
 			}
 
@@ -110,6 +111,9 @@ class schema {
 	 * @return boolean TRUE on sucess, FALSE on failure
 	 */
 	public function execute($sql, $params = []) {
+		if (is_scalar($params)) $params = array_slice(func_get_args(), 1);
+		return $this->query($sql, $params) != false;
+
 		$result = false;
 
 		if ($stmt = $this->_mysql->prepare($sql)) {
@@ -227,16 +231,16 @@ class schema {
 	 * @param string $fkey Name of foreign key field
 	 * @return object Newly-defined relation object
 	 */
-	public function add_relation($rel_name, $ptable_name, $ftable_name, $fkey) {
-		if (!$this->relation_exists($rel_name)) {
+	public function add_relation($name, $ptable_name, $ftable_name, $fkey) {
+		if (!$this->relation_exists($name)) {
 			if (($ptable =& $this->_tables[$ptable_name]) &&
 				($ftable =& $this->_tables[$ftable_name])) {
-				$rel = new relation($rel_name, $ptable, $ftable, $fkey);
+				$rel = new relation($name, $ptable, $ftable, $fkey);
 
-				$ptable->add_relation($rel_name, $rel);
-				$ftable->add_relation($rel_name, $rel);
+				$ptable->add_relation($name, $rel);
+				$ftable->add_relation($name, $rel);
 
-				$this->_rels[$rel_name] =& $rel;
+				$this->_rels[$name] =& $rel;
 			}
 		}
 
