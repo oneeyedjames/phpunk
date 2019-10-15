@@ -244,7 +244,7 @@ class schema {
 			}
 		}
 
-		return $this->get_relation($rel_name);
+		return $this->get_relation($name);
 	}
 
 	/**

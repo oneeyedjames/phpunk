@@ -109,25 +109,26 @@ class schema {
 					trigger_error($stmt-&gt;error, E_USER_WARNING);
 			}
 
-			if ($stmt-&gt;execute() &amp;&amp; $result = $stmt-&gt;get_result()) {
+			if ($stmt-&gt;execute()) {
 				$records = [];
 				$found = 0;
 
-				while ($record = $result-&gt;fetch_assoc())
-					$records[] = new record($record, $table_name);
-
-				$result-&gt;free();
-
-				if ($result = $this-&gt;_mysql-&gt;query('SELECT FOUND_ROWS()')) {
-					if ($record = $result-&gt;fetch_row())
-						$found = intval($record[0]);
+				if ($result = $stmt-&gt;get_result()) {
+					while ($record = $result-&gt;fetch_assoc())
+						$records[] = new record($record, $table_name);
 
 					$result-&gt;free();
+
+					if ($result = $this-&gt;_mysql-&gt;query('SELECT FOUND_ROWS()')) {
+						if ($record = $result-&gt;fetch_row())
+							$found = intval($record[0]);
+
+						$result-&gt;free();
+					}
 				}
 
 				return new result($records, $found, $table_name);
 			} else {
-				error_log($sql);
 				trigger_error($stmt-&gt;error, E_USER_WARNING);
 			}
 
@@ -146,6 +147,9 @@ class schema {
 	 * @return boolean TRUE on sucess, FALSE on failure
 	 */
 	public function execute($sql, $params = []) {
+		if (is_scalar($params)) $params = array_slice(func_get_args(), 1);
+		return $this-&gt;query($sql, $params) != false;
+
 		$result = false;
 
 		if ($stmt = $this-&gt;_mysql-&gt;prepare($sql)) {
@@ -263,16 +267,16 @@ class schema {
 	 * @param string $fkey Name of foreign key field
 	 * @return object Newly-defined relation object
 	 */
-	public function add_relation($rel_name, $ptable_name, $ftable_name, $fkey) {
-		if (!$this-&gt;relation_exists($rel_name)) {
+	public function add_relation($name, $ptable_name, $ftable_name, $fkey) {
+		if (!$this-&gt;relation_exists($name)) {
 			if (($ptable =&amp; $this-&gt;_tables[$ptable_name]) &amp;&amp;
 				($ftable =&amp; $this-&gt;_tables[$ftable_name])) {
-				$rel = new relation($rel_name, $ptable, $ftable, $fkey);
+				$rel = new relation($name, $ptable, $ftable, $fkey);
 
-				$ptable-&gt;add_relation($rel_name, $rel);
-				$ftable-&gt;add_relation($rel_name, $rel);
+				$ptable-&gt;add_relation($name, $rel);
+				$ftable-&gt;add_relation($name, $rel);
 
-				$this-&gt;_rels[$rel_name] =&amp; $rel;
+				$this-&gt;_rels[$name] =&amp; $rel;
 			}
 		}
 

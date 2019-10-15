@@ -180,12 +180,18 @@ class table {
 		return "DELETE FROM `$this->name` WHERE $this->where";
 	}
 
+	/**
+	 * @ignore internal method
+	 */
 	private function is_pkey($field) {
 		return is_array($this->pkey)
 			? in_array($field, $this->pkey)
 			: $field == $this->pkey;
 	}
 
+	/**
+	 * @ignore internal method
+	 */
 	private function _where() {
 		if (is_array($this->pkey)) {
 			$fields = [];

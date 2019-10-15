@@ -93,6 +93,9 @@ class relation {
 		return "`$this->ftable` $type JOIN `$this->ptable` ON $this->match";
 	}
 
+	/**
+	 * @ignore internal method
+	 */
 	private function _match() {
 		if (is_scalar($this->pkey) && is_scalar($this->fkey)) {
 			return "`$this->ftable`.`$this->fkey` = `$this->ptable`.`$this->pkey`";

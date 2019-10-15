@@ -216,12 +216,18 @@ class table {
 		return &quot;DELETE FROM `$this-&gt;name` WHERE $this-&gt;where&quot;;
 	}
 
+	/**
+	 * @ignore internal method
+	 */
 	private function is_pkey($field) {
 		return is_array($this-&gt;pkey)
 			? in_array($field, $this-&gt;pkey)
 			: $field == $this-&gt;pkey;
 	}
 
+	/**
+	 * @ignore internal method
+	 */
 	private function _where() {
 		if (is_array($this-&gt;pkey)) {
 			$fields = [];

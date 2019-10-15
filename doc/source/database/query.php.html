@@ -157,7 +157,7 @@ class query {
 
 	/**
 	 * Executes the SELECT query
-	 * @return boolean TRUE is query succeeds, FALSE otherwise
+	 * @return boolean TRUE if query succeeds, FALSE otherwise
 	 */
 	public function execute() {
 		if ($this-&gt;build()) {
@@ -169,6 +169,10 @@ class query {
 		return false;
 	}
 
+	/**
+	 * Generates the SQL string and parameter list for this query
+	 * @return boolean TRUE on success, FALSE on failure
+	 */
 	public function build() {
 		if ($table = $this-&gt;_database-&gt;get_table($this-&gt;table)) {
 			$query = &quot;SELECT SQL_CALC_FOUND_ROWS `$table-&gt;name`.*&quot;;
@@ -252,11 +256,16 @@ class query {
 	 * Disposes of the cached database result
 	 */
 	public function reset() {
-		$this-&gt;_query = null;
-		$this-&gt;_params = null;
 		$this-&gt;_result = null;
 	}
 
+	/**
+	 * Generates the JOIN clause for the SQL relation
+	 * @param object $table The base table object for the relation
+	 * @param object $rel The relation to join
+	 * @param string $field OUTPUT The fully-qualified field name
+	 * @return string The JOIN clause, FALSE if no join is necessary
+	 */
 	protected function join_table($table, $rel, &amp;$field = null) {
 		if ($table-&gt;name == $rel-&gt;ptable) {
 			$ftable = $this-&gt;_database-&gt;get_table($rel-&gt;ftable);

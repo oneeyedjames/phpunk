@@ -121,7 +121,7 @@ class query {
 
 	/**
 	 * Executes the SELECT query
-	 * @return boolean TRUE is query succeeds, FALSE otherwise
+	 * @return boolean TRUE if query succeeds, FALSE otherwise
 	 */
 	public function execute() {
 		if ($this->build()) {
@@ -133,6 +133,10 @@ class query {
 		return false;
 	}
 
+	/**
+	 * Generates the SQL string and parameter list for this query
+	 * @return boolean TRUE on success, FALSE on failure
+	 */
 	public function build() {
 		if ($table = $this->_database->get_table($this->table)) {
 			$query = "SELECT SQL_CALC_FOUND_ROWS `$table->name`.*";
@@ -158,10 +162,10 @@ class query {
 
 			foreach ($this->args as $field => $value) {
 				if ($rel = $table->get_relation($field)) {
-					if ($join = $this->join_table($table, $rel, $field))
+					if ($join = $this->_join($table, $rel, $field))
 						$joins[] = $join;
 				} elseif ($rel = $bridge->get_relation($field)) {
-					if ($join = $this->join_table($bridge, $rel, $field))
+					if ($join = $this->_join($bridge, $rel, $field))
 						$joins[] = $join;
 				}
 
@@ -219,7 +223,10 @@ class query {
 		$this->_result = null;
 	}
 
-	protected function join_table($table, $rel, &$field = null) {
+	/**
+	 * @ignore internal method
+	 */
+	private function _join($table, $rel, &$field = null) {
 		if ($table->name == $rel->ptable) {
 			$ftable = $this->_database->get_table($rel->ftable);
 			$field = "$ftable->name`.`$ftable->pkey";
