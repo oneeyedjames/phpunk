@@ -10,11 +10,16 @@ class databaseSchemaTest extends TestCase {
 	public $database;
 
 	public function setUp() {
-		$this->database = new schema(null);
+		$this->mock = new MySqlMock([
+			['foo' => 'bar']
+		], 13);
+
+		$this->database = new schema($this->mock);
 	}
 
 	public function tearDown() {
-		$this->database = null;
+		unset($this->mock);
+		unset($this->database);
 	}
 
 	public function testTableExists() {
@@ -88,5 +93,24 @@ class databaseSchemaTest extends TestCase {
 
 		$this->assertNull($db->get_relation('user_group'));
 		$this->assertNull($db->get_relation('user_role'));
+	}
+
+	public function testQuery() {
+		$this->mock->result = [[
+			'email' => 'joe@schmoe.me',
+			'username' => 'joeschmoe'
+		]];
+
+		$this->database->add_table('users');
+
+		$sql = 'SELECT `username` FROM `users`';
+
+		$result = $this->database->query($sql, [], 'users');
+
+		$this->assertEquals(13, $result->found);
+		$this->assertEquals(1, count($result));
+		$this->assertEquals('users', $result->table);
+		$this->assertEquals('joeschmoe', $result[0]->username);
+		$this->assertEquals('joe@schmoe.me', $result[0]->email);
 	}
 }
