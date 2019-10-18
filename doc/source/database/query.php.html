@@ -198,10 +198,10 @@ class query {
 
 			foreach ($this-&gt;args as $field =&gt; $value) {
 				if ($rel = $table-&gt;get_relation($field)) {
-					if ($join = $this-&gt;join_table($table, $rel, $field))
+					if ($join = $this-&gt;_join($table, $rel, $field))
 						$joins[] = $join;
 				} elseif ($rel = $bridge-&gt;get_relation($field)) {
-					if ($join = $this-&gt;join_table($bridge, $rel, $field))
+					if ($join = $this-&gt;_join($bridge, $rel, $field))
 						$joins[] = $join;
 				}
 
@@ -260,13 +260,9 @@ class query {
 	}
 
 	/**
-	 * Generates the JOIN clause for the SQL relation
-	 * @param object $table The base table object for the relation
-	 * @param object $rel The relation to join
-	 * @param string $field OUTPUT The fully-qualified field name
-	 * @return string The JOIN clause, FALSE if no join is necessary
+	 * @ignore internal method
 	 */
-	protected function join_table($table, $rel, &amp;$field = null) {
+	private function _join($table, $rel, &amp;$field = null) {
 		if ($table-&gt;name == $rel-&gt;ptable) {
 			$ftable = $this-&gt;_database-&gt;get_table($rel-&gt;ftable);
 			$field = &quot;$ftable-&gt;name`.`$ftable-&gt;pkey&quot;;

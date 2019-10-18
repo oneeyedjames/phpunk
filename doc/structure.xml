@@ -1467,7 +1467,7 @@ collection by its values and reset its keys to sequential indeces.</description>
     </parse_markers>
     <source>eJydklFv2jAUhZ/jX3FVIRUQFe/b6FbtpZu2FWnbU1uhS3JJXBw7sh06VvHfd+2EkDGQqvHGPT7xd871u/dVUYnpeCxgDB8qTNeYE/Cs1mseTYXQWJJjgWB+O+fpWyFqR/DZGf2drEQlf+NSUTtuzjz89FI9pEYpSr2M6jnRaHZ291tTkfVbcN5KncMgNRnBV0wLqenKEmbhKiBrjYWgnXYxsAsxbusS9bGtFWO4VKFzgJVcNJosK0Ulae/gwDf5Jyu8iCTk+SugSEKKJADJXBtLILUnq1HBBtnLh4I6FUll5QY9wWARIvyfs03RN3/koJ44Dmh6bsOa5RMDwrP0BfiCIJcb0rE5QJ11XbC9ub9Ci+Xr2z/heVX3PV8pf1EGgww9wt38x6e7bzdfAK3FLbDBW9yQdfETbRazAswyGTbDBQXfvpx6qWQKq1rHtcGC69WMVad+GKNMOrpJe+EM7h9HYZvJwBfSXV3HjfB40GzmMN/HmnXf6KnKYHYTkIfxsyOWdie2WmLOfCX5wmRnmXNi2jVtGyzHm0sL6E2SFPnlXQa+yzeH/y1UM0os+dpqaPFeLhbBf7ELyLvTbN3Lx8ix4u6PX/0Z5KfeMRo2kO399wGmQQX+za6hX/MkqnvwvrrfUjwQGj2ye9O0PeIDj7HsnfgDP+uDIA==</source>
   </file>
-  <file path="database/schema.php" generated-path="database.schema.html" hash="a1eb7c306b4c391f92d06fabee2ea030" package="phpunk\database">
+  <file path="database/schema.php" generated-path="database.schema.html" hash="7d1ef348cffcd67c59c010ff634adfc0" package="phpunk\database">
     <docblock line="0">
       <description></description>
       <long-description></long-description>
@@ -1872,7 +1872,7 @@ own primary key.</description>
       <error line="234" code="PPC:ERR-50014">Name of argument $name does not match with the DocBlock's name $rel_name in add_relation()</error>
       <notice line="234" code="PPC:ERR-50013">Parameter $rel_name could not be found in add_relation()</notice>
     </parse_markers>
-    <source>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</source>
+    <source>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</source>
   </file>
   <file path="token.php" generated-path="token.html" hash="5261766ab3b7d89c1b832d24e9a07047" package="phpunk">
     <docblock line="0">
@@ -2238,7 +2238,7 @@ own primary key.</description>
     </parse_markers>
     <source>eJzNVVFvmzAQfg6/4hRFahLR5akvy7It6rq1UtdGW7enSZELB1gBG9kmFary32djQiCCrUuyaW9w9/n8fd/dwZt3aZQ6k/HYgTG8T4m3IiGCjmVs9cPjScoZMqWTE8dhJEGpIQiL64XJX27zU8fJJEKQMU9RzrZ5TyBRuFR8hWzailijoEG+Rex4CJ6iUDlIJSgLYZBmjzH1loYBLIpnoL6+mAYUBQRcgK4uXFB5Sj0SxzmQImIOdFQUdG3IrTCHhX0GzbcoSuKOkimR8okLv/DDi/VbAYJnp6cvUOgp9GGwrLGd7mV2t2q5PaO3Z40XJPlDta0nX6bKHJ1oZrZ21ZTl0uNMl8o8NayTcBuFR0Zub6AiKs/f1rXCrEF9WkfVeM0a1TRqU3eChowLhISEmlmCKuJ+J9sQNc+KEQ1gSKU0MXvrc39psv3NaKTTPYEqEwz2k3sEPiFDoblJ3W5BmM8TbWCeKh4KkkZ2Es4lepkmWYxtZeqrtoaQOORwv3i4ub+b38I1kZEJm6igKkpc8DEgWaykLgafP1zYGiXVssjlL+/vcKe+e0NLYwZniX9xZt0qr2jCrDXNzpexXcdcq2q0Z9x3ElO/NO4Yxyzk95pP6vQj5zESBg9fvl2BHiRLgkpYG1UufJzffr0CriIUT1Rih+f1r9nQCinNavW+HX5MDw4fXtBoIIWM9jm2Cu/MmvMA5oubEt0GFih5JvR/omrH9tw2c3QD/8auWEHVyhRvbk3NDAISS2xtqfn4VMhR5dcM+lX0dRnsT7vWr7rykJ07bb8P3sL/fU5OuunNiakW/l9MTse35mUTtHF+AhMmVhM=</source>
   </file>
-  <file path="database/query.php" generated-path="database.query.html" hash="4494e5f56a1e872ce38d22992c24b416" package="phpunk\database">
+  <file path="database/query.php" generated-path="database.query.html" hash="049ad8dbfe82bacbaba9347d04f4df91" package="phpunk\database">
     <docblock line="0">
       <description></description>
       <long-description></long-description>
@@ -2319,48 +2319,13 @@ own primary key.</description>
           <long-description></long-description>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="protected" namespace="PHPunk\Database" line="233" package="phpunk\database">
-        <name>join_table</name>
-        <full_name>\PHPunk\Database\query::join_table()</full_name>
-        <docblock line="233">
-          <description>Generates the JOIN clause for the SQL relation</description>
-          <long-description></long-description>
-          <tag name="param" line="233" description="&lt;p&gt;The base table object for the relation&lt;/p&gt;" type="object" variable="$table">
-            <type>object</type>
-          </tag>
-          <tag name="param" line="233" description="&lt;p&gt;The relation to join&lt;/p&gt;" type="object" variable="$rel">
-            <type>object</type>
-          </tag>
-          <tag name="param" line="233" description="&lt;p&gt;OUTPUT The fully-qualified field name&lt;/p&gt;" type="string" variable="$field">
-            <type>string</type>
-          </tag>
-          <tag name="return" line="233" description="The JOIN clause, FALSE if no join is necessary" type="string">
-            <type>string</type>
-          </tag>
-        </docblock>
-        <argument line="0" by_reference="false">
-          <name>$table</name>
-          <default></default>
-          <type>object</type>
-        </argument>
-        <argument line="0" by_reference="false">
-          <name>$rel</name>
-          <default></default>
-          <type>object</type>
-        </argument>
-        <argument line="0" by_reference="true">
-          <name>$field</name>
-          <default>null</default>
-          <type>string</type>
-        </argument>
-      </method>
     </class>
     <parse_markers>
       <error line="0" code="PPC:ERR-50000">No summary was found for this file</error>
       <error line="10" code="PPC:ERR-50005">No summary for class \PHPunk\Database\query</error>
       <error line="77" code="PPC:ERR-50008">No summary for method __construct()</error>
     </parse_markers>
-    <source>eJylWG1PGzkQ/pz9FXNR1CQoUD7TA46DcKWipBeCqlNbBWfjBLeb3XS9W4oq/vuNZ2yvNyR9SaWq4Hnz+PEz41n+PF7eLaPnOzsR7MBfSxF/EnMJKCvTT++nohAToSXqnkdRKhZSo4WENy/fGPWZVb+IolJ76U2hkvfZ5KOMC1TEidAaPpcyf4BvUcNs1DA7qXma5RJUWsg8FQl8EbkSk0Qa7fOosczVF1FI0IUoVAyt8VTORJkUGg7hXdRotAtj3AY4PIJ2u2ckk1xN5yiqJCKfazQxkncfSKKzvKhLErVQBcfZJ0E2m2lZUJj9qPEBj/DLSWO2FTJbeNPZtnNlELbzNXAZeLc8s8H2N9zpItB/fzt3vrbt/Ymh27kuRS4WejvfXGpkdc2XwgEXELQck8AVG+j4Ti4EzLIc4ixN0Uplaei6UF/lFFp0nSd5Lh4ATRVmYjJwgVE0UzKZYmpJKbVLrJwkWG6zMqWoMB7jFrrIy7jo+FR6HLtr6rnRKu6U3j3yjMcbaIXsb7QsrVJ5b/fuCJPUeCHzuexomcwODqr6dsG77GyjU0WAiW2Uu0e2QioD5n1l4OqgsqA0ghDm/1BP9A30Zh3qmZ+VntahgWegNeA1WjyuYcZCzBHnhSzusulG7OcSUf8kHxhpfa+K+A4CSSM2gNtWeFAJbCcMJNQJgzX1wWDNXTAQ2C4YSKhAQgHTPpQwmVnSyGVR5ilYdL41xybv5qNB7LGOyZAsNQjgAERt4waeVLQ5A2jjWhqfVDbWWSFfRRrLDagiprboOgyimkHnD6XHaZkkHXeXbNHtRk8OElQsuVqx/CrjspCdH7lYjdlshRl9jqDx5BKu+5f909GaY0+yLJEihdHwpg+4Pz+suoxjKadYPOcnl9d9yDBGfq/0JhB8th4Bm+qkVMkUD8H0qudvmL1S7LtHtL/zpkXPWTE//JJYylXtUNgEO3OkQmsmEtNManD9I1NsaB6vfy9xVMhVOgeRToG2ltjxIFE64NMP8ERkCEldAWk2V0mZb0LSAhbgSJ1qHVSGeaTt1BBxWPNNHkLT3j0eaXx6cnk6Ph/cXJ2Nh4O313DL4XePzCh2u7fTZDhbHzNkvX17zfoer18G6yyfIhbubUYB300godxzmVDmvAdXSiLMOT0/qLO4nButqu0GicEhrtETKcBoHNvljJcHNe2LJ5G+A5zdn3N2mO0haD3EhpWr4Fh03n0w2K4YweAK/YLcbvfcEpvVLXrchql67dJom5T5I0gk5xM8zGvHC5t6u91l+yiqZw7nw8HrlZu1qSNvpaCWz5jQEyY0tPjlxgm1Ra+3u44fXiL5+dtje4NOBbtZeZaaHz26rB44X/YMQaVf+RYZjDANB/fv5MExfi2RyAOCPUbHIhF5x4Llt+UyccSgsObKj/lifZVwbPJdPSXGplnGhYZnz3AmK9Pi6V7LBD+cTMXx8DNT2Pb2e3XrHrSP247c69O7uIJOE/ZALZZJNpUdJD7+s9G7qGh2He8D+lB4Yo4uJ7yXgy88o1M6DD2Q5qw2U4Lboh+y+OLqqj+EVwNMsJZfTdED6/9iNSyddU3Yty/7w/5KxJOrMwrFPk9CMYHMhOPhXy0kmvW+U0gNi9iheVSKrFwupaeP6W7ts/71aRv7mv3lANon+NPxhtrtysWxd7NGz+qgeMLB8Axx+vs/WHO9FDDsH1Qx7osJvzIwuDsbSasOHWB5efH6YuTpXbt5P8yG8f1AW9+AxWt3GJyfX/c3bOHHYd8DbaN3D1/LfoIFKv9MtapvLD8V4FeJ/JlJ4UzpZaax9rIZzQoxMgG/j1bmxg3vOyqlmxSfjENrprj6WEKsjxNh/jrCQwiPKq4Trvvg4zdyhJaUXRF+tLkY3/M3jXcU2ECRgSm60NaOSpb+g5vRm5sROc3wRA+7n0uRKNRN7SeieZNqU5P1H9WP6IYmJE/KewLOXPiBigOV4LmLvn2zAhM1wR3IGx+dZ65ACerVKWv9tOHmqdlPTWLB28/15Xds2ghunrj1a/P6N2tUbNaHCDNWsGAh8JONqiGcE4I9Ns0ezc3Mfoz+Bz+OxzM=</source>
+    <source>eJylV21v2zgM/hz/Cl4QLEmRdv3cXdvrtemth67ZpRuGwzakiiOn2hw7s+x1w9D/fhQpyXJe9pIDirYiRYp6+JCifz9d3i+jp3t7EezBH0sRfxRzCSirso/vZqIUU6El6p5GUSYWUuMOCS+fvzTqC6t+FkWV9tLXpUrf5dMPMi5REadCa/hUyeIrfIta5qCWOUnNs7yQoLJSFplI4bMolJim0mifRq1loT6LUoIuRali6ExmMhFVWmo4hrdRq9UtzeYuwPEJdLsDI5kWajZHUS0RxVzjFiN5+54kOi/KpiRVC1Wyn0MS5EmiZUluDqPWe7zCLweN0dbI7GBNd9vNlEHYzdbAZeDd8c4G2/9hTolA+8PdzDltu9sTQ3czXYpCLPRutoXUyOqGLbkDLiDoOCaBKzbQ8b1cCEjyAuI8y3CXyrPQdKG+yBl0KJ1nRSG+Am5VGImJwDlGUaJkOsPQ0kpqF1g1TbHckiojrzCZ4BG6LKq47PlQBuy7b+q51Snvld4/8YzHDHRC9rc6llaZfLBn94QJarKQxVz2tEyTo6O6vp3zPhtb71QRYHwb5f6JrZB6A/O+3uDqoN5BYQQuzO9QT/QN9GYd6pmftZ7W4QbPQLuB17jjcQMzFmKOOC9keZ/PtmI/l4j6R/mVkdYPqozvIZC0YgO4bYVHtcB2wkBCnTBYUx8M1twFA4HtgoGECiQUMO1DCZOZJa1CllWRgUXnW3ti4m4/GsQem5iMaacGAeyAqG3MwJOKDmcArV9L47N6jzVWyFeRxXILqoipLboeg6gS6P2m9CSr0rTncsk7+v1o7SJBxZKpFcsvMq5K2fuRidWYw1aYMWQPGm8u4XZ4PTx/teHa0zxPpcjg1fj1EPB8flh1FcdSzrB4Ls+ub4eQo4/iQeltIPhoPQI21Gml0hlegunVjN8we6XY90/ofGdNi4HbxfzwS2IpV7VDYRvszJEarUSkppk04PpLZtjQPF7/XOOoUKhsDiKbAR0tseNBqnTApx/gicgQkroG0hyu0qrYhqQFLMCROtUmqAzzSNtrIOKw5kweQ9vmHq80OT+7Pp9cjl7fXEzGoze3cMfu90/MKHZ3sNdmODsfcmS9fXvN+gHTL4N1XswQC/c2o4BzE0go9kKmFDmfwZWSCnNPzw/qLC7mVqduu0FgcIxrtEQKMBqndpnw8qihfbbm6TvA2fM5ZofZAYI2QGxYuQqORefte4PtyiYY3aBdENvdgVtis7pDi7swVK9dGm2bIn8EieRcw8O8drywoXe7fd4fRc3I4XI8erGSWRs68lYKavmMCT1hQkOHX26cUDv0ert0/DCJZOezx/sNOgHsZmlZPKA8DcCZsVGIJ/3LCWQcwggc0juGwOa/FkPkYcDOomORiqJnIfIncnE4OpBbk+hTTqevDfZNtqsXRN80wTjX8OQJTmJVVq6ftUzxc8nUGY88icJmdzho7h5A97TrKL05vKsb6LXhANRimeYz2UO644/13kdFu+/YHpCG3BNfdDXlsxx84R2d0mHogTR3tZES3Bb9kLtXNzfDMfw9wgAb8TUUA7D2z1bd0l03uH3zfDgerng8u7kgV2yz5oq5Y+YaD/9q+dCE953yaVnEjs1TUubVcik9fUxP614Mb8+72M3sP0fQPcO/jjfUZFcSx9btBj3ri+INR+MLxOnPf2FDeslh2DWoWNx3En5boHN3N5LWfTnA8vrqxdUrT+9G5v0IG/r3Y2zzABZvPGF0eXk73HKEH4J957NF7p67jv3wClT+cerUX1Z+FsBvEfkz88GF0stcY+3lCU0IMTIBv4pWpsUtrzoqpZsP14agDbPb2vdec7C3X3v1ZL+hyT5xrCT/qwPF5ofVjQ7JTw0dwTPHpPIntq0H93Te+bV56NoN/NvN99K8oCxYCPw6IQqET2JwxrZntr09nY/Rf4fcae0=</source>
   </file>
   <file path="database/relation.php" generated-path="database.relation.html" hash="27be764da4ab3f84639f7a881c57ddf4" package="phpunk\database">
     <docblock line="0">
@@ -2691,7 +2656,7 @@ own primary key.</description>
     </parse_markers>
     <source>eJxtkkFvEzEQhc/rXzGHHtqIriWOFEpDL4CARKKIQ0HVxJlknXjtlT2mhKr/nfHuKoSmp6zmzcz7/Cav33ZNp/RkomACVx2aLa4JpJb99kdm66SulfLYUhKVYP5+XqRvIl0olRPBxxT8V4oWnf2DC0dSHve9w2QNRFpRJC+ztu0cteQZ2QYvHb1pIoKGuXuldU4va/GuPbFu0Wd0mrw2DlOqN2KTDmxK45H3fqEJzpFhKzW4Pvi+iWh539VmLlPwefz9Xx2h1pabvKhNaHXwRDtabkoaeghJ39ut1eOC89liI05pTAm+i9YH2D8BQq/+iyHtMYN/cfQWeFBVyXeElFirkmsleNeRkCkBQmrQuXAPxgkbhBVwI+cTM1rCEhnr0t/PyHEjttDa3yKdFA1m85sPsy/TTzD1O8AYcQchAkf8RTH1CANxmdeq6vLCyT1X2ffEcHdn5CQcs+HTYeEbuP15VrirE25sOr90AZfTsnhoOLtQ1ePBO67s2of49I8BK6E4uuzzDJuDNjodvCNxjh5GBA4DwOD9qP4C8276NA==</source>
   </file>
-  <file path="component/template.php" generated-path="component.template.html" hash="23e2f3253a0333358002c809e144b88c" package="phpunk\component">
+  <file path="component/template.php" generated-path="component.template.html" hash="8ee7ae170932d7443cd2799ba7f68c00" package="phpunk\component">
     <docblock line="0">
       <description></description>
       <long-description></long-description>
@@ -2765,19 +2730,19 @@ own primary key.</description>
           <type>string</type>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="PHPunk\Component" line="59" package="phpunk\component">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="PHPunk\Component" line="58" package="phpunk\component">
         <name>load</name>
         <full_name>\PHPunk\Component\template::load()</full_name>
-        <docblock line="59">
+        <docblock line="58">
           <description>Renders matching template with provided parameters.</description>
           <long-description></long-description>
-          <tag name="param" line="59" description="&lt;p&gt;Name of the view&lt;/p&gt;" type="string" variable="$view">
+          <tag name="param" line="58" description="&lt;p&gt;Name of the view&lt;/p&gt;" type="string" variable="$view">
             <type>string</type>
           </tag>
-          <tag name="param" line="59" description="&lt;p&gt;Name of the resource&lt;/p&gt;" type="string" variable="$resource">
+          <tag name="param" line="58" description="&lt;p&gt;Name of the resource&lt;/p&gt;" type="string" variable="$resource">
             <type>string</type>
           </tag>
-          <tag name="param" line="59" description="&lt;p&gt;OPTIONAL Named parameters passed into template&lt;/p&gt;" type="array" variable="$vars">
+          <tag name="param" line="58" description="&lt;p&gt;OPTIONAL Named parameters passed into template&lt;/p&gt;" type="array" variable="$vars">
             <type>array</type>
           </tag>
         </docblock>
@@ -2797,13 +2762,40 @@ own primary key.</description>
           <type>array</type>
         </argument>
       </method>
+      <method final="false" abstract="false" static="false" visibility="protected" namespace="PHPunk\Component" line="71" package="phpunk\component">
+        <name>get_filenames</name>
+        <full_name>\PHPunk\Component\template::get_filenames()</full_name>
+        <docblock line="71">
+          <description>Returns and  array of matchng filenames for the given view and resource.</description>
+          <long-description></long-description>
+          <tag name="param" line="71" description="&lt;p&gt;Name of the view&lt;/p&gt;" type="string" variable="$view">
+            <type>string</type>
+          </tag>
+          <tag name="param" line="71" description="&lt;p&gt;OPTIONAL name of the resource&lt;/p&gt;" type="string" variable="$resource">
+            <type>string</type>
+          </tag>
+          <tag name="return" line="71" description="List of matching filenames" type="array">
+            <type>array</type>
+          </tag>
+        </docblock>
+        <argument line="0" by_reference="false">
+          <name>$view</name>
+          <default></default>
+          <type>string</type>
+        </argument>
+        <argument line="0" by_reference="false">
+          <name>$resource</name>
+          <default>false</default>
+          <type>string</type>
+        </argument>
+      </method>
     </class>
     <parse_markers>
       <error line="0" code="PPC:ERR-50000">No summary was found for this file</error>
       <error line="8" code="PPC:ERR-50005">No summary for class \PHPunk\Component\template</error>
       <error line="17" code="PPC:ERR-50008">No summary for method __construct()</error>
     </parse_markers>
-    <source>eJytVNFu2jAUfSZfcYWQmiBW3ssYQ1u1oW0UQadNYlVknBtiNdiR7dBWE/++65CEUKBPywMKvucen5x77PejLMm8frfrQRc+Zow/sjUCreXy8Q9Xm0xJlJaKfc+TbIOGIAizrzNX/1TVB57HU2YMWNxkKbMIf72WI205VrGWSiMIaVFLlsKWacFWKbpq3wN6Mi22rqsTRkIbGMLygSgPDBnTbAPGaiHX0Fkxgw4In4VGbpV+gYzZBLiSlgnpMLWOWKRoGhvlq1RwiHPJrVASwpCaiDfn1q95A1IP5dOxiTDvPtS6ahAJdPVdQ+Y4igxEpSaB5rKg63OfdfpFl3WzKApjlUao/c4bipcPpNkBTsUukGme4LHgWGnYMMuTE8lnFW8FPsGUUgEqBpsguIVzQI1G5ZqC0wRXi/sGjTbXsuqYuXladazhsh2p4gTyC0G9xnZDiFlq0NnTanUK650hh/qwRMCIRrvvvhIywuerB7ihntayXaP7BaDdgxLYqBQt7UMvhbcaB1mKjCfgl9szA8WbO0zNsR1jm6lzHfRSNZColojBFyZ0PH67KvZr3ms6v+0gKLgdvPT2EnJQAne1mN1Bfw09Mm4Er30pmOCG1ut/DRdoqus16hC1Vtpv/xDGnETssBU5eRv+XNzOw1/j+XQy/RKUVNWXFDM7zfQcyX5y7DTCT4LylGm1FRFGUIQT6TY6fxD/Z6z3DUxr9kLEjMTdze4nd9Px96KpqYVejaEVuicPwX8r8yy6mPheuZm7SZspc8EpbHbT3IfswtkJXocTn61m7pp0xDSg3/fzcPFtMgsGRzAheZpH5TAHjUTtf3feP5UO+Y0=</source>
+    <source>eJytVdtu2zAMfba/gggC1Cmy5r1d1xVbsRXr0iDtsAFZYKg2bQt1JEOS0xZD/32UfIlz8fbSt1jkoQ4Pj5j3F0VW+JPjYx+O4WPBokeWItBZKR5/R3JVSIHCUHDi+4KtUFMKwuzrzMY/NfEz349ypjUYXBU5Mwh/fM8W9WxVngqpELgwqATLYc0UZw852ujE9wrF1xYyDGOuNJzDYkn1NvCCKbYCbRQXKQwfmEabCJ+5wshI9QIFMxlEUhjGhc1pSSQ8R93cUj7kPIKkFJHhUkAYEoKKlpEJ2qIjy9sbmozrdx9aOm2YeHmvHWqXcawhrnlw1P0kTg61st9FD1cWx2Ei8xhVMDzIcrEknja0Q/AOmYoy3CaZSAUrZqJsj+ZBlmuOTzCl0YNMwGQI9uBQokItS0Xu6CY3hxVAoSmVaBAzOzcjtzn0SJDLiDICx2bcuescEpZrrCVxWlspKm1SNKE9csbdw46syzxSA1mUQVCDmYZhg6mqdlK6xrCJ9KOT5/EEAq7dlcGgCU7acif0rAajkUv1ain60s5s1qvvuXF6bcz21vZ+QejmY+K6c1A4pfP2yzVJeqcpqhCVkioYfOda7w1/0/ZgDFfhj7urefjzcj69nn6plKoZO713fDZHQebUB2z1xGnGhZJrHmMMzjBIa+Dwg3hLq1UAphR7ocKMyN3O7q9vp5c3DtTlQj+1phNaUBsz9vqQxb0uHNc32RVWecI6wum6MWWPk0e1ifDZKGZ3kq1Eg/h1Pw/vvl3PRs4RXER5GdezOnP22BmEnRGZU8RQN0/quLGQbu1bcDvAapbyNQons4M0ZN5oOq3i4n8boaJ6w7Vp+fIu4favQhraYzSrdiD/fuPb+6G+rBM9r+P0lhY19oiTl5+PlnBqBV/sPrHBGOrETsRBBhusex6v/l8uEFvp</source>
   </file>
   <file path="component/model.php" generated-path="component.model.html" hash="134ae8393030db4cb1a752953285f758" package="phpunk\component">
     <docblock line="0">
