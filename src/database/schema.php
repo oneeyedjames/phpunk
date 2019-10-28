@@ -319,7 +319,7 @@ class schema {
 			$params = [];
 
 			if (is_string($table->pkey)) {
-				$insert = @$record[$table->pkey] == 0;
+				$insert = empty($record[$table->pkey]);
 			} elseif (is_array($table->pkey)) {
 				$insert = false;
 
