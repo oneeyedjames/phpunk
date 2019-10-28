@@ -5,6 +5,7 @@
 
 namespace PHPunk\Component;
 
+use PHPunk\api_error;
 use PHPunk\Util\object;
 use PHPunk\Database\result;
 use PHPunk\Database\record;
