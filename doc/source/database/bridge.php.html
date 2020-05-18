@@ -52,8 +52,11 @@ class bridge_table extends table {
 	public function __get($key) {
 		switch ($key) {
 			case 'join':
+				return $this-&gt;_join();
+			case 'left':
+			case 'right':
 			case 'inner':
-				return $this-&gt;_join('INNER');
+				return $this-&gt;_join($key);
 			default:
 				return parent::__get($key);
 		}
@@ -65,13 +68,13 @@ class bridge_table extends table {
 	 * @param mixed $args Array or iterable object of foreign key values
 	 * @return string A parameterized SQL query
 	 */
-	public function select_sql($name = false, $args = array()) {
+	public function select_sql($name = false, $args = []) {
 		if ($rel = $this-&gt;get_relation($name)) {
 			$table = $this-&gt;name != $rel-&gt;ptable ? $rel-&gt;ptable : $rel-&gt;ftable;
 			$query = &quot;SELECT SQL_CALC_FOUND_ROWS `$table`.* FROM $rel-&gt;join&quot;;
 
 			if (!empty($args)) {
-				$where = array();
+				$where = [];
 
 				foreach ($args as $fkey)
 					$where[] = &quot;`$this-&gt;name`.`$fkey` = ?&quot;;
@@ -88,13 +91,14 @@ class bridge_table extends table {
 	/**
 	 * @ignore internal method
 	 */
-	private function _join($type) {
+	private function _join($type = 'inner') {
 		$type = strtoupper($type);
-		$join = $this-&gt;name;
+		$join = &quot;`$this-&gt;name`&quot;;
 
 		foreach ($this-&gt;relations as $rel) {
 			$table = $this-&gt;name != $rel-&gt;ptable ? $rel-&gt;ptable : $rel-&gt;ftable;
-			$join .= &quot; $type JOIN `$table` ON `$rel-&gt;ftable`.`$rel-&gt;fkey` = `$rel-&gt;ptable`.`$rel-&gt;pkey`&quot;;
+
+			$join .= &quot; $type JOIN `$table` ON $rel-&gt;match&quot;;
 		}
 
 		return $join;

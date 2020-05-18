@@ -60,7 +60,7 @@ class table {
 	/**
 	 * @ignore internal variable
 	 */
-	private $_rels = array();
+	private $_rels = [];
 
 	/**
 	 * @property string $name Name of database table
@@ -82,6 +82,8 @@ class table {
 				return $this-&gt;_pkey;
 			case 'relations':
 				return $this-&gt;_rels;
+			case 'where':
+				return $this-&gt;_where();
 		}
 	}
 
@@ -124,7 +126,7 @@ class table {
 	 * Removes all relationships from this table.
 	 */
 	public function clear_relations() {
-		$this-&gt;_rels = array();
+		$this-&gt;_rels = [];
 	}
 
 	/**
@@ -136,13 +138,13 @@ class table {
 		if ($name) {
 			if ($rel = $this-&gt;get_relation($name)) {
 				$table = $this-&gt;name != $rel-&gt;ptable ? $rel-&gt;ptable : $rel-&gt;ftable;
-				return &quot;SELECT SQL_CALC_FOUND_ROWS `$table`.* FROM $rel-&gt;join WHERE `$this-&gt;name`.`$this-&gt;pkey` = ?&quot;;
+				return &quot;SELECT SQL_CALC_FOUND_ROWS `$table`.* FROM $rel-&gt;join WHERE $this-&gt;where&quot;;
 			}
 
 			return false;
 		}
 
-		return &quot;SELECT SQL_CALC_FOUND_ROWS * FROM `$this-&gt;name` WHERE `$this-&gt;pkey` = ?&quot;;
+		return &quot;SELECT SQL_CALC_FOUND_ROWS * FROM `$this-&gt;name` WHERE $this-&gt;where&quot;;
 	}
 
 	/**
@@ -152,7 +154,7 @@ class table {
 	 * @return string A parameterized SQL query
 	 */
 	public function insert_sql($record, &amp;$params) {
-		$fields = array();
+		$fields = [];
 
 		foreach ($record as $field =&gt; $value) {
 			if ($field != $this-&gt;pkey) {
@@ -174,10 +176,10 @@ class table {
 	 * @return string A parameterized SQL query
 	 */
 	public function update_sql($record, &amp;$params) {
-		$fields = array();
+		$fields = [];
 
 		foreach ($record as $field =&gt; $value) {
-			if ($field != $this-&gt;pkey) {
+			if (!$this-&gt;is_pkey($field)) {
 				$fields[] = &quot;`$field` = ?&quot;;
 				$params[] = $value;
 			}
@@ -185,9 +187,15 @@ class table {
 
 		$fields = implode(&quot;, &quot;, $fields);
 
-		$params[] = $record[$this-&gt;pkey];
+		if (is_scalar($this-&gt;pkey)) {
+			$params[] = $record[$this-&gt;pkey];
+		} elseif (is_array($this-&gt;pkey)) {
+			foreach ($this-&gt;pkey as $field) {
+				$params[] = $record[$field];
+			}
+		}
 
-		return &quot;UPDATE `$this-&gt;name` SET $fields WHERE `$this-&gt;pkey` = ?&quot;;
+		return &quot;UPDATE `$this-&gt;name` SET $fields WHERE $this-&gt;where&quot;;
 	}
 
 	/**
@@ -199,13 +207,38 @@ class table {
 		if ($name) {
 			if ($rel = $this-&gt;get_relation($name)) {
 				$table = $this-&gt;name != $rel-&gt;ptable ? $rel-&gt;ptable : $rel-&gt;ftable;
-				return &quot;DELETE `$table`.* FROM $rel-&gt;join WHERE `$this-&gt;name`.`$this-&gt;pkey` = ?&quot;;
+				return &quot;DELETE `$table`.* FROM $rel-&gt;join WHERE $this-&gt;where&quot;;
 			}
 
 			return false;
 		}
 
-		return &quot;DELETE FROM `$this-&gt;name` WHERE `$this-&gt;pkey` = ?&quot;;
+		return &quot;DELETE FROM `$this-&gt;name` WHERE $this-&gt;where&quot;;
+	}
+
+	/**
+	 * @ignore internal method
+	 */
+	private function is_pkey($field) {
+		return is_array($this-&gt;pkey)
+			? in_array($field, $this-&gt;pkey)
+			: $field == $this-&gt;pkey;
+	}
+
+	/**
+	 * @ignore internal method
+	 */
+	private function _where() {
+		if (is_array($this-&gt;pkey)) {
+			$fields = [];
+
+			foreach ($this-&gt;pkey as $field)
+				$fields[] = &quot;`$this-&gt;name`.`$field` = ?&quot;;
+
+			return implode(&quot; AND &quot;, $fields);
+		}
+
+		return &quot;`$this-&gt;name`.`$this-&gt;pkey` = ?&quot;;
 	}
 }
 </pre>

@@ -24,7 +24,7 @@ class table {
 	/**
 	 * @ignore internal variable
 	 */
-	private $_rels = array();
+	private $_rels = [];
 
 	/**
 	 * @property string $name Name of database table
@@ -46,6 +46,8 @@ class table {
 				return $this->_pkey;
 			case 'relations':
 				return $this->_rels;
+			case 'where':
+				return $this->_where();
 		}
 	}
 
@@ -88,7 +90,7 @@ class table {
 	 * Removes all relationships from this table.
 	 */
 	public function clear_relations() {
-		$this->_rels = array();
+		$this->_rels = [];
 	}
 
 	/**
@@ -100,13 +102,13 @@ class table {
 		if ($name) {
 			if ($rel = $this->get_relation($name)) {
 				$table = $this->name != $rel->ptable ? $rel->ptable : $rel->ftable;
-				return "SELECT SQL_CALC_FOUND_ROWS `$table`.* FROM $rel->join WHERE `$this->name`.`$this->pkey` = ?";
+				return "SELECT SQL_CALC_FOUND_ROWS `$table`.* FROM $rel->join WHERE $this->where";
 			}
 
 			return false;
 		}
 
-		return "SELECT SQL_CALC_FOUND_ROWS * FROM `$this->name` WHERE `$this->pkey` = ?";
+		return "SELECT SQL_CALC_FOUND_ROWS * FROM `$this->name` WHERE $this->where";
 	}
 
 	/**
@@ -116,7 +118,7 @@ class table {
 	 * @return string A parameterized SQL query
 	 */
 	public function insert_sql($record, &$params) {
-		$fields = array();
+		$fields = [];
 
 		foreach ($record as $field => $value) {
 			if ($field != $this->pkey) {
@@ -138,10 +140,10 @@ class table {
 	 * @return string A parameterized SQL query
 	 */
 	public function update_sql($record, &$params) {
-		$fields = array();
+		$fields = [];
 
 		foreach ($record as $field => $value) {
-			if ($field != $this->pkey) {
+			if (!$this->is_pkey($field)) {
 				$fields[] = "`$field` = ?";
 				$params[] = $value;
 			}
@@ -149,9 +151,15 @@ class table {
 
 		$fields = implode(", ", $fields);
 
-		$params[] = $record[$this->pkey];
+		if (is_scalar($this->pkey)) {
+			$params[] = $record[$this->pkey];
+		} elseif (is_array($this->pkey)) {
+			foreach ($this->pkey as $field) {
+				$params[] = $record[$field];
+			}
+		}
 
-		return "UPDATE `$this->name` SET $fields WHERE `$this->pkey` = ?";
+		return "UPDATE `$this->name` SET $fields WHERE $this->where";
 	}
 
 	/**
@@ -163,12 +171,37 @@ class table {
 		if ($name) {
 			if ($rel = $this->get_relation($name)) {
 				$table = $this->name != $rel->ptable ? $rel->ptable : $rel->ftable;
-				return "DELETE `$table`.* FROM $rel->join WHERE `$this->name`.`$this->pkey` = ?";
+				return "DELETE `$table`.* FROM $rel->join WHERE $this->where";
 			}
 
 			return false;
 		}
 
-		return "DELETE FROM `$this->name` WHERE `$this->pkey` = ?";
+		return "DELETE FROM `$this->name` WHERE $this->where";
+	}
+
+	/**
+	 * @ignore internal method
+	 */
+	private function is_pkey($field) {
+		return is_array($this->pkey)
+			? in_array($field, $this->pkey)
+			: $field == $this->pkey;
+	}
+
+	/**
+	 * @ignore internal method
+	 */
+	private function _where() {
+		if (is_array($this->pkey)) {
+			$fields = [];
+
+			foreach ($this->pkey as $field)
+				$fields[] = "`$this->name`.`$field` = ?";
+
+			return implode(" AND ", $fields);
+		}
+
+		return "`$this->name`.`$this->pkey` = ?";
 	}
 }

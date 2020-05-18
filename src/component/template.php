@@ -9,22 +9,22 @@ class template {
 	/**
 	 * @ignore internal variable
 	 */
-    private $_dirs = array();
+	private $_dirs = [];
 
 	/**
 	 * @param string $base_dir Directory path containing template files
 	 */
-    public function __construct($base_dir) {
-        $this->_dirs = array($base_dir);
-    }
+	public function __construct($base_dir) {
+		$this->_dirs = [$base_dir];
+	}
 
 	/**
 	 * Adds directories containing template files.
 	 * @param string $dir Directory path
 	 */
-    public function add_folder($dir) {
-        $this->_dirs[] = $dir;
-    }
+	public function add_folder($dir) {
+		$this->_dirs[] = $dir;
+	}
 
 	/**
 	 * Searches directories for matching template file.
@@ -32,23 +32,22 @@ class template {
 	 * @param string $resource Name of the resource
 	 * @return string Path to template file
 	 */
-    public function locate($view, $resource = false) {
-		$files = $resource === false ? array($view, 'index') :
-			array("$resource/$view", $view, "$resource/index", 'index');
+	public function locate($view, $resource = false) {
+		$files = $this->get_filenames($view, $resource);
 
-        foreach ($files as $filename) {
-            foreach ($this->_dirs as $dirname) {
+		foreach ($files as $filename) {
+			foreach ($this->_dirs as $dirname) {
 				if (is_file("$dirname/$filename.php"))
-    				return "$dirname/$filename.php";
-    		}
-        }
+					return "$dirname/$filename.php";
+			}
+		}
 
-        $filename = $resource ? "$resource/$view.php" : "$view.php";
+		$filename = $resource ? "$resource/$view.php" : "$view.php";
 
-        trigger_error("Missing template file $filename", E_USER_WARNING);
+		trigger_error("Missing template file $filename", E_USER_WARNING);
 
-    	return false;
-    }
+		return false;
+	}
 
 	/**
 	 * Renders matching template with provided parameters.
@@ -56,10 +55,21 @@ class template {
 	 * @param string $resource Name of the resource
 	 * @param array $vars OPTIONAL Named parameters passed into template
 	 */
-    public function load($view, $resource = false, $vars = array()) {
-        if ($file = $this->locate($view, $resource)) {
-            extract($vars, EXTR_SKIP);
-            include $file;
-        }
-    }
+	public function load($view, $resource = false, $vars = []) {
+		if ($file = $this->locate($view, $resource)) {
+			extract($vars, EXTR_SKIP);
+			include $file;
+		}
+	}
+
+	/**
+	 * Returns and  array of matchng filenames for the given view and resource.
+	 * @param string $view Name of the view
+	 * @param string $resource OPTIONAL name of the resource
+	 * @return array List of matching filenames
+	 */
+	protected function get_filenames($view, $resource = false) {
+		return $resource === false ? [$view, 'index'] :
+			["$resource/$view", $view, "$resource/index", 'index'];
+	}
 }

@@ -110,27 +110,42 @@ class relation {
 			case 'pkey':
 				return $this-&gt;_ptable-&gt;pkey;
 			case 'join':
-			case 'inner':
-				return $this-&gt;_join('INNER');
+				return $this-&gt;_join();
 			case 'left':
 			case 'right':
+			case 'inner':
 				return $this-&gt;_join($key);
+			case 'match':
+				return $this-&gt;_match();
 		}
 	}
 
 	/**
 	 * @ignore internal method
 	 */
-	private function _join($type = 'INNER') {
-		$ptable = $this-&gt;_ptable-&gt;name;
-		$pkey   = $this-&gt;_ptable-&gt;pkey;
-
-		$ftable = $this-&gt;_ftable-&gt;name;
-		$fkey   = $this-&gt;_fkey;
-
+	private function _join($type = 'inner') {
 		$type = strtoupper($type);
 
-		return &quot;`$ptable` $type JOIN `$ftable` ON `$ptable`.`$pkey` = `$ftable`.`$fkey`&quot;;
+		return &quot;`$this-&gt;ftable` $type JOIN `$this-&gt;ptable` ON $this-&gt;match&quot;;
+	}
+
+	/**
+	 * @ignore internal method
+	 */
+	private function _match() {
+		if (is_scalar($this-&gt;pkey) &amp;&amp; is_scalar($this-&gt;fkey)) {
+			return &quot;`$this-&gt;ftable`.`$this-&gt;fkey` = `$this-&gt;ptable`.`$this-&gt;pkey`&quot;;
+		} elseif (is_array($this-&gt;pkey) &amp;&amp; is_array($this-&gt;fkey)) {
+			$match = [];
+
+			foreach ($this-&gt;pkey as $index =&gt; $field) {
+				$match[] = &quot;`$this-&gt;ftable`.`{$this-&gt;fkey[$index]}` = `$this-&gt;ptable`.`$field`&quot;;
+			}
+
+			return implode(&quot; AND &quot;, $match);
+		}
+
+		return false;
 	}
 }
 </pre>

@@ -24,22 +24,22 @@ class url_schema {
 	/**
 	 * @ignore internal variable
 	 */
-	private $_resources = array();
+	private $_resources = [];
 
 	/**
 	 * @ignore internal variable
 	 */
-	private $_aliases = array();
+	private $_aliases = [];
 
 	/**
 	 * @ignore internal variable
 	 */
-	private $_actions = array();
+	private $_actions = [];
 
 	/**
 	 * @ignore internal variable
 	 */
-	private $_views = array();
+	private $_views = [];
 
 	/**
 	 * @param string $host A fully-qualified domain name
@@ -69,10 +69,10 @@ class url_schema {
 	 */
 	public function add_resource($resource, $alias = false) {
 		if (!$this->is_resource($resource)) {
-			$this->_resources[$resource] = array(
-				'actions' => array('save', 'delete'),
-				'views'   => array('list', 'grid', 'item', 'form')
-			);
+			$this->_resources[$resource] = [
+				'actions' => ['save', 'delete'],
+				'views'   => ['list', 'grid', 'item', 'form']
+			];
 		}
 
 		if ($alias)
@@ -176,7 +176,7 @@ class url_schema {
 		if (is_string($path))
 			$path = explode('/', trim($path, '/'));
 
-		$params = array();
+		$params = [];
 
 		if ($params['api'] = ('api' == $path[0]))
 			array_shift($path);
@@ -202,7 +202,7 @@ class url_schema {
 			} elseif ($this->is_view($path[0], $params['resource'])) {
 				$params['view'] = array_shift($path);
 			} elseif (isset($params['id']) && $resource = $this->is_resource($path[0])) {
-				$params['filter'] = array($params['resource'] => $params['id']);
+				$params['filter'] = [$params['resource'] => $params['id']];
 				$params['resource'] = $resource;
 
 				unset($params['id']);
@@ -223,7 +223,7 @@ class url_schema {
 
 			if ($key == 'sort')
 				$params[$key][$value] = strtolower($suffix) == 'desc' ? 'desc' : 'asc';
-			elseif (in_array($key, array('page', 'per_page')))
+			elseif (in_array($key, ['page', 'per_page']))
 				$params[$key] = intval($value);
 			elseif (!empty($suffix))
 				@$params['filter'][$key][$suffix] = urldecode($value);
@@ -239,8 +239,8 @@ class url_schema {
 	 * @param array $params OPTIONAL Key-value parameters for URL
 	 * @return string The URL path
 	 */
-	public function build_path($params = array()) {
-		$path = array();
+	public function build_path($params = []) {
+		$path = [];
 
 		if (@$params['api'])
 			$path[] = 'api';
@@ -255,13 +255,15 @@ class url_schema {
 				$path[] = $params['action'];
 			elseif ($this->is_view(@$params['view'], $params['resource']))
 				$path[] = $params['view'];
+			elseif ($this->is_resource(@$params['relation']))
+				$path[] = $params['relation'];
 		} elseif ($this->is_action(@$params['action'])) {
 			$path[] = $params['action'];
 		} elseif ($this->is_view(@$params['view'])) {
 			$path[] = $params['view'];
 		}
 
-		foreach (array('page', 'per_page') as $filter) {
+		foreach (['page', 'per_page'] as $filter) {
 			if (isset($params[$filter]) && is_numeric($params[$filter])) {
 				$path[] = $filter;
 				$path[] = intval($params[$filter]);
@@ -271,7 +273,7 @@ class url_schema {
 		if (isset($params['sort']) && is_array($params['sort'])) {
 			foreach ($params['sort'] as $key => $order) {
 				$order = strtolower($order);
-				if (in_array($order, array('asc', 'desc'))) {
+				if (in_array($order, ['asc', 'desc'])) {
 					$path[] = $this->join_slug('sort', $order);
 					$path[] = $key;
 				}
@@ -318,10 +320,10 @@ class url_schema {
 	 */
 	protected function split_slug($slug) {
 		if (preg_match('/^([A-Z0-9-_]+)~([A-Z0-9-_]+)$/si', $slug, $matches))
-			return array($matches[1], $matches[2]);
+			return [$matches[1], $matches[2]];
 
 		static $empty = '';
-		return array($slug, $empty);
+		return [$slug, $empty];
 	}
 
 	/**

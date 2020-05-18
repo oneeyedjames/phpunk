@@ -10,6 +10,7 @@ use PHPunk\Database\record;
 
 /**
  * @property string $resource Resource name for this component
+ * @property string $table Database table name for this component
  * @property mixed $insert_id Most recent auto-generated Id on the database connection
  */
 class model {
@@ -22,6 +23,11 @@ class model {
 	 * @ignore internal variable
 	 */
 	private $_database;
+
+	/**
+	 * @ignore internal variable
+	 */
+	private $_table;
 
 	/**
 	 * @ignore internal variable
@@ -46,6 +52,8 @@ class model {
 		switch ($key) {
 			case 'resource':
 				return $this->_resource;
+			case 'table':
+				return $this->_table ?: $this->_resource;
 			case 'insert_id':
 				return $this->_database->insert_id;
 		}
@@ -58,7 +66,7 @@ class model {
 	 */
 	public function create_record($data = []) {
 		if (is_numeric($data)) $data = ['id' => $data];
-		return new record($data, $this->_resource);
+		return new record($data, $this->table);
 	}
 
 	/**
@@ -71,7 +79,7 @@ class model {
 		if ($record = $this->get_cached_object($id))
 			return $record;
 
-		if ($record = $this->_database->get_record($this->_resource, $id))
+		if ($record = $this->_database->get_record($this->table, $id))
 			$this->put_cached_object($id, $record);
 
 		return $record;
@@ -84,7 +92,7 @@ class model {
 	 * @return object Record instance updated with auto-generated id, FALSE on failure
 	 */
 	public function put_record($record) {
-		if ($record = $this->_database->put_record($this->_resource, $record))
+		if ($record = $this->_database->put_record($this->table, $record))
 			$this->put_cached_object($record->id, $record);
 
 		return $record;
@@ -97,10 +105,18 @@ class model {
 	 * @return boolean TRUE on success, FALSE on failure
 	 */
 	public function remove_record($id) {
-		if ($result = $this->_database->remove_record($this->_resource, $id))
+		if ($result = $this->_database->remove_record($this->table, $id))
 			$this->remove_cached_object($id);
 
 		return $result;
+	}
+
+	/**
+	 * Overrides the database table name.
+	 * @param string $table Name of database table
+	 */
+	protected function set_table_name($table) {
+		$this->_table = $table;
 	}
 
 	/**
@@ -110,7 +126,7 @@ class model {
 	 * @param array $params OPTIONAL Array of parameter values for query
 	 * @return object Result instance returned by query
 	 */
-	protected function query($sql, $params = array()) {
+	protected function query($sql, $params = []) {
 		$params = is_array($params) ? $params : array_slice(func_get_args(), 1);
 		return $this->_database->query($sql, $params);
 	}
@@ -122,7 +138,7 @@ class model {
 	 * @param array $params OPTIONAL Array of parameter values for query
 	 * @return boolean TRUE on success, FALSE on failure
 	 */
-	protected function execute($sql, $params = array()) {
+	protected function execute($sql, $params = []) {
 		$params = is_array($params) ? $params : array_slice(func_get_args(), 1);
 		return $this->_database->execute($sql, $params);
 	}
@@ -134,7 +150,7 @@ class model {
 	 * @return object Database query object
 	 */
 	protected function make_query($args) {
-		$args['table'] = $this->_resource;
+		$args['table'] = $this->table;
 		return new query($this->_database, $args);
 	}
 
@@ -144,7 +160,7 @@ class model {
 	 * @return object Cached data object, NULL on failure
 	 */
 	protected function get_cached_object($id) {
-		return @$this->_cache->get($this->_resource, $id);
+		return @$this->_cache->get($this->resource, $id);
 	}
 
 	/**
@@ -154,7 +170,7 @@ class model {
 	 * @return object Cached data object
 	 */
 	protected function put_cached_object($id, $object) {
-		return @$this->_cache->put($this->_resource, $id, $object);
+		return @$this->_cache->put($this->resource, $id, $object);
 	}
 
 	/**
@@ -162,6 +178,6 @@ class model {
 	 * @param mixed $id Unique identifier for database record
 	 */
 	protected function remove_cached_object($id) {
-		return @$this->_cache->remove($this->_resource, $id);
+		return @$this->_cache->remove($this->resource, $id);
 	}
 }

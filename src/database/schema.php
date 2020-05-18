@@ -17,12 +17,12 @@ class schema {
 	/**
 	 * @ignore internal variable
 	 */
-	private $_tables = array();
+	private $_tables = [];
 
 	/**
 	 * @ignore internal variable
 	 */
-	private $_rels = array();
+	private $_rels = [];
 
 	/**
 	 * @param object $mysql A previously-established MySQLi instance
@@ -50,13 +50,13 @@ class schema {
 	 * @param string $table_name OPTIONAL Table name to be passed on to result
 	 * @return object Database result object, FALSE on failure
 	 */
-	public function query($sql, $params = array(), $table_name = false) {
+	public function query($sql, $params = [], $table_name = false) {
 		if ($stmt = $this->_mysql->prepare($sql)) {
 			if (is_scalar($params))
 				$params = array_slice(func_get_args(), 1);
 
 			if (count($params)) {
-				$_params = array('');
+				$_params = [''];
 
 				for ($i = 0, $n = count($params); $i < $n; $i++) {
 					$_params[$i + 1] =& $params[$i];
@@ -69,29 +69,30 @@ class schema {
 						$_params[0] .= 's';
 				}
 
-				if (!call_user_func_array(array($stmt, 'bind_param'), $_params))
+				if (!call_user_func_array([$stmt, 'bind_param'], $_params))
 					trigger_error($stmt->error, E_USER_WARNING);
 			}
 
-			if ($stmt->execute() && $result = $stmt->get_result()) {
-				$records = array();
+			if ($stmt->execute()) {
+				$records = [];
 				$found = 0;
 
-				while ($record = $result->fetch_assoc())
-					$records[] = new record($record, $table_name);
-
-				$result->free();
-
-				if ($result = $this->_mysql->query('SELECT FOUND_ROWS()')) {
-					if ($record = $result->fetch_row())
-						$found = intval($record[0]);
+				if ($result = $stmt->get_result()) {
+					while ($record = $result->fetch_assoc())
+						$records[] = new record($record, $table_name);
 
 					$result->free();
+
+					if ($result = $this->_mysql->query('SELECT FOUND_ROWS()')) {
+						if ($record = $result->fetch_row())
+							$found = intval($record[0]);
+
+						$result->free();
+					}
 				}
 
 				return new result($records, $found, $table_name);
 			} else {
-				error_log($sql);
 				trigger_error($stmt->error, E_USER_WARNING);
 			}
 
@@ -109,7 +110,10 @@ class schema {
 	 * @param array $params OPTIONAL Index-based query parameters
 	 * @return boolean TRUE on sucess, FALSE on failure
 	 */
-	public function execute($sql, $params = array()) {
+	public function execute($sql, $params = []) {
+		if (is_scalar($params)) $params = array_slice(func_get_args(), 1);
+		return $this->query($sql, $params) != false;
+
 		$result = false;
 
 		if ($stmt = $this->_mysql->prepare($sql)) {
@@ -117,7 +121,7 @@ class schema {
 				$params = array_slice(func_get_args(), 1);
 
 			if (count($params)) {
-				$_params = array('');
+				$_params = [''];
 
 				for ($i = 0, $n = count($params); $i < $n; $i++) {
 					$_params[$i + 1] =& $params[$i];
@@ -130,7 +134,7 @@ class schema {
 						$_params[0] .= 's';
 				}
 
-				if (!call_user_func_array(array($stmt, 'bind_param'), $_params))
+				if (!call_user_func_array([$stmt, 'bind_param'], $_params))
 					trigger_error($stmt->error, E_USER_WARNING);
 			}
 
@@ -196,7 +200,7 @@ class schema {
 	 * Removes all database table definitions from schema.
 	 */
 	public function clear_tables() {
-		$this->_tables = array();
+		$this->_tables = [];
 	}
 
 	/**
@@ -227,20 +231,20 @@ class schema {
 	 * @param string $fkey Name of foreign key field
 	 * @return object Newly-defined relation object
 	 */
-	public function add_relation($rel_name, $ptable_name, $ftable_name, $fkey) {
-		if (!$this->relation_exists($rel_name)) {
+	public function add_relation($name, $ptable_name, $ftable_name, $fkey) {
+		if (!$this->relation_exists($name)) {
 			if (($ptable =& $this->_tables[$ptable_name]) &&
 				($ftable =& $this->_tables[$ftable_name])) {
-				$rel = new relation($rel_name, $ptable, $ftable, $fkey);
+				$rel = new relation($name, $ptable, $ftable, $fkey);
 
-				$ptable->add_relation($rel_name, $rel);
-				$ftable->add_relation($rel_name, $rel);
+				$ptable->add_relation($name, $rel);
+				$ftable->add_relation($name, $rel);
 
-				$this->_rels[$rel_name] =& $rel;
+				$this->_rels[$name] =& $rel;
 			}
 		}
 
-		return $this->get_relation($rel_name);
+		return $this->get_relation($name);
 	}
 
 	/**
@@ -263,7 +267,7 @@ class schema {
 	 * Removes all database relationship definitions from schema.
 	 */
 	public function clear_relations() {
-		$this->_rels = array();
+		$this->_rels = [];
 
 		foreach ($this->_tables as &$table)
 			$table->clear_relations();
@@ -283,7 +287,14 @@ class schema {
 		if ($table = @$this->_tables[$table_name]) {
 			$sql = $table->select_sql($rel_name);
 
-			$params = array(intval($record_id));
+			$params = [];
+
+			if (is_string($table->pkey)) {
+				$params[] = intval($record_id);
+			} elseif (is_array($table->pkey)) {
+				foreach ($table->pkey as $field)
+					$params[] = @$record_id[$field];
+			}
 
 			if ($result = $this->query($sql, $params, $table_name))
 				return $result->first;
@@ -305,8 +316,20 @@ class schema {
 					? $record->toArray()
 					: get_object_vars($record);
 
-			$params = array();
-			$insert = @$record[$table->pkey] == 0;
+			$params = [];
+
+			if (is_string($table->pkey)) {
+				$insert = empty($record[$table->pkey]);
+			} elseif (is_array($table->pkey)) {
+				$insert = false;
+
+				foreach ($table->pkey as $field) {
+					if (empty($record[$field])) {
+						$insert = true;
+						break;
+					}
+				}
+			}
 
 			if ($insert)
 				$sql = $table->insert_sql($record, $params);
@@ -315,7 +338,15 @@ class schema {
 
 			$this->execute($sql, $params);
 
-			return @$record[$table->pkey] ?: $this->insert_id;
+			if (is_string($table->pkey)) {
+				return @$record[$table->pkey] ?: $this->insert_id;
+			} else {
+				$record_id = [];
+				foreach ($table->pkey as $field)
+					$record_id[$field] = @$record[$field];
+
+				return $record_id;
+			}
 		}
 
 		return false;
@@ -331,7 +362,14 @@ class schema {
 		if ($table = @$this->_tables[$table_name]) {
 			$sql = $table->delete_sql();
 
-			$params = array(intval($record_id));
+			$params = [];
+
+			if (is_string($table->pkey)) {
+				$params[] = intval($record_id);
+			} elseif (is_array($table->pkey)) {
+				foreach ($table->pkey as $field)
+					$params[] = @$record_id[$field];
+			}
 
 			return $this->execute($sql, $params);
 		}

@@ -53,12 +53,12 @@ class schema {
 	/**
 	 * @ignore internal variable
 	 */
-	private $_tables = array();
+	private $_tables = [];
 
 	/**
 	 * @ignore internal variable
 	 */
-	private $_rels = array();
+	private $_rels = [];
 
 	/**
 	 * @param object $mysql A previously-established MySQLi instance
@@ -86,13 +86,13 @@ class schema {
 	 * @param string $table_name OPTIONAL Table name to be passed on to result
 	 * @return object Database result object, FALSE on failure
 	 */
-	public function query($sql, $params = array(), $table_name = false) {
+	public function query($sql, $params = [], $table_name = false) {
 		if ($stmt = $this-&gt;_mysql-&gt;prepare($sql)) {
 			if (is_scalar($params))
 				$params = array_slice(func_get_args(), 1);
 
 			if (count($params)) {
-				$_params = array('');
+				$_params = [''];
 
 				for ($i = 0, $n = count($params); $i &lt; $n; $i++) {
 					$_params[$i + 1] =&amp; $params[$i];
@@ -105,29 +105,30 @@ class schema {
 						$_params[0] .= 's';
 				}
 
-				if (!call_user_func_array(array($stmt, 'bind_param'), $_params))
+				if (!call_user_func_array([$stmt, 'bind_param'], $_params))
 					trigger_error($stmt-&gt;error, E_USER_WARNING);
 			}
 
-			if ($stmt-&gt;execute() &amp;&amp; $result = $stmt-&gt;get_result()) {
-				$records = array();
+			if ($stmt-&gt;execute()) {
+				$records = [];
 				$found = 0;
 
-				while ($record = $result-&gt;fetch_assoc())
-					$records[] = new record($record, $table_name);
-
-				$result-&gt;free();
-
-				if ($result = $this-&gt;_mysql-&gt;query('SELECT FOUND_ROWS()')) {
-					if ($record = $result-&gt;fetch_row())
-						$found = intval($record[0]);
+				if ($result = $stmt-&gt;get_result()) {
+					while ($record = $result-&gt;fetch_assoc())
+						$records[] = new record($record, $table_name);
 
 					$result-&gt;free();
+
+					if ($result = $this-&gt;_mysql-&gt;query('SELECT FOUND_ROWS()')) {
+						if ($record = $result-&gt;fetch_row())
+							$found = intval($record[0]);
+
+						$result-&gt;free();
+					}
 				}
 
 				return new result($records, $found, $table_name);
 			} else {
-				error_log($sql);
 				trigger_error($stmt-&gt;error, E_USER_WARNING);
 			}
 
@@ -145,7 +146,10 @@ class schema {
 	 * @param array $params OPTIONAL Index-based query parameters
 	 * @return boolean TRUE on sucess, FALSE on failure
 	 */
-	public function execute($sql, $params = array()) {
+	public function execute($sql, $params = []) {
+		if (is_scalar($params)) $params = array_slice(func_get_args(), 1);
+		return $this-&gt;query($sql, $params) != false;
+
 		$result = false;
 
 		if ($stmt = $this-&gt;_mysql-&gt;prepare($sql)) {
@@ -153,7 +157,7 @@ class schema {
 				$params = array_slice(func_get_args(), 1);
 
 			if (count($params)) {
-				$_params = array('');
+				$_params = [''];
 
 				for ($i = 0, $n = count($params); $i &lt; $n; $i++) {
 					$_params[$i + 1] =&amp; $params[$i];
@@ -166,7 +170,7 @@ class schema {
 						$_params[0] .= 's';
 				}
 
-				if (!call_user_func_array(array($stmt, 'bind_param'), $_params))
+				if (!call_user_func_array([$stmt, 'bind_param'], $_params))
 					trigger_error($stmt-&gt;error, E_USER_WARNING);
 			}
 
@@ -232,7 +236,7 @@ class schema {
 	 * Removes all database table definitions from schema.
 	 */
 	public function clear_tables() {
-		$this-&gt;_tables = array();
+		$this-&gt;_tables = [];
 	}
 
 	/**
@@ -263,20 +267,20 @@ class schema {
 	 * @param string $fkey Name of foreign key field
 	 * @return object Newly-defined relation object
 	 */
-	public function add_relation($rel_name, $ptable_name, $ftable_name, $fkey) {
-		if (!$this-&gt;relation_exists($rel_name)) {
+	public function add_relation($name, $ptable_name, $ftable_name, $fkey) {
+		if (!$this-&gt;relation_exists($name)) {
 			if (($ptable =&amp; $this-&gt;_tables[$ptable_name]) &amp;&amp;
 				($ftable =&amp; $this-&gt;_tables[$ftable_name])) {
-				$rel = new relation($rel_name, $ptable, $ftable, $fkey);
+				$rel = new relation($name, $ptable, $ftable, $fkey);
 
-				$ptable-&gt;add_relation($rel_name, $rel);
-				$ftable-&gt;add_relation($rel_name, $rel);
+				$ptable-&gt;add_relation($name, $rel);
+				$ftable-&gt;add_relation($name, $rel);
 
-				$this-&gt;_rels[$rel_name] =&amp; $rel;
+				$this-&gt;_rels[$name] =&amp; $rel;
 			}
 		}
 
-		return $this-&gt;get_relation($rel_name);
+		return $this-&gt;get_relation($name);
 	}
 
 	/**
@@ -299,7 +303,7 @@ class schema {
 	 * Removes all database relationship definitions from schema.
 	 */
 	public function clear_relations() {
-		$this-&gt;_rels = array();
+		$this-&gt;_rels = [];
 
 		foreach ($this-&gt;_tables as &amp;$table)
 			$table-&gt;clear_relations();
@@ -319,7 +323,14 @@ class schema {
 		if ($table = @$this-&gt;_tables[$table_name]) {
 			$sql = $table-&gt;select_sql($rel_name);
 
-			$params = array(intval($record_id));
+			$params = [];
+
+			if (is_string($table-&gt;pkey)) {
+				$params[] = intval($record_id);
+			} elseif (is_array($table-&gt;pkey)) {
+				foreach ($table-&gt;pkey as $field)
+					$params[] = @$record_id[$field];
+			}
 
 			if ($result = $this-&gt;query($sql, $params, $table_name))
 				return $result-&gt;first;
@@ -341,8 +352,20 @@ class schema {
 					? $record-&gt;toArray()
 					: get_object_vars($record);
 
-			$params = array();
-			$insert = @$record[$table-&gt;pkey] == 0;
+			$params = [];
+
+			if (is_string($table-&gt;pkey)) {
+				$insert = @$record[$table-&gt;pkey] == 0;
+			} elseif (is_array($table-&gt;pkey)) {
+				$insert = false;
+
+				foreach ($table-&gt;pkey as $field) {
+					if (empty($record[$field])) {
+						$insert = true;
+						break;
+					}
+				}
+			}
 
 			if ($insert)
 				$sql = $table-&gt;insert_sql($record, $params);
@@ -351,7 +374,15 @@ class schema {
 
 			$this-&gt;execute($sql, $params);
 
-			return @$record[$table-&gt;pkey] ?: $this-&gt;insert_id;
+			if (is_string($table-&gt;pkey)) {
+				return @$record[$table-&gt;pkey] ?: $this-&gt;insert_id;
+			} else {
+				$record_id = [];
+				foreach ($table-&gt;pkey as $field)
+					$record_id[$field] = @$record[$field];
+
+				return $record_id;
+			}
 		}
 
 		return false;
@@ -367,7 +398,14 @@ class schema {
 		if ($table = @$this-&gt;_tables[$table_name]) {
 			$sql = $table-&gt;delete_sql();
 
-			$params = array(intval($record_id));
+			$params = [];
+
+			if (is_string($table-&gt;pkey)) {
+				$params[] = intval($record_id);
+			} elseif (is_array($table-&gt;pkey)) {
+				foreach ($table-&gt;pkey as $field)
+					$params[] = @$record_id[$field];
+			}
 
 			return $this-&gt;execute($sql, $params);
 		}
