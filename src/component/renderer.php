@@ -84,8 +84,9 @@ class renderer {
 
 		foreach ($this->get_links($record) as $rel => $params) {
 			$params['api'] = true;
-			$href = build_url($params);
-			$links[] = compact('rel', 'href');
+			$links[$rel] = [
+				'href' => $this->build_url($params)
+			];
 		}
 
 		$response->links = $links;
@@ -128,5 +129,9 @@ class renderer {
 	protected function map_field_value($value, &$field) {
 		$field = $this->map_field_name($field);
 		return $field ? $value : null;
+	}
+
+	protected function build_url($params) {
+		trigger_error("Function must be overridden, renderer::build_url()", E_USER_ERROR);
 	}
 }
