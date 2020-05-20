@@ -41,6 +41,7 @@
 
 namespace PHPunk\Component;
 
+use PHPunk\api_error;
 use PHPunk\Util\object;
 use PHPunk\Database\result;
 use PHPunk\Database\record;
@@ -119,8 +120,9 @@ class renderer {
 
 		foreach ($this-&gt;get_links($record) as $rel =&gt; $params) {
 			$params['api'] = true;
-			$href = build_url($params);
-			$links[] = compact('rel', 'href');
+			$links[$rel] = [
+				'href' =&gt; $this-&gt;build_url($params)
+			];
 		}
 
 		$response-&gt;links = $links;
@@ -163,6 +165,10 @@ class renderer {
 	protected function map_field_value($value, &amp;$field) {
 		$field = $this-&gt;map_field_name($field);
 		return $field ? $value : null;
+	}
+
+	protected function build_url($params) {
+		trigger_error(&quot;Function must be overridden, renderer::build_url()&quot;, E_USER_ERROR);
 	}
 }
 </pre>

@@ -27,22 +27,24 @@ class model {
 	/**
 	 * @ignore internal variable
 	 */
-	private $_table;
+	private $_cache;
 
 	/**
 	 * @ignore internal variable
 	 */
-	private $_cache;
+	private $_table;
 
 	/**
 	 * @property string $resource Resource name for this component
 	 * @property object $database Database instance for this component
 	 * @property object $cache OPTIONAL Cache instance for this component
+	 * @property object $cache OPTIONAL Database table name for this component
 	 */
-	public function __construct($resource, $database, $cache = null) {
+	public function __construct($resource, $database, $cache = null, $table = false) {
 		$this->_resource = $resource;
 		$this->_database = $database;
 		$this->_cache    = $cache;
+		$this->_table    = $table;
 	}
 
 	/**
@@ -92,8 +94,16 @@ class model {
 	 * @return object Record instance updated with auto-generated id, FALSE on failure
 	 */
 	public function put_record($record) {
-		if ($record = $this->_database->put_record($this->table, $record))
-			$this->put_cached_object($record->id, $record);
+		if ($record_id = $this->_database->put_record($this->table, $record)) {
+			if (is_scalar($record_id)) {
+				$record->id = $record_id;
+			} elseif (is_array($record_id)) {
+				foreach ($record_id as $field => $value)
+					$record[$field] = $value;
+			}
+
+			$this->put_cached_object($record_id, $record);
+		}
 
 		return $record;
 	}
@@ -109,14 +119,6 @@ class model {
 			$this->remove_cached_object($id);
 
 		return $result;
-	}
-
-	/**
-	 * Overrides the database table name.
-	 * @param string $table Name of database table
-	 */
-	protected function set_table_name($table) {
-		$this->_table = $table;
 	}
 
 	/**
@@ -160,6 +162,7 @@ class model {
 	 * @return object Cached data object, NULL on failure
 	 */
 	protected function get_cached_object($id) {
+		if (is_array($id)) $id = serialize($id);
 		return @$this->_cache->get($this->resource, $id);
 	}
 
@@ -170,6 +173,7 @@ class model {
 	 * @return object Cached data object
 	 */
 	protected function put_cached_object($id, $object) {
+		if (is_array($id)) $id = serialize($id);
 		return @$this->_cache->put($this->resource, $id, $object);
 	}
 
@@ -178,6 +182,7 @@ class model {
 	 * @param mixed $id Unique identifier for database record
 	 */
 	protected function remove_cached_object($id) {
+		if (is_array($id)) $id = serialize($id);
 		return @$this->_cache->remove($this->resource, $id);
 	}
 }
