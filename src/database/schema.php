@@ -367,8 +367,12 @@ class schema {
 			if (is_string($table->pkey)) {
 				$params[] = intval($record_id);
 			} elseif (is_array($table->pkey)) {
-				foreach ($table->pkey as $field)
-					$params[] = @$record_id[$field];
+				foreach ($table->pkey as $field) {
+					if (empty($record_id[$field]))
+						return false;
+
+					$params[] = $record_id[$field];
+				}
 			}
 
 			return $this->execute($sql, $params);
