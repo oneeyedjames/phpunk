@@ -27,22 +27,24 @@ class model {
 	/**
 	 * @ignore internal variable
 	 */
-	private $_table;
+	private $_cache;
 
 	/**
 	 * @ignore internal variable
 	 */
-	private $_cache;
+	private $_table;
 
 	/**
 	 * @property string $resource Resource name for this component
 	 * @property object $database Database instance for this component
 	 * @property object $cache OPTIONAL Cache instance for this component
+	 * @property object $cache OPTIONAL Database table name for this component
 	 */
-	public function __construct($resource, $database, $cache = null) {
+	public function __construct($resource, $database, $cache = null, $table = false) {
 		$this->_resource = $resource;
 		$this->_database = $database;
 		$this->_cache    = $cache;
+		$this->_table    = $table;
 	}
 
 	/**
@@ -109,14 +111,6 @@ class model {
 			$this->remove_cached_object($id);
 
 		return $result;
-	}
-
-	/**
-	 * Overrides the database table name.
-	 * @param string $table Name of database table
-	 */
-	protected function set_table_name($table) {
-		$this->_table = $table;
 	}
 
 	/**
