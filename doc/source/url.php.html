@@ -291,6 +291,8 @@ class url_schema {
 				$path[] = $params['action'];
 			elseif ($this-&gt;is_view(@$params['view'], $params['resource']))
 				$path[] = $params['view'];
+			elseif ($this-&gt;is_resource(@$params['relation']))
+				$path[] = $params['relation'];
 		} elseif ($this-&gt;is_action(@$params['action'])) {
 			$path[] = $params['action'];
 		} elseif ($this-&gt;is_view(@$params['view'])) {

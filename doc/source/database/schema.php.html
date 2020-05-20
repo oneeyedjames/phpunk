@@ -355,7 +355,7 @@ class schema {
 			$params = [];
 
 			if (is_string($table-&gt;pkey)) {
-				$insert = @$record[$table-&gt;pkey] == 0;
+				$insert = empty($record[$table-&gt;pkey]);
 			} elseif (is_array($table-&gt;pkey)) {
 				$insert = false;
 
@@ -403,8 +403,12 @@ class schema {
 			if (is_string($table-&gt;pkey)) {
 				$params[] = intval($record_id);
 			} elseif (is_array($table-&gt;pkey)) {
-				foreach ($table-&gt;pkey as $field)
-					$params[] = @$record_id[$field];
+				foreach ($table-&gt;pkey as $field) {
+					if (empty($record_id[$field]))
+						return false;
+
+					$params[] = $record_id[$field];
+				}
 			}
 
 			return $this-&gt;execute($sql, $params);

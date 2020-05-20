@@ -189,7 +189,19 @@ class query {
 
 				$query .= &quot;, `$bridge-&gt;name`.*&quot;;
 
-				$joins[] = &quot;`$bridge-&gt;name` ON `$rel-&gt;ftable`.`$rel-&gt;fkey` = `$rel-&gt;ptable`.`$rel-&gt;pkey`&quot;;
+				if (is_scalar($rel-&gt;pkey) &amp;&amp; is_scalar($rel-&gt;fkey)) {
+					$match = &quot;`$rel-&gt;ftable`.`$rel-&gt;fkey` = `$rel-&gt;ptable`.`$rel-&gt;pkey`&quot;;
+				} elseif (is_array($rel-&gt;pkey) &amp;&amp; is_array($rel-&gt;fkey)) {
+					$match = [];
+
+					for ($i = 0, $n = count($rel-&gt;pkey); $i &lt; $n; $i++) {
+						$match[] = &quot;`$rel-&gt;ftable`.`{$rel-&gt;fkey[$i]}` = `$rel-&gt;ptable`.`{$rel-&gt;pkey[$i]}`&quot;;
+					}
+
+					$match = implode(&quot; AND &quot;, $match);
+				}
+
+				$joins[] = &quot;`$bridge-&gt;name` ON $match&quot;;
 			} else {
 				$bridge = new bridge_table('');
 			}
