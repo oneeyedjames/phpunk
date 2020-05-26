@@ -98,9 +98,13 @@ class controller {
 	 * @param mixed $result Database result/record or error that will be rendered
 	 */
 	public function pre_render($view, &amp;$result) {
-		$method = 'api_' . str_replace('-', '_', $view) . '_view';
-		if (method_exists($this, $method)) {
-			$result = call_user_func([$this, $method], $_GET, $_POST);
+		$new_method = str_replace('-', '_', $view) . '_api';
+		$old_method = 'api_' . str_replace('-', '_', $view) . '_view';
+
+		if (method_exists($this, $new_method)) {
+			$result = call_user_func([$this, $new_method], $_GET, $_POST);
+		} elseif (method_exists($this, $old_method)) {
+			$result = call_user_func([$this, $old_method], $_GET, $_POST);
 		} else {
 			$result = new api_error('api_undefined_view',
 				'The requested API view is not defined', [
