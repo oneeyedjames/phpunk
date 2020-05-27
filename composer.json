@@ -37,7 +37,8 @@
 			"src/component/controller.php",
 			"src/component/renderer.php",
 			"src/component/template.php",
-			"src/component/user.php"
+			"src/component/user.php",
+			"src/component/application.php"
 		]
 	},
 	"scripts": {

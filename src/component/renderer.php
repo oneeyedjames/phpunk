@@ -17,7 +17,7 @@ class renderer {
 	/**
 	 * @ignore internal variable
 	 */
-	private $_resource = false;
+	private $_resource;
 
 	/**
 	 * @property string $resource Resource name for this component
