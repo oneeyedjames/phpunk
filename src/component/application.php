@@ -5,6 +5,7 @@
 
 namespace PHPunk\Component;
 
+use PHPunk\cache;
 use PHPunk\url_schema;
 use PHPunk\Database\schema as db_schema;
 
