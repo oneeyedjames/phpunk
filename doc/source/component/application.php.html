@@ -1,4 +1,40 @@
-<?php
+<html>
+    <head>
+        <script
+            type="text/javascript"
+            src="../../js/jquery-1.4.2.min.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../../syntax_highlighter/scripts/shCore.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../../syntax_highlighter/scripts/shBrushJScript.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../../syntax_highlighter/scripts/shBrushPhp.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../../syntax_highlighter/scripts/shBrushXml.js">
+        </script>
+        <link
+            href="../../syntax_highlighter/styles/shCore.css" rel="stylesheet"
+            type="text/css"
+        />
+        <link
+            href="../../syntax_highlighter/styles/shCoreEclipse.css"
+            rel="stylesheet" type="text/css"
+        />
+        <link
+            href="../../syntax_highlighter/styles/shThemeWordpress.css"
+            rel="stylesheet" type="text/css"
+        />
+    </head>
+    <body>
+        <pre class="brush: php">&lt;?php
 /**
  * @package phpunk\component
  */
@@ -93,17 +129,17 @@ class application {
 	public function __get($key) {
 		switch ($key) {
 			case 'database':
-				return $this->load_database();
+				return $this-&gt;load_database();
 			case 'router':
-				return $this->load_router();
+				return $this-&gt;load_router();
 			case 'cache':
-				return $this->load_cache();
+				return $this-&gt;load_cache();
 			case 'model':
-				return $this->load_model();
+				return $this-&gt;load_model();
 			case 'controller':
-				return $this->load_controller();
+				return $this-&gt;load_controller();
 			case 'renderer':
-				return $this->load_renderer();
+				return $this-&gt;load_renderer();
 		}
 	}
 
@@ -116,16 +152,16 @@ class application {
 
 			switch ($func) {
 				case 'model':
-					return $this->load_model($resource);
+					return $this-&gt;load_model($resource);
 				case 'controller':
-					return $this->load_controller($resource);
+					return $this-&gt;load_controller($resource);
 				case 'renderer':
-					return $this->load_renderer($resource);
+					return $this-&gt;load_renderer($resource);
 			}
 		}
 
 		$class = get_class($this);
-		trigger_error("Call to undefined method $class::$func()", E_USER_WARNING);
+		trigger_error(&quot;Call to undefined method $class::$func()&quot;, E_USER_WARNING);
 	}
 
 	/**
@@ -135,37 +171,37 @@ class application {
 	 * @param object $meta Traversable object containing table structures
 	 */
 	public function init_database($config, $meta) {
-		if (is_null($this->_database_conn)) {
-			$this->_database_conn = new \mysqli(
-				$config->hostname,
-				$config->username,
-				$config->password
+		if (is_null($this-&gt;_database_conn)) {
+			$this-&gt;_database_conn = new \mysqli(
+				$config-&gt;hostname,
+				$config-&gt;username,
+				$config-&gt;password
 			);
 
-			if ($this->_database_conn->connect_errno) {
-				trigger_error($this->_database_conn->connect_error, E_USER_ERROR);
+			if ($this-&gt;_database_conn-&gt;connect_errno) {
+				trigger_error($this-&gt;_database_conn-&gt;connect_error, E_USER_ERROR);
 				return false;
 			}
 
-			$this->_database_conn->set_charset('utf8');
+			$this-&gt;_database_conn-&gt;set_charset('utf8');
 
-			$query = "SHOW DATABASES LIKE '$config->database'";
+			$query = &quot;SHOW DATABASES LIKE '$config-&gt;database'&quot;;
 
-			if ($result = $this->_database_conn->query($query)) {
-				if (0 == $result->num_rows) {
-					$query = "CREATE DATABASE `$config->database`";
+			if ($result = $this-&gt;_database_conn-&gt;query($query)) {
+				if (0 == $result-&gt;num_rows) {
+					$query = &quot;CREATE DATABASE `$config-&gt;database`&quot;;
 
-					if (!$this->_database_conn->query($query)) {
-						trigger_error($this->_database_conn->error, E_USER_ERROR);
+					if (!$this-&gt;_database_conn-&gt;query($query)) {
+						trigger_error($this-&gt;_database_conn-&gt;error, E_USER_ERROR);
 						return false;
 					}
 				}
 
-				$result->close();
+				$result-&gt;close();
 			}
 
-			$this->_database_conn->select_db($config->database);
-			$this->_database_meta = $meta;
+			$this-&gt;_database_conn-&gt;select_db($config-&gt;database);
+			$this-&gt;_database_meta = $meta;
 		}
 	}
 
@@ -176,33 +212,33 @@ class application {
 	 * @return object The database schema object
 	 */
 	public function load_database() {
-		if (is_null($this->_database)) {
-			if (!($connection = $this->_database_conn)) {
-				trigger_error("No database connection", E_USER_ERROR);
+		if (is_null($this-&gt;_database)) {
+			if (!($connection = $this-&gt;_database_conn)) {
+				trigger_error(&quot;No database connection&quot;, E_USER_ERROR);
 				return false;
 			}
 
-			$this->_database = new db_schema($connection);
+			$this-&gt;_database = new db_schema($connection);
 
-			foreach ($this->_database_meta as $table_name => $table_meta) {
-				$this->_database->add_table($table_name, @$table_meta->pkey);
+			foreach ($this-&gt;_database_meta as $table_name =&gt; $table_meta) {
+				$this-&gt;_database-&gt;add_table($table_name, @$table_meta-&gt;pkey);
 
-				if (isset($table_meta->relations)) {
-					foreach ($table_meta->relations as $rel_name => $rel_meta) {
-						$rel_meta->ftable = $table_name;
+				if (isset($table_meta-&gt;relations)) {
+					foreach ($table_meta-&gt;relations as $rel_name =&gt; $rel_meta) {
+						$rel_meta-&gt;ftable = $table_name;
 
-						$this->_database->add_relation(
+						$this-&gt;_database-&gt;add_relation(
 							$rel_name,
-							$rel_meta->ptable,
-							$rel_meta->ftable,
-							$rel_meta->fkey
+							$rel_meta-&gt;ptable,
+							$rel_meta-&gt;ftable,
+							$rel_meta-&gt;fkey
 						);
 					}
 				}
 			}
 		}
 
-		return $this->_database;
+		return $this-&gt;_database;
 	}
 
 	/**
@@ -211,8 +247,8 @@ class application {
 	 * @param object $meta Traversable object containing url structures
 	 */
 	public function init_router($host, $meta) {
-		$this->_router_host = $host;
-		$this->_router_meta = $meta;
+		$this-&gt;_router_host = $host;
+		$this-&gt;_router_meta = $meta;
 	}
 
 	/**
@@ -221,31 +257,31 @@ class application {
 	 * @return object The url schema object
 	 */
 	public function load_router() {
-		if (is_null($this->_router)) {
-			$this->_router = new url_schema($this->_router_host);
+		if (is_null($this-&gt;_router)) {
+			$this-&gt;_router = new url_schema($this-&gt;_router_host);
 
-			foreach ($this->_router_meta as $res_name => $res_meta) {
-				if ('<global>' == $res_name)
+			foreach ($this-&gt;_router_meta as $res_name =&gt; $res_meta) {
+				if ('&lt;global&gt;' == $res_name)
 					$res_name = false;
 				else
-					$this->_router->add_resource($res_name);
+					$this-&gt;_router-&gt;add_resource($res_name);
 
-				$aliases = @$res_meta->aliases ?: [];
-				$actions = @$res_meta->actions ?: [];
-				$views   = @$res_meta->views   ?: [];
+				$aliases = @$res_meta-&gt;aliases ?: [];
+				$actions = @$res_meta-&gt;actions ?: [];
+				$views   = @$res_meta-&gt;views   ?: [];
 
 				foreach ($aliases as $alias)
-					$this->_router->add_alias($alias, $res_name);
+					$this-&gt;_router-&gt;add_alias($alias, $res_name);
 
 				foreach ($actions as $action)
-					$this->_router->add_action($action, $res_name);
+					$this-&gt;_router-&gt;add_action($action, $res_name);
 
 				foreach ($views as $view)
-					$this->_router->add_view($view, $res_name);
+					$this-&gt;_router-&gt;add_view($view, $res_name);
 			}
 		}
 
-		return $this->_router;
+		return $this-&gt;_router;
 	}
 
 	/**
@@ -253,18 +289,18 @@ class application {
 	 * @param object Traversable object containing host and port for server
 	 */
 	public function init_cache($config) {
-		if (is_null($this->_cache_server)) {
-			switch (strtolower($config->driver)) {
+		if (is_null($this-&gt;_cache_server)) {
+			switch (strtolower($config-&gt;driver)) {
 				case 'memcached':
-					$this->_cache_server = new Memcached();
+					$this-&gt;_cache_server = new Memcached();
 					break;
 				case 'memcache':
 				default:
-					$this->_cache_server = new Memcache();
+					$this-&gt;_cache_server = new Memcache();
 					break;
 			}
 
-			$this->_cache_server->addServer($config->host, $config->port);
+			$this-&gt;_cache_server-&gt;addServer($config-&gt;host, $config-&gt;port);
 		}
 	}
 
@@ -274,11 +310,11 @@ class application {
 	 * @return object The cache object
 	 */
 	public function load_cache() {
-		if (is_null($this->_cache)) {
-			$this->_cache = new cache($this->_cache_server);
+		if (is_null($this-&gt;_cache)) {
+			$this-&gt;_cache = new cache($this-&gt;_cache_server);
 		}
 
-		return $this->_cache;
+		return $this-&gt;_cache;
 	}
 
 	/**
@@ -288,16 +324,16 @@ class application {
 	 */
 	public function load_model($resource = false) {
 		if ($resource) {
-			if (!isset($this->_models[$resource])) {
-				$this->_models[$resource] = $this->create_model($resource);
+			if (!isset($this-&gt;_models[$resource])) {
+				$this-&gt;_models[$resource] = $this-&gt;create_model($resource);
 			}
 
-			return $this->_models[$resource];
+			return $this-&gt;_models[$resource];
 		} else {
-			if (is_null($this->_default_model))
-				$this->_default_model = $this->create_model();
+			if (is_null($this-&gt;_default_model))
+				$this-&gt;_default_model = $this-&gt;create_model();
 
-			return $this->_default_model;
+			return $this-&gt;_default_model;
 		}
 	}
 
@@ -308,15 +344,15 @@ class application {
 	 */
 	public function load_controller($resource = false) {
 		if ($resource) {
-			if (!isset($this->_controllers[$resource]))
-				$this->_controllers[$resource] = $this->create_controller($resource);
+			if (!isset($this-&gt;_controllers[$resource]))
+				$this-&gt;_controllers[$resource] = $this-&gt;create_controller($resource);
 
-			return $this->_controllers[$resource];
+			return $this-&gt;_controllers[$resource];
 		} else {
-			if (is_null($this->_default_controller))
-				$this->_default_controller = $this->create_controller();
+			if (is_null($this-&gt;_default_controller))
+				$this-&gt;_default_controller = $this-&gt;create_controller();
 
-			return $this->_default_controller;
+			return $this-&gt;_default_controller;
 		}
 	}
 
@@ -327,15 +363,15 @@ class application {
 	 */
 	public function load_renderer($resource = false) {
 		if ($resource) {
-			if (!isset($this->_renderers[$resource]))
-				$this->_renderers[$resource] = $this->create_renderer($resource);
+			if (!isset($this-&gt;_renderers[$resource]))
+				$this-&gt;_renderers[$resource] = $this-&gt;create_renderer($resource);
 
-			return $this->_renderers[$resource];
+			return $this-&gt;_renderers[$resource];
 		} else {
-			if (is_null($this->_default_renderer))
-				$this->_default_renderer = $this->create_renderer();
+			if (is_null($this-&gt;_default_renderer))
+				$this-&gt;_default_renderer = $this-&gt;create_renderer();
 
-			return $this->_default_renderer;
+			return $this-&gt;_default_renderer;
 		}
 	}
 
@@ -347,19 +383,19 @@ class application {
 	 * @return object A model object
 	 */
 	protected function create_model($resource = false) {
-		if (!($database = $this->database)) {
-			trigger_error("No default database", E_USER_ERROR);
+		if (!($database = $this-&gt;database)) {
+			trigger_error(&quot;No default database&quot;, E_USER_ERROR);
 			return false;
 		}
 
 		if ($resource) {
-			$class = "{$resource}_model";
+			$class = &quot;{$resource}_model&quot;;
 
 			if (class_exists($class))
-				return new $class($database, $this->cache);
+				return new $class($database, $this-&gt;cache);
 		}
 
-		return new model($resource, $database, $this->cache);
+		return new model($resource, $database, $this-&gt;cache);
 	}
 
 	/**
@@ -370,10 +406,10 @@ class application {
 	 * @return object A controller object
 	 */
 	protected function create_controller($resource = false) {
-		$model = $this->load_model($resource);
+		$model = $this-&gt;load_model($resource);
 
 		if ($resource) {
-			$class = "{$resource}_controller";
+			$class = &quot;{$resource}_controller&quot;;
 
 			if (class_exists($class))
 				return new $class($model);
@@ -391,7 +427,7 @@ class application {
 	 */
 	protected function create_renderer($resource = false) {
 		if ($resource) {
-			$class = "{$resource}_renderer";
+			$class = &quot;{$resource}_renderer&quot;;
 
 			if (class_exists($class))
 				return new $class();
@@ -400,3 +436,12 @@ class application {
 		return new renderer($resource);
 	}
 }
+</pre>
+        <script type="text/javascript">
+             SyntaxHighlighter.all();
+             jQuery('.gutter div').each(function(key, data){
+                jQuery(data).prepend('<a name="L'+jQuery(data).text()+'"/>');
+             });
+        </script>
+    </body>
+</html>
