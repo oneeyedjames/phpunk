@@ -61,7 +61,7 @@ class renderer {
 			http_response_code(500);
 		}
 
-		header('Content-type: text/json');
+		header('Content-type: application/hal+json');
 		echo json_encode($response);
 	}
 
@@ -89,7 +89,11 @@ class renderer {
 			];
 		}
 
-		$response->links = $links;
+		$response->_links = $links;
+
+		if ($embeds = $this->get_embeds($record)) {
+			$response->_embedded = $embeds;
+		}
 
 		return $response;
 	}
@@ -104,11 +108,17 @@ class renderer {
 			'self' => [
 				'resource' => $this->resource,
 				'id'       => $record->id
-			],
-			'collection' => [
-				'resource' => $this->resource
 			]
 		];
+	}
+
+	/**
+	 * Adds relevant embedded objects to a data object in API response
+	 * @param object $record The data object being rendered
+	 * @return array Multidimensional array of keys and objects
+	 */
+	protected function get_embeds($record) {
+		return [];
 	}
 
 	/**
