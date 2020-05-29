@@ -61,17 +61,17 @@ class application {
 	/**
 	 * @ignore internal variable
 	 */
-	private $_default_model = false;
+	private $_default_model;
 
 	/**
 	 * @ignore internal variable
 	 */
-	private $_default_controller = false;
+	private $_default_controller;
 
 	/**
 	 * @ignore internal variable
 	 */
-	private $_default_renderer = false;
+	private $_default_renderer;
 
 	/**
 	 * @ignore internal variable
