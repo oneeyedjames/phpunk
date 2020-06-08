@@ -64,6 +64,15 @@ class url_schema {
 
 	/**
 	 * Registers a resource name. Registers alias for resource, if included.
+	 *
+	 * Adds resource-specific actions:
+	 *   - save
+	 *   - delete
+	 *
+	 * Adds resource-specific views:
+	 *   - index
+	 *   - item
+	 *
 	 * @param string $resource Resource name
 	 * @param string $alias Alias for resource name
 	 */
@@ -71,7 +80,7 @@ class url_schema {
 		if (!$this->is_resource($resource)) {
 			$this->_resources[$resource] = [
 				'actions' => ['save', 'delete'],
-				'views'   => ['list', 'grid', 'item', 'form']
+				'views'   => ['index', 'item']
 			];
 		}
 

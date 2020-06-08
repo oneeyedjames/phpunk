@@ -1,0 +1,447 @@
+<html>
+    <head>
+        <script
+            type="text/javascript"
+            src="../../js/jquery-1.4.2.min.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../../syntax_highlighter/scripts/shCore.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../../syntax_highlighter/scripts/shBrushJScript.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../../syntax_highlighter/scripts/shBrushPhp.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../../syntax_highlighter/scripts/shBrushXml.js">
+        </script>
+        <link
+            href="../../syntax_highlighter/styles/shCore.css" rel="stylesheet"
+            type="text/css"
+        />
+        <link
+            href="../../syntax_highlighter/styles/shCoreEclipse.css"
+            rel="stylesheet" type="text/css"
+        />
+        <link
+            href="../../syntax_highlighter/styles/shThemeWordpress.css"
+            rel="stylesheet" type="text/css"
+        />
+    </head>
+    <body>
+        <pre class="brush: php">&lt;?php
+/**
+ * @package phpunk\component
+ */
+
+namespace PHPunk\Component;
+
+use PHPunk\url_schema;
+use PHPunk\Database\schema as db_schema;
+
+/**
+ * @property object $database Single database schema instance
+ * @property object $router Single url schema instance
+ * @property object $cache Single cache instance
+ * @property object $model Default model instance
+ * @property object $controller Default controller instance
+ * @property object $renderer Default renderer instance
+ */
+class application {
+	/**
+	 * @ignore internal variable
+	 */
+	private $_database;
+
+	/**
+	 * @ignore internal variable
+	 */
+	private $_database_conn;
+
+	/**
+	 * @ignore internal variable
+	 */
+	private $_database_meta;
+
+	/**
+	 * @ignore internal variable
+	 */
+	private $_router;
+
+	/**
+	 * @ignore internal variable
+	 */
+	private $_router_host;
+
+	/**
+	 * @ignore internal variable
+	 */
+	private $_router_meta;
+
+	/**
+	 * @ignore internal variable
+	 */
+	private $_cache;
+
+	/**
+	 * @ignore internal variable
+	 */
+	private $_cache_server;
+
+	/**
+	 * @ignore internal variable
+	 */
+	private $_default_model = false;
+
+	/**
+	 * @ignore internal variable
+	 */
+	private $_default_controller = false;
+
+	/**
+	 * @ignore internal variable
+	 */
+	private $_default_renderer = false;
+
+	/**
+	 * @ignore internal variable
+	 */
+	private $_models = [];
+
+	/**
+	 * @ignore internal variable
+	 */
+	private $_controllers = [];
+
+	/**
+	 * @ignore internal variable
+	 */
+	private $_renderers = [];
+
+	/**
+	 * @ignore magic method
+	 */
+	public function __get($key) {
+		switch ($key) {
+			case 'database':
+				return $this-&gt;load_database();
+			case 'router':
+				return $this-&gt;load_router();
+			case 'cache':
+				return $this-&gt;load_cache();
+			case 'model':
+				return $this-&gt;load_model();
+			case 'controller':
+				return $this-&gt;load_controller();
+			case 'renderer':
+				return $this-&gt;load_renderer();
+		}
+	}
+
+	/**
+	 * @ignore magic method
+	 */
+	public function __call($func, $args) {
+		if (count($args) == 1) {
+			$resource = $args[0];
+
+			switch ($func) {
+				case 'model':
+					return $this-&gt;load_model($resource);
+				case 'controller':
+					return $this-&gt;load_controller($resource);
+				case 'renderer':
+					return $this-&gt;load_renderer($resource);
+			}
+		}
+
+		$class = get_class($this);
+		trigger_error(&quot;Call to undefined method $class::$func()&quot;, E_USER_WARNING);
+	}
+
+	/**
+	 * Initializes database connection and table structures. An E_USER_ERROR
+	 * error will be triggered if the database is inaccessible.
+	 * @param object $config Traversable object containing DB credentials
+	 * @param object $meta Traversable object containing table structures
+	 */
+	public function init_database($config, $meta) {
+		if (is_null($this-&gt;_database_conn)) {
+			$this-&gt;_database_conn = new \mysqli(
+				$config-&gt;hostname,
+				$config-&gt;username,
+				$config-&gt;password
+			);
+
+			if ($this-&gt;_database_conn-&gt;connect_errno) {
+				trigger_error($this-&gt;_database_conn-&gt;connect_error, E_USER_ERROR);
+				return false;
+			}
+
+			$this-&gt;_database_conn-&gt;set_charset('utf8');
+
+			$query = &quot;SHOW DATABASES LIKE '$config-&gt;database'&quot;;
+
+			if ($result = $this-&gt;_database_conn-&gt;query($query)) {
+				if (0 == $result-&gt;num_rows) {
+					$query = &quot;CREATE DATABASE `$config-&gt;database`&quot;;
+
+					if (!$this-&gt;_database_conn-&gt;query($query)) {
+						trigger_error($this-&gt;_database_conn-&gt;error, E_USER_ERROR);
+						return false;
+					}
+				}
+
+				$result-&gt;close();
+			}
+
+			$this-&gt;_database_conn-&gt;select_db($config-&gt;database);
+			$this-&gt;_database_meta = $meta;
+		}
+	}
+
+	/**
+	 * Lazy-loads a database schema instance, using the previously-initialized
+	 * database connection and table structures. An E_USER_ERROR error will be
+	 * triggered if the database connection has not yet been initialized.
+	 * @return object The database schema object
+	 */
+	public function load_database() {
+		if (is_null($this-&gt;_database)) {
+			if (!($connection = $this-&gt;_database_conn)) {
+				trigger_error(&quot;No database connection&quot;, E_USER_ERROR);
+				return false;
+			}
+
+			$this-&gt;_database = new db_schema($connection);
+
+			foreach ($this-&gt;_database_meta as $table_name =&gt; $table_meta) {
+				$this-&gt;_database-&gt;add_table($table_name, @$table_meta-&gt;pkey);
+
+				if (isset($table_meta-&gt;relations)) {
+					foreach ($table_meta-&gt;relations as $rel_name =&gt; $rel_meta) {
+						$rel_meta-&gt;ftable = $table_name;
+
+						$this-&gt;_database-&gt;add_relation(
+							$rel_name,
+							$rel_meta-&gt;ptable,
+							$rel_meta-&gt;ftable,
+							$rel_meta-&gt;fkey
+						);
+					}
+				}
+			}
+		}
+
+		return $this-&gt;_database;
+	}
+
+	/**
+	 * Initializes host and metadata for url schema.
+	 * @param string $host Hostname for url schema
+	 * @param object $meta Traversable object containing url structures
+	 */
+	public function init_router($host, $meta) {
+		$this-&gt;_router_host = $host;
+		$this-&gt;_router_meta = $meta;
+	}
+
+	/**
+	 * Lazy-loads a url schema instance, using the previously-initialized host
+	 * and metadata.
+	 * @return object The url schema object
+	 */
+	public function load_router() {
+		if (is_null($this-&gt;_router)) {
+			$this-&gt;_router = new url_schema($this-&gt;_router_host);
+
+			foreach ($this-&gt;_router_meta as $res_name =&gt; $res_meta) {
+				if ('&lt;global&gt;' == $res_name)
+					$res_name = false;
+				else
+					$this-&gt;_router-&gt;add_resource($res_name);
+
+				$aliases = @$res_meta-&gt;aliases ?: [];
+				$actions = @$res_meta-&gt;actions ?: [];
+				$views   = @$res_meta-&gt;views   ?: [];
+
+				foreach ($aliases as $alias)
+					$this-&gt;_router-&gt;add_alias($alias, $res_name);
+
+				foreach ($actions as $action)
+					$this-&gt;_router-&gt;add_action($action, $res_name);
+
+				foreach ($views as $view)
+					$this-&gt;_router-&gt;add_view($view, $res_name);
+			}
+		}
+
+		return $this-&gt;_router;
+	}
+
+	/**
+	 * Initializes caching server connection.
+	 * @param object Traversable object containing host and port for server
+	 */
+	public function init_cache($config) {
+		if (is_null($this-&gt;_cache_server)) {
+			switch (strtolower($config-&gt;driver)) {
+				case 'memcached':
+					$this-&gt;_cache_server = new Memcached();
+					break;
+				case 'memcache':
+				default:
+					$this-&gt;_cache_server = new Memcache();
+					break;
+			}
+
+			$this-&gt;_cache_server-&gt;addServer($config-&gt;host, $config-&gt;port);
+		}
+	}
+
+	/**
+	 * Lazy-loads a cache instance, using the previously-initialized connection.
+	 * If server is not initalized, cache object will only use in-memory data.
+	 * @return object The cache object
+	 */
+	public function load_cache() {
+		if (is_null($this-&gt;_cache)) {
+			$this-&gt;_cache = new cache($this-&gt;_cache_server);
+		}
+
+		return $this-&gt;_cache;
+	}
+
+	/**
+	 * Lazy-loads a model object for the specified resource, if given.
+	 * @param string $resource OPTIONAL resource name
+	 * @return object A model object
+	 */
+	public function load_model($resource = false) {
+		if ($resource) {
+			if (!isset($this-&gt;_models[$resource])) {
+				$this-&gt;_models[$resource] = $this-&gt;create_model($resource);
+			}
+
+			return $this-&gt;_models[$resource];
+		} else {
+			if (is_null($this-&gt;_default_model))
+				$this-&gt;_default_model = $this-&gt;create_model();
+
+			return $this-&gt;_default_model;
+		}
+	}
+
+	/**
+	 * Lazy-loads a controller object for the specified resource, if given.
+	 * @param string $resource OPTIONAL resource name
+	 * @return object A controller object
+	 */
+	public function load_controller($resource = false) {
+		if ($resource) {
+			if (!isset($this-&gt;_controllers[$resource]))
+				$this-&gt;_controllers[$resource] = $this-&gt;create_controller($resource);
+
+			return $this-&gt;_controllers[$resource];
+		} else {
+			if (is_null($this-&gt;_default_controller))
+				$this-&gt;_default_controller = $this-&gt;create_controller();
+
+			return $this-&gt;_default_controller;
+		}
+	}
+
+	/**
+	 * Lazy-loads a renderer object for the specified resource, if given.
+	 * @param string $resource OPTIONAL resource name
+	 * @return object A renderer object
+	 */
+	public function load_renderer($resource = false) {
+		if ($resource) {
+			if (!isset($this-&gt;_renderers[$resource]))
+				$this-&gt;_renderers[$resource] = $this-&gt;create_renderer($resource);
+
+			return $this-&gt;_renderers[$resource];
+		} else {
+			if (is_null($this-&gt;_default_renderer))
+				$this-&gt;_default_renderer = $this-&gt;create_renderer();
+
+			return $this-&gt;_default_renderer;
+		}
+	}
+
+	/**
+	 * Constructs a model object for the specified resource. An E_USER_ERROR is
+	 * triggered if the database connection has not yet been initialized.
+	 * This method is intended to be extensible for child classes.
+	 * @param string $resource OPTIONAL resource name
+	 * @return object A model object
+	 */
+	protected function create_model($resource = false) {
+		if (!($database = $this-&gt;database)) {
+			trigger_error(&quot;No default database&quot;, E_USER_ERROR);
+			return false;
+		}
+
+		if ($resource) {
+			$class = &quot;{$resource}_model&quot;;
+
+			if (class_exists($class))
+				return new $class($database, $this-&gt;cache);
+		}
+
+		return new model($resource, $database, $this-&gt;cache);
+	}
+
+	/**
+	 * Constructs a controller object for the specified resource. An E_USER_ERROR
+	 * is triggered if the database connection has not yet been initialized.
+	 * This method is intended to be extensible for child classes.
+	 * @param string $resource OPTIONAL resource name
+	 * @return object A controller object
+	 */
+	protected function create_controller($resource = false) {
+		$model = $this-&gt;load_model($resource);
+
+		if ($resource) {
+			$class = &quot;{$resource}_controller&quot;;
+
+			if (class_exists($class))
+				return new $class($model);
+		}
+
+		return new controller($model);
+	}
+
+	/**
+	 * Constructs a renderer object for the specified resource. An E_USER_ERROR
+	 * is triggered if the database connection has not yet been initialized.
+	 * This method is intended to be extensible for child classes.
+	 * @param string $resource OPTIONAL resource name
+	 * @return object A renderer object
+	 */
+	protected function create_renderer($resource = false) {
+		if ($resource) {
+			$class = &quot;{$resource}_renderer&quot;;
+
+			if (class_exists($class))
+				return new $class();
+		}
+
+		return new renderer($resource);
+	}
+}
+</pre>
+        <script type="text/javascript">
+             SyntaxHighlighter.all();
+             jQuery('.gutter div').each(function(key, data){
+                jQuery(data).prepend('<a name="L'+jQuery(data).text()+'"/>');
+             });
+        </script>
+    </body>
+</html>

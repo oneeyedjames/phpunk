@@ -81,8 +81,10 @@ class model {
 		if ($record = $this->get_cached_object($id))
 			return $record;
 
-		if ($record = $this->_database->get_record($this->table, $id))
+		if ($record = $this->_database->get_record($this->table, $id)) {
+			$record->meta->resource = $this->resource;
 			$this->put_cached_object($id, $record);
+		}
 
 		return $record;
 	}

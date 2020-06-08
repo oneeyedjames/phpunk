@@ -14,9 +14,16 @@ use JsonSerializable;
  * @see collectible Collectible Trait
  * @see mutable Mutable Trait
  * @see http://github.com/oneeyedjames/phpunk/wiki/Mutable-Objects PHPunk Wiki
+ *
+ * @property object $meta Mutable object of metadata
  */
 class object implements collection, JsonSerializable {
 	use mutable;
+
+	/**
+	 * @ignore internal variable
+	 */
+	private $_meta;
 
 	/**
 	 * Creates a shallow clone of the passed data.
@@ -25,6 +32,21 @@ class object implements collection, JsonSerializable {
 	 */
 	public function __construct($data = []) {
 		$this->loadArray($data);
+	}
+
+	/**
+	 * @ignore magic method
+	 */
+	public function __get($key) {
+		switch ($key) {
+			case 'meta':
+				if (is_null($this->_meta))
+					$this->_meta = new self();
+
+				return $this->_meta;
+			default:
+				return $this->get($key);
+		}
 	}
 
 	/**
