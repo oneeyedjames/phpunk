@@ -173,11 +173,11 @@ class query {
 			$query .= " FROM `$table->name`";
 
 			foreach ($this->args as $field => $value) {
-				if ($rel = $table->get_relation($field)) {
-					if ($join = $this->_join($table, $rel, $field))
-						$joins[] = $join;
-				} elseif ($rel = $bridge->get_relation($field)) {
+				if ($rel = $bridge->get_relation($field)) {
 					if ($join = $this->_join($bridge, $rel, $field))
+						$joins[] = $join;
+				} elseif ($rel = $table->get_relation($field)) {
+					if ($join = $this->_join($table, $rel, $field))
 						$joins[] = $join;
 				}
 

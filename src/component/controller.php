@@ -59,14 +59,17 @@ class controller {
 	/**
 	 * Executes concrete api view methods in child classes
 	 * @param string $view API name of the relevant view
-	 * @param mixed $result Database result/record or error that will be rendered
+	 * @param mixed $vars Array of named parameters that will be passed into the renderer
 	 */
-	public function pre_render($view, &$result) {
-		$method = 'api_' . str_replace('-', '_', $view) . '_view';
-		if (method_exists($this, $method)) {
-			$result = call_user_func([$this, $method], $_GET, $_POST);
+	public function pre_render($view, &$vars) {
+		$new_method = str_replace('-', '_', $view) . '_api';
+		$old_method = 'api_' . str_replace('-', '_', $view) . '_view';
+		if (method_exists($this, $new_method)) {
+			$vars = call_user_func([$this, $new_method], $vars);
+		} elseif (method_exists($this, $old_method)) {
+			$vars = call_user_func([$this, $old_method], $_GET, $_POST);
 		} else {
-			$result = new api_error('api_undefined_view',
+			$vars = new api_error('api_undefined_view',
 				'The requested API view is not defined', [
 					'status'   => 400,
 					'resource' => $this->resource,

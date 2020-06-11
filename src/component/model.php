@@ -62,14 +62,18 @@ class model {
 	}
 
 	/**
-	 * Instantiates a new database record with the given data.
-	 * @param mixed $data Associative array of data or record ID
-	 * @return object New database record
+	 * Builds and executes a database query for this component.
+	 * @see PHPunk\Database\query
+	 * @param array $args Named parameters to pass to query object
+	 * @return object Database result matching supplied arguments.
 	 */
-	public function create_record($data = []) {
-		if (is_numeric($data)) $data = ['id' => $data];
-		return new record($data, $this->table);
-	}
+	public function get_result($args) {
+ 		$result = $this->make_query($args)->get_result();
+ 		$result->meta->resource = $this->resource;
+ 		$result->meta->args = $args;
+
+ 		return $result;
+ 	}
 
 	/**
 	 * Fetches a single database record by unique identifier.
@@ -124,6 +128,16 @@ class model {
 	}
 
 	/**
+	 * Instantiates a new database record with the given data.
+	 * @param mixed $data Associative array of data or record ID
+	 * @return object New database record
+	 */
+	public function create_record($data = []) {
+		if (is_numeric($data)) $data = ['id' => $data];
+		return new record($data, $this->table);
+	}
+
+	/**
 	 * Runs a raw parameterized SQL query against the database.
 	 * Retrieves data from database.
 	 * @param string $sql SQL query to run
@@ -150,7 +164,7 @@ class model {
 	/**
 	 * Creates a new database query object for this component.
 	 * @see PHPunk\Database\query
-	 * @param array $args Name parameters to pass to query object
+	 * @param array $args Named parameters to pass to query object
 	 * @return object Database query object
 	 */
 	protected function make_query($args) {

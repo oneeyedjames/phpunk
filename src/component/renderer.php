@@ -14,6 +14,13 @@ use PHPunk\Database\record;
  * @property string $resource Name of the resource for this component
  */
 class renderer {
+	const MIME_TYPE = 'application/hal+json';
+
+	const RESULT = 'result';
+	const RECORD = 'record';
+	const EMBEDDED = 'embedded';
+	const URL_PARAMS = 'url_params';
+
 	/**
 	 * @ignore internal variable
 	 */
@@ -32,101 +39,85 @@ class renderer {
 	public function __get($key) {
 		switch ($key) {
 			case 'resource':
+			case 'result_name':
 				return $this->_resource;
 		}
 	}
 
 	/**
-	 * Renders a database result for API response.
-	 * @param object $result Database result, record, or error object
+	 * Renders the named view with the provided data
+	 * @param string $view Name of view to render
+	 * @param array $vars OPTIONAL Array of variables to render
 	 */
-	protected function render($result) {
-		if ($result instanceof record) {
-			$response = $this->create_response($result);
-		} elseif ($result instanceof result) {
-			$response = [];
-			foreach ($result as $record)
-				$response[] = $this->create_response($record);
-		} elseif ($result instanceof api_error) {
-			if (isset($result['status'])) {
-				http_response_code($result['status']);
-				unset($result['status']);
-			}
+	public function render($view, $vars = []) {
+		if ($result = @$vars[self::RESULT]) {
+			$params = @$vars[self::URL_PARAMS];
 
-			$response = $result;
-		} else {
-			$response = new api_error('api_invalid_response',
-				'The response was invalid.');
+			$output = new object();
+			$output->count = count($result);
+			$output->total = $result->found;
+			$output->_links = $this->get_result_links($result, $params);
 
-			http_response_code(500);
+			$vars[self::EMBEDDED][$this->result_name] = $result;
+		} elseif ($record = @$vars[self::RECORD]) {
+			$output = $this->map_record($record);
+			$output->_links = $this->get_record_links($record);
 		}
 
-		header('Content-type: application/hal+json');
-		echo json_encode($response);
+		if ($embedded = @$vars[self::EMBEDDED])
+			$output->_embedded = array_map([$this, 'embed'], $embedded);
+
+		header('Content-Type: ' . self::MIME_TYPE);
+		echo json_encode($output);
 	}
 
 	/**
-	 * Builds an API data object from a database record. Returned object will
-	 * have transformed field names/values and contain API hyperlinks.
-	 * @param object $record Database record
-	 * @return object API data object
+	 * TODO backport to PHPunk project
+	 * @param object $object A database result or record
+	 * @return object Formatted record with links for embedded context
 	 */
-	protected function create_response($record) {
-		$response = new object();
+	protected function embed($object) {
+		if ($object instanceof record) {
+			$embedded = $this->map_record($object, true);
+			$embedded['_links'] = $this->get_record_links($object);
+		} elseif ($object instanceof result) {
+			$embedded = $object->map(function($record) {
+				return $this->embed($record);
+			});
+		} else {
+			$class = get_class($object);
+			trigger_error("Invalid object type: $class", E_USER_WARNING);
+			return false;
+		}
+
+		return $embedded;
+	}
+
+	/**
+	 * Transforms a database record into its final API representation
+	 * @param object $record A database record
+	 * @param boolean $embedded OPTIONAL flag to indicate embedded context
+	 * @return object Formatted record for appropriate context
+	 */
+	protected function map_record($record, $embedded = false) {
+		$object = new object();
 
 		foreach ($record as $key => $value) {
 			$map_key = $key;
-			$map_value = $this->map_field_value($value, $map_key);
-			if ($map_key) $response[$map_key] = $map_value;
+			$map_value = $this->map_field_value($value, $map_key, $embedded);
+			if ($map_key) $object[$map_key] = $map_value;
 		}
 
-		$links = [];
-
-		foreach ($this->get_links($record) as $rel => $params) {
-			$params['api'] = true;
-			$links[$rel] = [
-				'href' => $this->build_url($params)
-			];
-		}
-
-		$response->_links = $links;
-
-		if ($embeds = $this->get_embeds($record)) {
-			$response->_embedded = $embeds;
-		}
-
-		return $response;
-	}
-
-	/**
-	 * Adds relevant hyperlinks to a data object in API response
-	 * @param object $record The data object being rendered
-	 * @return array Multidimensional array of keys and URL parameters
-	 */
-	protected function get_links($record) {
-		return [
-			'self' => [
-				'resource' => $this->resource,
-				'id'       => $record->id
-			]
-		];
-	}
-
-	/**
-	 * Adds relevant embedded objects to a data object in API response
-	 * @param object $record The data object being rendered
-	 * @return array Multidimensional array of keys and objects
-	 */
-	protected function get_embeds($record) {
-		return [];
+		return $object;
 	}
 
 	/**
 	 * Maps database field name to API field name
 	 * @param string $field Database field name
+	 * @param boolean $embedded OPTIONAL flag indicating embedded context
 	 * @return string API field name
 	 */
-	protected function map_field_name($field) {
+	protected function map_field_name($field, $embedded = false) {
 		return $field;
 	}
 
@@ -134,14 +125,69 @@ class renderer {
 	 * Transforms database field value into API field value
 	 * @param mixed $value Database field value
 	 * @param string $field Database field name
+	 * @param boolean $embedded OPTIONAL flag indicating embedded context
 	 * @return mixed Database field value, NULL if field is not mapped
 	 */
-	protected function map_field_value($value, &$field) {
-		$field = $this->map_field_name($field);
+	protected function map_field_value($value, &$field, $embedded = false) {
+		$field = $this->map_field_name($field, $embedded);
 		return $field ? $value : null;
 	}
 
 	protected function build_url($params) {
 		trigger_error("Function must be overridden, renderer::build_url()", E_USER_ERROR);
+	}
+
+	/**
+	 * Generates API links for a database result
+	 * @see PHPunk\url_schema
+	 * @param object $result A database result
+	 * @param array $params OPTIONAL url schema parameters
+	 * @return array Named set of API links
+	 */
+	protected function get_result_links($result, $params = []) {
+		$params['resource'] = $this->resource;
+		$params['api'] = true;
+
+		$first = $params;
+		$first['page'] = 1;
+
+		$last = $params;
+		$last['page'] = intval(ceil($result->found / $params['per_page']));
+
+		$prev = $params;
+		$prev['page']--;
+
+		$next = $params;
+		$next['page']++;
+
+		$links = ['self' => ['href' => $this->build_url($params)]];
+
+		if ($first['page'] != $last['page']) {
+			$links['first'] = ['href' => $this->build_url($first)];
+			$links['last']  = ['href' => $this->build_url($last)];
+		}
+
+		if ($prev['page'] >= $first['page'])
+			$links['prev'] = ['href' => $this->build_url($prev)];
+
+		if ($next['page'] <= $last['page'])
+			$links['next'] = ['href' => $this->build_url($next)];
+
+		return $links;
+	}
+
+	/**
+	 * Generates API links for an individual record
+	 * @see PHPunk\url_schema
+	 * @param object $record A database record
+	 * @param array $params OPTIONAL url schema parameters
+	 * @return array Named set of API links
+	 */
+	protected function get_record_links($record, $params = []) {
+		$params['resource'] = $this->resource;
+		$params['id'] = $record->id;
+		$params['api'] = true;
+
+		return ['self' => ['href' => $this->build_url($params)]];
 	}
 }
