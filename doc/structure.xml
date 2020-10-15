@@ -1,7 +1,186 @@
 <?xml version="1.0" encoding="utf-8"?>
 <project title="API Documentation" version="2.8.5">
   <partials/>
-  <file path="component/controller.php" generated-path="component.controller.html" hash="afefc8329cd5c9929321d353728cd714" package="phpunk\component">
+  <file path="collection/collectible.php" generated-path="collection.collectible.html" hash="cecb041a948e4d3b700f6c1255322ed7" package="phpunk\collection">
+    <docblock line="0">
+      <description></description>
+      <long-description></long-description>
+      <tag name="package" line="0" description="phpunk\collection"/>
+    </docblock>
+    <namespace-alias name="ArrayAccess">\ArrayAccess</namespace-alias>
+    <namespace-alias name="Countable">\Countable</namespace-alias>
+    <namespace-alias name="Iterator">\Iterator</namespace-alias>
+    <function namespace="PHPunk\Collection" line="186" package="phpunk\collection">
+      <name>is_collectible</name>
+      <full_name>\PHPunk\Collection\is_collectible()</full_name>
+      <docblock line="186">
+        <description>Returns whether or not the object is an instance of collectible.</description>
+        <long-description></long-description>
+        <tag name="package" line="186" description="phpunk\collection"/>
+        <tag name="param" line="186" description="&lt;p&gt;Any object&lt;/p&gt;" type="object" variable="$obj">
+          <type>object</type>
+        </tag>
+        <tag name="return" line="186" description="Returns **TRUE** if **obj** collectible, **FALSE** otherwise." type="boolean">
+          <type>boolean</type>
+        </tag>
+      </docblock>
+      <argument line="0" by_reference="false">
+        <name>$obj</name>
+        <default></default>
+        <type>object</type>
+      </argument>
+    </function>
+    <interface namespace="PHPunk\Collection" line="194" package="phpunk\collection">
+      <extends>\ArrayAccess</extends>
+      <extends>\Countable</extends>
+      <extends>\Iterator</extends>
+      <name>arraylike</name>
+      <full_name>\PHPunk\Collection\arraylike</full_name>
+      <docblock line="194">
+        <description>This inteface consolidates the interfaces ArrayAccess, Countable, and Iterator.</description>
+        <long-description>Classes using the collectible trait must implement this interface.</long-description>
+        <tag name="package" line="194" description="phpunk\collection"/>
+      </docblock>
+    </interface>
+    <trait namespace="PHPunk\Collection" line="16" package="phpunk\collection">
+      <name>collectible</name>
+      <full_name>\PHPunk\Collection\collectible</full_name>
+      <docblock line="16">
+        <description>Array-style key-value storage
+'Implements' ArrayAccess, Countable, Iterator</description>
+        <long-description></long-description>
+        <tag name="see" line="16" description="PHPunk Wiki" link="http://github.com/oneeyedjames/phpunk/wiki/Mutable-Objects"/>
+        <tag name="package" line="16" description="phpunk\collection"/>
+      </docblock>
+      <property static="false" visibility="private" namespace="PHPunk\Collection" line="21" package="phpunk\collection">
+        <name>$_data</name>
+        <full_name>\PHPunk\Collection\collectible::_data</full_name>
+        <default>array()</default>
+        <docblock line="21">
+          <description>Internal key-value storage</description>
+          <long-description></long-description>
+          <tag name="var" line="21" description="" type="array" variable="">
+            <type>array</type>
+          </tag>
+        </docblock>
+      </property>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="PHPunk\Collection" line="37" package="phpunk\collection">
+        <name>sort</name>
+        <full_name>\PHPunk\Collection\collectible::sort()</full_name>
+        <docblock line="37">
+          <description>Sorts the data collection. If first argument is callable, it will be used
+as a comparison function. Otherwise, it will be used as a boolean flag to
+reverse-sort the collection. Omitting the sorting mode flag will sort the
+collection by its values and reset its keys to sequential indeces.</description>
+          <long-description>The sorting mode flag works as follows:
+  'k' will sort the collection by its keys
+  'a' will sort the collection by its values, preserving its keys</long-description>
+          <tag name="param" line="37" description="&lt;p&gt;Whether to reverse-sort the collection&lt;/p&gt;" type="mixed" variable="$reverse">
+            <type>mixed</type>
+          </tag>
+          <tag name="param" line="37" description="&lt;p&gt;OPTIONAL Sorting mode flag&lt;/p&gt;" type="string" variable="$mode">
+            <type>string</type>
+          </tag>
+          <tag name="return" line="37" description="TRUE on success, FALSE on failure" type="boolean">
+            <type>boolean</type>
+          </tag>
+        </docblock>
+        <argument line="0" by_reference="false">
+          <name>$reverse</name>
+          <default>false</default>
+          <type>mixed</type>
+        </argument>
+        <argument line="0" by_reference="false">
+          <name>$mode</name>
+          <default>''</default>
+          <type>string</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="PHPunk\Collection" line="65" package="phpunk\collection">
+        <name>walk</name>
+        <full_name>\PHPunk\Collection\collectible::walk()</full_name>
+        <docblock line="65">
+          <description>Apply a callback functon to each item in the collection.</description>
+          <long-description></long-description>
+          <tag name="param" line="65" description="&lt;p&gt;A callable to apply to each item&lt;/p&gt;" type="mixed" variable="$func">
+            <type>mixed</type>
+          </tag>
+          <tag name="param" line="65" description="&lt;p&gt;OPTIONAL Data to pass along to callable&lt;/p&gt;" type="mixed" variable="$data">
+            <type>mixed</type>
+          </tag>
+          <tag name="return" line="65" description="TRUE" type="boolean">
+            <type>boolean</type>
+          </tag>
+        </docblock>
+        <argument line="0" by_reference="false">
+          <name>$func</name>
+          <default></default>
+          <type>mixed</type>
+        </argument>
+        <argument line="0" by_reference="false">
+          <name>$data</name>
+          <default>null</default>
+          <type>mixed</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="PHPunk\Collection" line="72" package="phpunk\collection">
+        <name>keys</name>
+        <full_name>\PHPunk\Collection\collectible::keys()</full_name>
+        <docblock line="72">
+          <description></description>
+          <long-description></long-description>
+          <tag name="return" line="72" description="Key set for collection" type="array">
+            <type>array</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="PHPunk\Collection" line="79" package="phpunk\collection">
+        <name>values</name>
+        <full_name>\PHPunk\Collection\collectible::values()</full_name>
+        <docblock line="79">
+          <description></description>
+          <long-description></long-description>
+          <tag name="return" line="79" description="Value set for collection" type="array">
+            <type>array</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="PHPunk\Collection" line="87" package="phpunk\collection">
+        <name>toArray</name>
+        <full_name>\PHPunk\Collection\collectible::toArray()</full_name>
+        <docblock line="87">
+          <description>Returns collection as array.</description>
+          <long-description></long-description>
+          <tag name="return" line="87" description="collection of data" type="array">
+            <type>array</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="protected" namespace="PHPunk\Collection" line="95" package="phpunk\collection">
+        <name>load</name>
+        <full_name>\PHPunk\Collection\collectible::load()</full_name>
+        <docblock line="95">
+          <description>Replaces internal data collection.</description>
+          <long-description></long-description>
+          <tag name="param" line="95" description="&lt;p&gt;OPTIONAL Any array or traversable object&lt;/p&gt;" type="mixed" variable="$data">
+            <type>mixed</type>
+          </tag>
+        </docblock>
+        <argument line="0" by_reference="false">
+          <name>$data</name>
+          <default></default>
+          <type>mixed</type>
+        </argument>
+      </method>
+    </trait>
+    <parse_markers>
+      <error line="0" code="PPC:ERR-50000">No summary was found for this file</error>
+      <error line="72" code="PPC:ERR-50008">No summary for method keys()</error>
+      <error line="79" code="PPC:ERR-50008">No summary for method values()</error>
+    </parse_markers>
+    <source>eJy1WN9v2zYQfrb/ihsQwI7h2O/JssbIui1Y1wRNuj50RUDLJ5s1RWokFcco8r/v+EOKZMlxMTQPQSzq7rvvjndHnn5+k6/y/nQ06sMILnKWrNkSgdYKuf4nUUJgYrmS9Hba70uWoSEZhJs/bpzAZSVw1u8XBmGmNdvOkgSNGcOlKqRlc4FjuLKomVWaxKItL3li7FYgrHF78sBEgWBIhgg4gcFVlgvMUFozOIhLCt4Bgwgra/PT6XTJ7aqYTxKVTZVE3OLiq6M/Db5NN3zNp38VHufkev6V3DDRLfhE77zHVjNuoQwDScK3fs850CNjV5KMSyY66LvXFw9MA3O83eO038s1f2AW4eh+wSyDc/j8hcJRwd0qTQzsCsG/fo79BK5SSLk2luCWhYsIcAMJEyIEgShuuBAwR6A9WHg0ZsBhZDnT3CgJaSEj2DWZ0Btu2opBaa6UQEYagi3BKo+m8QG1wRNDHD3FOrvrjFvL5dK/cBLud6YWGCC8hVLRoz0rw3xLJAz46JFxuSBTBq1fpLBSPBQY/LcgnzlFmssFUg5MHIyHuus2qfTaOG9SsqQ25tTLAgzWgyadDirOainODosH5mPIHW/94HjUUUIm0CawDDL+SDE+irGETyt0O+E8fCG8dQBjtcM/8o5e39xdXb+fvfN503A/qGi0hZbVbt59+PgWiLYpYhH9Nnt361dSxkWhsUzSYi54UqWLd31YcT4naeEyJ3A4h8Hg2JVEj6cw5Oa+zMlK4zi87pkNt8kKhl4vrvUSRpAU5FP/1IuMCxZs2hU3J7/4WhlXUTs+q2mudzXXhzUXmLJC2B3Fg3pPfffX73ak6UfErGL2hqq2hX8Mp9D2M9hqOteGW3fDtZ0PcA2P22jdYN1YFIWnWsea5bnYujZDuz6nkyNkDSUNpTQyihK3mFHN7naMjqJwmjCreppDYB69DtWh51tlVQq/uifSyJmh8hfK9SRVge6tiz2pv2FiPfTMxtHQOchCiLDrEcc3+Psg2syfmqILXj1wF3Vl+BO34HpeqvRO4XeQco1l2MHAr+9u2H6bf4fj6nuthi7XZTe+ecnyBy9v6s3THTROfdJBrSamUn8W7iFllb8VNFnVibR45ILuLoYyMh7cuwftwQSbyW1kSVGjy4ErIp+vyl8gqoNeWXoi9YqrUGwxDLlQ75ceK67HZlJ3gBLuKDrSewKkzlv22ecbyWHt52g0Qbi7Ox1C4PGCdW9Vg20LLUTgRawl2ihGaaNNC6lTyV2SWp3ngi+l0gi8vCK6WGuV1e+JYZtT2vE9+aPSlArg7SM3lriEp+7KuseG0BheLLQfx+13tJ3ELur2P0eJL6/H4/aZB/nuSz7w6eTh8s7LvB6hj9LshqYIS12EvnuHqsHiII3ESTY7T1j6X5lRTjGHzRZaY8twXHxd01QGTbNu4XVNSnwsXfU/X9eaxg2NF5WPu9n04w1SjfDFgZjCT+fh0uGtP1XTc3mmbuIQQeakCrND6LBuQqTrDZfGMkkDOx2ltUNjUs7L4ayLKkf03x9x8TTruC6Vdkcjd3EajYC6/2hE8qNRHX9Mi37AoGVVzpsTP1JX7u8eYwTiY1Ee5I5MSb/J/qwWiDsKlo+0CzQJSaMoqjRmh1G62gOz9xOCGzrLPXMU4VLQ9ZEUClMOtfUPAOGTQFbQNF5tPdiShbcVHK0ewzki+BqBshjlYj+XKne+PfX/A1xgphs=</source>
+  </file>
+  <file path="component/controller.php" generated-path="component.controller.html" hash="4375568aec122a91b472848de31aabbb" package="phpunk\component">
     <docblock line="0">
       <description></description>
       <long-description></long-description>
@@ -118,7 +297,7 @@
       <error line="13" code="PPC:ERR-50005">No summary for class \PHPunk\Component\controller</error>
       <error line="22" code="PPC:ERR-50008">No summary for method __construct()</error>
     </parse_markers>
-    <source>eJy1VU1T2zAQPdu/YofJ1A4TGg49QaEwbYZyKM3wMT1QxqPYm0RFkVxJTmA6/PeuJDsmlEA4lINRVvt2n/atVh8/ldMy7m9vx7ANRyXLb9kEgWyVvP2Zq1mpJEpLm/04lmyGhlwQhl+Hbv9zs78fx5VZmlnJM9RaaTIvI2tVorb3YKzmcgIdjUZVmmKdNwsXHsZKg51yA6u5c8GMs0mrlRCo4U8cudCRi80nUmkELi1qyQTMmeZsJNDt9uOIUlvMLRbQyWaqQEG0WnDJNJuBGv0iF+j4ffjmv1way2T+LKc6cjUSPIdxJXPLlYQsI4Z0wCq3aQjVdUSjjkPvHIbscFCn2Y+jh/jfY8zYhGLO0E5VsTbPBCnDLd6H+GbBbT6FR5YoZ6RH0hQ52XO2SKOttISjFT47h40XESJGK6QGd5hXFn3pc4IjsEAh8DNUJMinXBTgFULzuKiN1DXkeHgaNFZjKieCRoFzJm0dcs1ZC5WF/bSOU5c0EKBiUpZMYymoL9NkJ+lBktFn6fyefod14s7Hx5AGaIZ33FiT+mIQIFi73bgtVM6EyKixdebopNerrje0yk4Gl+7f8PvFZdfFR2HQRaCjTyYE9Pcg3bqSBY65pB6si1FL0JR+r+a71YNBdnUxOM9+HJ+fnZ6ddPdfE2TOcfEmOTxgrRhu9zGKac3uCcS0gWO/JoRDFuAdiALt2CmzsOBCwIimh0tduPuofOwm5DPqlhozt516Vj145xNtKLGDBIHd6g3yhtMcbKCvZ/OqBDTw/rcMM37nBhj1SyUsfGGWjdwND7/7GnOlC6A55fttVQ6N1Hwa1w0TJ0FwaUUIYWsZJC6yzaWgWnglOkoULSxxb0JCDptK+aKWLaNuPe6awqzXtMU8e28fwN3c9Snb02yessW8kPJpMOIJywc09XWrmuERitPzszy59O3yu0LjnjbXSL6j6JmSykKNoNpee/coocfMViYBgIND+LC726vtyzfC2Z+MpcbH5wUI2E7oTfq7cd/u8tl4iP8C5qedLw==</source>
+    <source>eJy1VVtP2zAUfk5+xRGqlhSVlYc9wWCgrWI8jFVctAeGItc5TT1cO7MdLpr47zu2k0KBCpC2PqTOuXzn8/nsk4+f6lmdDtfXU1iHvZrxS1YhkK1Rlz+5ntdaoXLkHKapYnO0FIIw/jr2/s+dfztNG7sws1oUaIw2ZF4gG12jcbdgnRGqgp5BqxtDWMfdwsPDVBtwM2FhuTaXzHqbckZLiQb+pImHTjy2qJQ2CEI5NIpJuGJGsIlE7x2mCZV2yB2W0CvmukRJtO6Ta2bYHPTkF4VAL/jhW3gKZR1T/FlOLXIzkYLDtFHcCa2gKIghbbDhLo9QfU806fnsjd1YHXbaMttpcpc+3cacVYQ5RzfT5co6FVKFS7yN+PZaOD6DB5aEM9Ij65qcbXlbYtA1RsHeEp+N3S6KCBGjJVKjG+SNw9B6TukILFKI/Cw1CfhMyBKCQmgfNrWTuk3ZHx9GjfWU2olgUOIVU66FXLHXUhfRn7c4bUsjAWomVSkM1pLOZZ5tZAPICnosgt/Te1xnfn9iCnlMLfBGWGfz0AxKiNZ+P71vFGdSFnSwTeHp5OfLoRe0Kg5Gp/5v/P3ktO/xUVr0CLT1qqLEcA/ytTNV4lQoOoNtM1oJutZvtXzXBjAqzk5Gx8WP/eOjw6OD/vZLglwJvH6THCFhpRje+zCLGcNuKYkZC/thTRk+s4QQQBTI42bMwbWQEiY0PXzp0t9HHbA7yGfUrQ0W3p0HVgN4Fwq9UmKfEgX2qzfIG3ez8wp9A5sXJaCB979lmIsbP8DovDTSwRfm2MTf8Pg+NMi1KYHmVDhvy3IYpMNncNUw8RLEkHsRIuxjGTI/2DNq+L/UI46rbmOv0eTJnbsDf+seAylq7+JLlAfuTXcLI8FBGIrZaej77wat/0Z4RYI0NO+VdtBm0P7OQ3iS0VfBNTYDgJ1d+LC5OWjti2Hr7Y/udxcT6gLE3F4UmX4X/tlfzN+79C8EbWMk</source>
   </file>
   <file path="compat/http.php" generated-path="compat.http.html" hash="913a766ae700275b262f1a35faae68f9" package="phpunk\compat\http">
     <docblock line="0">
@@ -598,22 +777,22 @@
     </parse_markers>
     <source>eJytVNtO20AQfba/YogsJUQQ3kMDjSAUquDQQMUDRc4mHjsL9tqs10Ba8e+dvZgkCPWpUqRo53LmzJkZfzkul6V/0O360IWvJVs8shSBbLV4/BUzxeasQvId+L5gOVYUgXB1fqXdp8596K8BZFGiVCuolOQiheCh4AKGGWcVJIUEtUS4CMPRFL5PLkJYZKw28J9kciFQws1nCQ6KVzCXPCa+xCOzLCmgasyRMQO+KhRxZYPgj+9psp6uyVNRSIScpXwBOaplEWvHge+V9TwjW1KLheKFgChKUXWCR1ztagSveuFqsYQNi7cgJaCt+2339duTqGopINBE948i7ensHq5DM0yUDbVvydPllsEo8A8wU9wAxpiwOlNboSWTKFS/v0Fdx7759Ftr8A2pBlNYAYPr0Xh0cgNPNcpmDHugBxwDSaBHl/JnFFp9JOmAICsrJNVi+fvk9KLA5OrmYhIOxxDqV5GYfIkZ1YqhWSw3E1XYoptgOX+lwIDJtIKhlGwFNHOuiKzOKOYPuFAadoMMPLOsRkfJqeA4DcGgIuXz34R7/WO8LvnJvCvMCD+qnrKObWcACcsq3HOMBnB3b+fOE9oC6otMbjgkd2QaJSCbvetWJLDtvkca5B16Uvj+UWm9x9vPvnsm5mmmHdgJDaDlJkbdRCfD8Ul0NvkZnkbTye01zGyxWa8LZ9PJpUPRe9Oie/Us8R3MS7XqmJ4akl7wskSJpkUb6WmNmVl30zzdcpDofTJOF393rwnNNjqb9WYmbEaOY1e04d4bQBtuz0fTEf33gOdlVsTYacMwPIU2qWww7XK/mczmAEy+XWT/3Wpmc7i92c11c0FDFyz7cOCSP9Mqbly4PSm1KnXr7vasJI2RdkkVdUmfKRtn6Nkv3MfWbbtr3ayr2QorIb3+414YHMOFtG2B5Wy+mc0mwCR0OTmjj1fro4gm24j45v8FrEjVfw==</source>
   </file>
-  <file path="database/result.php" generated-path="database.result.html" hash="c169194175dca9177e05c9bf533e00eb" package="phpunk\database">
+  <file path="database/result.php" generated-path="database.result.html" hash="d1fb7bd9455fbb28fd73c6ecb311ae47" package="phpunk\database">
     <docblock line="0">
       <description></description>
       <long-description></long-description>
       <tag name="package" line="0" description="phpunk\database"/>
     </docblock>
-    <namespace-alias name="object">\PHPunk\Util\object</namespace-alias>
+    <namespace-alias name="collection">\PHPunk\Collection\collection</namespace-alias>
     <class final="false" abstract="false" namespace="PHPunk\Database" line="17" package="phpunk\database">
-      <extends>\PHPunk\Util\object</extends>
+      <extends>\PHPunk\Collection\collection</extends>
       <name>result</name>
       <full_name>\PHPunk\Database\result</full_name>
       <docblock line="17">
         <description>Contains a set of data return from a database query</description>
         <long-description></long-description>
         <tag name="package" line="17" description="phpunk\database"/>
-        <tag name="inherited_from" description="\PHPunk\Util\object" refers="\PHPunk\Util\object" link="/classes/PHPunk.Util.object.html"/>
+        <tag name="inherited_from" description="\PHPunk\Collection\collection" refers="\PHPunk\Collection\collection" link="/classes/PHPunk.Collection.collection.html"/>
       </docblock>
       <method final="false" abstract="false" static="false" visibility="public" namespace="PHPunk\Database" line="33" package="phpunk\database">
         <name>__construct</name>
@@ -630,7 +809,7 @@
           <tag name="param" line="33" description="&lt;p&gt;OPTIONAL database table name&lt;/p&gt;" type="string" variable="$table">
             <type>string</type>
           </tag>
-          <tag name="inherited_from" description="\PHPunk\Util\object::__construct()" refers="\PHPunk\Util\object::__construct()" link="/classes/PHPunk.Util.object.html#method___construct"/>
+          <tag name="inherited_from" description="\PHPunk\Collection\collection::__construct()" refers="\PHPunk\Collection\collection::__construct()" link="/classes/PHPunk.Collection.collection.html#method___construct"/>
         </docblock>
         <argument line="0" by_reference="false">
           <name>$records</name>
@@ -687,13 +866,13 @@ record in the result.</description>
           <type>callable</type>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="PHPunk\Database" line="26" package="phpunk\util">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="PHPunk\Database" line="33" package="phpunk\collection">
         <name>__construct</name>
-        <full_name>\PHPunk\Util\object::__construct()</full_name>
-        <docblock line="26">
+        <full_name>\PHPunk\Collection\collection::__construct()</full_name>
+        <docblock line="33">
           <description>Creates a shallow clone of the passed data.</description>
           <long-description></long-description>
-          <tag name="param" line="26" description="&lt;p&gt;OPTIONAL Any array or traversable object&lt;/p&gt;" type="mixed" variable="$data">
+          <tag name="param" line="33" description="&lt;p&gt;OPTIONAL Any array or traversable object&lt;/p&gt;" type="mixed" variable="$data">
             <type>mixed</type>
           </tag>
         </docblock>
@@ -702,11 +881,11 @@ record in the result.</description>
           <default>array()</default>
           <type>mixed</type>
         </argument>
-        <inherited_from>\PHPunk\Util\object</inherited_from>
+        <inherited_from>\PHPunk\Collection\collection</inherited_from>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="PHPunk\Database" line="61" package="phpunk\util">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="PHPunk\Database" line="61" package="phpunk\collection">
         <name>has</name>
-        <full_name>\PHPunk\Util\mutable::has()</full_name>
+        <full_name>\PHPunk\Collection\mutable::has()</full_name>
         <docblock line="61">
           <description>Determine whether or not a given key exists.</description>
           <long-description></long-description>
@@ -722,11 +901,11 @@ record in the result.</description>
           <default></default>
           <type>mixed</type>
         </argument>
-        <inherited_from>\PHPunk\Util\mutable</inherited_from>
+        <inherited_from>\PHPunk\Collection\mutable</inherited_from>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="PHPunk\Database" line="71" package="phpunk\util">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="PHPunk\Database" line="71" package="phpunk\collection">
         <name>get</name>
-        <full_name>\PHPunk\Util\mutable::get()</full_name>
+        <full_name>\PHPunk\Collection\mutable::get()</full_name>
         <docblock line="71">
           <description>Get the stored value for a given key.</description>
           <long-description></long-description>
@@ -747,11 +926,11 @@ record in the result.</description>
           <default>null</default>
           <type>mixed</type>
         </argument>
-        <inherited_from>\PHPunk\Util\mutable</inherited_from>
+        <inherited_from>\PHPunk\Collection\mutable</inherited_from>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="PHPunk\Database" line="81" package="phpunk\util">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="PHPunk\Database" line="81" package="phpunk\collection">
         <name>put</name>
-        <full_name>\PHPunk\Util\mutable::put()</full_name>
+        <full_name>\PHPunk\Collection\mutable::put()</full_name>
         <docblock line="81">
           <description>Store a value for a given key.</description>
           <long-description></long-description>
@@ -772,11 +951,11 @@ record in the result.</description>
           <default></default>
           <type>mixed</type>
         </argument>
-        <inherited_from>\PHPunk\Util\mutable</inherited_from>
+        <inherited_from>\PHPunk\Collection\mutable</inherited_from>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="PHPunk\Database" line="90" package="phpunk\util">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="PHPunk\Database" line="90" package="phpunk\collection">
         <name>remove</name>
-        <full_name>\PHPunk\Util\mutable::remove()</full_name>
+        <full_name>\PHPunk\Collection\mutable::remove()</full_name>
         <docblock line="90">
           <description>Remove a key-value pair from the store.</description>
           <long-description></long-description>
@@ -789,7 +968,7 @@ record in the result.</description>
           <default></default>
           <type>mixed</type>
         </argument>
-        <inherited_from>\PHPunk\Util\mutable</inherited_from>
+        <inherited_from>\PHPunk\Collection\mutable</inherited_from>
       </method>
       <property final="false" static="false" visibility="public" line="17">
         <name>$table</name>
@@ -841,24 +1020,24 @@ record in the result.</description>
       <error line="0" code="PPC:ERR-50000">No summary was found for this file</error>
       <error line="33" code="PPC:ERR-50008">No summary for method __construct()</error>
     </parse_markers>
-    <source>eJzNVMGO0zAQPSdfMYdI264Ky7kFlhUcQEJshZYTiyrHnaSmjh1sp0uF9t8ZO3bbrFKBOHFLPDNv3rzn8cvrdtPmV5eXOVzCm5bxLasR6KxT2/s1c6xkFil2leeKNWgpA2H5funD72J4keedPZx+cULe6/I7ckeBiPxWK8eEssDAogNdgccGg64zCiqjG4qkdvCjQ7Onsp6T0S0atwfrjFA1FJQkEe42CJ6Rx3L0bVAyh+sjSEgbIgjlsEYDRaU7tQ4QTjsmQXVNSecEZZBrs7bQMMc3vp3HTnxOoPoBCUkY6wJS/9XXH0n5+SIrP3lQkktmLcVsJx3gT4eKGkbAX3nmJct8M1ErbTCwNopY7pgRYajMo2StETsaGYpVGJXE/ofSoMSgtGWGkRvGsD0USY6b8BttC/LGyGnNU3mDtJy+g+EHRUcqh9beLu8+3H66+fjEy2B3GqArpeBQdYo7oRWsVlwrQum4myTSs0hklnBfQcWkxakXOaPGqNx8PlY5XVBC4TbCPnvdK0S1NN2OyUmPOchI6EX0IXscsaJhNRFu0G30+uwQNRKJLe57ivZBkGRwcpJxr8ZF6HMx9wdZXKEBl8UxNbAdT43WH1P9BR6mCms9I1/w9cW3KVxD+oY5LY2UoXyNFaOrPKg8ynuYyec+DsX5HJL9q6DwIW0Eq+jSAmtbuU8LWIsdKuBMypJeqKNiTgMyvglYcfOEipvnsZ77yOlF8xDBrcJjhL0dRQ3dE3yE7nHifHFdB8TpfXNM8XN3tGHtJLTtvYxAvt6irCZh41aHpFnyyemwfJPpdDa0brr4CzFJeHp+yv2JKDa9TmdU/a9EI/6rJ8L5y2QBaOH+LFlYU1rbDu0hv/+djOSedYXrphQKwz3270oPMW7IY/4bbKdc8g==</source>
+    <source>eJzNVE1v1DAQPSe/Yg6RulstlPMuUKpyAAnRCvVG0crxTrKmjh1sZ8sK9b8zduzNpsoKxImbP2bevHnP49eX7bbNL87PcziHdy3jD6xGoLNOPdxvmGMls0h3F3muWIOWIhBuP9z66/fxepXnnT2cXmspkTuh1T0/LCkk1rjWyjGhLDCw6EBX4KuAQdcZBZXRDd2kwvCjQ7OntJ6d0S0atwfrjFA1FBQkEe62CJ6bx3K0NiiZw80AEsLGCEI5rNFAUelObQKE045JUF1T0jlBGeTabCw0zPGtL+exE58jKF1+px4JSRjrAlK/6vMHUr6/yMp3HjTlkllLd7aTDvCnQ0UFB9XgV5552TJfUNRKGwzMjSKmO2ZEaCzzSFlrxI7ahmId2iXB/yE1qDFKbZlh5IgxbA9FkuQqbKN1QeJ4c5zzXOIgL6d1MP2g6kTm2N6b27uPN5+vPj3zM1ieGuhKKThUneplW6+5VoTScTdLpBeRyCLhvoGKSYtzL3JGhVG55XIqc76igMJthX3xtleIcqm7HZOzHnMUkdCL6EP2NGFFw2oi3KDb6s3JJmokEg+47ynaR0GSwdFJxr0aZ6HO2dIfZHGMRlxWQ2hgOx0arR9C/SMehwprPSOf8PXVtzlcQlrDkgZHypC+wYrRcx5lDvIeevKxT2NxvoRg/zMofExTwSp6tMDaVu7TENZihwo4k7Kk/2pQzGlAxrcBK06fUHH6PNZLf3P80DxEcKvwGGF2J1FD9QQfoXuc2F/8A0bE6Y9zTPFTb7Rh7SyU7b2MQD7foqxmYeLWh6BF8snpMHyz+Xwxtm6++gsxSXj6gsr9kSg2/VAnVP2vRCP+62fC+cdkAWjg/ixZGFMa2w7tIb7fziZiT7rCdVMKheEd+3+lh5g25Cn/DZpWYso=</source>
   </file>
-  <file path="database/record.php" generated-path="database.record.html" hash="049628b372907986b4ae8ab47bfe3e6c" package="phpunk\database">
+  <file path="database/record.php" generated-path="database.record.html" hash="e8d3dd50098e1d2e99f69f35df7a4725" package="phpunk\database">
     <docblock line="0">
       <description></description>
       <long-description></long-description>
       <tag name="package" line="0" description="phpunk\database"/>
     </docblock>
-    <namespace-alias name="object">\PHPunk\Util\object</namespace-alias>
+    <namespace-alias name="collection">\PHPunk\Collection\collection</namespace-alias>
     <class final="false" abstract="false" namespace="PHPunk\Database" line="14" package="phpunk\database">
-      <extends>\PHPunk\Util\object</extends>
+      <extends>\PHPunk\Collection\collection</extends>
       <name>record</name>
       <full_name>\PHPunk\Database\record</full_name>
       <docblock line="14">
         <description>Represents a row in a database table</description>
         <long-description></long-description>
         <tag name="package" line="14" description="phpunk\database"/>
-        <tag name="inherited_from" description="\PHPunk\Util\object" refers="\PHPunk\Util\object" link="/classes/PHPunk.Util.object.html"/>
+        <tag name="inherited_from" description="\PHPunk\Collection\collection" refers="\PHPunk\Collection\collection" link="/classes/PHPunk.Collection.collection.html"/>
       </docblock>
       <method final="false" abstract="false" static="false" visibility="public" namespace="PHPunk\Database" line="24" package="phpunk\database">
         <name>__construct</name>
@@ -872,7 +1051,7 @@ record in the result.</description>
           <tag name="param" line="24" description="&lt;p&gt;OPTIONAL The name of the related database table&lt;/p&gt;" type="string" variable="$table">
             <type>string</type>
           </tag>
-          <tag name="inherited_from" description="\PHPunk\Util\object::__construct()" refers="\PHPunk\Util\object::__construct()" link="/classes/PHPunk.Util.object.html#method___construct"/>
+          <tag name="inherited_from" description="\PHPunk\Collection\collection::__construct()" refers="\PHPunk\Collection\collection::__construct()" link="/classes/PHPunk.Collection.collection.html#method___construct"/>
         </docblock>
         <argument line="0" by_reference="false">
           <name>$data</name>
@@ -885,13 +1064,13 @@ record in the result.</description>
           <type>string</type>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="PHPunk\Database" line="26" package="phpunk\util">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="PHPunk\Database" line="33" package="phpunk\collection">
         <name>__construct</name>
-        <full_name>\PHPunk\Util\object::__construct()</full_name>
-        <docblock line="26">
+        <full_name>\PHPunk\Collection\collection::__construct()</full_name>
+        <docblock line="33">
           <description>Creates a shallow clone of the passed data.</description>
           <long-description></long-description>
-          <tag name="param" line="26" description="&lt;p&gt;OPTIONAL Any array or traversable object&lt;/p&gt;" type="mixed" variable="$data">
+          <tag name="param" line="33" description="&lt;p&gt;OPTIONAL Any array or traversable object&lt;/p&gt;" type="mixed" variable="$data">
             <type>mixed</type>
           </tag>
         </docblock>
@@ -900,11 +1079,11 @@ record in the result.</description>
           <default>array()</default>
           <type>mixed</type>
         </argument>
-        <inherited_from>\PHPunk\Util\object</inherited_from>
+        <inherited_from>\PHPunk\Collection\collection</inherited_from>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="PHPunk\Database" line="61" package="phpunk\util">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="PHPunk\Database" line="61" package="phpunk\collection">
         <name>has</name>
-        <full_name>\PHPunk\Util\mutable::has()</full_name>
+        <full_name>\PHPunk\Collection\mutable::has()</full_name>
         <docblock line="61">
           <description>Determine whether or not a given key exists.</description>
           <long-description></long-description>
@@ -920,11 +1099,11 @@ record in the result.</description>
           <default></default>
           <type>mixed</type>
         </argument>
-        <inherited_from>\PHPunk\Util\mutable</inherited_from>
+        <inherited_from>\PHPunk\Collection\mutable</inherited_from>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="PHPunk\Database" line="71" package="phpunk\util">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="PHPunk\Database" line="71" package="phpunk\collection">
         <name>get</name>
-        <full_name>\PHPunk\Util\mutable::get()</full_name>
+        <full_name>\PHPunk\Collection\mutable::get()</full_name>
         <docblock line="71">
           <description>Get the stored value for a given key.</description>
           <long-description></long-description>
@@ -945,11 +1124,11 @@ record in the result.</description>
           <default>null</default>
           <type>mixed</type>
         </argument>
-        <inherited_from>\PHPunk\Util\mutable</inherited_from>
+        <inherited_from>\PHPunk\Collection\mutable</inherited_from>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="PHPunk\Database" line="81" package="phpunk\util">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="PHPunk\Database" line="81" package="phpunk\collection">
         <name>put</name>
-        <full_name>\PHPunk\Util\mutable::put()</full_name>
+        <full_name>\PHPunk\Collection\mutable::put()</full_name>
         <docblock line="81">
           <description>Store a value for a given key.</description>
           <long-description></long-description>
@@ -970,11 +1149,11 @@ record in the result.</description>
           <default></default>
           <type>mixed</type>
         </argument>
-        <inherited_from>\PHPunk\Util\mutable</inherited_from>
+        <inherited_from>\PHPunk\Collection\mutable</inherited_from>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="PHPunk\Database" line="90" package="phpunk\util">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="PHPunk\Database" line="90" package="phpunk\collection">
         <name>remove</name>
-        <full_name>\PHPunk\Util\mutable::remove()</full_name>
+        <full_name>\PHPunk\Collection\mutable::remove()</full_name>
         <docblock line="90">
           <description>Remove a key-value pair from the store.</description>
           <long-description></long-description>
@@ -987,7 +1166,7 @@ record in the result.</description>
           <default></default>
           <type>mixed</type>
         </argument>
-        <inherited_from>\PHPunk\Util\mutable</inherited_from>
+        <inherited_from>\PHPunk\Collection\mutable</inherited_from>
       </method>
       <property final="false" static="false" visibility="public" line="14">
         <name>$table</name>
@@ -1009,7 +1188,7 @@ record in the result.</description>
       <error line="0" code="PPC:ERR-50000">No summary was found for this file</error>
       <error line="24" code="PPC:ERR-50008">No summary for method __construct()</error>
     </parse_markers>
-    <source>eJyNkUFr20AQhc+7v2IOgjQmxXenaRPooYXSmJKemmDGq7G0tbQrZkdOTPF/76xkOzGm0JOWeTPvfTP68KmrOzudTCxM4LZDt8aKQGt9WD+WKLjERKpNrQ3YUtIOgvmXeZY/7+Vra/t0rP4U3zzG5W9yosLe+Qd1TImCJEDg+Aw+6OPgD/ppaCTg2BHLFpKwDxUUgwQPNUHOh7gC0TdTg0LlucPUugZT0gYXuQR6EQplgpEH/liTgUxO8lWITAoixAEb2CD7wcRkF9Ox32gEFIvBWld5He2QsYXWvyhBkRHgfv7w9f773Te4C1tAZtxCZBDGDXEaNhgJ3s6fbnh0+M9V95T9svEOVn1w4mOAxcLFoMa9k3cj2Q38ero6hNzACptEl/kQRin0h8xmZzOX16oWUvv0/uPiMFjsz2B29vyILVZK0ZLUsfwnWUXqv6btmJ6evbga3lSMy9tdDDkXs1wwTNJzgBOWDGdKWmHfyEnX6z7HpNy7y8g7+xeuSunF</source>
+    <source>eJyNkVtr4zAQhZ+lXzEPhm7Dlrynty3tQwulDUvftiVM5ImtRpbMSE4bSv77jpxbQ1jYJ4u5nPOd8cV1W7d6OBhoGMCvFs0cKwKpdX7+WmLCKUaS3lBrjw1FmSAY349z+27TPte6i7vqbXCOTLLBv5rdU0Y2Hr+pZYrkUwQEDh9gvTy2TiAfR2sWDi1xWkJMbH0FRd+Cl5ogk0CYQZI3k8NE5bHCUBuHMcqACVwCfSbyZYQ9E3xplaFUdrOVD0wCk4g9Olgg215IZSXVsl2IDRSTXl7i7FdbZGygsZ9CUWQMeB6/PDw/3TzCjV8CMuMSAkNiXBDHPkWYvgvE9/3DlDuF/4y7oeymzhqYdX4dcDIxwYtwZ9KPNdkl/Hn7uTW5hBm6SKf5EEoo5KeMRkc7p+fSLVJt49nVZLtYbM6gVvr4iA1WQtFQqkP5T7KKRH9Oy7V7/LDJ1PCtokxOd9L7nIxyQTGljj0csGQ4VdIMO5cOpvZ5dk55dpWRV/ovOFDvnQ==</source>
   </file>
   <file path="event.php" generated-path="event.html" hash="2d697349669f928d3525d4b276fb8fa5" package="phpunk">
     <docblock line="0">
@@ -1073,197 +1252,18 @@ record in the result.</description>
     </parse_markers>
     <source>eJytUstqwzAQPFtfsQUf7JASeu6bQukxh95CMBtnbYsospHkQCn59+5aqU0f6amgizQzu7Ozurnvmk4tZjMFM3josNxhTcBvvd3x00Ipi3vyDBAsX5b8eq1UadB7oAPZUOzRssLBu0qkSiJldG1bR6BtIGfRwAGdxo0hQRcq6Zw+YCBIiwbt1pDzcAurNRceSzxutx4QSjRmw57gRISqdRAaAt9RqStN2+hCNLF1hw734IPTtoZ0AOGVBTIFtNUgHiWf9CduI/4gHRuKZrxUvS2Dbi2E9uTkax2Zqd8YXU5Mo30gm0UH86lwLkEluoJM+6I89c0mOOID4UJ7TyFLQ6P95d2Y1SrWXOe5EJNz8BjpecpKSGPra6YeFZ9pC8/aEa/BmB+L8P+8iV8SZGHNH+sUYcwlRVfLZ0Hn8K3wzKdMBEVNoRAsy+dwlQ9jx4z/TjCGzaMQlg2cJQL67xtMErkXvSdXDA4GS9MieeXiJ5dUJdYY7VF9ADnwFQI=</source>
   </file>
-  <file path="util/collectible.php" generated-path="util.collectible.html" hash="0558df16174b2656e1974b9425d88248" package="phpunk\util">
-    <docblock line="0">
-      <description></description>
-      <long-description></long-description>
-      <tag name="package" line="0" description="phpunk\util"/>
-    </docblock>
-    <namespace-alias name="ArrayAccess">\ArrayAccess</namespace-alias>
-    <namespace-alias name="Countable">\Countable</namespace-alias>
-    <namespace-alias name="Iterator">\Iterator</namespace-alias>
-    <function namespace="PHPunk\Util" line="192" package="phpunk\util">
-      <name>is_collectible</name>
-      <full_name>\PHPunk\Util\is_collectible()</full_name>
-      <docblock line="192">
-        <description>Returns whether or not the object is an instance of collectible.</description>
-        <long-description></long-description>
-        <tag name="package" line="192" description="phpunk\util"/>
-        <tag name="param" line="192" description="&lt;p&gt;Any object&lt;/p&gt;" type="object" variable="$obj">
-          <type>object</type>
-        </tag>
-        <tag name="return" line="192" description="Returns **TRUE** if **obj** collectible, **FALSE** otherwise." type="boolean">
-          <type>boolean</type>
-        </tag>
-      </docblock>
-      <argument line="0" by_reference="false">
-        <name>$obj</name>
-        <default></default>
-        <type>object</type>
-      </argument>
-    </function>
-    <interface namespace="PHPunk\Util" line="184" package="phpunk\util">
-      <extends>\ArrayAccess</extends>
-      <extends>\Countable</extends>
-      <extends>\Iterator</extends>
-      <name>collection</name>
-      <full_name>\PHPunk\Util\collection</full_name>
-      <docblock line="184">
-        <description>This inteface consolidates the interfaces ArrayAccess, Countable, and Iterator.</description>
-        <long-description>Classes using the collectible trait must implement this interface.</long-description>
-        <tag name="package" line="184" description="phpunk\util"/>
-      </docblock>
-    </interface>
-    <trait namespace="PHPunk\Util" line="16" package="phpunk\util">
-      <name>collectible</name>
-      <full_name>\PHPunk\Util\collectible</full_name>
-      <docblock line="16">
-        <description>Array-style key-value storage
-'Implements' ArrayAccess, Countable, Iterator</description>
-        <long-description></long-description>
-        <tag name="see" line="16" description="PHPunk Wiki" link="http://github.com/oneeyedjames/phpunk/wiki/Mutable-Objects"/>
-        <tag name="package" line="16" description="phpunk\util"/>
-      </docblock>
-      <property static="false" visibility="private" namespace="PHPunk\Util" line="21" package="phpunk\util">
-        <name>$_data</name>
-        <full_name>\PHPunk\Util\collectible::_data</full_name>
-        <default>array()</default>
-        <docblock line="21">
-          <description>Internal key-value storage</description>
-          <long-description></long-description>
-          <tag name="var" line="21" description="" type="array" variable="">
-            <type>array</type>
-          </tag>
-        </docblock>
-      </property>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="PHPunk\Util" line="37" package="phpunk\util">
-        <name>sort</name>
-        <full_name>\PHPunk\Util\collectible::sort()</full_name>
-        <docblock line="37">
-          <description>Sorts the data collection. If first argument is callable, it will be used
-as a comparison function. Otherwise, it will be used as a boolean flag to
-reverse-sort the collection. Omitting the sorting mode flag will sort the
-collection by its values and reset its keys to sequential indeces.</description>
-          <long-description>The sorting mode flag works as follows:
-  'k' will sort the collection by its keys
-  'a' will sort the collection by its values, preserving its keys</long-description>
-          <tag name="param" line="37" description="&lt;p&gt;Whether to reverse-sort the collection&lt;/p&gt;" type="mixed" variable="$reverse">
-            <type>mixed</type>
-          </tag>
-          <tag name="param" line="37" description="&lt;p&gt;OPTIONAL Sorting mode flag&lt;/p&gt;" type="string" variable="$mode">
-            <type>string</type>
-          </tag>
-          <tag name="return" line="37" description="TRUE on success, FALSE on failure" type="boolean">
-            <type>boolean</type>
-          </tag>
-        </docblock>
-        <argument line="0" by_reference="false">
-          <name>$reverse</name>
-          <default>false</default>
-          <type>mixed</type>
-        </argument>
-        <argument line="0" by_reference="false">
-          <name>$mode</name>
-          <default>''</default>
-          <type>string</type>
-        </argument>
-      </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="PHPunk\Util" line="65" package="phpunk\util">
-        <name>walk</name>
-        <full_name>\PHPunk\Util\collectible::walk()</full_name>
-        <docblock line="65">
-          <description>Apply a callback functon to each item in the collection.</description>
-          <long-description></long-description>
-          <tag name="param" line="65" description="&lt;p&gt;A callable to apply to each item&lt;/p&gt;" type="mixed" variable="$func">
-            <type>mixed</type>
-          </tag>
-          <tag name="param" line="65" description="&lt;p&gt;OPTIONAL Data to pass along to callable&lt;/p&gt;" type="mixed" variable="$data">
-            <type>mixed</type>
-          </tag>
-          <tag name="return" line="65" description="TRUE" type="boolean">
-            <type>boolean</type>
-          </tag>
-        </docblock>
-        <argument line="0" by_reference="false">
-          <name>$func</name>
-          <default></default>
-          <type>mixed</type>
-        </argument>
-        <argument line="0" by_reference="false">
-          <name>$data</name>
-          <default>null</default>
-          <type>mixed</type>
-        </argument>
-      </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="PHPunk\Util" line="72" package="phpunk\util">
-        <name>keys</name>
-        <full_name>\PHPunk\Util\collectible::keys()</full_name>
-        <docblock line="72">
-          <description></description>
-          <long-description></long-description>
-          <tag name="return" line="72" description="Key set for collection" type="array">
-            <type>array</type>
-          </tag>
-        </docblock>
-      </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="PHPunk\Util" line="79" package="phpunk\util">
-        <name>values</name>
-        <full_name>\PHPunk\Util\collectible::values()</full_name>
-        <docblock line="79">
-          <description></description>
-          <long-description></long-description>
-          <tag name="return" line="79" description="Value set for collection" type="array">
-            <type>array</type>
-          </tag>
-        </docblock>
-      </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="PHPunk\Util" line="87" package="phpunk\util">
-        <name>toArray</name>
-        <full_name>\PHPunk\Util\collectible::toArray()</full_name>
-        <docblock line="87">
-          <description>Returns collection as array.</description>
-          <long-description></long-description>
-          <tag name="return" line="87" description="collection of data" type="array">
-            <type>array</type>
-          </tag>
-        </docblock>
-      </method>
-      <method final="false" abstract="false" static="false" visibility="protected" namespace="PHPunk\Util" line="95" package="phpunk\util">
-        <name>loadArray</name>
-        <full_name>\PHPunk\Util\collectible::loadArray()</full_name>
-        <docblock line="95">
-          <description>Replaces internal data collection.</description>
-          <long-description></long-description>
-          <tag name="param" line="95" description="&lt;p&gt;OPTIONAL Any array or traversable object&lt;/p&gt;" type="mixed" variable="$data">
-            <type>mixed</type>
-          </tag>
-        </docblock>
-        <argument line="0" by_reference="false">
-          <name>$data</name>
-          <default></default>
-          <type>mixed</type>
-        </argument>
-      </method>
-    </trait>
-    <parse_markers>
-      <error line="0" code="PPC:ERR-50000">No summary was found for this file</error>
-      <error line="72" code="PPC:ERR-50008">No summary for method keys()</error>
-      <error line="79" code="PPC:ERR-50008">No summary for method values()</error>
-    </parse_markers>
-    <source>eJy1WFFvGzcMfrZ/BQcEcGI49nuyrDG6bgvWNUGTrA9dEcg2z1atk26Szo5R5L+PlO4ud/Y5LobmIUhOIj9+pEiJzM9vskXWHfX7XejDZSamSzFHoLVcL//JvVS0Pup2tUjR0S7CzR83vHVPW+fdbu4QxtaKzXg6RecG8Nbk2ouJwgFcebTCG0tiBX6QPHV+oxCWuDldCZUjOJIhoyzQu0ozhSlq73oHcUkhkHaIsPA+OxuN5tIv8slwatKR0YgbnH1l4qPoz2gtl3L0Vx5wTq8nX3HqXeEQfKK94Ku3QnqYGqVoW5IkfOt22IEOGbvSZFwL1UKfty9XwoJg3vw56nYyK1fCIxw9zIQXcAGfv1A4KrhbY4mBXyCE7dKo0UO4SiCR1nmCm+ccEZAOpkKpGASiuJZKwQSBzmAW0IQDxkgzYaUzGpJcF2DXZMKupdtVjEoTYxQK0lBiDt4ENIsrtA5PHXEMFOvsrlPpvdTzsMES/HdqZhghgoVSMaA9K8NkQyQchOiRcT0jUw59WKSwUjwMOPw3J58lRVrqGVIODBkmQN21mzR26dibhCyZtTsLsgC9Za9Jp4UKWy3FxWHxyHwAGfO2K+ZRR4mZQIcgUkjlI8X4qIglfFognwR7+EJ46wDOW8Y/Co5e39xdXX8Yvw9503A/qlj0udXVad59vH8HRNvlRRH9Nn5/G1YSIVVusUzSfKLktEqX4PpxxfmCpBVnTuRwAb3eCZdERyZwLN1DmZOVxknc7ri19NMFHAe9Yq0zFQRJQT4LX52CcS6iTb+Q7vSXUCuDKmon5zXN5bbm8rDmDBORK7+leFDvqcs/3XZHmn4UmFXM3lDV7uCfwBns+hltNZ3bhVu2w+06H+EaHu+itYO1Y1EUnmo31jjL1IavGTr1Cb0WMWsoaSilUVCUpMeUanb7xmgpCtaEcXWnMYII6HWoFr1wVVal8Ct/kUYmHJW/MnwnmQp0b13sSf21UMvjwGxQGLoAnSsVT73ACRf8QxRt5k9NkYNXD9xlXRn+xA3wnZcYu1X4LaT4YjluYRDWtw9sv82/43P1vVbjLddmt9h5yfLHIO/qlyc/NKw+bKFWEzNJeAv3kPImdAVNVnUiOzwyRV2Lo4wsHu7th/Zggo31pmBJUaPmgIso5KsJDUT10BtPX6RecVVGzCLbmBD1S1PU1osbpe4FZd1R4U3nCZCu3/KyfW5LDms/h6QJIrmBOoQgiy7rwZsG2x20GIYXseboCzHKHet2kFqVuFPauX4u5VwbiyDLPpEDbk1abxbjWSd07HuSyCQJVcG7R+k8cYlf7eX1gA2hAbxYbT+O2+/oW4ld1u1/LiS+vB6P22ce5Huo+8inlQfnXZB5PUL32m2HJo9LbYS++4Sq6eIgjSlLNq+fuPS/MqMcZQ6bza3FHcPF4uuapjJomuWF1zWp8bF0Nfz5utYsrmnGqHzczqYfb5BqRM4OxBR+uoidR7D+VI3QdyQTDDA+pZ52hsBoxIxjZGXa7R2feeAqqQ4Z8q2i1okUclcOdPXhN47DaU6TaOUx+JJFsDUMc3P1WX/N6fRQz/aTqWL27dnFsndYF8MS7WoTZ6T4iPAkTG2c1M4LTfaoZagxHpb/F4hveqFyRL/DU1682i1tYWm33+cGsd8HeuD6fZLv9+v4A1oMgxQtm3KujiGoTnj7pSaQcNxlw8JkSvpN9ud01v8B982jpg==</source>
-  </file>
-  <file path="error.php" generated-path="error.html" hash="c37f2b37850f67ad5ac5b319e2b18c0f" package="phpunk">
+  <file path="error.php" generated-path="error.html" hash="6fd30e3f793f7fbcda9eeb27b34b0263" package="phpunk">
     <docblock line="0">
       <description></description>
       <long-description></long-description>
       <tag name="package" line="0" description="phpunk"/>
     </docblock>
     <namespace-alias name="JsonSerializable">\JsonSerializable</namespace-alias>
-    <namespace-alias name="collectible">\PHPunk\Util\collectible</namespace-alias>
-    <namespace-alias name="collection">\PHPunk\Util\collection</namespace-alias>
+    <namespace-alias name="collectible">\PHPunk\collection\collectible</namespace-alias>
+    <namespace-alias name="arraylike">\PHPunk\collection\arraylike</namespace-alias>
     <class final="false" abstract="false" namespace="PHPunk" line="17" package="phpunk">
       <extends/>
-      <implements>\PHPunk\Util\collection</implements>
+      <implements>\PHPunk\collection\arraylike</implements>
       <implements>\JsonSerializable</implements>
       <name>api_error</name>
       <full_name>\PHPunk\api_error</full_name>
@@ -1272,18 +1272,6 @@ collection by its values and reset its keys to sequential indeces.</description>
         <long-description></long-description>
         <tag name="package" line="17" description="phpunk"/>
       </docblock>
-      <property static="false" visibility="private" namespace="PHPunk" line="21" package="phpunk\util">
-        <name>$_data</name>
-        <full_name>\PHPunk\Util\collectible::_data</full_name>
-        <default>array()</default>
-        <docblock line="21">
-          <description>Internal key-value storage</description>
-          <long-description></long-description>
-          <tag name="var" line="21" description="" type="array" variable="">
-            <type>array</type>
-          </tag>
-        </docblock>
-      </property>
       <method final="false" abstract="false" static="false" visibility="public" namespace="PHPunk" line="37" package="phpunk">
         <name>__construct</name>
         <full_name>\PHPunk\api_error::__construct()</full_name>
@@ -1315,120 +1303,6 @@ collection by its values and reset its keys to sequential indeces.</description>
           <default>array()</default>
           <type>mixed</type>
         </argument>
-      </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="PHPunk" line="37" package="phpunk\util">
-        <name>sort</name>
-        <full_name>\PHPunk\Util\collectible::sort()</full_name>
-        <docblock line="37">
-          <description>Sorts the data collection. If first argument is callable, it will be used
-as a comparison function. Otherwise, it will be used as a boolean flag to
-reverse-sort the collection. Omitting the sorting mode flag will sort the
-collection by its values and reset its keys to sequential indeces.</description>
-          <long-description>The sorting mode flag works as follows:
-  'k' will sort the collection by its keys
-  'a' will sort the collection by its values, preserving its keys</long-description>
-          <tag name="param" line="37" description="&lt;p&gt;Whether to reverse-sort the collection&lt;/p&gt;" type="mixed" variable="$reverse">
-            <type>mixed</type>
-          </tag>
-          <tag name="param" line="37" description="&lt;p&gt;OPTIONAL Sorting mode flag&lt;/p&gt;" type="string" variable="$mode">
-            <type>string</type>
-          </tag>
-          <tag name="return" line="37" description="TRUE on success, FALSE on failure" type="boolean">
-            <type>boolean</type>
-          </tag>
-        </docblock>
-        <argument line="0" by_reference="false">
-          <name>$reverse</name>
-          <default>false</default>
-          <type>mixed</type>
-        </argument>
-        <argument line="0" by_reference="false">
-          <name>$mode</name>
-          <default>''</default>
-          <type>string</type>
-        </argument>
-        <inherited_from>\PHPunk\Util\collectible</inherited_from>
-      </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="PHPunk" line="65" package="phpunk\util">
-        <name>walk</name>
-        <full_name>\PHPunk\Util\collectible::walk()</full_name>
-        <docblock line="65">
-          <description>Apply a callback functon to each item in the collection.</description>
-          <long-description></long-description>
-          <tag name="param" line="65" description="&lt;p&gt;A callable to apply to each item&lt;/p&gt;" type="mixed" variable="$func">
-            <type>mixed</type>
-          </tag>
-          <tag name="param" line="65" description="&lt;p&gt;OPTIONAL Data to pass along to callable&lt;/p&gt;" type="mixed" variable="$data">
-            <type>mixed</type>
-          </tag>
-          <tag name="return" line="65" description="TRUE" type="boolean">
-            <type>boolean</type>
-          </tag>
-        </docblock>
-        <argument line="0" by_reference="false">
-          <name>$func</name>
-          <default></default>
-          <type>mixed</type>
-        </argument>
-        <argument line="0" by_reference="false">
-          <name>$data</name>
-          <default>null</default>
-          <type>mixed</type>
-        </argument>
-        <inherited_from>\PHPunk\Util\collectible</inherited_from>
-      </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="PHPunk" line="72" package="phpunk\util">
-        <name>keys</name>
-        <full_name>\PHPunk\Util\collectible::keys()</full_name>
-        <docblock line="72">
-          <description></description>
-          <long-description></long-description>
-          <tag name="return" line="72" description="Key set for collection" type="array">
-            <type>array</type>
-          </tag>
-        </docblock>
-        <inherited_from>\PHPunk\Util\collectible</inherited_from>
-      </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="PHPunk" line="79" package="phpunk\util">
-        <name>values</name>
-        <full_name>\PHPunk\Util\collectible::values()</full_name>
-        <docblock line="79">
-          <description></description>
-          <long-description></long-description>
-          <tag name="return" line="79" description="Value set for collection" type="array">
-            <type>array</type>
-          </tag>
-        </docblock>
-        <inherited_from>\PHPunk\Util\collectible</inherited_from>
-      </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="PHPunk" line="87" package="phpunk\util">
-        <name>toArray</name>
-        <full_name>\PHPunk\Util\collectible::toArray()</full_name>
-        <docblock line="87">
-          <description>Returns collection as array.</description>
-          <long-description></long-description>
-          <tag name="return" line="87" description="collection of data" type="array">
-            <type>array</type>
-          </tag>
-        </docblock>
-        <inherited_from>\PHPunk\Util\collectible</inherited_from>
-      </method>
-      <method final="false" abstract="false" static="false" visibility="protected" namespace="PHPunk" line="95" package="phpunk\util">
-        <name>loadArray</name>
-        <full_name>\PHPunk\Util\collectible::loadArray()</full_name>
-        <docblock line="95">
-          <description>Replaces internal data collection.</description>
-          <long-description></long-description>
-          <tag name="param" line="95" description="&lt;p&gt;OPTIONAL Any array or traversable object&lt;/p&gt;" type="mixed" variable="$data">
-            <type>mixed</type>
-          </tag>
-        </docblock>
-        <argument line="0" by_reference="false">
-          <name>$data</name>
-          <default></default>
-          <type>mixed</type>
-        </argument>
-        <inherited_from>\PHPunk\Util\collectible</inherited_from>
       </method>
       <property final="false" static="false" visibility="public" line="17">
         <name>$code</name>
@@ -1465,7 +1339,131 @@ collection by its values and reset its keys to sequential indeces.</description>
       <error line="0" code="PPC:ERR-50000">No summary was found for this file</error>
       <error line="17" code="PPC:ERR-50005">No summary for class \PHPunk\api_error</error>
     </parse_markers>
-    <source>eJydklFv2jAUhZ/jX3FVIRUQFe/b6FbtpZu2FWnbU1uhS3JJXBw7sh06VvHfd+2EkDGQqvHGPT7xd871u/dVUYnpeCxgDB8qTNeYE/Cs1mseTYXQWJJjgWB+O+fpWyFqR/DZGf2drEQlf+NSUTtuzjz89FI9pEYpSr2M6jnRaHZ291tTkfVbcN5KncMgNRnBV0wLqenKEmbhKiBrjYWgnXYxsAsxbusS9bGtFWO4VKFzgJVcNJosK0Ulae/gwDf5Jyu8iCTk+SugSEKKJADJXBtLILUnq1HBBtnLh4I6FUll5QY9wWARIvyfs03RN3/koJ44Dmh6bsOa5RMDwrP0BfiCIJcb0rE5QJ11XbC9ub9Ci+Xr2z/heVX3PV8pf1EGgww9wt38x6e7bzdfAK3FLbDBW9yQdfETbRazAswyGTbDBQXfvpx6qWQKq1rHtcGC69WMVad+GKNMOrpJe+EM7h9HYZvJwBfSXV3HjfB40GzmMN/HmnXf6KnKYHYTkIfxsyOWdie2WmLOfCX5wmRnmXNi2jVtGyzHm0sL6E2SFPnlXQa+yzeH/y1UM0os+dpqaPFeLhbBf7ELyLvTbN3Lx8ix4u6PX/0Z5KfeMRo2kO399wGmQQX+za6hX/MkqnvwvrrfUjwQGj2ye9O0PeIDj7HsnfgDP+uDIA==</source>
+    <source>eJydkk9v2zAMxc/WpyAKA02CFLlvS7eil3bY1gDbrSsCxmZsNbZkSHK6rMh3HyX/qZe5QLGcHJJP+r1HffhY5ZVYzGYCZvCpwmSHGQHXarXj0kIIhSVZbhCsblZcfS9EbQk+W62+k5FYyN+4KagtNzM/E10UlDipVf8ZZsZH0Bg8FHLnD+lRjK7IuANYZ6TKIE50SvAVk1wqujCEqb8VyBhtwPfGVcxuvaObukR1KmubwWdSoLWAlVw3PVlWBZWkHBc7vPk/ruFZRN7TXyZF5E1EnkdmShsCqRwZhQXskbU85LsLEVVG7tERxGvv4P+UrYmh+Jp9OmJwUPTUetWbRwaEJ+lycDlBJvekQnCAKu2jYHlzf4UGy7eHP6J5U/QDXSl/UQpxig7hbvXj9u7b1Zcme2CBM7gnY8MRrRe9BUxT6Z8QB+R1XTj1ppAJbGsV3hesOV7FWHXiJsHKvKebtxcu4f5h6rcZxS6X9uIybITLcbOZl3pna9mfMegWGtNJOHHK1ePIQkvMGK0kl+v0VdyMGHRHh4bI8tKSHAaVKEF+dOce7fzdy/+WpylFhlxtFLRkz2drrz87etrjOFv/5jFwbDn20wf/CvLjYIwmDWR7/72HaVCBf8tLGCY8D90OfNjtFhQGfKIncqev/NuYTHngIYR9FH8AEdOFbQ==</source>
+  </file>
+  <file path="collection/mutable.php" generated-path="collection.mutable.html" hash="ca95121ee91157afd2b355d47a09d4a6" package="phpunk\collection">
+    <docblock line="0">
+      <description></description>
+      <long-description></long-description>
+      <tag name="package" line="0" description="phpunk\collection"/>
+    </docblock>
+    <function namespace="PHPunk\Collection" line="101" package="phpunk\collection">
+      <name>is_mutable</name>
+      <full_name>\PHPunk\Collection\is_mutable()</full_name>
+      <docblock line="101">
+        <description>Returns whether or not the object is an instance of mutable.</description>
+        <long-description></long-description>
+        <tag name="package" line="101" description="phpunk\collection"/>
+        <tag name="param" line="101" description="&lt;p&gt;Any object&lt;/p&gt;" type="object" variable="$obj">
+          <type>object</type>
+        </tag>
+        <tag name="return" line="101" description="Returns **TRUE** if **obj** mutable, **FALSE** otherwise." type="boolean">
+          <type>boolean</type>
+        </tag>
+      </docblock>
+      <argument line="0" by_reference="false">
+        <name>$obj</name>
+        <default></default>
+        <type>object</type>
+      </argument>
+    </function>
+    <trait namespace="PHPunk\Collection" line="13" package="phpunk\collection">
+      <name>mutable</name>
+      <full_name>\PHPunk\Collection\mutable</full_name>
+      <docblock line="13">
+        <description>Object-oriented style syntax support</description>
+        <long-description></long-description>
+        <tag name="see" line="13" description="PHPunk Wiki" link="http://github.com/oneeyedjames/phpunk/wiki/Mutable-Objects"/>
+        <tag name="package" line="13" description="phpunk\collection"/>
+      </docblock>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="PHPunk\Collection" line="61" package="phpunk\collection">
+        <name>has</name>
+        <full_name>\PHPunk\Collection\mutable::has()</full_name>
+        <docblock line="61">
+          <description>Determine whether or not a given key exists.</description>
+          <long-description></long-description>
+          <tag name="param" line="61" description="&lt;p&gt;The key&lt;/p&gt;" type="mixed" variable="$key">
+            <type>mixed</type>
+          </tag>
+          <tag name="return" line="61" description="TRUE if the key exists, FALSE otherwise" type="boolean">
+            <type>boolean</type>
+          </tag>
+        </docblock>
+        <argument line="0" by_reference="false">
+          <name>$key</name>
+          <default></default>
+          <type>mixed</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="PHPunk\Collection" line="71" package="phpunk\collection">
+        <name>get</name>
+        <full_name>\PHPunk\Collection\mutable::get()</full_name>
+        <docblock line="71">
+          <description>Get the stored value for a given key.</description>
+          <long-description></long-description>
+          <tag name="param" line="71" description="&lt;p&gt;The key&lt;/p&gt;" type="mixed" variable="$key">
+            <type>mixed</type>
+          </tag>
+          <tag name="param" line="71" description="&lt;p&gt;OPTIONAL The value to return if the given key does not exist&lt;/p&gt;" type="mixed" variable="$default">
+            <type>mixed</type>
+          </tag>
+        </docblock>
+        <argument line="0" by_reference="false">
+          <name>$key</name>
+          <default></default>
+          <type>mixed</type>
+        </argument>
+        <argument line="0" by_reference="false">
+          <name>$default</name>
+          <default>null</default>
+          <type>mixed</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="PHPunk\Collection" line="81" package="phpunk\collection">
+        <name>put</name>
+        <full_name>\PHPunk\Collection\mutable::put()</full_name>
+        <docblock line="81">
+          <description>Store a value for a given key.</description>
+          <long-description></long-description>
+          <tag name="param" line="81" description="&lt;p&gt;The key&lt;/p&gt;" type="mixed" variable="$key">
+            <type>mixed</type>
+          </tag>
+          <tag name="param" line="81" description="&lt;p&gt;The value to be stored&lt;/p&gt;" type="mixed" variable="$value">
+            <type>mixed</type>
+          </tag>
+        </docblock>
+        <argument line="0" by_reference="false">
+          <name>$key</name>
+          <default></default>
+          <type>mixed</type>
+        </argument>
+        <argument line="0" by_reference="false">
+          <name>$value</name>
+          <default></default>
+          <type>mixed</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="PHPunk\Collection" line="90" package="phpunk\collection">
+        <name>remove</name>
+        <full_name>\PHPunk\Collection\mutable::remove()</full_name>
+        <docblock line="90">
+          <description>Remove a key-value pair from the store.</description>
+          <long-description></long-description>
+          <tag name="param" line="90" description="&lt;p&gt;The key&lt;/p&gt;" type="mixed" variable="$key">
+            <type>mixed</type>
+          </tag>
+        </docblock>
+        <argument line="0" by_reference="false">
+          <name>$key</name>
+          <default></default>
+          <type>mixed</type>
+        </argument>
+      </method>
+    </trait>
+    <parse_markers>
+      <error line="0" code="PPC:ERR-50000">No summary was found for this file</error>
+    </parse_markers>
+    <source>eJytVV9v2jAQf04+xaniASIg2ysd61DHukpdW0GrPmwTMuGSuCR2ZDttUdXvvrOTQKF0qtY9Ee7Ovz/nO/nTUZEWfhgEPgTwpWDRkiUIFCvF8lckswwjw6WgbOj7guWoqQbh8vulLTheFxz6DcjF/JZCPak4CoML0GaVIeiVMOwBdFkUUhmqc3waEVJjikEYJtyk5bwfyTyUAnGFi1vLFlZSwnu+5OGP0rB5hr2KQtcq4IZyTqBRjBvIqyp49L1SIzQmKEQiPavSs9w8EVIh5CzhEeRoUrmwidD3inKeUSwuhbMGs1nEsqzdsoEutJhKdMeiezyGdiRLYdp1cDiEjx1KeApNqQS0TMp173OCZuv0zw+/O1aL14oypjUMgSpm7rvtjlDW84ziSYJqhkpJ1T44Jg1gJJRigTEX1NlKNFQgg4FjaHcOujCeXU/Hk9nNaHJ+en5iwZ7+1bmTvsRVZXiPLZt7D4GuQag1dywrsSKqGYpyJ/keJq71X8ykTL/fTCm2KWpshbm8w73wX9Ggyuk64T4lbFQgFQhpgEHC71AAnQF84Nrovj1QaSqYYjnk/IGmwKLCVYq2ssrWxuZSZsgEXE2ux0CjaqqaGq0L30Zn0zFIS3rPNb5iat2XPT2TcUx+xw5vr7sTNI5WG2rhAtwdQkwOn7l7s62tLO0AKzMDF5dXpxfnozNXWuHTjtQya9ObRi4katdd14NXHCebiWxYhiDKLHtbC+BoO3eynojBGnCnTVPbHurJf+xPBbXVlHlzD6/4frFsz0e48jLdXdYdIxM36KSeanoVccG4gljJfDMIb3S0R+LzRXqp7nqzfU7X0/pNmrg707s7ZhVJ95YA10CrwoU2TND7JuPmGek3b1UltS5v0S+MxKr+7+9Zu4YzCOwCBoGdxiCgevqssbsUcFtIofUe9t1TtrbM9ayubltSZ7sZQSuikbxRfEjG/wCNe3Fz</source>
   </file>
   <file path="database/schema.php" generated-path="database.schema.html" hash="8216658bea70979571e3af8e2cbf8913" package="phpunk\database">
     <docblock line="0">
@@ -2238,13 +2236,13 @@ own primary key.</description>
     </parse_markers>
     <source>eJzNVVFvmzAQfg6/4hRFahLR5akvy7It6rq1UtdGW7enSZELB1gBG9kmFary32djQiCCrUuyaW9w9/n8fd/dwZt3aZQ6k/HYgTG8T4m3IiGCjmVs9cPjScoZMqWTE8dhJEGpIQiL64XJX27zU8fJJEKQMU9RzrZ5TyBRuFR8hWzailijoEG+Rex4CJ6iUDlIJSgLYZBmjzH1loYBLIpnoL6+mAYUBQRcgK4uXFB5Sj0SxzmQImIOdFQUdG3IrTCHhX0GzbcoSuKOkimR8okLv/DDi/VbAYJnp6cvUOgp9GGwrLGd7mV2t2q5PaO3Z40XJPlDta0nX6bKHJ1oZrZ21ZTl0uNMl8o8NayTcBuFR0Zub6AiKs/f1rXCrEF9WkfVeM0a1TRqU3eChowLhISEmlmCKuJ+J9sQNc+KEQ1gSKU0MXvrc39psv3NaKTTPYEqEwz2k3sEPiFDoblJ3W5BmM8TbWCeKh4KkkZ2Es4lepkmWYxtZeqrtoaQOORwv3i4ub+b38I1kZEJm6igKkpc8DEgWaykLgafP1zYGiXVssjlL+/vcKe+e0NLYwZniX9xZt0qr2jCrDXNzpexXcdcq2q0Z9x3ElO/NO4Yxyzk95pP6vQj5zESBg9fvl2BHiRLgkpYG1UufJzffr0CriIUT1Rih+f1r9nQCinNavW+HX5MDw4fXtBoIIWM9jm2Cu/MmvMA5oubEt0GFih5JvR/omrH9tw2c3QD/8auWEHVyhRvbk3NDAISS2xtqfn4VMhR5dcM+lX0dRnsT7vWr7rykJ07bb8P3sL/fU5OuunNiakW/l9MTse35mUTtHF+AhMmVhM=</source>
   </file>
-  <file path="database/query.php" generated-path="database.query.html" hash="474bbdf13334ed50b19442cd840a9bb1" package="phpunk\database">
+  <file path="database/query.php" generated-path="database.query.html" hash="4a4b5eb97aca26b1970c7de1759b2faf" package="phpunk\database">
     <docblock line="0">
       <description></description>
       <long-description></long-description>
       <tag name="package" line="0" description="phpunk\database"/>
     </docblock>
-    <namespace-alias name="object">\PHPunk\Util\object</namespace-alias>
+    <namespace-alias name="collection">\PHPunk\Collection\collection</namespace-alias>
     <class final="false" abstract="false" namespace="PHPunk\Database" line="10" package="phpunk\database">
       <extends/>
       <name>query</name>
@@ -2325,7 +2323,7 @@ own primary key.</description>
       <error line="10" code="PPC:ERR-50005">No summary for class \PHPunk\Database\query</error>
       <error line="77" code="PPC:ERR-50008">No summary for method __construct()</error>
     </parse_markers>
-    <source>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</source>
+    <source>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</source>
   </file>
   <file path="database/relation.php" generated-path="database.relation.html" hash="27be764da4ab3f84639f7a881c57ddf4" package="phpunk\database">
     <docblock line="0">
@@ -2525,137 +2523,6 @@ own primary key.</description>
     </parse_markers>
     <source>eJylVttOGzEQfd79itEqggSV8l6atEjQQlUFhHijKHE23sSwF8vrpY1Q/r3jsffWbBKUvnk9c86cuXiSz1/kUvpnJyc+nMBXycIXtuCAd0X68mvONJuxnKPtzPdTlvAcPTjcXd8Z86Uzn/s1gcokV3oFuVYiXUDPgOBhyYEOWQQazyUvKB4zLbI0XwrZxmezZx5q6En0jC2DVCJhalWjydQNi2pYlCkuFulOWKlWvvBVK5b5jgSP593+UelfBtnj/5yJFC5iwXKDoFrcjMdX9/Dj9mYMYcyKfIsykaZcUagNgKMS+Y5yljQxjzSx/Lz69nAoiRKLpWW5v/l+/T6aMx8d8voa3nzPDI1nImDlsH4gUs1VymJ4ZUpQkzwD9LAZr0xz6E3MEOG0HYC0c3QYNvofLE5ECymZYskhz6OBfv/j6ADtfxodOncMusu4mMUihKhIQ2rvZBKibq2KUPcpyw9w5PSaU+RORDwww+D1zNicjqjHMLSlMZWrDC7bYZn3ecMWVba6WbXRiB3aWAhadzQyYQtUn3C9zLZnNOcuobZgq+Z0pHiSvfJJ2bR+M6HBptj9gIOFLjgWvSps/lvocAmNGy80zT42cY4/1d+mPvbbU1wXKgWn6C2YGHCwPq+dbdYteONmG8HpyLa1ptkWsyqrtF0rAWaFdgOMpT9ouJpl1xRIe6t5QUt1BxlVrEGYMCxktz+ZbPR1d+eqXdFuntsUdfdsZL2SZpydxHLg7CVOoc4KiUvZ+g1o2p2gYOok2XZMwaJoR5cm6Uy341I/yQ+2zNx7lbsakFYRQV/kkzxkMVPlZEuawKMj2LDQGnDDuSWRj9OG7xTL8E82ld1EmQbUCeBxzp0UphRbdSlpGZpCepQQRnp8ogp7Zvkxeko1C+BvOf46z/kfGI5wx5id6PCO4PEJKTazeWtEfLQMT+vuvIjUpkQNqmokEhlnc94P4GJ8CQHuU4roxrAeiojF5m8a3q39v98UHOo=</source>
   </file>
-  <file path="util/object.php" generated-path="util.object.html" hash="015a1d8ca46c2679f6f0b5fdc407b9a7" package="phpunk\util">
-    <docblock line="0">
-      <description></description>
-      <long-description></long-description>
-      <tag name="package" line="0" description="phpunk\util"/>
-    </docblock>
-    <namespace-alias name="JsonSerializable">\JsonSerializable</namespace-alias>
-    <class final="false" abstract="false" namespace="PHPunk\Util" line="18" package="phpunk\util">
-      <extends/>
-      <implements>\PHPunk\Util\collection</implements>
-      <implements>\JsonSerializable</implements>
-      <name>object</name>
-      <full_name>\PHPunk\Util\object</full_name>
-      <docblock line="18">
-        <description>Basic reference implementation</description>
-        <long-description></long-description>
-        <tag name="see" line="18" description="JsonSerializable" link="http://us2.php.net/manual/en/class.jsonserializable.php"/>
-        <tag name="see" line="18" description="Collectible Trait" link="\PHPunk\Util\collectible"/>
-        <tag name="see" line="18" description="Mutable Trait" link="\PHPunk\Util\mutable"/>
-        <tag name="see" line="18" description="PHPunk Wiki" link="http://github.com/oneeyedjames/phpunk/wiki/Mutable-Objects"/>
-        <tag name="package" line="18" description="phpunk\util"/>
-      </docblock>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="PHPunk\Util" line="26" package="phpunk\util">
-        <name>__construct</name>
-        <full_name>\PHPunk\Util\object::__construct()</full_name>
-        <docblock line="26">
-          <description>Creates a shallow clone of the passed data.</description>
-          <long-description></long-description>
-          <tag name="param" line="26" description="&lt;p&gt;OPTIONAL Any array or traversable object&lt;/p&gt;" type="mixed" variable="$data">
-            <type>mixed</type>
-          </tag>
-        </docblock>
-        <argument line="0" by_reference="false">
-          <name>$data</name>
-          <default>array()</default>
-          <type>mixed</type>
-        </argument>
-      </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="PHPunk\Util" line="61" package="phpunk\util">
-        <name>has</name>
-        <full_name>\PHPunk\Util\mutable::has()</full_name>
-        <docblock line="61">
-          <description>Determine whether or not a given key exists.</description>
-          <long-description></long-description>
-          <tag name="param" line="61" description="&lt;p&gt;The key&lt;/p&gt;" type="mixed" variable="$key">
-            <type>mixed</type>
-          </tag>
-          <tag name="return" line="61" description="TRUE if the key exists, FALSE otherwise" type="boolean">
-            <type>boolean</type>
-          </tag>
-        </docblock>
-        <argument line="0" by_reference="false">
-          <name>$key</name>
-          <default></default>
-          <type>mixed</type>
-        </argument>
-        <inherited_from>\PHPunk\Util\mutable</inherited_from>
-      </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="PHPunk\Util" line="71" package="phpunk\util">
-        <name>get</name>
-        <full_name>\PHPunk\Util\mutable::get()</full_name>
-        <docblock line="71">
-          <description>Get the stored value for a given key.</description>
-          <long-description></long-description>
-          <tag name="param" line="71" description="&lt;p&gt;The key&lt;/p&gt;" type="mixed" variable="$key">
-            <type>mixed</type>
-          </tag>
-          <tag name="param" line="71" description="&lt;p&gt;OPTIONAL The value to return if the given key does not exist&lt;/p&gt;" type="mixed" variable="$default">
-            <type>mixed</type>
-          </tag>
-        </docblock>
-        <argument line="0" by_reference="false">
-          <name>$key</name>
-          <default></default>
-          <type>mixed</type>
-        </argument>
-        <argument line="0" by_reference="false">
-          <name>$default</name>
-          <default>null</default>
-          <type>mixed</type>
-        </argument>
-        <inherited_from>\PHPunk\Util\mutable</inherited_from>
-      </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="PHPunk\Util" line="81" package="phpunk\util">
-        <name>put</name>
-        <full_name>\PHPunk\Util\mutable::put()</full_name>
-        <docblock line="81">
-          <description>Store a value for a given key.</description>
-          <long-description></long-description>
-          <tag name="param" line="81" description="&lt;p&gt;The key&lt;/p&gt;" type="mixed" variable="$key">
-            <type>mixed</type>
-          </tag>
-          <tag name="param" line="81" description="&lt;p&gt;The value to be stored&lt;/p&gt;" type="mixed" variable="$value">
-            <type>mixed</type>
-          </tag>
-        </docblock>
-        <argument line="0" by_reference="false">
-          <name>$key</name>
-          <default></default>
-          <type>mixed</type>
-        </argument>
-        <argument line="0" by_reference="false">
-          <name>$value</name>
-          <default></default>
-          <type>mixed</type>
-        </argument>
-        <inherited_from>\PHPunk\Util\mutable</inherited_from>
-      </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="PHPunk\Util" line="90" package="phpunk\util">
-        <name>remove</name>
-        <full_name>\PHPunk\Util\mutable::remove()</full_name>
-        <docblock line="90">
-          <description>Remove a key-value pair from the store.</description>
-          <long-description></long-description>
-          <tag name="param" line="90" description="&lt;p&gt;The key&lt;/p&gt;" type="mixed" variable="$key">
-            <type>mixed</type>
-          </tag>
-        </docblock>
-        <argument line="0" by_reference="false">
-          <name>$key</name>
-          <default></default>
-          <type>mixed</type>
-        </argument>
-        <inherited_from>\PHPunk\Util\mutable</inherited_from>
-      </method>
-    </class>
-    <parse_markers>
-      <error line="0" code="PPC:ERR-50000">No summary was found for this file</error>
-    </parse_markers>
-    <source>eJxtkkFvEzEQhc/rXzGHHtqIriWOFEpDL4CARKKIQ0HVxJlknXjtlT2mhKr/nfHuKoSmp6zmzcz7/Cav33ZNp/RkomACVx2aLa4JpJb99kdm66SulfLYUhKVYP5+XqRvIl0olRPBxxT8V4oWnf2DC0dSHve9w2QNRFpRJC+ztu0cteQZ2QYvHb1pIoKGuXuldU4va/GuPbFu0Wd0mrw2DlOqN2KTDmxK45H3fqEJzpFhKzW4Pvi+iWh539VmLlPwefz9Xx2h1pabvKhNaHXwRDtabkoaeghJ39ut1eOC89liI05pTAm+i9YH2D8BQq/+iyHtMYN/cfQWeFBVyXeElFirkmsleNeRkCkBQmrQuXAPxgkbhBVwI+cTM1rCEhnr0t/PyHEjttDa3yKdFA1m85sPsy/TTzD1O8AYcQchAkf8RTH1CANxmdeq6vLCyT1X2ffEcHdn5CQcs+HTYeEbuP15VrirE25sOr90AZfTsnhoOLtQ1ePBO67s2of49I8BK6E4uuzzDJuDNjodvCNxjh5GBA4DwOD9qP4C8276NA==</source>
-  </file>
   <file path="component/template.php" generated-path="component.template.html" hash="8ee7ae170932d7443cd2799ba7f68c00" package="phpunk\component">
     <docblock line="0">
       <description></description>
@@ -2797,7 +2664,153 @@ own primary key.</description>
     </parse_markers>
     <source>eJytVdtu2zAMfba/gggC1Cmy5r1d1xVbsRXr0iDtsAFZYKg2bQt1JEOS0xZD/32UfIlz8fbSt1jkoQ4Pj5j3F0VW+JPjYx+O4WPBokeWItBZKR5/R3JVSIHCUHDi+4KtUFMKwuzrzMY/NfEz349ypjUYXBU5Mwh/fM8W9WxVngqpELgwqATLYc0UZw852ujE9wrF1xYyDGOuNJzDYkn1NvCCKbYCbRQXKQwfmEabCJ+5wshI9QIFMxlEUhjGhc1pSSQ8R93cUj7kPIKkFJHhUkAYEoKKlpEJ2qIjy9sbmozrdx9aOm2YeHmvHWqXcawhrnlw1P0kTg61st9FD1cWx2Ei8xhVMDzIcrEknja0Q/AOmYoy3CaZSAUrZqJsj+ZBlmuOTzCl0YNMwGQI9uBQokItS0Xu6CY3hxVAoSmVaBAzOzcjtzn0SJDLiDICx2bcuescEpZrrCVxWlspKm1SNKE9csbdw46syzxSA1mUQVCDmYZhg6mqdlK6xrCJ9KOT5/EEAq7dlcGgCU7acif0rAajkUv1ain60s5s1qvvuXF6bcz21vZ+QejmY+K6c1A4pfP2yzVJeqcpqhCVkioYfOda7w1/0/ZgDFfhj7urefjzcj69nn6plKoZO713fDZHQebUB2z1xGnGhZJrHmMMzjBIa+Dwg3hLq1UAphR7ocKMyN3O7q9vp5c3DtTlQj+1phNaUBsz9vqQxb0uHNc32RVWecI6wum6MWWPk0e1ifDZKGZ3kq1Eg/h1Pw/vvl3PRs4RXER5GdezOnP22BmEnRGZU8RQN0/quLGQbu1bcDvAapbyNQons4M0ZN5oOq3i4n8boaJ6w7Vp+fIu4favQhraYzSrdiD/fuPb+6G+rBM9r+P0lhY19oiTl5+PlnBqBV/sPrHBGOrETsRBBhusex6v/l8uEFvp</source>
   </file>
-  <file path="component/model.php" generated-path="component.model.html" hash="10c2abe53fdc39d8b0841aee873d3abf" package="phpunk\component">
+  <file path="collection/collection.php" generated-path="collection.collection.html" hash="6a846d462377e7ad086477d7f635ab6a" package="phpunk\collection">
+    <docblock line="0">
+      <description></description>
+      <long-description></long-description>
+      <tag name="package" line="0" description="phpunk\collection"/>
+    </docblock>
+    <namespace-alias name="JsonSerializable">\JsonSerializable</namespace-alias>
+    <class final="false" abstract="false" namespace="PHPunk\Collection" line="20" package="phpunk\collection">
+      <extends/>
+      <implements>\PHPunk\Collection\arraylike</implements>
+      <implements>\JsonSerializable</implements>
+      <name>collection</name>
+      <full_name>\PHPunk\Collection\collection</full_name>
+      <docblock line="20">
+        <description>Basic reference implementation</description>
+        <long-description></long-description>
+        <tag name="see" line="20" description="JsonSerializable" link="http://us2.php.net/manual/en/class.jsonserializable.php"/>
+        <tag name="see" line="20" description="Collectible Trait" link="\PHPunk\Collection\collectible"/>
+        <tag name="see" line="20" description="Mutable Trait" link="\PHPunk\Collection\mutable"/>
+        <tag name="see" line="20" description="PHPunk Wiki" link="http://github.com/oneeyedjames/phpunk/wiki/Mutable-Objects"/>
+        <tag name="package" line="20" description="phpunk\collection"/>
+      </docblock>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="PHPunk\Collection" line="33" package="phpunk\collection">
+        <name>__construct</name>
+        <full_name>\PHPunk\Collection\collection::__construct()</full_name>
+        <docblock line="33">
+          <description>Creates a shallow clone of the passed data.</description>
+          <long-description></long-description>
+          <tag name="param" line="33" description="&lt;p&gt;OPTIONAL Any array or traversable object&lt;/p&gt;" type="mixed" variable="$data">
+            <type>mixed</type>
+          </tag>
+        </docblock>
+        <argument line="0" by_reference="false">
+          <name>$data</name>
+          <default>array()</default>
+          <type>mixed</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="PHPunk\Collection" line="61" package="phpunk\collection">
+        <name>has</name>
+        <full_name>\PHPunk\Collection\mutable::has()</full_name>
+        <docblock line="61">
+          <description>Determine whether or not a given key exists.</description>
+          <long-description></long-description>
+          <tag name="param" line="61" description="&lt;p&gt;The key&lt;/p&gt;" type="mixed" variable="$key">
+            <type>mixed</type>
+          </tag>
+          <tag name="return" line="61" description="TRUE if the key exists, FALSE otherwise" type="boolean">
+            <type>boolean</type>
+          </tag>
+        </docblock>
+        <argument line="0" by_reference="false">
+          <name>$key</name>
+          <default></default>
+          <type>mixed</type>
+        </argument>
+        <inherited_from>\PHPunk\Collection\mutable</inherited_from>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="PHPunk\Collection" line="71" package="phpunk\collection">
+        <name>get</name>
+        <full_name>\PHPunk\Collection\mutable::get()</full_name>
+        <docblock line="71">
+          <description>Get the stored value for a given key.</description>
+          <long-description></long-description>
+          <tag name="param" line="71" description="&lt;p&gt;The key&lt;/p&gt;" type="mixed" variable="$key">
+            <type>mixed</type>
+          </tag>
+          <tag name="param" line="71" description="&lt;p&gt;OPTIONAL The value to return if the given key does not exist&lt;/p&gt;" type="mixed" variable="$default">
+            <type>mixed</type>
+          </tag>
+        </docblock>
+        <argument line="0" by_reference="false">
+          <name>$key</name>
+          <default></default>
+          <type>mixed</type>
+        </argument>
+        <argument line="0" by_reference="false">
+          <name>$default</name>
+          <default>null</default>
+          <type>mixed</type>
+        </argument>
+        <inherited_from>\PHPunk\Collection\mutable</inherited_from>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="PHPunk\Collection" line="81" package="phpunk\collection">
+        <name>put</name>
+        <full_name>\PHPunk\Collection\mutable::put()</full_name>
+        <docblock line="81">
+          <description>Store a value for a given key.</description>
+          <long-description></long-description>
+          <tag name="param" line="81" description="&lt;p&gt;The key&lt;/p&gt;" type="mixed" variable="$key">
+            <type>mixed</type>
+          </tag>
+          <tag name="param" line="81" description="&lt;p&gt;The value to be stored&lt;/p&gt;" type="mixed" variable="$value">
+            <type>mixed</type>
+          </tag>
+        </docblock>
+        <argument line="0" by_reference="false">
+          <name>$key</name>
+          <default></default>
+          <type>mixed</type>
+        </argument>
+        <argument line="0" by_reference="false">
+          <name>$value</name>
+          <default></default>
+          <type>mixed</type>
+        </argument>
+        <inherited_from>\PHPunk\Collection\mutable</inherited_from>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="PHPunk\Collection" line="90" package="phpunk\collection">
+        <name>remove</name>
+        <full_name>\PHPunk\Collection\mutable::remove()</full_name>
+        <docblock line="90">
+          <description>Remove a key-value pair from the store.</description>
+          <long-description></long-description>
+          <tag name="param" line="90" description="&lt;p&gt;The key&lt;/p&gt;" type="mixed" variable="$key">
+            <type>mixed</type>
+          </tag>
+        </docblock>
+        <argument line="0" by_reference="false">
+          <name>$key</name>
+          <default></default>
+          <type>mixed</type>
+        </argument>
+        <inherited_from>\PHPunk\Collection\mutable</inherited_from>
+      </method>
+      <property final="false" static="false" visibility="public" line="20">
+        <name>$meta</name>
+        <default/>
+        <docblock>
+          <description>Mutable object of metadata</description>
+          <long-description/>
+          <tag name="var" description="&lt;p&gt;Mutable object of metadata&lt;/p&gt;" type="object" line="20">
+            <type by_reference="false">object</type>
+          </tag>
+          <tag name="magic" line="20"/>
+          <tag name="property" line="20" description="Mutable object of metadata" type="object" variable="$meta">
+            <type>object</type>
+          </tag>
+        </docblock>
+      </property>
+    </class>
+    <parse_markers>
+      <error line="0" code="PPC:ERR-50000">No summary was found for this file</error>
+    </parse_markers>
+    <source>eJx1U1uv0kAQfm5/xTyQnEI8NPERvCEvalRIPIkPasjQTunCdrfZC4iG/+5sWzglYF8oM9/Od5ntq7d1WcfpaBTDCN7VmO1wQ8A1r3Y/My0lZU5oxd00jhVWZBlDsPywDID5BTCNY28JPlmtvpERKMUfXEvicjf7PVqRgaGCDCmeIKpaUkXKYTe/EWCJoHSunqSpty/HrGOsyKUVKo8yJZVmEq0db5nG9mgC8Ib7MvBsg2sw770/GRTugqq8C6fgS/d73e1EbYQr/Xqc6SrViuhI+TZkkraBpQexE2k34HGx3jKT7bKC79w726yNrsm4I+gGA4OKHF6Yu6IuIJRzdNjE31iH5508R2gBjcGjFDt6cRMD/I2jsJrOH28kCiuJgg6xUdrwLpQjo1DCHvlciC4KhFFtxB4dwWAVhPRPzg1xg3nBliilPkAmOZCg2ZV8f1gp5RCkjwO+ZavRYAWV+M2tQejBYvn0cfF19hlm6th6AG3AGdyTsb0sznr8WvIlKrxqA1itMr4HzvjMJe3A1/Dj1zA4jgauFPbxjdSYt73hNI5Od8xXuOGZbLDU+X95NsQMOzq2s+1BuKyEXiXKkCN+CDE9TML/SBSQCLtSXsqk09KkOBw27ahfY9mKDmBJFskwxMyPIeeNgj5sGho5Feilm9wBXUQG4Om+2+vPDgqO++a7uR/CtgejpLV9ze/0LKwwaZM+xf8A+n5lKQ==</source>
+  </file>
+  <file path="component/model.php" generated-path="component.model.html" hash="42164d28922ed4982f1b53c7ab297bc7" package="phpunk\component">
     <docblock line="0">
       <description></description>
       <long-description></long-description>
@@ -2892,16 +2905,16 @@ own primary key.</description>
           <type>mixed</type>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="PHPunk\Component" line="96" package="phpunk\component">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="PHPunk\Component" line="98" package="phpunk\component">
         <name>put_record</name>
         <full_name>\PHPunk\Component\model::put_record()</full_name>
-        <docblock line="96">
+        <docblock line="98">
           <description>Saves a single database record to the database.</description>
           <long-description>Invalidates any previously-cached copy of record.</long-description>
-          <tag name="param" line="96" description="&lt;p&gt;Record instance to save to database&lt;/p&gt;" type="object" variable="$record">
+          <tag name="param" line="98" description="&lt;p&gt;Record instance to save to database&lt;/p&gt;" type="object" variable="$record">
             <type>object</type>
           </tag>
-          <tag name="return" line="96" description="Record instance updated with auto-generated id, FALSE on failure" type="object">
+          <tag name="return" line="98" description="Record instance updated with auto-generated id, FALSE on failure" type="object">
             <type>object</type>
           </tag>
         </docblock>
@@ -2911,16 +2924,16 @@ own primary key.</description>
           <type>object</type>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="PHPunk\Component" line="117" package="phpunk\component">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="PHPunk\Component" line="119" package="phpunk\component">
         <name>remove_record</name>
         <full_name>\PHPunk\Component\model::remove_record()</full_name>
-        <docblock line="117">
+        <docblock line="119">
           <description>Deletes a single database record by unique identifier.</description>
           <long-description>Invalidates any previously-cached copy of the record.</long-description>
-          <tag name="param" line="117" description="&lt;p&gt;Unique identifier for database record&lt;/p&gt;" type="mixed" variable="$id">
+          <tag name="param" line="119" description="&lt;p&gt;Unique identifier for database record&lt;/p&gt;" type="mixed" variable="$id">
             <type>mixed</type>
           </tag>
-          <tag name="return" line="117" description="TRUE on success, FALSE on failure" type="boolean">
+          <tag name="return" line="119" description="TRUE on success, FALSE on failure" type="boolean">
             <type>boolean</type>
           </tag>
         </docblock>
@@ -2930,19 +2943,19 @@ own primary key.</description>
           <type>mixed</type>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="protected" namespace="PHPunk\Component" line="131" package="phpunk\component">
+      <method final="false" abstract="false" static="false" visibility="protected" namespace="PHPunk\Component" line="133" package="phpunk\component">
         <name>query</name>
         <full_name>\PHPunk\Component\model::query()</full_name>
-        <docblock line="131">
+        <docblock line="133">
           <description>Runs a raw parameterized SQL query against the database.</description>
           <long-description>Retrieves data from database.</long-description>
-          <tag name="param" line="131" description="&lt;p&gt;SQL query to run&lt;/p&gt;" type="string" variable="$sql">
+          <tag name="param" line="133" description="&lt;p&gt;SQL query to run&lt;/p&gt;" type="string" variable="$sql">
             <type>string</type>
           </tag>
-          <tag name="param" line="131" description="&lt;p&gt;OPTIONAL Array of parameter values for query&lt;/p&gt;" type="array" variable="$params">
+          <tag name="param" line="133" description="&lt;p&gt;OPTIONAL Array of parameter values for query&lt;/p&gt;" type="array" variable="$params">
             <type>array</type>
           </tag>
-          <tag name="return" line="131" description="Result instance returned by query" type="object">
+          <tag name="return" line="133" description="Result instance returned by query" type="object">
             <type>object</type>
           </tag>
         </docblock>
@@ -2957,19 +2970,19 @@ own primary key.</description>
           <type>array</type>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="protected" namespace="PHPunk\Component" line="143" package="phpunk\component">
+      <method final="false" abstract="false" static="false" visibility="protected" namespace="PHPunk\Component" line="145" package="phpunk\component">
         <name>execute</name>
         <full_name>\PHPunk\Component\model::execute()</full_name>
-        <docblock line="143">
+        <docblock line="145">
           <description>Runs a raw parameterized SQL query against the database.</description>
           <long-description>Manipulates data in database.</long-description>
-          <tag name="param" line="143" description="&lt;p&gt;SQL query to run&lt;/p&gt;" type="string" variable="$sql">
+          <tag name="param" line="145" description="&lt;p&gt;SQL query to run&lt;/p&gt;" type="string" variable="$sql">
             <type>string</type>
           </tag>
-          <tag name="param" line="143" description="&lt;p&gt;OPTIONAL Array of parameter values for query&lt;/p&gt;" type="array" variable="$params">
+          <tag name="param" line="145" description="&lt;p&gt;OPTIONAL Array of parameter values for query&lt;/p&gt;" type="array" variable="$params">
             <type>array</type>
           </tag>
-          <tag name="return" line="143" description="TRUE on success, FALSE on failure" type="boolean">
+          <tag name="return" line="145" description="TRUE on success, FALSE on failure" type="boolean">
             <type>boolean</type>
           </tag>
         </docblock>
@@ -2984,17 +2997,17 @@ own primary key.</description>
           <type>array</type>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="protected" namespace="PHPunk\Component" line="154" package="phpunk\component">
+      <method final="false" abstract="false" static="false" visibility="protected" namespace="PHPunk\Component" line="156" package="phpunk\component">
         <name>make_query</name>
         <full_name>\PHPunk\Component\model::make_query()</full_name>
-        <docblock line="154">
+        <docblock line="156">
           <description>Creates a new database query object for this component.</description>
           <long-description></long-description>
-          <tag name="see" line="154" description="" link="\PHPunk\Component\PHPunk\Database\query"/>
-          <tag name="param" line="154" description="&lt;p&gt;Name parameters to pass to query object&lt;/p&gt;" type="array" variable="$args">
+          <tag name="see" line="156" description="" link="\PHPunk\Component\PHPunk\Database\query"/>
+          <tag name="param" line="156" description="&lt;p&gt;Name parameters to pass to query object&lt;/p&gt;" type="array" variable="$args">
             <type>array</type>
           </tag>
-          <tag name="return" line="154" description="Database query object" type="object">
+          <tag name="return" line="156" description="Database query object" type="object">
             <type>object</type>
           </tag>
         </docblock>
@@ -3004,16 +3017,16 @@ own primary key.</description>
           <type>array</type>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="protected" namespace="PHPunk\Component" line="164" package="phpunk\component">
+      <method final="false" abstract="false" static="false" visibility="protected" namespace="PHPunk\Component" line="166" package="phpunk\component">
         <name>get_cached_object</name>
         <full_name>\PHPunk\Component\model::get_cached_object()</full_name>
-        <docblock line="164">
+        <docblock line="166">
           <description>Fetches a cached copy of a data object by unique identifier.</description>
           <long-description></long-description>
-          <tag name="param" line="164" description="&lt;p&gt;Unique identifier for database record&lt;/p&gt;" type="mixed" variable="$id">
+          <tag name="param" line="166" description="&lt;p&gt;Unique identifier for database record&lt;/p&gt;" type="mixed" variable="$id">
             <type>mixed</type>
           </tag>
-          <tag name="return" line="164" description="Cached data object, NULL on failure" type="object">
+          <tag name="return" line="166" description="Cached data object, NULL on failure" type="object">
             <type>object</type>
           </tag>
         </docblock>
@@ -3023,19 +3036,19 @@ own primary key.</description>
           <type>mixed</type>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="protected" namespace="PHPunk\Component" line="175" package="phpunk\component">
+      <method final="false" abstract="false" static="false" visibility="protected" namespace="PHPunk\Component" line="177" package="phpunk\component">
         <name>put_cached_object</name>
         <full_name>\PHPunk\Component\model::put_cached_object()</full_name>
-        <docblock line="175">
+        <docblock line="177">
           <description>Caches a copy of a single data object by unique identifier.</description>
           <long-description></long-description>
-          <tag name="param" line="175" description="&lt;p&gt;Unique identifier for data object&lt;/p&gt;" type="mixed" variable="$id">
+          <tag name="param" line="177" description="&lt;p&gt;Unique identifier for data object&lt;/p&gt;" type="mixed" variable="$id">
             <type>mixed</type>
           </tag>
-          <tag name="param" line="175" description="&lt;p&gt;data object to cache&lt;/p&gt;" type="object" variable="$object">
+          <tag name="param" line="177" description="&lt;p&gt;data object to cache&lt;/p&gt;" type="object" variable="$object">
             <type>object</type>
           </tag>
-          <tag name="return" line="175" description="Cached data object" type="object">
+          <tag name="return" line="177" description="Cached data object" type="object">
             <type>object</type>
           </tag>
         </docblock>
@@ -3050,13 +3063,13 @@ own primary key.</description>
           <type>object</type>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="protected" namespace="PHPunk\Component" line="184" package="phpunk\component">
+      <method final="false" abstract="false" static="false" visibility="protected" namespace="PHPunk\Component" line="186" package="phpunk\component">
         <name>remove_cached_object</name>
         <full_name>\PHPunk\Component\model::remove_cached_object()</full_name>
-        <docblock line="184">
+        <docblock line="186">
           <description>Un-caches a copy of a single data object by unique identifier.</description>
           <long-description></long-description>
-          <tag name="param" line="184" description="&lt;p&gt;Unique identifier for database record&lt;/p&gt;" type="mixed" variable="$id">
+          <tag name="param" line="186" description="&lt;p&gt;Unique identifier for database record&lt;/p&gt;" type="mixed" variable="$id">
             <type>mixed</type>
           </tag>
         </docblock>
@@ -3121,9 +3134,9 @@ own primary key.</description>
       <error line="43" code="PPC:ERR-50015">Argument $table is missing from the Docblock of __construct</error>
       <error line="43" code="PPC:ERR-50008">No summary for method __construct()</error>
     </parse_markers>
-    <source>eJzNV91PIzcQf07+inmIRILCob5yDRyCnorEcRSOJw5FZneSuGzsnL0bLlfxv3f8uZvNbsoBastLWNszv/FvPv3r0WK26O7v7nZhFz4sWPLApgi0VoiHr4mcL6RAkdPmfrcr2Bw1HUG4/P3S7J+E/ffdbqHj8inL2T3T+PVbgWr1vnFLYSJVSnIRWskFqnwFOldcTKGnUMtCEdhV+Mfgw0QqyGdcQ9W4BnHCyRACHrjPZ2mY8++YQo8LTZ9jnsInqXMgg+kksCKXe1MUqFhOp85SkIK0IaQBKZFCYJJzKSxrSca0hrlMMYO/uh1z3Y6B41MhFQIXOSrBMlgyxY2NZne/21koviQE6I0DD8TVC6SDWS+TTlgye6GoJXxN9BUeXpeX938SwdCLlEcvk89yJpKf0GFvCJ8vv5x9vjg+hxP7+Wo1zww7z1lxn/EEJoWwUQPjMYUQcVQkeT9yNCyvOwxwIxBFlg1DrI9gwjKNAxNmnZ6B2juM0UO7vTKSyv3I4agEqO47JPobedTqpsN1m97fnaeGaJmzKV1wjvlMpq2XniJd9wFXzn79yPNkBpWVTmLM3AmX2Dkwax2FeaEE1K/7vhSwhjWfdvYfHWwTj2WgWUXgbO8wHjTCT+tEnNmAyjmlhgYGAh/LeuEqIdB9Z7aQTPkShd1+54ONKTYPVcmsw7HWMiFldBKYUozicGIlgGLM6zs7ddLeXh+oF5vILQ5JFJK1Y3em73BHcHvnnMEn0Od6LIo5Kp647cEA4rEd4gtGh27hzjDi7TBXr+ocBiatLwa1APqIFASWMk0VI8MN1u5XUAhOfQZ4ShnFJxyVo+3K4lG2maBNKekWqyGQ2WzJeGawmtilYn9TV2cTt4GzOrVXzqIoaI2z2pFq5RAubs7PTbOYEH6hsIV2yoLIOU9Lsnv+wqPAlzno7jZ2Btjzg24lRGOPbVFRCd4qbMUfQ4hK/fKiaIAdBqyBBavjr7n0mi23OTSXa930nU+fJct46rJHEKsKl1wWOlvtVdxrksBpWXNtKNEeILgplHgC1GSS+Q2g27wbxIpFagcAm7a1ocAQ8vH4/Pq3f3a3oTPw7imsu9xMIE0uq4quu8wr8mXTp6pOWMZURWnY7/glqmCp6xL+gC2CT4DUU7wOW2uaVFCKILPlurSZaehRGmSprQPkwAJtIEXAW7d9Z0DttgPsbo+2CFANOi+2NfBOMcP8ZbXk+fFnYrchBl9TXu6lzJAJ+HJ1YwNKF0mCWj87xBTO5RLbioousrwxvGpiW4uCP7tZjmrlwIDVvHJVCOMSxR7LWsl/EFnXf5yDfT8AmzKTdg11gWq84mjqie07EyXntROe/zBx6m9ZRTGlvCpE9Zxrpj37octx7jj02Ggi2IDV1nlWWXPNsOzGmuF2XWOIQnZoljmdp43oNLvdN/YOozll9y1XyqR0SwM4iucP3HXGmsIB+0a1mbHo/FT3B0P4ZVBpy5v+b7Cg3p1f5btPTPBFkdmcst7j4n/hu59Ot03n4XdMihz/U/c12lB34Imd8TYmUsewD+LNZ4v3jsaWB3+DU4zRcGFeQdEL2rhwYd7G9FtFbMqk0ybT2h0wZw849gFsoD3t5t9b/x64K4teeLlUR1QvXKN16G7SPqXWugHzQ7m7RHt/ebsh9MQZUIFtHTw3aWseKavzvg9W2/l7dlygNw+n3vgDfb2PLH5Ye0HaCbMf20V80zqZtZhkgctIYqVfvymXawG3Piz63yokham9yvNob2e5bYJ2H29FN6E00l0C1Xi/EW6W+Xeob3h/bjLVOla8EUdO/5aofOr+DaKL3Fg=</source>
+    <source>eJzNWFtPG0cUfvb+ivNgCRuZoL5CDUHQqEiEUAhPBFnD7rE9ZT3rzOyaOBX/vWeue/Eu5aa2eTE7M+cy3/nOZfLr4XK+jHa3tyPYho9LFt+zGQKtFeL+W5wtlplAkdPmbhQJtkBFRxAufr/Q+8d+fz+KChWWT1jO7pjCb98LlOv91i2JcSYTkgumZbZEma9B5ZKLGfQlqqyQZOzS/6HtwzSTkM+5gqpzLeJkJ0Xw9sB+PkvDgv/ABPpcKPqc8AQ+ZyoHcphOAivybGeGAiXL6dRpApkgbQiJtxRnQmCc80wY1OKUKQWLLMEU/op6+ro9bY7PRCYRuMhRCpbCikmufdS7u1FvKfmKLEB/4nEgrF4h7d16nXTM4vkrRQ3gNdE3RLgun939SQBDP0Aeokwxy5mIX6DD3BC+XHw9/XJ+dAbH5vPNap5JO4dZcZfyGKaFMKyByYQoRBgVcT4IGI3K6468uTGIIk1HnutjmLJU4VDTrNfXpnYOAntot18yqdwPGI5LA9V9a4n+jZ3V6qa1azddvHuPLWxZsBldcIH5PEs6Lz1Duu49rq3/6oHn8RwqK71Yu7nlL7G1p9d6EvNCCmhed78UMI61n7b+H+49JR7KQLsKj9nOQTiohR/rQJwaQuWcUkMBA4EPZb2wlRDovnNTSGZ8hcJsf3BkY5ItfFXS63CkVBaTMjoJTEpGPJwaCSCOOX2nJ1ba+euIer5puSMgsUTydmLPDKzdMdzc2mDwKQy4mohigZLHdns4hHBsi/CC8YFduNWIOD/01as6Rx5JE4thg0CfkEhgIFNUMVLcQO1uDYXg1GeAJ5RRfMpRWtgujT3KNk3ahJJuuR4Buc1WjKfaVhu6VOyvm+pM4rZg1oT20noUBI1zRjtSrRzB+fXZmW4WU7JfSOyAnbIgYM6TEuy+u/DY46UP2rtNrAPm/DCqUDT02A4VFfJWzVbiMQKj1Oafk985oAuxnYNqZbEitexxa8uixc2R921ocyXa9LlGgyu2eooEeVbrwB9cyq1YyhObcYIiIXHFs0Kl650KJXTiWC01Oviy7gz40Pq2QAYVuaR/vdGnGOHFimVihgaT6o1BQoPy6ejs6rd/poiG1MfKwdikiZ5a2sJcFa2H2SlyoXbprWKWMllR6vdLLlhD4YAJ/SMg9SGnw9SnNhWUVshMiS99Zgr6lDppYmoHBbBAw+hg8MZu32qjZtsajJ5mXDDwUuKdYIr56+rP8/mnudvCwbeUpLssS5EJ+Hp5bQilijhGpZ5NMYmLbIVdhUgVad5Kr4bYZiGphMmd3Sxh+/WoaGONqFwWQodEsoeyvvKfBNbVH2dg3hzAZkynXUtdoL4gOep6YnrVVGaLxgmHv59S1fe0ophSXhaies424L75UOUIeOT7cnARDGGVCZ5R1l4zDLqhZthd20yCkBm0s5zO00YImtkeaH9HwZ2yY5crZVLapSEchvN79joTRXTAgVat5zI6P1OD4Qh+GVZa+Wb8WzxodvQ3xe4zE3xZpCanTPS4+F/E7sXpthk8/IFxkeN/Gr5WH5oBPDZz4cYUaxF2JN586rjoKOz4T4KWoGin4Vy/nEIUlA7hUr+n6bdqsS2TTtpc6w7Agt3jxBFYm3aw6z9v3Bvitix6/rVTHWudcAPWkb1J92Tb6AbMDfL2Et395f0G12PrQMVs57C6CVv7GFp9Iziyms7fN+MCvZM49caf6Op9QPFj7dVpptJBY7a0jaTJSeaxDCBW+vW7YlkjXH1YdL9Vk0RTc5Xnwd6NctcUbT/eC26y0gp3aaiB+7Wws8y/A33Lm3UTqc6x4p0wsvqfYOVj9DefVuyg</source>
   </file>
-  <file path="index.php" generated-path="index.html" hash="399facb524ecf68016f9cdefd0cf1f9f" package="Default">
+  <file path="index.php" generated-path="index.html" hash="245d66e0d68980518f2f8f1c773a3a73" package="Default">
     <docblock line="0">
       <description></description>
       <long-description></long-description>
@@ -3132,7 +3145,7 @@ own primary key.</description>
     <parse_markers>
       <error line="0" code="PPC:ERR-50000">No summary was found for this file</error>
     </parse_markers>
-    <source>eJyF0s0OwjAIAOD7nsLbbu4BNPFRTEeJq7alo9Rkb2/9yZYYtp35oEA5X9KQmoZxLI7xShHw0AKFZKQDnpLQsYL2pAuZEuYtMIikX/wPFHG+A/IeQVzvUa3yQaGI2QTU32sR/RkwMOipyEysRoQeGPWcJ0bRG2GvN2BN7d5k7HJtJBg1eTbrg86kZ2dvO4bRG3GkzzCrsSBPe4WA2O6ZXPza9usVUKw76wJZ9KuX8jVAUfh9Efq3LFAwpDqhvoWFMUaLvFut5Jm8AJ1FGwc=</source>
+    <source>eJyN0lEOwiAMANB/T+Hf/uQAmngUw6Bxi0BZKSa7vRjdZmIR/0j6WmjL6RyHuNsRTHkkuGAwsO8M+qhZGZoj46GA7igLniOkX2Bgju/4F3AODI8Y1HLsHVRqrdRn1n+w7Vi5XJtBLgJESGKE8QZBzrlDYDGSyckPsLr0oROoVB7itZi8mnrLK+lptNeGIXD6YyQVNWWguVXIINmWSdlxbfU+YigzUx4tuOr/eRmDgem5T3ktG2TwsXRY+xwLIwgWqFktp5U8AM6fJAY=</source>
   </file>
   <file path="database/table.php" generated-path="database.table.html" hash="44b507d301de0eda701ec271040be13e" package="phpunk\database">
     <docblock line="0">
@@ -3657,14 +3670,14 @@ Supported options for **PASSWORD_BCRYPT**:
     </function>
     <source>eJylVm1z00YQ/mz/ioVxkRyckGQ6fCB4IBBDmQLJ2Am0E6jmLJ2tm8g6cXeycVv+e3fvdJbsOC60k5kkutv359m9ffqsSIv2o729NuzBCxbfLJhK9H4sZwUzYiwyYZYwKfPYCJlrYHkCMf5jWG40qpDW8wLV2JQDWirzm09O91OsloWRKPCo3U74ROQ8CYOL09Ho4/nwLHrxcvj7xWXQBZAK3PXt2x7AUfdki/bZ4NXp1VtS36btb3uwYRBttcUEwns+oYh/FdroMFCYmJxF46XhOuh24a92i2rSwvRe85wrhueYPDA1FkYxtYSM51OTgjZK5FOQE3D5ThUrUhGDMwjWIJiUGVTloEth2DjjMMG41xVKzXt4H6fANCxSnsPUOSbzmmVG9+CGLzVlLHJhBMvEn4ySgDmPjVT6wIZ7qcR0ypUGrhSJTiCX5MoU3hXLsiVoHpcYUBVmXs7GXHmPFBvmOqYwyzyxdq1tRFqxGbo3HF1Ap6rBZcp9ObAOJl2ZrYpj09epLLOEjCpuSoV4oh1XHxf4c3fulYb2C4vuD5B2hmHm1iBZ+VJybdBMFfwmBFvSrL09arc8B6CJfVjlZBnQqiKKtkqctFvf2t/uIlTKdBphiCzb5NNLag9FrFjIKjeN6Pu8NJtxMAJ/IQnwQNHpMsAkrDWCP5emwjoVetWcjQojlxIwEmZIkylSl+yRfWYMtqo+sfQTtotjZJ1lG6ZmqWZrGHahYFovpEqAMqmq1iRBhUqHro8sBepWuMnlIveUwDhilzKwKSOvd5k5tmYweLWvy6LIBGbh7jcha1Q3dBH0KhPrwO2Q2w2fz95a2ARQcTcOIOeL9TpVOFrOSqpFzvcXbGnv7EU2lUqYdObxoxbLMrlYu9TVrCgKqZDgT6ws/uxtTri9PdiHK80tccYWudrKbS03BNeU7En04u35x1dvRr/UyhY1m6cVo/gPHN0WIsugUDIpY24Txd7AJ2PFG/9yZLxZETJyv3O87NwHkfDciIng6sAWAFuhzIyzyzKsliYKM3h8CHGKHIkN9oCjQY/Y/+r07WiAlYUJExk2d83Mka8YyMI9V8TzLQWoK0qD1RaEuoXlpR0amN0co6Ts8JqukJOuSzyQlI9H/gDeTEBir6HnHir54cd8VphONVm5G6bWdSy1c73AYZXiK4Ztbd8KXsOA7wKJbU5Q6u9Nr/gKMqrjnGUlpyY8Olx5t/J3NfCKwL75Ar1KbevUp+jgtCZ+TRq/GbhkfJ3WSLWzkk13TClsnE6F5K4XwhMUcfeG7iZKc4qsNXnYqZVtir2Vc+jD9ef1wfK9qt87ZuZciclyY9B8oEPh9wdKcyrmVemQrSZOK7644xUf/y/SzZmMQNs/bhgg+5YbZeuuQTOWMuO4O3hsLodXA9pBmijbJbLOoYkVvXcLoXdA5Qq1VnEydQc6d0l7VKq997mY5hJHLlFc5fjIer92e10FsX0PIM+E7i1wZcFzrTOvVWheJnK1Ytbh7pBrLhs803yrn5kdvZFDKBJz3IofPIDV0vzOzfizwYfoanj6/uz83Zr3TW3vsge3FWl/bhm3YEZ2vwyD9xLYHBvMrrUvRxfD969xDlSDyu2PuIgPoqvRYBgNhsPzobVStzKihVGizMpxnKrwsItiiBBYiHZjtA7Sv+wGVEL0ir6q2y7c6/eheXSMbVjFN0ErnOLtjHFb7ft154/KIsLSQUm8OCQhem7CjqBP9Eny3ixqd08Ar57iOf3z8CFhYJX/7mMHJFbmuiM+N8vjjPeteU/XH6nFj084/tXQkxv6G4Tut8thNPr1zYUNzM4xoTVHEXrh3MRqdewz1Yfqhr668Ax0gZPETMLgp8PjhCB2F08gODoMTkjPvpJ9CGg3CODASeDfwH4RPRQvMhbz8Dp4iBaCfvC5h4qt64B4FeAXjJnmj3+OeB7LhIdrTXr0uNt13b6qqVtUmrWwefxHtn3XYKo832Jmb0swVslG8w/4OCPA</source>
   </file>
-  <file path="component/renderer.php" generated-path="component.renderer.html" hash="61b79e08b84b276798993533d9905a6b" package="phpunk\component">
+  <file path="component/renderer.php" generated-path="component.renderer.html" hash="5e3ca0f2cab09ee5fbbc9d77f4d1482f" package="phpunk\component">
     <docblock line="0">
       <description></description>
       <long-description></long-description>
       <tag name="package" line="0" description="phpunk\component"/>
     </docblock>
     <namespace-alias name="api_error">\PHPunk\api_error</namespace-alias>
-    <namespace-alias name="object">\PHPunk\Util\object</namespace-alias>
+    <namespace-alias name="collection">\PHPunk\Collection\collection</namespace-alias>
     <namespace-alias name="result">\PHPunk\Database\result</namespace-alias>
     <namespace-alias name="record">\PHPunk\Database\record</namespace-alias>
     <class final="false" abstract="false" namespace="PHPunk\Component" line="16" package="phpunk\component">
@@ -3728,16 +3741,16 @@ have transformed field names/values and contain API hyperlinks.</description>
           <type>object</type>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="protected" namespace="PHPunk\Component" line="102" package="phpunk\component">
+      <method final="false" abstract="false" static="false" visibility="protected" namespace="PHPunk\Component" line="106" package="phpunk\component">
         <name>get_links</name>
         <full_name>\PHPunk\Component\renderer::get_links()</full_name>
-        <docblock line="102">
+        <docblock line="106">
           <description>Adds relevant hyperlinks to a data object in API response</description>
           <long-description></long-description>
-          <tag name="param" line="102" description="&lt;p&gt;The data object being rendered&lt;/p&gt;" type="object" variable="$record">
+          <tag name="param" line="106" description="&lt;p&gt;The data object being rendered&lt;/p&gt;" type="object" variable="$record">
             <type>object</type>
           </tag>
-          <tag name="return" line="102" description="Multidimensional array of keys and URL parameters" type="array">
+          <tag name="return" line="106" description="Multidimensional array of keys and URL parameters" type="array">
             <type>array</type>
           </tag>
         </docblock>
@@ -3747,16 +3760,35 @@ have transformed field names/values and contain API hyperlinks.</description>
           <type>object</type>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="protected" namespace="PHPunk\Component" line="119" package="phpunk\component">
+      <method final="false" abstract="false" static="false" visibility="protected" namespace="PHPunk\Component" line="120" package="phpunk\component">
+        <name>get_embeds</name>
+        <full_name>\PHPunk\Component\renderer::get_embeds()</full_name>
+        <docblock line="120">
+          <description>Adds relevant embedded objects to a data object in API response</description>
+          <long-description></long-description>
+          <tag name="param" line="120" description="&lt;p&gt;The data object being rendered&lt;/p&gt;" type="object" variable="$record">
+            <type>object</type>
+          </tag>
+          <tag name="return" line="120" description="Multidimensional array of keys and objects" type="array">
+            <type>array</type>
+          </tag>
+        </docblock>
+        <argument line="0" by_reference="false">
+          <name>$record</name>
+          <default></default>
+          <type>object</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="protected" namespace="PHPunk\Component" line="129" package="phpunk\component">
         <name>map_field_name</name>
         <full_name>\PHPunk\Component\renderer::map_field_name()</full_name>
-        <docblock line="119">
+        <docblock line="129">
           <description>Maps database field name to API field name</description>
           <long-description></long-description>
-          <tag name="param" line="119" description="&lt;p&gt;Database field name&lt;/p&gt;" type="string" variable="$field">
+          <tag name="param" line="129" description="&lt;p&gt;Database field name&lt;/p&gt;" type="string" variable="$field">
             <type>string</type>
           </tag>
-          <tag name="return" line="119" description="API field name" type="string">
+          <tag name="return" line="129" description="API field name" type="string">
             <type>string</type>
           </tag>
         </docblock>
@@ -3766,19 +3798,19 @@ have transformed field names/values and contain API hyperlinks.</description>
           <type>string</type>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="protected" namespace="PHPunk\Component" line="129" package="phpunk\component">
+      <method final="false" abstract="false" static="false" visibility="protected" namespace="PHPunk\Component" line="139" package="phpunk\component">
         <name>map_field_value</name>
         <full_name>\PHPunk\Component\renderer::map_field_value()</full_name>
-        <docblock line="129">
+        <docblock line="139">
           <description>Transforms database field value into API field value</description>
           <long-description></long-description>
-          <tag name="param" line="129" description="&lt;p&gt;Database field value&lt;/p&gt;" type="mixed" variable="$value">
+          <tag name="param" line="139" description="&lt;p&gt;Database field value&lt;/p&gt;" type="mixed" variable="$value">
             <type>mixed</type>
           </tag>
-          <tag name="param" line="129" description="&lt;p&gt;Database field name&lt;/p&gt;" type="string" variable="$field">
+          <tag name="param" line="139" description="&lt;p&gt;Database field name&lt;/p&gt;" type="string" variable="$field">
             <type>string</type>
           </tag>
-          <tag name="return" line="129" description="Database field value, NULL if field is not mapped" type="mixed">
+          <tag name="return" line="139" description="Database field value, NULL if field is not mapped" type="mixed">
             <type>mixed</type>
           </tag>
         </docblock>
@@ -3793,10 +3825,10 @@ have transformed field names/values and contain API hyperlinks.</description>
           <type>string</type>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="protected" namespace="PHPunk\Component" line="134" package="phpunk\component">
+      <method final="false" abstract="false" static="false" visibility="protected" namespace="PHPunk\Component" line="144" package="phpunk\component">
         <name>build_url</name>
         <full_name>\PHPunk\Component\renderer::build_url()</full_name>
-        <docblock line="134">
+        <docblock line="144">
           <description></description>
           <long-description></long-description>
         </docblock>
@@ -3827,10 +3859,10 @@ have transformed field names/values and contain API hyperlinks.</description>
       <error line="16" code="PPC:ERR-50005">No summary for class \PHPunk\Component\renderer</error>
       <error line="25" code="PPC:ERR-50015">Argument $resource is missing from the Docblock of __construct</error>
       <error line="25" code="PPC:ERR-50008">No summary for method __construct()</error>
-      <error line="134" code="PPC:ERR-50015">Argument $params is missing from the Docblock of build_url</error>
-      <error line="134" code="PPC:ERR-50008">No summary for method build_url()</error>
+      <error line="144" code="PPC:ERR-50015">Argument $params is missing from the Docblock of build_url</error>
+      <error line="144" code="PPC:ERR-50008">No summary for method build_url()</error>
     </parse_markers>
-    <source>eJyVVttuGzcQfdZ+xSAQupIh23nJi9Q4TWMXLeCkhho/ycaC2h1JjFfkguTKMYL8e4e3veiSpn7yDoczZ86cGerXd9WmSi7PzhI4g98qlj+xNQLZavH0kMttJQUKQ4eXSSLYFjW5INz9eWfPP8TzWZLUujGzimeolFSzrvXe8PJBLr9gbnr2a2bYkml8UKjr8uRZLlVBaRqkSlaozAtoo7hYw5Buy1oRtk+EEuQKzAahMa6kIgPX0C8pL5nW5CUKVKjgWzKw8Qc2AV8LqRC4MKgEK2HHFGfLEu3pZTKoFN8xgzDMYg4C194+DW8e/7FsHsMV4tfLkuewqkVuuBSQZbkUFKzOzagJNraIB0Mb4PyqAQJv23SzZPA9Oaxqy9YUfItmI4uTCddIqZ7wxWfRz9zkG+hYBjl1BtKYKp1a20ChqZWAfVAEhJD0wMwd7RoYFKHN4CXgWHl/95f9JFI0XgRSmWJb8BJyJVrf6/7dCXipTIBiOBGGC03fpKEvLNpKfftHIaCvja8gGkgC2jCRI2nKxw7lDyM8S7gvN1dIosjiQRPTVQ9YajwZuM3dC7x4tHcHxAgyR3+4y7RlwKFxtDd3Fo8/hONu/CecZoIDIuvGtUYTnRcp+Zpap4/j4DLYGFM1qUitBR5xdsUManE8lDu1EtkjN26GiPqQJoHPLehRav/lYsdKXjSQ0onLnX72e8HffCYeg+NFOp651EcKefP6tSfNOmyQWb2kHyTtBmHOzUuFUzD41Vx+0VKkzhPzjQT7maFouHARx3sz+XvNy4KmQDjJ21GIEl8pue1Ph+3eBQ2OHTGScPB75mXpQm3YDsEoJjTpZWs1zrEs3KbRl1RkjTZPQctGGMZ9wg2hVyUXT/rElNmc3Smz394zjHpw3UN/et5OqdIvs72m+mAj35ruFDhYdgpoH8HbKxi6+uIEbVmVuQN3PmtszqkdEGtyHPmDkQ8ygXjfK9INSbRAO2nR5iauid7oZOhYDTPcQ++T037NnEvLgJ/q0tXj+qBjQf5rYZWd2nz0EqAvy4VY2GvWvvAi3yhcpS6Mz7W0IstqVY5iXOv32GKNRZ1fRdQ+sEMed3p02lPw+6Kwj2iJOyZMR1BgZJBv1EjQXIzzA8HZKe3eXKJ9RsNL3dcfU4q9wEfaELzgWxSaREYPtjfTMqMOednfz2/BJUN60/VpgR5pzLeWBcdwqrH0BAfCm1ewQ3q0hcXDixT8n3Xxkc+veOE64XzSXJYlOhA/G9tdTnwruz35yCrdbo52D9ie2Ba0lm4T4q8Vf3p9eL1HfPA+DHec1nbYrN/IJ+lR6017lXyO++ygHj/M9AutW5Izdmva8q+Ewk/2fkkHzv+PAB/6WMwJfLq/vQXaHN5Iv/CENJaCCoufoai/j37pkhXAHVliXV5n+7TCu0jCFERdloHmIygOl4XLS9Ss16jCG/vqjwZ0re18gtzRCS8KFJPmJ/V02gYbv5rATXb/z808u5nP/577h/B78i/V4/77</source>
+    <source>eJzNV01v20YQPYu/YhEIpezKcS69WI3T1HbRAE5qqPFJMYgVORI3JpfE7lKuEeS/d2Y/+CXJbW/1SZydnXnz5s2Q/vldndfR+elpxE7ZLzVPH/kWGNoa+fglrcq6kiANHp5HkeQlaHQBdvf7HZ1fhfNFFDW6NfNaJKBUpRZ961VVFJAaUUmMG34OPK654Wuu4YsC3RTm2FlaqQwTtphVVYMyz0wbJeSWTfF21ShE+QnxsmrDTA6sNW4qhQah2bC4tOBao5fMQIFi36IJxZ9QArGVlQImpAElecF2XAm+LoBOz6NJrcSOG2DTJORAcN3t4/CW4QfxegiXj9+sC5GyTSMtYyxJ0kpisCY1szbYCSGeTCnA2WULhL3t0i2iyfdov6qSbzF4CSavsqMJt4CpHuHZZdFPwqQ561kmKXaGxSFVfEG2iQLTKMnGoBAIIhmAWVraNeMs821mTgKWlfd3H+gRSdHw2pPKFS9Ztf6KKrIlku/18O6cOanMGcawcvQX2r5VBp8g6yp17Z/5gK42sWHBgBLQhssUUFMuti9/GuAR4a7cVAGKIgkHbUxbPYNCw9HAXe5B4NUD3Z0gI8At/f4u18SARWNpb++sHl6EY2/8I5x2lj0ichNagwnOqxh9TaPjhxPvMsmNqdtUqNYMDjjbYiaNPBzKnpJERuSGzRBQ79Mk4akDPYvpp5A7XoishRTPbe74s9sL7uYT8ugdX8cnC5v6QCE/vXnjSCOHHDjpJb6qcDdIc2aea7jA7DXODydFnee8+PGrrmRsL0GaV4weE5AtLTb4yWg8f21EkeFASKt+moqg9o2qyuGgUCNf4wzRtKGavd+TKAobKuc7YEZxqVE6JcldQJHZpaPPsd4GKE+Ge0caLlzCHAtRhZCP+sjAUc7+wNGz8/RT711H6I+P3jGBur026m/3/pi5TvWHwkKjocD1xN5esqmtMQxUyevEHtjzRWuzTt28kMny5A5mLsichftOoHZmgoV1gxdsdgDb6K1sppZZP9ID9C45rtvEunQsuCEvbD22FzoU5J5WJPSY8uGLAVxZNsSKrpF95TSfK9jENozLtSahJY0qZiEu+T10WENRuMEDbBfZQrcMQLmGTHfkEX5nawsY7zOMZj0y1ADec95t0vDmCN6j4XifZfSqLmDHpelplZnKT0aQn5dziPOClmkX9G+ugV7W/ntgKG2uFH9mH3EPiUyUIDXqED8LnBlXJjbeTdT98pbZZIBfDvq49g/0+1vHgm1crKFwffN9bN+1vV4Gm19vIouZ+yMXF/nsUmS2wZFr8nFa2/Y4Qv535HpYL7M6UuGA1nH5H3mtu7XaLUkqnOrsLP1Kw1edO73evz6oznvvhztcQreFyG/mkgyqcKZRJZ/Dst+rx205/JLtl2SN/ZpK8ReicCtvXNKe838jwIU+FHPOPt3f3jJcKM6IX8KyMkRBDdm/oWi4qH/ok+XBHdjufV4XY1rZu0DCBZNNUXiaD6DY36I2L1Kz3YLy3yKvfmtBN5qGgFU7PBE4ZXLe/utxcdEFO3k1ZzfJ/Z83y+Rmufxj6b4Svkd/A0jKZ4o=</source>
   </file>
   <file path="cache.php" generated-path="cache.html" hash="1b6a444ebefc66181c339d5947f38b39" package="phpunk">
     <docblock line="0">
@@ -3986,7 +4018,7 @@ omitted, removes all objects of the given type.</description>
     </parse_markers>
     <source>eJy9lV9P2zAUxZ+bT3GH+kBRS9/H+LeNaZUKrVh5Qqhyk5vGI7Ez2ykgxHfftZ20SSGMTWJvle/18bnnZ6efjvMkD4Z7ewHswUnOwlu2RKC1QtzS0jAIBMtQUwFh+n1KqwdB1f6ZaR6CwhgVCqrzLE8xQ2GY4VLsw3mRGj4wDzn2gYtBhplUDxCyMMF9px2mTGu/AI9Bx8p2rA2+FFKRnjCoBEthxRRnixRtdRh0ciUNhgYj6M5J1O0nV/+0P2KGwSFc39QFzktR4JrG+1VwRb1GQq5Qo1phaZmFSpL/zI5Jk7tW1Ebvexc5UywDufhJZ0G3MgqT6Ww0uTgdb06Rav07ItPaMEqz8losUgo5LkRoQ4X5PJTUoYrQ7G40DyFmqcaeTbHTNQnXg6N5rdrdxNR5qg16iaZQQsNdgiZBZZ0IaYBBaaY0j/ecxoKYytQGS75CAZYrMBHBKPIDj2JXHUU2NplxQwn3KZTmEW6bF2zkRDNxsYSuq1/QnQMZV+fbtXpvxu8tPB5twrwSnMKvNowi3+4Ph4WUKTIBs8urM+BrWdlwQ8n7sfvw7XT84wyk9XvHdRuKhOndrr/d1kqDAR2y+4FrjUSpxGFv2rXrv+n1qKVTmnO77O2rFqzYMbRuvqb6TQ8+Al2CNp7bAP9A7j8g8P2zBJvO+nBxNR5bJvbeeRAtcS9dHO1xb1/7esbbtcGRVdtxckNS2+k9B3DSlj1F/1JtC8UXew6REFUgd9wk7wbh5ewbXWXNIqjkpIfxFlAtUPKiDqVfnfIKFVd59o0aHOkmkI3UAQyHMJt8nYDhGcrCHNfB+ibK3oVfLbezO6xtab6cTK7eyAtiJTNX8v9ljS+fU6t9/UrZNC11teXZlH3vR/gCN+/r795TG7kIUzS49ZrWiNZonCaP3LMsxKsfN7sHU/vhfaW15wg+Bb8B7OPCeg==</source>
   </file>
-  <file path="url.php" generated-path="url.html" hash="dd9c3d20112b3b8e66cfc6cdc1948058" package="phpunk">
+  <file path="url.php" generated-path="url.html" hash="ffd5b11d4dcfa497791e5a3713467548" package="phpunk">
     <docblock line="0">
       <description></description>
       <long-description></long-description>
@@ -4025,16 +4057,22 @@ omitted, removes all objects of the given type.</description>
           <type>string</type>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="PHPunk" line="70" package="phpunk">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="PHPunk" line="79" package="phpunk">
         <name>add_resource</name>
         <full_name>\PHPunk\url_schema::add_resource()</full_name>
-        <docblock line="70">
+        <docblock line="79">
           <description>Registers a resource name. Registers alias for resource, if included.</description>
-          <long-description></long-description>
-          <tag name="param" line="70" description="&lt;p&gt;Resource name&lt;/p&gt;" type="string" variable="$resource">
+          <long-description>Adds resource-specific actions:
+  - save
+  - delete
+
+Adds resource-specific views:
+  - index
+  - item</long-description>
+          <tag name="param" line="79" description="&lt;p&gt;Resource name&lt;/p&gt;" type="string" variable="$resource">
             <type>string</type>
           </tag>
-          <tag name="param" line="70" description="&lt;p&gt;Alias for resource name&lt;/p&gt;" type="string" variable="$alias">
+          <tag name="param" line="79" description="&lt;p&gt;Alias for resource name&lt;/p&gt;" type="string" variable="$alias">
             <type>string</type>
           </tag>
         </docblock>
@@ -4046,38 +4084,38 @@ omitted, removes all objects of the given type.</description>
         <argument line="0" by_reference="false">
           <name>$alias</name>
           <default>false</default>
-          <type>string</type>
-        </argument>
-      </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="PHPunk" line="87" package="phpunk">
-        <name>is_resource</name>
-        <full_name>\PHPunk\url_schema::is_resource()</full_name>
-        <docblock line="87">
-          <description>Returns canonical resource name, if it exists.</description>
-          <long-description></long-description>
-          <tag name="param" line="87" description="&lt;p&gt;Resource name or alias&lt;/p&gt;" type="string" variable="$resource">
-            <type>string</type>
-          </tag>
-          <tag name="return" line="87" description="Canonical resource name, FALSE if no such resource or alias exists" type="string">
-            <type>string</type>
-          </tag>
-        </docblock>
-        <argument line="0" by_reference="false">
-          <name>$resource</name>
-          <default></default>
           <type>string</type>
         </argument>
       </method>
       <method final="false" abstract="false" static="false" visibility="public" namespace="PHPunk" line="96" package="phpunk">
-        <name>add_alias</name>
-        <full_name>\PHPunk\url_schema::add_alias()</full_name>
+        <name>is_resource</name>
+        <full_name>\PHPunk\url_schema::is_resource()</full_name>
         <docblock line="96">
-          <description>Registers an alias for the given resource name.</description>
+          <description>Returns canonical resource name, if it exists.</description>
           <long-description></long-description>
-          <tag name="param" line="96" description="&lt;p&gt;Alias for the resource name&lt;/p&gt;" type="string" variable="$alias">
+          <tag name="param" line="96" description="&lt;p&gt;Resource name or alias&lt;/p&gt;" type="string" variable="$resource">
             <type>string</type>
           </tag>
-          <tag name="param" line="96" description="&lt;p&gt;Original resource name&lt;/p&gt;" type="string" variable="$resource">
+          <tag name="return" line="96" description="Canonical resource name, FALSE if no such resource or alias exists" type="string">
+            <type>string</type>
+          </tag>
+        </docblock>
+        <argument line="0" by_reference="false">
+          <name>$resource</name>
+          <default></default>
+          <type>string</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="PHPunk" line="105" package="phpunk">
+        <name>add_alias</name>
+        <full_name>\PHPunk\url_schema::add_alias()</full_name>
+        <docblock line="105">
+          <description>Registers an alias for the given resource name.</description>
+          <long-description></long-description>
+          <tag name="param" line="105" description="&lt;p&gt;Alias for the resource name&lt;/p&gt;" type="string" variable="$alias">
+            <type>string</type>
+          </tag>
+          <tag name="param" line="105" description="&lt;p&gt;Original resource name&lt;/p&gt;" type="string" variable="$resource">
             <type>string</type>
           </tag>
         </docblock>
@@ -4092,16 +4130,16 @@ omitted, removes all objects of the given type.</description>
           <type>string</type>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="PHPunk" line="108" package="phpunk">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="PHPunk" line="117" package="phpunk">
         <name>is_alias</name>
         <full_name>\PHPunk\url_schema::is_alias()</full_name>
-        <docblock line="108">
+        <docblock line="117">
           <description>Returns canonical resource name for the alias, if it exists.</description>
           <long-description></long-description>
-          <tag name="param" line="108" description="&lt;p&gt;Alias for the resource name&lt;/p&gt;" type="string" variable="$alias">
+          <tag name="param" line="117" description="&lt;p&gt;Alias for the resource name&lt;/p&gt;" type="string" variable="$alias">
             <type>string</type>
           </tag>
-          <tag name="return" line="108" description="Canonical resource name, FALSE if no such alias exists" type="string">
+          <tag name="return" line="117" description="Canonical resource name, FALSE if no such alias exists" type="string">
             <type>string</type>
           </tag>
         </docblock>
@@ -4111,17 +4149,17 @@ omitted, removes all objects of the given type.</description>
           <type>string</type>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="PHPunk" line="118" package="phpunk">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="PHPunk" line="127" package="phpunk">
         <name>add_action</name>
         <full_name>\PHPunk\url_schema::add_action()</full_name>
-        <docblock line="118">
+        <docblock line="127">
           <description>Registers an action name. If resource is omitted, the action is registered
 as a global action.</description>
           <long-description></long-description>
-          <tag name="param" line="118" description="&lt;p&gt;Action name&lt;/p&gt;" type="string" variable="$action">
+          <tag name="param" line="127" description="&lt;p&gt;Action name&lt;/p&gt;" type="string" variable="$action">
             <type>string</type>
           </tag>
-          <tag name="param" line="118" description="&lt;p&gt;OPTIONAL Resource name&lt;/p&gt;" type="string" variable="$resource">
+          <tag name="param" line="127" description="&lt;p&gt;OPTIONAL Resource name&lt;/p&gt;" type="string" variable="$resource">
             <type>string</type>
           </tag>
         </docblock>
@@ -4136,19 +4174,19 @@ as a global action.</description>
           <type>string</type>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="PHPunk" line="133" package="phpunk">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="PHPunk" line="142" package="phpunk">
         <name>is_action</name>
         <full_name>\PHPunk\url_schema::is_action()</full_name>
-        <docblock line="133">
+        <docblock line="142">
           <description>Returns canonical action name, if it exists.</description>
           <long-description></long-description>
-          <tag name="param" line="133" description="&lt;p&gt;Action name&lt;/p&gt;" type="string" variable="$action">
+          <tag name="param" line="142" description="&lt;p&gt;Action name&lt;/p&gt;" type="string" variable="$action">
             <type>string</type>
           </tag>
-          <tag name="param" line="133" description="&lt;p&gt;OPTIONAL Resource name&lt;/p&gt;" type="string" variable="$resource">
+          <tag name="param" line="142" description="&lt;p&gt;OPTIONAL Resource name&lt;/p&gt;" type="string" variable="$resource">
             <type>string</type>
           </tag>
-          <tag name="return" line="133" description="Canonical action name, FALSE if no such action exists" type="string">
+          <tag name="return" line="142" description="Canonical action name, FALSE if no such action exists" type="string">
             <type>string</type>
           </tag>
         </docblock>
@@ -4163,17 +4201,17 @@ as a global action.</description>
           <type>string</type>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="PHPunk" line="147" package="phpunk">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="PHPunk" line="156" package="phpunk">
         <name>add_view</name>
         <full_name>\PHPunk\url_schema::add_view()</full_name>
-        <docblock line="147">
+        <docblock line="156">
           <description>Registers a view name. If resource is omitted, the view is registered as
 a global view.</description>
           <long-description></long-description>
-          <tag name="param" line="147" description="&lt;p&gt;View name&lt;/p&gt;" type="string" variable="$action">
+          <tag name="param" line="156" description="&lt;p&gt;View name&lt;/p&gt;" type="string" variable="$action">
             <type>string</type>
           </tag>
-          <tag name="param" line="147" description="&lt;p&gt;OPTIONAL Resource name&lt;/p&gt;" type="string" variable="$resource">
+          <tag name="param" line="156" description="&lt;p&gt;OPTIONAL Resource name&lt;/p&gt;" type="string" variable="$resource">
             <type>string</type>
           </tag>
         </docblock>
@@ -4188,19 +4226,19 @@ a global view.</description>
           <type>string</type>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="PHPunk" line="162" package="phpunk">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="PHPunk" line="171" package="phpunk">
         <name>is_view</name>
         <full_name>\PHPunk\url_schema::is_view()</full_name>
-        <docblock line="162">
+        <docblock line="171">
           <description>Returns canonical view name, if it exists.</description>
           <long-description></long-description>
-          <tag name="param" line="162" description="&lt;p&gt;View name&lt;/p&gt;" type="string" variable="$action">
+          <tag name="param" line="171" description="&lt;p&gt;View name&lt;/p&gt;" type="string" variable="$action">
             <type>string</type>
           </tag>
-          <tag name="param" line="162" description="&lt;p&gt;OPTIONAL Resource name&lt;/p&gt;" type="string" variable="$resource">
+          <tag name="param" line="171" description="&lt;p&gt;OPTIONAL Resource name&lt;/p&gt;" type="string" variable="$resource">
             <type>string</type>
           </tag>
-          <tag name="return" line="162" description="Canonical view name, FALSE if no such view exists" type="string">
+          <tag name="return" line="171" description="Canonical view name, FALSE if no such view exists" type="string">
             <type>string</type>
           </tag>
         </docblock>
@@ -4215,16 +4253,16 @@ a global view.</description>
           <type>string</type>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="PHPunk" line="175" package="phpunk">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="PHPunk" line="184" package="phpunk">
         <name>parse_path</name>
         <full_name>\PHPunk\url_schema::parse_path()</full_name>
-        <docblock line="175">
+        <docblock line="184">
           <description>Parses a URL path into key-value parameters.</description>
           <long-description></long-description>
-          <tag name="param" line="175" description="&lt;p&gt;OPTIONAL Path to parse&lt;/p&gt;" type="string" variable="$path">
+          <tag name="param" line="184" description="&lt;p&gt;OPTIONAL Path to parse&lt;/p&gt;" type="string" variable="$path">
             <type>string</type>
           </tag>
-          <tag name="return" line="175" description="Key-value parameters" type="array">
+          <tag name="return" line="184" description="Key-value parameters" type="array">
             <type>array</type>
           </tag>
         </docblock>
@@ -4234,16 +4272,16 @@ a global view.</description>
           <type>string</type>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="PHPunk" line="242" package="phpunk">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="PHPunk" line="251" package="phpunk">
         <name>build_path</name>
         <full_name>\PHPunk\url_schema::build_path()</full_name>
-        <docblock line="242">
+        <docblock line="251">
           <description>Builds a URL path, based on given parameters.</description>
           <long-description></long-description>
-          <tag name="param" line="242" description="&lt;p&gt;OPTIONAL Key-value parameters for URL&lt;/p&gt;" type="array" variable="$params">
+          <tag name="param" line="251" description="&lt;p&gt;OPTIONAL Key-value parameters for URL&lt;/p&gt;" type="array" variable="$params">
             <type>array</type>
           </tag>
-          <tag name="return" line="242" description="The URL path" type="string">
+          <tag name="return" line="251" description="The URL path" type="string">
             <type>string</type>
           </tag>
         </docblock>
@@ -4253,19 +4291,19 @@ a global view.</description>
           <type>array</type>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="PHPunk" line="301" package="phpunk">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="PHPunk" line="310" package="phpunk">
         <name>build</name>
         <full_name>\PHPunk\url_schema::build()</full_name>
-        <docblock line="301">
+        <docblock line="310">
           <description>Builds a complete URL, based on given parameters. Includes any base path.</description>
           <long-description></long-description>
-          <tag name="param" line="301" description="&lt;p&gt;Key-value parameters for URL&lt;/p&gt;" type="array" variable="$params">
+          <tag name="param" line="310" description="&lt;p&gt;Key-value parameters for URL&lt;/p&gt;" type="array" variable="$params">
             <type>array</type>
           </tag>
-          <tag name="param" line="301" description="&lt;p&gt;Whether the URL should use HTTPS&lt;/p&gt;" type="boolean" variable="$secure">
+          <tag name="param" line="310" description="&lt;p&gt;Whether the URL should use HTTPS&lt;/p&gt;" type="boolean" variable="$secure">
             <type>boolean</type>
           </tag>
-          <tag name="return" line="301" description="The complete URL" type="string">
+          <tag name="return" line="310" description="The complete URL" type="string">
             <type>string</type>
           </tag>
         </docblock>
@@ -4280,18 +4318,18 @@ a global view.</description>
           <type>boolean</type>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="protected" namespace="PHPunk" line="321" package="phpunk">
+      <method final="false" abstract="false" static="false" visibility="protected" namespace="PHPunk" line="330" package="phpunk">
         <name>split_slug</name>
         <full_name>\PHPunk\url_schema::split_slug()</full_name>
-        <docblock line="321">
+        <docblock line="330">
           <description>Splits a URL slug at the first tilde (~). If slug does not contain a
 tilde, the first half will be the full slug and the second half will be
 an empty string.</description>
           <long-description></long-description>
-          <tag name="param" line="321" description="&lt;p&gt;URL slug to be split&lt;/p&gt;" type="string" variable="$slug">
+          <tag name="param" line="330" description="&lt;p&gt;URL slug to be split&lt;/p&gt;" type="string" variable="$slug">
             <type>string</type>
           </tag>
-          <tag name="param" line="321" description="&lt;p&gt;Array of two strings&lt;/p&gt;" type="array" variable="">
+          <tag name="param" line="330" description="&lt;p&gt;Array of two strings&lt;/p&gt;" type="array" variable="">
             <type>array</type>
           </tag>
         </docblock>
@@ -4301,20 +4339,20 @@ an empty string.</description>
           <type>string</type>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="protected" namespace="PHPunk" line="336" package="phpunk">
+      <method final="false" abstract="false" static="false" visibility="protected" namespace="PHPunk" line="345" package="phpunk">
         <name>join_slug</name>
         <full_name>\PHPunk\url_schema::join_slug()</full_name>
-        <docblock line="336">
+        <docblock line="345">
           <description>Joins two strings with a tilde (~) into a single URL slug. If second
 argument is empty, result will contain the base string with no tilde.</description>
           <long-description></long-description>
-          <tag name="param" line="336" description="&lt;p&gt;A base string&lt;/p&gt;" type="string" variable="$slug">
+          <tag name="param" line="345" description="&lt;p&gt;A base string&lt;/p&gt;" type="string" variable="$slug">
             <type>string</type>
           </tag>
-          <tag name="param" line="336" description="&lt;p&gt;A suffix to append&lt;/p&gt;" type="string" variable="$suffix">
+          <tag name="param" line="345" description="&lt;p&gt;A suffix to append&lt;/p&gt;" type="string" variable="$suffix">
             <type>string</type>
           </tag>
-          <tag name="return" line="336" description="The completed URL slug" type="string">
+          <tag name="return" line="345" description="The completed URL slug" type="string">
             <type>string</type>
           </tag>
         </docblock>
@@ -4329,17 +4367,17 @@ argument is empty, result will contain the base string with no tilde.</descripti
           <type>string</type>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="protected" namespace="PHPunk" line="349" package="phpunk">
+      <method final="false" abstract="false" static="false" visibility="protected" namespace="PHPunk" line="358" package="phpunk">
         <name>explode_slug</name>
         <full_name>\PHPunk\url_schema::explode_slug()</full_name>
-        <docblock line="349">
+        <docblock line="358">
           <description>Splits a URL slug at each dot (.). If slug does not contain a dot, the
 original URL slug will be returned.</description>
           <long-description></long-description>
-          <tag name="param" line="349" description="&lt;p&gt;URL slug to be split&lt;/p&gt;" type="string" variable="$slug">
+          <tag name="param" line="358" description="&lt;p&gt;URL slug to be split&lt;/p&gt;" type="string" variable="$slug">
             <type>string</type>
           </tag>
-          <tag name="return" line="349" description="Array of strings, or original slug" type="mixed">
+          <tag name="return" line="358" description="Array of strings, or original slug" type="mixed">
             <type>mixed</type>
           </tag>
         </docblock>
@@ -4349,16 +4387,16 @@ original URL slug will be returned.</description>
           <type>string</type>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="protected" namespace="PHPunk" line="361" package="phpunk">
+      <method final="false" abstract="false" static="false" visibility="protected" namespace="PHPunk" line="370" package="phpunk">
         <name>implode_slug</name>
         <full_name>\PHPunk\url_schema::implode_slug()</full_name>
-        <docblock line="361">
+        <docblock line="370">
           <description>Joins an array of strings with dots (.) into a single URL slug.</description>
           <long-description></long-description>
-          <tag name="param" line="361" description="&lt;p&gt;Array of strings to be joined&lt;/p&gt;" type="array" variable="$slug">
+          <tag name="param" line="370" description="&lt;p&gt;Array of strings to be joined&lt;/p&gt;" type="array" variable="$slug">
             <type>array</type>
           </tag>
-          <tag name="return" line="361" description="The completed URL slug" type="string">
+          <tag name="return" line="370" description="The completed URL slug" type="string">
             <type>string</type>
           </tag>
         </docblock>
@@ -4418,41 +4456,42 @@ original URL slug will be returned.</description>
       <error line="0" code="PPC:ERR-50000">No summary was found for this file</error>
       <error line="13" code="PPC:ERR-50005">No summary for class \PHPunk\url_schema</error>
       <error line="48" code="PPC:ERR-50008">No summary for method __construct()</error>
-      <error line="147" code="PPC:ERR-50014">Name of argument $view does not match with the DocBlock's name $action in add_view()</error>
-      <notice line="147" code="PPC:ERR-50013">Parameter $action could not be found in add_view()</notice>
-      <error line="162" code="PPC:ERR-50014">Name of argument $view does not match with the DocBlock's name $action in is_view()</error>
-      <notice line="162" code="PPC:ERR-50013">Parameter $action could not be found in is_view()</notice>
+      <error line="156" code="PPC:ERR-50014">Name of argument $view does not match with the DocBlock's name $action in add_view()</error>
+      <notice line="156" code="PPC:ERR-50013">Parameter $action could not be found in add_view()</notice>
+      <error line="171" code="PPC:ERR-50014">Name of argument $view does not match with the DocBlock's name $action in is_view()</error>
+      <notice line="171" code="PPC:ERR-50013">Parameter $action could not be found in is_view()</notice>
     </parse_markers>
-    <source>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</source>
+    <source>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</source>
   </file>
-  <file path="component/application.php" generated-path="component.application.html" hash="29189f5957f921b463ce2e6ae39dcb54" package="phpunk\component">
+  <file path="component/application.php" generated-path="component.application.html" hash="f004502f8462b7765418c463e48ec14e" package="phpunk\component">
     <docblock line="0">
       <description></description>
       <long-description></long-description>
       <tag name="package" line="0" description="phpunk\component"/>
     </docblock>
+    <namespace-alias name="cache">\PHPunk\cache</namespace-alias>
     <namespace-alias name="url_schema">\PHPunk\url_schema</namespace-alias>
     <namespace-alias name="db_schema">\PHPunk\Database\schema</namespace-alias>
-    <class final="false" abstract="false" namespace="PHPunk\Component" line="19" package="phpunk\component">
+    <class final="false" abstract="false" namespace="PHPunk\Component" line="20" package="phpunk\component">
       <extends/>
       <name>application</name>
       <full_name>\PHPunk\Component\application</full_name>
-      <docblock line="19">
+      <docblock line="20">
         <description></description>
         <long-description></long-description>
-        <tag name="package" line="19" description="phpunk\component"/>
+        <tag name="package" line="20" description="phpunk\component"/>
       </docblock>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="PHPunk\Component" line="137" package="phpunk\component">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="PHPunk\Component" line="138" package="phpunk\component">
         <name>init_database</name>
         <full_name>\PHPunk\Component\application::init_database()</full_name>
-        <docblock line="137">
+        <docblock line="138">
           <description>Initializes database connection and table structures. An E_USER_ERROR
 error will be triggered if the database is inaccessible.</description>
           <long-description></long-description>
-          <tag name="param" line="137" description="&lt;p&gt;Traversable object containing DB credentials&lt;/p&gt;" type="object" variable="$config">
+          <tag name="param" line="138" description="&lt;p&gt;Traversable object containing DB credentials&lt;/p&gt;" type="object" variable="$config">
             <type>object</type>
           </tag>
-          <tag name="param" line="137" description="&lt;p&gt;Traversable object containing table structures&lt;/p&gt;" type="object" variable="$meta">
+          <tag name="param" line="138" description="&lt;p&gt;Traversable object containing table structures&lt;/p&gt;" type="object" variable="$meta">
             <type>object</type>
           </tag>
         </docblock>
@@ -4467,29 +4506,29 @@ error will be triggered if the database is inaccessible.</description>
           <type>object</type>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="PHPunk\Component" line="178" package="phpunk\component">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="PHPunk\Component" line="179" package="phpunk\component">
         <name>load_database</name>
         <full_name>\PHPunk\Component\application::load_database()</full_name>
-        <docblock line="178">
+        <docblock line="179">
           <description>Lazy-loads a database schema instance, using the previously-initialized
 database connection and table structures. An E_USER_ERROR error will be
 triggered if the database connection has not yet been initialized.</description>
           <long-description></long-description>
-          <tag name="return" line="178" description="The database schema object" type="object">
+          <tag name="return" line="179" description="The database schema object" type="object">
             <type>object</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="PHPunk\Component" line="213" package="phpunk\component">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="PHPunk\Component" line="214" package="phpunk\component">
         <name>init_router</name>
         <full_name>\PHPunk\Component\application::init_router()</full_name>
-        <docblock line="213">
+        <docblock line="214">
           <description>Initializes host and metadata for url schema.</description>
           <long-description></long-description>
-          <tag name="param" line="213" description="&lt;p&gt;Hostname for url schema&lt;/p&gt;" type="string" variable="$host">
+          <tag name="param" line="214" description="&lt;p&gt;Hostname for url schema&lt;/p&gt;" type="string" variable="$host">
             <type>string</type>
           </tag>
-          <tag name="param" line="213" description="&lt;p&gt;Traversable object containing url structures&lt;/p&gt;" type="object" variable="$meta">
+          <tag name="param" line="214" description="&lt;p&gt;Traversable object containing url structures&lt;/p&gt;" type="object" variable="$meta">
             <type>object</type>
           </tag>
         </docblock>
@@ -4504,25 +4543,25 @@ triggered if the database connection has not yet been initialized.</description>
           <type>object</type>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="PHPunk\Component" line="223" package="phpunk\component">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="PHPunk\Component" line="224" package="phpunk\component">
         <name>load_router</name>
         <full_name>\PHPunk\Component\application::load_router()</full_name>
-        <docblock line="223">
+        <docblock line="224">
           <description>Lazy-loads a url schema instance, using the previously-initialized host
 and metadata.</description>
           <long-description></long-description>
-          <tag name="return" line="223" description="The url schema object" type="object">
+          <tag name="return" line="224" description="The url schema object" type="object">
             <type>object</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="PHPunk\Component" line="255" package="phpunk\component">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="PHPunk\Component" line="256" package="phpunk\component">
         <name>init_cache</name>
         <full_name>\PHPunk\Component\application::init_cache()</full_name>
-        <docblock line="255">
+        <docblock line="256">
           <description>Initializes caching server connection.</description>
           <long-description></long-description>
-          <tag name="param" line="255" description="&lt;p&gt;Traversable object containing host and port for server&lt;/p&gt;" type="object" variable="$config">
+          <tag name="param" line="256" description="&lt;p&gt;Traversable object containing host and port for server&lt;/p&gt;" type="object" variable="$config">
             <type>object</type>
           </tag>
         </docblock>
@@ -4532,27 +4571,27 @@ and metadata.</description>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="PHPunk\Component" line="276" package="phpunk\component">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="PHPunk\Component" line="277" package="phpunk\component">
         <name>load_cache</name>
         <full_name>\PHPunk\Component\application::load_cache()</full_name>
-        <docblock line="276">
+        <docblock line="277">
           <description>Lazy-loads a cache instance, using the previously-initialized connection.</description>
           <long-description>If server is not initalized, cache object will only use in-memory data.</long-description>
-          <tag name="return" line="276" description="The cache object" type="object">
+          <tag name="return" line="277" description="The cache object" type="object">
             <type>object</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="PHPunk\Component" line="289" package="phpunk\component">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="PHPunk\Component" line="290" package="phpunk\component">
         <name>load_model</name>
         <full_name>\PHPunk\Component\application::load_model()</full_name>
-        <docblock line="289">
+        <docblock line="290">
           <description>Lazy-loads a model object for the specified resource, if given.</description>
           <long-description></long-description>
-          <tag name="param" line="289" description="&lt;p&gt;OPTIONAL resource name&lt;/p&gt;" type="string" variable="$resource">
+          <tag name="param" line="290" description="&lt;p&gt;OPTIONAL resource name&lt;/p&gt;" type="string" variable="$resource">
             <type>string</type>
           </tag>
-          <tag name="return" line="289" description="A model object" type="object">
+          <tag name="return" line="290" description="A model object" type="object">
             <type>object</type>
           </tag>
         </docblock>
@@ -4562,16 +4601,16 @@ and metadata.</description>
           <type>string</type>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="PHPunk\Component" line="309" package="phpunk\component">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="PHPunk\Component" line="310" package="phpunk\component">
         <name>load_controller</name>
         <full_name>\PHPunk\Component\application::load_controller()</full_name>
-        <docblock line="309">
+        <docblock line="310">
           <description>Lazy-loads a controller object for the specified resource, if given.</description>
           <long-description></long-description>
-          <tag name="param" line="309" description="&lt;p&gt;OPTIONAL resource name&lt;/p&gt;" type="string" variable="$resource">
+          <tag name="param" line="310" description="&lt;p&gt;OPTIONAL resource name&lt;/p&gt;" type="string" variable="$resource">
             <type>string</type>
           </tag>
-          <tag name="return" line="309" description="A controller object" type="object">
+          <tag name="return" line="310" description="A controller object" type="object">
             <type>object</type>
           </tag>
         </docblock>
@@ -4581,16 +4620,16 @@ and metadata.</description>
           <type>string</type>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="PHPunk\Component" line="328" package="phpunk\component">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="PHPunk\Component" line="329" package="phpunk\component">
         <name>load_renderer</name>
         <full_name>\PHPunk\Component\application::load_renderer()</full_name>
-        <docblock line="328">
+        <docblock line="329">
           <description>Lazy-loads a renderer object for the specified resource, if given.</description>
           <long-description></long-description>
-          <tag name="param" line="328" description="&lt;p&gt;OPTIONAL resource name&lt;/p&gt;" type="string" variable="$resource">
+          <tag name="param" line="329" description="&lt;p&gt;OPTIONAL resource name&lt;/p&gt;" type="string" variable="$resource">
             <type>string</type>
           </tag>
-          <tag name="return" line="328" description="A renderer object" type="object">
+          <tag name="return" line="329" description="A renderer object" type="object">
             <type>object</type>
           </tag>
         </docblock>
@@ -4600,17 +4639,17 @@ and metadata.</description>
           <type>string</type>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="protected" namespace="PHPunk\Component" line="349" package="phpunk\component">
+      <method final="false" abstract="false" static="false" visibility="protected" namespace="PHPunk\Component" line="350" package="phpunk\component">
         <name>create_model</name>
         <full_name>\PHPunk\Component\application::create_model()</full_name>
-        <docblock line="349">
+        <docblock line="350">
           <description>Constructs a model object for the specified resource. An E_USER_ERROR is
 triggered if the database connection has not yet been initialized.</description>
           <long-description>This method is intended to be extensible for child classes.</long-description>
-          <tag name="param" line="349" description="&lt;p&gt;OPTIONAL resource name&lt;/p&gt;" type="string" variable="$resource">
+          <tag name="param" line="350" description="&lt;p&gt;OPTIONAL resource name&lt;/p&gt;" type="string" variable="$resource">
             <type>string</type>
           </tag>
-          <tag name="return" line="349" description="A model object" type="object">
+          <tag name="return" line="350" description="A model object" type="object">
             <type>object</type>
           </tag>
         </docblock>
@@ -4620,17 +4659,17 @@ triggered if the database connection has not yet been initialized.</description>
           <type>string</type>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="protected" namespace="PHPunk\Component" line="372" package="phpunk\component">
+      <method final="false" abstract="false" static="false" visibility="protected" namespace="PHPunk\Component" line="373" package="phpunk\component">
         <name>create_controller</name>
         <full_name>\PHPunk\Component\application::create_controller()</full_name>
-        <docblock line="372">
+        <docblock line="373">
           <description>Constructs a controller object for the specified resource. An E_USER_ERROR
 is triggered if the database connection has not yet been initialized.</description>
           <long-description>This method is intended to be extensible for child classes.</long-description>
-          <tag name="param" line="372" description="&lt;p&gt;OPTIONAL resource name&lt;/p&gt;" type="string" variable="$resource">
+          <tag name="param" line="373" description="&lt;p&gt;OPTIONAL resource name&lt;/p&gt;" type="string" variable="$resource">
             <type>string</type>
           </tag>
-          <tag name="return" line="372" description="A controller object" type="object">
+          <tag name="return" line="373" description="A controller object" type="object">
             <type>object</type>
           </tag>
         </docblock>
@@ -4640,17 +4679,17 @@ is triggered if the database connection has not yet been initialized.</descripti
           <type>string</type>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="protected" namespace="PHPunk\Component" line="392" package="phpunk\component">
+      <method final="false" abstract="false" static="false" visibility="protected" namespace="PHPunk\Component" line="393" package="phpunk\component">
         <name>create_renderer</name>
         <full_name>\PHPunk\Component\application::create_renderer()</full_name>
-        <docblock line="392">
+        <docblock line="393">
           <description>Constructs a renderer object for the specified resource. An E_USER_ERROR
 is triggered if the database connection has not yet been initialized.</description>
           <long-description>This method is intended to be extensible for child classes.</long-description>
-          <tag name="param" line="392" description="&lt;p&gt;OPTIONAL resource name&lt;/p&gt;" type="string" variable="$resource">
+          <tag name="param" line="393" description="&lt;p&gt;OPTIONAL resource name&lt;/p&gt;" type="string" variable="$resource">
             <type>string</type>
           </tag>
-          <tag name="return" line="392" description="A renderer object" type="object">
+          <tag name="return" line="393" description="A renderer object" type="object">
             <type>object</type>
           </tag>
         </docblock>
@@ -4660,92 +4699,92 @@ is triggered if the database connection has not yet been initialized.</descripti
           <type>string</type>
         </argument>
       </method>
-      <property final="false" static="false" visibility="public" line="19">
+      <property final="false" static="false" visibility="public" line="20">
         <name>$database</name>
         <default/>
         <docblock>
           <description>Single database schema instance</description>
           <long-description/>
-          <tag name="var" description="&lt;p&gt;Single database schema instance&lt;/p&gt;" type="object" line="19">
+          <tag name="var" description="&lt;p&gt;Single database schema instance&lt;/p&gt;" type="object" line="20">
             <type by_reference="false">object</type>
           </tag>
-          <tag name="magic" line="19"/>
-          <tag name="property" line="19" description="Single database schema instance" type="object" variable="$database">
+          <tag name="magic" line="20"/>
+          <tag name="property" line="20" description="Single database schema instance" type="object" variable="$database">
             <type>object</type>
           </tag>
         </docblock>
       </property>
-      <property final="false" static="false" visibility="public" line="19">
+      <property final="false" static="false" visibility="public" line="20">
         <name>$router</name>
         <default/>
         <docblock>
           <description>Single url schema instance</description>
           <long-description/>
-          <tag name="var" description="&lt;p&gt;Single url schema instance&lt;/p&gt;" type="object" line="19">
+          <tag name="var" description="&lt;p&gt;Single url schema instance&lt;/p&gt;" type="object" line="20">
             <type by_reference="false">object</type>
           </tag>
-          <tag name="magic" line="19"/>
-          <tag name="property" line="19" description="Single url schema instance" type="object" variable="$router">
+          <tag name="magic" line="20"/>
+          <tag name="property" line="20" description="Single url schema instance" type="object" variable="$router">
             <type>object</type>
           </tag>
         </docblock>
       </property>
-      <property final="false" static="false" visibility="public" line="19">
+      <property final="false" static="false" visibility="public" line="20">
         <name>$cache</name>
         <default/>
         <docblock>
           <description>Single cache instance</description>
           <long-description/>
-          <tag name="var" description="&lt;p&gt;Single cache instance&lt;/p&gt;" type="object" line="19">
+          <tag name="var" description="&lt;p&gt;Single cache instance&lt;/p&gt;" type="object" line="20">
             <type by_reference="false">object</type>
           </tag>
-          <tag name="magic" line="19"/>
-          <tag name="property" line="19" description="Single cache instance" type="object" variable="$cache">
+          <tag name="magic" line="20"/>
+          <tag name="property" line="20" description="Single cache instance" type="object" variable="$cache">
             <type>object</type>
           </tag>
         </docblock>
       </property>
-      <property final="false" static="false" visibility="public" line="19">
+      <property final="false" static="false" visibility="public" line="20">
         <name>$model</name>
         <default/>
         <docblock>
           <description>Default model instance</description>
           <long-description/>
-          <tag name="var" description="&lt;p&gt;Default model instance&lt;/p&gt;" type="object" line="19">
+          <tag name="var" description="&lt;p&gt;Default model instance&lt;/p&gt;" type="object" line="20">
             <type by_reference="false">object</type>
           </tag>
-          <tag name="magic" line="19"/>
-          <tag name="property" line="19" description="Default model instance" type="object" variable="$model">
+          <tag name="magic" line="20"/>
+          <tag name="property" line="20" description="Default model instance" type="object" variable="$model">
             <type>object</type>
           </tag>
         </docblock>
       </property>
-      <property final="false" static="false" visibility="public" line="19">
+      <property final="false" static="false" visibility="public" line="20">
         <name>$controller</name>
         <default/>
         <docblock>
           <description>Default controller instance</description>
           <long-description/>
-          <tag name="var" description="&lt;p&gt;Default controller instance&lt;/p&gt;" type="object" line="19">
+          <tag name="var" description="&lt;p&gt;Default controller instance&lt;/p&gt;" type="object" line="20">
             <type by_reference="false">object</type>
           </tag>
-          <tag name="magic" line="19"/>
-          <tag name="property" line="19" description="Default controller instance" type="object" variable="$controller">
+          <tag name="magic" line="20"/>
+          <tag name="property" line="20" description="Default controller instance" type="object" variable="$controller">
             <type>object</type>
           </tag>
         </docblock>
       </property>
-      <property final="false" static="false" visibility="public" line="19">
+      <property final="false" static="false" visibility="public" line="20">
         <name>$renderer</name>
         <default/>
         <docblock>
           <description>Default renderer instance</description>
           <long-description/>
-          <tag name="var" description="&lt;p&gt;Default renderer instance&lt;/p&gt;" type="object" line="19">
+          <tag name="var" description="&lt;p&gt;Default renderer instance&lt;/p&gt;" type="object" line="20">
             <type by_reference="false">object</type>
           </tag>
-          <tag name="magic" line="19"/>
-          <tag name="property" line="19" description="Default renderer instance" type="object" variable="$renderer">
+          <tag name="magic" line="20"/>
+          <tag name="property" line="20" description="Default renderer instance" type="object" variable="$renderer">
             <type>object</type>
           </tag>
         </docblock>
@@ -4753,150 +4792,26 @@ is triggered if the database connection has not yet been initialized.</descripti
     </class>
     <parse_markers>
       <error line="0" code="PPC:ERR-50000">No summary was found for this file</error>
-      <error line="19" code="PPC:ERR-50005">No summary for class \PHPunk\Component\application</error>
+      <error line="20" code="PPC:ERR-50005">No summary for class \PHPunk\Component\application</error>
     </parse_markers>
-    <source>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</source>
-  </file>
-  <file path="util/mutable.php" generated-path="util.mutable.html" hash="0a975f5156b5c6747de5fc98dd12fe07" package="phpunk\util">
-    <docblock line="0">
-      <description></description>
-      <long-description></long-description>
-      <tag name="package" line="0" description="phpunk\util"/>
-    </docblock>
-    <function namespace="PHPunk\Util" line="101" package="phpunk\util">
-      <name>is_mutable</name>
-      <full_name>\PHPunk\Util\is_mutable()</full_name>
-      <docblock line="101">
-        <description>Returns whether or not the object is an instance of mutable.</description>
-        <long-description></long-description>
-        <tag name="package" line="101" description="phpunk\util"/>
-        <tag name="param" line="101" description="&lt;p&gt;Any object&lt;/p&gt;" type="object" variable="$obj">
-          <type>object</type>
-        </tag>
-        <tag name="return" line="101" description="Returns **TRUE** if **obj** mutable, **FALSE** otherwise." type="boolean">
-          <type>boolean</type>
-        </tag>
-      </docblock>
-      <argument line="0" by_reference="false">
-        <name>$obj</name>
-        <default></default>
-        <type>object</type>
-      </argument>
-    </function>
-    <trait namespace="PHPunk\Util" line="13" package="phpunk\util">
-      <name>mutable</name>
-      <full_name>\PHPunk\Util\mutable</full_name>
-      <docblock line="13">
-        <description>Object-oriented style syntax support</description>
-        <long-description></long-description>
-        <tag name="see" line="13" description="PHPunk Wiki" link="http://github.com/oneeyedjames/phpunk/wiki/Mutable-Objects"/>
-        <tag name="package" line="13" description="phpunk\util"/>
-      </docblock>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="PHPunk\Util" line="61" package="phpunk\util">
-        <name>has</name>
-        <full_name>\PHPunk\Util\mutable::has()</full_name>
-        <docblock line="61">
-          <description>Determine whether or not a given key exists.</description>
-          <long-description></long-description>
-          <tag name="param" line="61" description="&lt;p&gt;The key&lt;/p&gt;" type="mixed" variable="$key">
-            <type>mixed</type>
-          </tag>
-          <tag name="return" line="61" description="TRUE if the key exists, FALSE otherwise" type="boolean">
-            <type>boolean</type>
-          </tag>
-        </docblock>
-        <argument line="0" by_reference="false">
-          <name>$key</name>
-          <default></default>
-          <type>mixed</type>
-        </argument>
-      </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="PHPunk\Util" line="71" package="phpunk\util">
-        <name>get</name>
-        <full_name>\PHPunk\Util\mutable::get()</full_name>
-        <docblock line="71">
-          <description>Get the stored value for a given key.</description>
-          <long-description></long-description>
-          <tag name="param" line="71" description="&lt;p&gt;The key&lt;/p&gt;" type="mixed" variable="$key">
-            <type>mixed</type>
-          </tag>
-          <tag name="param" line="71" description="&lt;p&gt;OPTIONAL The value to return if the given key does not exist&lt;/p&gt;" type="mixed" variable="$default">
-            <type>mixed</type>
-          </tag>
-        </docblock>
-        <argument line="0" by_reference="false">
-          <name>$key</name>
-          <default></default>
-          <type>mixed</type>
-        </argument>
-        <argument line="0" by_reference="false">
-          <name>$default</name>
-          <default>null</default>
-          <type>mixed</type>
-        </argument>
-      </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="PHPunk\Util" line="81" package="phpunk\util">
-        <name>put</name>
-        <full_name>\PHPunk\Util\mutable::put()</full_name>
-        <docblock line="81">
-          <description>Store a value for a given key.</description>
-          <long-description></long-description>
-          <tag name="param" line="81" description="&lt;p&gt;The key&lt;/p&gt;" type="mixed" variable="$key">
-            <type>mixed</type>
-          </tag>
-          <tag name="param" line="81" description="&lt;p&gt;The value to be stored&lt;/p&gt;" type="mixed" variable="$value">
-            <type>mixed</type>
-          </tag>
-        </docblock>
-        <argument line="0" by_reference="false">
-          <name>$key</name>
-          <default></default>
-          <type>mixed</type>
-        </argument>
-        <argument line="0" by_reference="false">
-          <name>$value</name>
-          <default></default>
-          <type>mixed</type>
-        </argument>
-      </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="PHPunk\Util" line="90" package="phpunk\util">
-        <name>remove</name>
-        <full_name>\PHPunk\Util\mutable::remove()</full_name>
-        <docblock line="90">
-          <description>Remove a key-value pair from the store.</description>
-          <long-description></long-description>
-          <tag name="param" line="90" description="&lt;p&gt;The key&lt;/p&gt;" type="mixed" variable="$key">
-            <type>mixed</type>
-          </tag>
-        </docblock>
-        <argument line="0" by_reference="false">
-          <name>$key</name>
-          <default></default>
-          <type>mixed</type>
-        </argument>
-      </method>
-    </trait>
-    <parse_markers>
-      <error line="0" code="PPC:ERR-50000">No summary was found for this file</error>
-    </parse_markers>
-    <source>eJytVV9v2jAQf04+xaniASIg2ysd69DGukpdW0FRH7YJmXBJXBI7sp22aOp339lJoFA6VeueCHfn35/znfzhpEgLPwwCHwL4VLBoxRIEipVi9bM0PKN46PuC5agpi3D17cqmZpQ69puDl4tbjExPKo7C4BK0WWcIei0MewBdFoVUhuoch0aE1JhiEIYJN2m56EcyD6VAXOPy1vKEFX14z1c8/F4atsiwV1Homh9uKOekGcW4gbyqgt++V2qESGYZVXMKkUjPqvQsN0+EVAg5S3gEOZpULm0i9L2iXGQUi0tBx6SA+TxiWdZu2UAXWkwlumPRPR5DO5KlMO06OBzC+w4lPIWmVAJaJuW69zFBs3P6x7tfHavFa0UZ0xqGQBVz9912RyjreUbxJEE1R6Wkah99Jg1gJJRiiTEX1NlKNFQgg4FjaHeOujCez6bjyfxmNLk4uzi1YI//6txJX+G6MnzAls29hUDXINSaO5aVWBHVDEW5l3wLE9f6L2ZSpt9uphS7FDW2wlze4UH4L2hQ5XSdcJ8SNiqQCoQ0wCDhdyiAzgA+cG103x6oNBVMsRxy/kBTYFHhOkVbWWVrYwspM2QCriezMdComqqmRuvC19H5dAzSkt5zjS+Y2vTlQM9kHJPfscM76O4UjaPVhlq4BHeHEJPDJ+5ebWsnSzvAyszA5dX12eXF6NyVVvi0I7XM2vS2kUuJ2nXX9eAFx8l2IhuWIYgyy17XAjjZzZ1uJmKwAdxr09S2h3ryH/tTQe00ZdHcwwu+ny3b0xGuvEz3l3XPyMQNOqmnml5FXDCuIFYy3w7CKx0dkPh0kZ6rm223z+l63LxJE3dnen/HrCLp3hLgGmhVuNCGCXrZZNw8I/3mraqk1uUt+oWRWNf//QNr13AGgV3AILDTGARUT581dpcCbgsptNnDvnvKNpa5ntfVbUvqbDcjaEU0kreKj8n4H711bJc=</source>
+    <source>eJzlWV9v2zYQf44/BRsYiFzYbfc2JLVbNwnWYF1SJBn60BYuLdM2F1lySSppWuS77/hPoiRSTpwNBTagSC3y7ni8+93xeHz5ar1cd54/fdpBT9HrNY6v8IIgGMvTq09xtlpnKUkFTD7vdFK8IhxICHr/9r2cP7TzB51OzovhGMdLcuCO5CyZcBhc4crwERZ4ijn5pOcQ5mg2LQhLrVi2Jkzcomz6F4kF6s4MH7qg6SIhqPg2cmjKBU5j4udmWS4Is7yg2v3Y1K4sl/5oZ1hlM5KgIzLHeSKQ/tqwRJYKliUJaGfZnKENuyLpjDCHsxhw+J534gRzjvB6ndAYC5ql6EdnRxp6R0qlizRjcl9goBQn6BoziqcJkbPPOztrRq+xIKg7sRYHLz2CewK7Sx8pYkUE3k6ExsFjeCfLjItHCdheexNkW7NOOGHX225/pjE2UaB+nIgS4I+TY+G+nRS1EY6G6OPnLW1abOMxUuwmwjJWeEFjBLBZZjPLnk8hmNE8T2MV0JPJgoioe0VuezK4d/gNFfESOSM7sUyWezaG9vbl2A4jImcp6ool5YNRkuFZEWVR76Bk09ANM+n5CotCXJhDTVcYlD/CDGq6ukJh/5ZlCprqfozRW3ZkKDTbXQf+bemZGCdJ1JUDfdTFbMG1Q+gcRXGWp+A2PTgcol+MryCz8yxncOoONcvHFwoZjmOlPEPtsV/YgIVobY6QKTfY0i+lZtVWs9Yk3Ckjw5+uPq2GCAA9Ub8jxa/IBKOLBaRQwljGot1DsCwSGcpB5pymZGZcgbSQ/X1lpai320fHkz8vjs8nH8bnpyenv0lhrj9PUiooTuh3wsvCQh5URDsRpzMkZPQiLlgew64If4bGqRV7fH5+dq4kKc3QDQXFpgQZfUEx8LZYOlUL5ZAacBwTzinIfaZhtcYMr9zSYE4X6JJhSNpcLW+mpCcwTaEuQUdvUAwLQEEGG+A+MfK82SCkvrcAloFYlPnB6NfXK5SgpnyS5hLy2u3Vk79nEe6bBK+n5AZ9Wt3yrwmNFIjMKoORPHdlNdqvDkNpyTzDa/D/TcZmcrSnQ0fq5l12MDKulrhKMxtVVbBt5sxYv4IHExomCObgHWKgHjTAYMQl6peYwf/RXi7mv+4Z7btfc8JuwUK7F2/PPqCj8eX4zfji+AK9O/n9GO0VGy8S/K6za3CpLA+HKLCqkh3pJayHFOcLmZUM+2CU5ivI9DfcUjhKHZ4fjy+PC7XQl4ZCX4xCWvCTh2hyT1+EfeDxgk451hs7xR7jJCvOvg2eSqTjZ9OosVXN3eBTgTjU4eI5VN7h77cDmSShVg9eb/oo5ypiIZmsGbmmWc6T2wEtEpg6h7ZPYtUEpmSFk5gjfAn3uDQT6JYI4CM6VxiNTHIzLjDZ53LZvMPpqUDyqRUnG9ONRY9Cm/KR1TUQBj1/4O+eZr4d7z4m2E2iKy6+rnom3udQX2B10nthBObuKmdOZPJDw5H9LHNxc9nBCM9mE0UXOdx99Nphhtwpi0YTrNrCMhtVSBhJ1E2SlzHqKOwjVBrDV6mv/HC1VUGYGL65RurQ3aXNH4F92aUiQ7VTLNevjJhNKrm+mXl4Bgxjhnu1JOKWMNWyx7k3B2sOebap+JTrSHoE1nTaFJXyAKJXZoCuYnprTsUaw5Z1gBJwryrAFPxKiUoFYHft3JalF/WtuTFdS4nBdOjp2GzOhMqsSpZr2mA2ctbYnIjshSeYhjRBvdwxfSgd/mWHLPJYLZQHXMvpmOJuTPFKTEnN9l4ukmyKk9GePcwVfa9j4W353dMRbsakUwk2va4NNV27R6U0E5xdMD1gXRbwrwttgMmMvtpXd1xNGevEUKM0oy7lNSU3HKEapR01lJ1qErIrShOp373wdtS8Yemjxp4coXGZy/TvNqmKwDK1ytVbkVLlrxaZclqTV+W1pB/b8gomH3kTl4Gkm0POEee7lLTnjyKPrTMmVErSQtsyiW4EmBoqHE9uA8tGlb0MQ8oSWZLdyIRU1GKMOpT2ikxWSs7M3lB90k10/mFpI5vrp+CuqwOPOCPNtKXuL9ojuVovuLwKABfqZ1S5FPVReesBs/v6FZVcWu1j3yON1hFxMrdYobrok8Satm+kG2ioMjJLk1skXwBoOgCLZXBhaM3DroS2FGxM2I6YegLWwrUbDPJ8ADsIBJPpwIaNq1v+ZjcyAKRd+ZrEdE7BlDZx9mUtvQCEpt6jvWj/nL2/PDk7Hb8rGJEMeJ/lxpWl2+xW6wPZvF8asmzNOBW0LQK1HXTv9GNB+blXrzkbFGXZHQPaBfH3ozT+a1ZvyFLuQfKMKjVs3APcfnWvVy2I3bmAYiZL14u5ahd8Q6SVDzk/BRGN9VvDydPd2wobTlu8ApCKB/xEDVcEWo4ex/gFPgQopYQAWhxztujZjhv36aMdPMVb3k+BTm311lK40dLdCjbFO0gYND6Shiu8HWaPR3zCHgIXyx8AS2HAoH7tQCnfthowOYQSVF3SHnDgNBs9lP+T3Z1L0N5231VvW0j9Z7I7PyWIfINP1ehWKkK9mUBZIXv0hP+7ByDLBHyBIgVm/adPE7JPoq7TrjHuqTeXPK0i8xRvKb19onqbSJ16vjgpXkN2fxRTd1p3p7+riCbkG+UCrjHqy6DSLCSrna55TLGK9QtcqjqpXvFIlpqN+qiFOQjQhxyC/jcVwNN/CKXBQzkI1c0nc7dWyATe+x4EsnLVbZGmKy8fsNwdFVRBBN3/JPw/4CdwMgfRs83x7EeElbQlHrxI8L8H33XuOn8DM9BIKA==</source>
   </file>
   <package name="Default" full_name="Default"/>
   <package name="global" full_name="global"/>
   <package name="phpunk" full_name="phpunk">
+    <package name="collection" full_name="phpunk\collection"/>
     <package name="compat" full_name="phpunk\compat">
       <package name="crypto" full_name="phpunk\compat\crypto"/>
       <package name="http" full_name="phpunk\compat\http"/>
     </package>
     <package name="component" full_name="phpunk\component"/>
     <package name="database" full_name="phpunk\database"/>
-    <package name="util" full_name="phpunk\util"/>
   </package>
   <namespace name="global" full_name="global"/>
   <namespace name="PHPunk" full_name="PHPunk">
+    <namespace name="Collection" full_name="PHPunk\Collection"/>
     <namespace name="Component" full_name="PHPunk\Component"/>
     <namespace name="Database" full_name="PHPunk\Database"/>
-    <namespace name="Util" full_name="PHPunk\Util"/>
   </namespace>
   <deprecated count="0"/>
 </project>

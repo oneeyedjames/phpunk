@@ -36,10 +36,10 @@
     <body>
         <pre class="brush: php">&lt;?php
 /**
- * @package phpunk\util
+ * @package phpunk\collection
  */
 
-namespace PHPunk\Util;
+namespace PHPunk\Collection;
 
 use JsonSerializable;
 
@@ -50,9 +50,16 @@ use JsonSerializable;
  * @see collectible Collectible Trait
  * @see mutable Mutable Trait
  * @see http://github.com/oneeyedjames/phpunk/wiki/Mutable-Objects PHPunk Wiki
+ *
+ * @property object $meta Mutable object of metadata
  */
-class object implements collection, JsonSerializable {
+class collection implements arraylike, JsonSerializable {
 	use mutable;
+
+	/**
+	 * @ignore internal variable
+	 */
+	private $_meta;
 
 	/**
 	 * Creates a shallow clone of the passed data.
@@ -60,7 +67,22 @@ class object implements collection, JsonSerializable {
 	 * @param mixed $data OPTIONAL Any array or traversable object
 	 */
 	public function __construct($data = []) {
-		$this-&gt;loadArray($data);
+		$this-&gt;load($data);
+	}
+
+	/**
+	 * @ignore magic method
+	 */
+	public function __get($key) {
+		switch ($key) {
+			case 'meta':
+				if (is_null($this-&gt;_meta))
+					$this-&gt;_meta = new self();
+
+				return $this-&gt;_meta;
+			default:
+				return $this-&gt;get($key);
+		}
 	}
 
 	/**

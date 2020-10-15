@@ -42,7 +42,7 @@
 namespace PHPunk\Component;
 
 use PHPunk\api_error;
-use PHPunk\Util\object;
+use PHPunk\Collection\collection;
 use PHPunk\Database\result;
 use PHPunk\Database\record;
 
@@ -97,7 +97,7 @@ class renderer {
 			http_response_code(500);
 		}
 
-		header('Content-type: text/json');
+		header('Content-type: application/hal+json');
 		echo json_encode($response);
 	}
 
@@ -108,7 +108,7 @@ class renderer {
 	 * @return object API data object
 	 */
 	protected function create_response($record) {
-		$response = new object();
+		$response = new collection();
 
 		foreach ($record as $key =&gt; $value) {
 			$map_key = $key;
@@ -125,7 +125,11 @@ class renderer {
 			];
 		}
 
-		$response-&gt;links = $links;
+		$response-&gt;_links = $links;
+
+		if ($embeds = $this-&gt;get_embeds($record)) {
+			$response-&gt;_embedded = $embeds;
+		}
 
 		return $response;
 	}
@@ -140,11 +144,17 @@ class renderer {
 			'self' =&gt; [
 				'resource' =&gt; $this-&gt;resource,
 				'id'       =&gt; $record-&gt;id
-			],
-			'collection' =&gt; [
-				'resource' =&gt; $this-&gt;resource
 			]
 		];
+	}
+
+	/**
+	 * Adds relevant embedded objects to a data object in API response
+	 * @param object $record The data object being rendered
+	 * @return array Multidimensional array of keys and objects
+	 */
+	protected function get_embeds($record) {
+		return [];
 	}
 
 	/**
