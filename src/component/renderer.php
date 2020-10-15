@@ -12,8 +12,12 @@ use PHPunk\Database\record;
 
 /**
  * @property string $resource Name of the resource for this component
+ * @property string $result_name Collective name for embedded collection
  */
 class renderer {
+	/**
+	 * @ignore internal constant
+	 */
 	const MIME_TYPE = 'application/hal+json';
 
 	const RESULT = 'result';
@@ -134,7 +138,7 @@ class renderer {
 	}
 
 	protected function build_url($params) {
-		trigger_error("Function must be overridden, renderer::build_url()", E_USER_ERROR);
+		trigger_error("Function must be overridden, renderer::build_url()", E_USER_WARNING);
 	}
 
 	/**
