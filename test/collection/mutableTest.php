@@ -2,13 +2,13 @@
 
 use PHPUnit\Framework\TestCase;
 
-use PHPunk\Util\mutable;
+use PHPunk\Collection\mutable;
 
 class mutableObject {
 	use mutable;
 
 	public function __construct($data = []) {
-		$this->loadArray($data);
+		$this->load($data);
 	}
 }
 

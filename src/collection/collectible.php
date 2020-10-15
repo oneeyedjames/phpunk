@@ -1,9 +1,9 @@
 <?php
 /**
- * @package phpunk\util
+ * @package phpunk\collection
  */
 
-namespace PHPunk\Util;
+namespace PHPunk\Collection;
 
 use ArrayAccess, Countable, Iterator;
 
@@ -92,7 +92,7 @@ trait collectible {
 	 * Replaces internal data collection.
 	 * @param mixed $data OPTIONAL Any array or traversable object
 	 */
-	protected function loadArray($data) {
+	protected function load($data) {
 		if (is_array($data)) {
 			$this->_data = $data;
 		} elseif (is_collectible($data)) {
@@ -178,12 +178,6 @@ trait collectible {
 }
 
 /**
- * This inteface consolidates the interfaces ArrayAccess, Countable, and Iterator.
- * Classes using the collectible trait must implement this interface.
- */
-interface collection extends ArrayAccess, Countable, Iterator {}
-
-/**
  * Returns whether or not the object is an instance of collectible.
  *
  * @param object $obj Any object
@@ -192,3 +186,9 @@ interface collection extends ArrayAccess, Countable, Iterator {}
 function is_collectible($obj) {
 	return $obj instanceof collectible;
 }
+
+/**
+ * This inteface consolidates the interfaces ArrayAccess, Countable, and Iterator.
+ * Classes using the collectible trait must implement this interface.
+ */
+interface arraylike extends ArrayAccess, Countable, Iterator {}

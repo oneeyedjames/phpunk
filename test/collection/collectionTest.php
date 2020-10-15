@@ -2,11 +2,11 @@
 
 use PHPUnit\Framework\TestCase;
 
-use PHPunk\util\object;
+use PHPunk\Collection\collection;
 
-class objectTest extends TestCase {
+class collectionTest extends TestCase {
 	public function testJSON() {
-		$obj = new object(['foo' => 'bar']);
+		$obj = new collection(['foo' => 'bar']);
 
 		$this->assertEquals('{"foo":"bar"}', json_encode($obj));
 	}

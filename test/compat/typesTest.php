@@ -2,7 +2,7 @@
 
 use PHPUnit\Framework\TestCase;
 
-use PHPunk\util\object;
+use PHPunk\Collection\collection;
 
 class typesTest extends TestCase {
 	public function testBoolVal() {
@@ -20,7 +20,7 @@ class typesTest extends TestCase {
 		$this->assertSame(true, boolval(' '));
 		$this->assertSame(true, boolval('.'));
 
-		$this->assertSame(true, boolval(new object()));
+		$this->assertSame(true, boolval(new collection()));
 		$this->assertSame(false, boolval(null));
 	}
 
@@ -75,7 +75,7 @@ class typesTest extends TestCase {
 		$this->assertFalse(is_iterable('.'));
 
 		$this->assertTrue(is_iterable(array()));
-		$this->assertTrue(is_iterable(new object()));
+		$this->assertTrue(is_iterable(new collection()));
 
 		$this->assertFalse(is_iterable((object) array()));
 	}

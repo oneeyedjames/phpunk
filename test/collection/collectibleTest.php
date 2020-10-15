@@ -2,14 +2,14 @@
 
 use PHPUnit\Framework\TestCase;
 
-use PHPunk\Util\collection;
-use PHPunk\Util\collectible;
+use PHPunk\Collection\arraylike;
+use PHPunk\Collection\collectible;
 
-class collectibleObject implements collection {
+class collectibleObject implements arraylike {
 	use collectible;
 
 	public function __construct($data = []) {
-		$this->loadArray($data);
+		$this->load($data);
 	}
 }
 

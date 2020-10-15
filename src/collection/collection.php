@@ -1,9 +1,9 @@
 <?php
 /**
- * @package phpunk\util
+ * @package phpunk\collection
  */
 
-namespace PHPunk\Util;
+namespace PHPunk\Collection;
 
 use JsonSerializable;
 
@@ -17,7 +17,7 @@ use JsonSerializable;
  *
  * @property object $meta Mutable object of metadata
  */
-class object implements collection, JsonSerializable {
+class collection implements arraylike, JsonSerializable {
 	use mutable;
 
 	/**
@@ -31,7 +31,7 @@ class object implements collection, JsonSerializable {
 	 * @param mixed $data OPTIONAL Any array or traversable object
 	 */
 	public function __construct($data = []) {
-		$this->loadArray($data);
+		$this->load($data);
 	}
 
 	/**

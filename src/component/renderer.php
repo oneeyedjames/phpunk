@@ -6,7 +6,7 @@
 namespace PHPunk\Component;
 
 use PHPunk\api_error;
-use PHPunk\Util\object;
+use PHPunk\Collection\collection;
 use PHPunk\Database\result;
 use PHPunk\Database\record;
 
@@ -72,7 +72,7 @@ class renderer {
 	 * @return object API data object
 	 */
 	protected function create_response($record) {
-		$response = new object();
+		$response = new collection();
 
 		foreach ($record as $key => $value) {
 			$map_key = $key;

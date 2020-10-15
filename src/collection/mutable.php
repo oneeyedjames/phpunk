@@ -1,9 +1,9 @@
 <?php
 /**
- * @package phpunk\util
+ * @package phpunk\collection
  */
 
-namespace PHPunk\Util;
+namespace PHPunk\Collection;
 
 /**
  * Object-oriented style syntax support

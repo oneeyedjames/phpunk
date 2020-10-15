@@ -5,7 +5,7 @@
 
 namespace PHPunk\Database;
 
-use PHPunk\Util\object;
+use PHPunk\Collection\collection;
 
 /**
  * Contains a set of data return from a database query
@@ -14,7 +14,7 @@ use PHPunk\Util\object;
  * @property integer $found The total number of records matching the query
  * @property object $first The first record of the returned data set
  */
-class result extends object {
+class result extends collection {
 	/**
 	 * @ignore internal variable
 	 */

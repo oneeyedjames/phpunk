@@ -7,14 +7,14 @@ namespace PHPunk;
 
 use JsonSerializable;
 
-use PHPunk\Util\collectible;
-use PHPunk\Util\collection;
+use PHPunk\collection\collectible;
+use PHPunk\collection\arraylike;
 
 /**
  * @property string $code Machine-readable error code
  * @property string $message Human-readable error message
  */
-class api_error implements collection, JsonSerializable {
+class api_error implements arraylike, JsonSerializable {
 	use collectible;
 
 	/**
@@ -37,7 +37,7 @@ class api_error implements collection, JsonSerializable {
 	public function __construct($code, $message, $data = []) {
 		$this->_code = $code;
 		$this->_message = $message;
-		$this->loadArray($data);
+		$this->load($data);
 	}
 
 	/**

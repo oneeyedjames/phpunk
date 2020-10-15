@@ -5,7 +5,7 @@
 
 namespace PHPunk\Database;
 
-use PHPunk\Util\object;
+use PHPunk\Collection\collection;
 
 class query {
 	/**
@@ -77,7 +77,7 @@ class query {
 	public function __construct($database, $args) {
 		$this->_database = $database;
 
-		$args = new object(array_merge(self::$_defaults, $args));
+		$args = new collection(array_merge(self::$_defaults, $args));
 
 		$this->_table  = $args->table;
 		$this->_bridge = $args->bridge;

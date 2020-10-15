@@ -8,9 +8,9 @@
 			<file>test/compat/typesTest.php</file>
 			<file>test/compat/cryptoTest.php</file>
 
-			<file>test/util/collectibleTest.php</file>
-			<file>test/util/mutableTest.php</file>
-			<file>test/util/objectTest.php</file>
+			<file>test/collection/collectibleTest.php</file>
+			<file>test/collection/mutableTest.php</file>
+			<file>test/collection/collectionTest.php</file>
 
 			<file>test/database/recordTest.php</file>
 			<file>test/database/resultTest.php</file>
